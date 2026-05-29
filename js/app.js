@@ -125,41 +125,12 @@ document.addEventListener('click', e => {
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeTicketTip(); });
 
 // ═══════════════════════════════════════════════════════════
-//  DEPARTURE CITY  (stored in localStorage)
-// ═══════════════════════════════════════════════════════════
-function saveDep() {
-  const val = document.getElementById('depInput').value.trim().toUpperCase();
-  if (!val) return;
-  localStorage.setItem('wc_home_iata', val);
-  document.getElementById('depCurrent').textContent = val;
-  document.getElementById('depInput').value = '';
-}
-
-document.getElementById('depSetBtn').addEventListener('click', saveDep);
-document.getElementById('depInput').addEventListener('keydown', e => { if (e.key === 'Enter') saveDep(); });
-
-(function loadSavedDep() {
-  const saved = localStorage.getItem('wc_home_iata');
-  if (saved) document.getElementById('depCurrent').textContent = saved;
-})();
-
-// ═══════════════════════════════════════════════════════════
-//  FLIGHT LINK HANDLER
+//  FLIGHT LINK HANDLER  (default departure: Shanghai PVG)
 // ═══════════════════════════════════════════════════════════
 function openFlightLink(destCity, dateISO) {
-  const homeIata = (localStorage.getItem('wc_home_iata') || '').trim().toUpperCase();
+  const homeIata = 'PVG';
   const destIata = CITY_IATA[destCity];
   if (!destIata) return;
-
-  if (!homeIata) {
-    const inp = document.getElementById('depInput');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    inp.classList.add('dep-highlight');
-    setTimeout(() => inp.classList.remove('dep-highlight'), 1500);
-    setTimeout(() => inp.focus(), 400);
-    return;
-  }
-
   const dep  = isoToTripDate(dateOffset(dateISO, -1));
   const ret  = isoToTripDate(dateOffset(dateISO, +1));
   const path = `${homeIata}-to-${encodeURIComponent(destCity)}`;
