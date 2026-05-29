@@ -522,7 +522,7 @@ footer { text-align:center; padding:20px; font-size:.8rem; color:#455a64; border
   padding: 2px 7px;
   border-radius: 4px;
 }
-.ms-date   { font-size: .62rem; color: #546e7a; }
+.ms-date   { font-size: .72rem; font-weight: 600; color: #90caf9; }
 .ms-teams  {
   display: flex;
   align-items: center;
@@ -534,7 +534,7 @@ footer { text-align:center; padding:20px; font-size:.8rem; color:#455a64; border
   flex-wrap: wrap;
 }
 .ms-vs     { font-size: .6rem; color: #455a64; font-weight: 700; }
-.ms-time   { font-size: .63rem; color: #37474f; margin-bottom: 8px; }
+.ms-time   { font-size: .75rem; font-weight: 700; color: #e0e4f0; margin-bottom: 8px; }
 .ms-links  { display: flex; gap: 5px; }
 .ms-btn {
   flex: 1;
