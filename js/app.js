@@ -125,46 +125,16 @@ document.addEventListener('click', e => {
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeTicketTip(); });
 
 // ═══════════════════════════════════════════════════════════
-//  DEPARTURE CITY  (auto-detected via IP, fallback: PVG)
-// ═══════════════════════════════════════════════════════════
-let _homeIata = 'PVG';
-
-(async function detectHomeCity() {
-  try {
-    const cached = sessionStorage.getItem('wc_home_iata');
-    if (cached) { _homeIata = cached; return; }
-
-    const res  = await fetch('https://ipapi.co/json/');
-    const data = await res.json();
-
-    // 1. Try exact city name match
-    let iata = CITY_IATA_MAP[data.city];
-
-    // 2. Try state / province / region fallback
-    if (!iata) {
-      const cc = data.country_code;
-      if      (cc === 'US') iata = US_REGION_IATA[data.region];
-      else if (cc === 'CA') iata = CA_REGION_IATA[data.region];
-      else if (cc === 'CN') iata = CN_REGION_IATA[data.region];
-    }
-
-    if (iata) {
-      _homeIata = iata;
-      sessionStorage.setItem('wc_home_iata', iata);
-    }
-  } catch (e) { /* silently fall back to PVG */ }
-})();
-
-// ═══════════════════════════════════════════════════════════
-//  FLIGHT LINK HANDLER
+//  FLIGHT LINK HANDLER  (departure: Shanghai PVG)
 // ═══════════════════════════════════════════════════════════
 function openFlightLink(destCity, dateISO) {
+  const homeIata = 'PVG';
   const destIata = CITY_IATA[destCity];
   if (!destIata) return;
   const dep  = isoToTripDate(dateOffset(dateISO, -1));
   const ret  = isoToTripDate(dateOffset(dateISO, +1));
-  const path = `${_homeIata}-to-${encodeURIComponent(destCity)}`;
-  const url  = `https://www.trip.com/flights/${path}/tickets-${_homeIata}-${destIata}?flighttype=D&dcity=${_homeIata}&acity=${destIata}&ddate=${dep}&rdate=${ret}&${TRIP_AFFILIATE}`;
+  const path = `${homeIata}-to-${encodeURIComponent(destCity)}`;
+  const url  = `https://www.trip.com/flights/${path}/tickets-${homeIata}-${destIata}?flighttype=D&dcity=${homeIata}&acity=${destIata}&ddate=${dep}&rdate=${ret}&${TRIP_AFFILIATE}`;
   window.open(url, '_blank', 'noopener');
 }
 
