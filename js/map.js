@@ -92,7 +92,7 @@ function initMap() {
           <div class="ms-links">
             <a href="${getStubHubUrl(m)}" class="ms-btn ms-ticket" target="_blank" rel="noopener">🎫 Tickets</a>
             <a href="${getBookingUrl(m.venue, m.dateISO)}" class="ms-btn ms-hotel" target="_blank" rel="noopener">🏨 Hotel</a>
-            <a href="${getFlightsUrl(city, m.dateISO)}" class="ms-btn ms-flight" target="_blank" rel="noopener">✈️ Flights</a>
+            <a href="#" class="ms-btn ms-flight" onclick="openFlightLink('${city}','${m.dateISO}');return false;">✈️ Flights</a>
           </div>
         </div>`;
       }).join('');

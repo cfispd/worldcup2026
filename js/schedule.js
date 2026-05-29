@@ -118,7 +118,7 @@ function schedCardHtml(m) {
       <div class="card-links">
         <a href="${getStubHubUrl(m)}" class="card-link-btn card-ticket-btn" target="_blank" rel="noopener">🎫 Tickets</a>
         <a href="${getBookingUrl(m.venue, m.dateISO)}" class="card-link-btn card-hotel-btn" target="_blank" rel="noopener">🏨 Hotel</a>
-        <a href="${getFlightsUrl(city, m.dateISO)}" class="card-link-btn card-flight-btn" target="_blank" rel="noopener">✈️ Flights</a>
+        <a href="#" class="card-link-btn card-flight-btn" onclick="openFlightLink('${city}','${m.dateISO}');return false;">✈️ Flights</a>
       </div>
     </div>
   `;

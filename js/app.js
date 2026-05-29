@@ -47,7 +47,7 @@ function openModal(groupKey) {
       <div class="card-links">
         <a href="${getStubHubUrl(m)}" class="card-link-btn card-ticket-btn" target="_blank" rel="noopener">🎫 Tickets</a>
         <a href="${getBookingUrl(m.venue, m.dateISO)}" class="card-link-btn card-hotel-btn" target="_blank" rel="noopener">🏨 Hotel</a>
-        <a href="${getFlightsUrl(getCity(m.venue), m.dateISO)}" class="card-link-btn card-flight-btn" target="_blank" rel="noopener">✈️ Flights</a>
+        <a href="#" class="card-link-btn card-flight-btn" onclick="openFlightLink('${getCity(m.venue)}','${m.dateISO}');return false;">✈️ Flights</a>
       </div>
     </div>
   `).join('');
@@ -123,6 +123,49 @@ document.addEventListener('click', e => {
 });
 
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeTicketTip(); });
+
+// ═══════════════════════════════════════════════════════════
+//  DEPARTURE CITY  (stored in localStorage)
+// ═══════════════════════════════════════════════════════════
+function saveDep() {
+  const val = document.getElementById('depInput').value.trim().toUpperCase();
+  if (!val) return;
+  localStorage.setItem('wc_home_iata', val);
+  document.getElementById('depCurrent').textContent = val;
+  document.getElementById('depInput').value = '';
+}
+
+document.getElementById('depSetBtn').addEventListener('click', saveDep);
+document.getElementById('depInput').addEventListener('keydown', e => { if (e.key === 'Enter') saveDep(); });
+
+(function loadSavedDep() {
+  const saved = localStorage.getItem('wc_home_iata');
+  if (saved) document.getElementById('depCurrent').textContent = saved;
+})();
+
+// ═══════════════════════════════════════════════════════════
+//  FLIGHT LINK HANDLER
+// ═══════════════════════════════════════════════════════════
+function openFlightLink(destCity, dateISO) {
+  const homeIata = (localStorage.getItem('wc_home_iata') || '').trim().toUpperCase();
+  const destIata = CITY_IATA[destCity];
+  if (!destIata) return;
+
+  if (!homeIata) {
+    const inp = document.getElementById('depInput');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    inp.classList.add('dep-highlight');
+    setTimeout(() => inp.classList.remove('dep-highlight'), 1500);
+    setTimeout(() => inp.focus(), 400);
+    return;
+  }
+
+  const dep  = isoToTripDate(dateOffset(dateISO, -1));
+  const ret  = isoToTripDate(dateOffset(dateISO, +1));
+  const path = `${homeIata}-to-${encodeURIComponent(destCity)}`;
+  const url  = `https://www.trip.com/flights/${path}/tickets-${homeIata}-${destIata}?flighttype=D&dcity=${homeIata}&acity=${destIata}&ddate=${dep}&rdate=${ret}&${TRIP_AFFILIATE}`;
+  window.open(url, '_blank', 'noopener');
+}
 
 // ═══════════════════════════════════════════════════════════
 //  INIT
