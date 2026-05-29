@@ -41,6 +41,26 @@ const CITY_GROUPS = [
   { country:'Canada',        flag:'ca', cities:['Toronto','Vancouver'] },
 ];
 
+// City → IATA airport code
+const CITY_IATA = {
+  'Atlanta':      'ATL',
+  'Boston':       'BOS',
+  'Dallas':       'DFW',
+  'Houston':      'IAH',
+  'Kansas City':  'MCI',
+  'Los Angeles':  'LAX',
+  'Miami':        'MIA',
+  'New York/NJ':  'EWR',
+  'Philadelphia': 'PHL',
+  'San Francisco':'SFO',
+  'Seattle':      'SEA',
+  'Toronto':      'YYZ',
+  'Vancouver':    'YVR',
+  'Guadalajara':  'GDL',
+  'Mexico City':  'MEX',
+  'Monterrey':    'MTY',
+};
+
 // City → country reverse lookup (derived from CITY_GROUPS)
 const CITY_COUNTRY = {};
 CITY_GROUPS.forEach(g => g.cities.forEach(c => { CITY_COUNTRY[c] = g.country; }));
@@ -342,13 +362,23 @@ function dateOffset(iso, days) {
   return d.toISOString().slice(0, 10);
 }
 
+function isoToTripDate(iso) { return iso.replace(/-/g, ''); } // "2026-06-10" → "20260610"
+
+const TRIP_AFFILIATE = 'Allianceid=8410774&SID=315981072&trip_sub1=';
+
 function getFlightsUrl(city, dateISO) {
-  const cleanCity = city.replace(/\/.*$/, '').trim();
-  if (!dateISO) return `https://www.google.com/travel/flights?q=${encodeURIComponent('flights to ' + cleanCity)}`;
-  const dep = dateOffset(dateISO, -1);
-  const ret = dateOffset(dateISO, +1);
-  const q   = `round trip flights to ${cleanCity} ${fmtDate(dep)} 2026 return ${fmtDate(ret)} 2026`;
-  return `https://www.google.com/travel/flights?q=${encodeURIComponent(q)}`;
+  const iata = CITY_IATA[city];
+  if (!iata) {
+    // Fallback: Google Flights text search
+    const q = `round trip flights to ${city.replace(/\/.*$/, '').trim()}`;
+    return `https://www.google.com/travel/flights?q=${encodeURIComponent(q)}`;
+  }
+  if (!dateISO) {
+    return `https://www.trip.com/flights/to-${encodeURIComponent(city)}/tickets-${iata}?flighttype=D&acity=${iata}&${TRIP_AFFILIATE}`;
+  }
+  const dep = isoToTripDate(dateOffset(dateISO, -1));
+  const ret = isoToTripDate(dateOffset(dateISO, +1));
+  return `https://www.trip.com/flights/to-${encodeURIComponent(city)}/tickets-${iata}?flighttype=D&acity=${iata}&ddate=${dep}&rdate=${ret}&${TRIP_AFFILIATE}`;
 }
 
 // ═══════════════════════════════════════════════════════════
