@@ -133,9 +133,21 @@ let _homeIata = 'PVG';
   try {
     const cached = sessionStorage.getItem('wc_home_iata');
     if (cached) { _homeIata = cached; return; }
+
     const res  = await fetch('https://ipapi.co/json/');
     const data = await res.json();
-    const iata = CITY_IATA_MAP[data.city];
+
+    // 1. Try exact city name match
+    let iata = CITY_IATA_MAP[data.city];
+
+    // 2. Try state / province / region fallback
+    if (!iata) {
+      const cc = data.country_code;
+      if      (cc === 'US') iata = US_REGION_IATA[data.region];
+      else if (cc === 'CA') iata = CA_REGION_IATA[data.region];
+      else if (cc === 'CN') iata = CN_REGION_IATA[data.region];
+    }
+
     if (iata) {
       _homeIata = iata;
       sessionStorage.setItem('wc_home_iata', iata);

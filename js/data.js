@@ -98,6 +98,42 @@ const CITY_IATA_MAP = {
   'Moscow':'SVO','Saint Petersburg':'LED',
 };
 
+// Region/state fallbacks when city name doesn't match exactly
+const US_REGION_IATA = {
+  'Washington':'SEA','Oregon':'PDX','California':'LAX','Nevada':'LAS',
+  'Arizona':'PHX','Texas':'DFW','Colorado':'DEN','Utah':'SLC',
+  'Hawaii':'HNL','Alaska':'ANC','New Mexico':'ABQ','Idaho':'BOI',
+  'Montana':'BZN','Minnesota':'MSP','Iowa':'DSM','Missouri':'STL',
+  'Wisconsin':'MKE','Illinois':'ORD','Michigan':'DTW','Indiana':'IND',
+  'Ohio':'CMH','Kentucky':'CVG','Tennessee':'BNA','Arkansas':'LIT',
+  'Louisiana':'MSY','Mississippi':'JAN','Alabama':'BHM','Georgia':'ATL',
+  'Florida':'MIA','South Carolina':'CLT','North Carolina':'CLT',
+  'Virginia':'IAD','West Virginia':'CRW','Pennsylvania':'PHL',
+  'Maryland':'BWI','New Jersey':'EWR','New York':'JFK',
+  'Connecticut':'BDL','Massachusetts':'BOS','Vermont':'BTV',
+  'New Hampshire':'MHT','Maine':'PWM','Rhode Island':'PVD',
+  'Nebraska':'OMA','Kansas':'ICT','Oklahoma':'OKC',
+  'North Dakota':'FAR','South Dakota':'RAP','Wyoming':'JAC',
+};
+
+const CA_REGION_IATA = {
+  'British Columbia':'YVR','Alberta':'YYC','Saskatchewan':'YXE',
+  'Manitoba':'YWG','Ontario':'YYZ','Quebec':'YUL',
+  'Nova Scotia':'YHZ','New Brunswick':'YFC',
+  'Newfoundland and Labrador':'YYT','Prince Edward Island':'YYG',
+};
+
+const CN_REGION_IATA = {
+  'Shanghai':'PVG','Beijing':'PEK','Guangdong':'CAN','Sichuan':'CTU',
+  'Zhejiang':'HGH','Jiangsu':'NKG','Hubei':'WUH','Shaanxi':'XIY',
+  'Chongqing':'CKG','Yunnan':'KMG','Shandong':'TAO','Tianjin':'TSN',
+  'Liaoning':'DLC','Heilongjiang':'HRB','Henan':'CGO','Hunan':'CSX',
+  'Fujian':'XMN','Guangxi':'NNG','Xinjiang':'URC','Hainan':'HAK',
+  'Jilin':'CGQ','Anhui':'HFE','Hebei':'SJW','Shanxi':'TYN',
+  'Inner Mongolia':'HET','Gansu':'LHW','Guizhou':'KWE',
+  'Tibet':'LXA','Ningxia':'INC','Jiangxi':'KHN',
+};
+
 // City → IATA airport code
 const CITY_IATA = {
   'Atlanta':      'ATL',
