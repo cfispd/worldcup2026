@@ -105,7 +105,7 @@ function schedCardHtml(m) {
   const pinIcon   = `<svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>`;
 
   return `
-    <div class="sched-card" data-city="${city}">
+    <div class="sched-card" data-city="${city}" data-ticket-from="${getTicketFrom(m)}" data-ticket-url="${getStubHubUrl(m)}">
       <div class="sched-top">
         <span class="group-pill" style="background:${accent}">${pill}</span>
         <span class="sched-time">${clockIcon}${m.time} ${timeNote}</span>
@@ -116,6 +116,7 @@ function schedCardHtml(m) {
         <div class="sched-team right"><span>${m.away}</span>${f2}</div>
       </div>
       <div class="sched-venue">${pinIcon} ${m.venue}</div>
+      <a href="${getStubHubUrl(m)}" class="card-ticket-btn" target="_blank" rel="noopener">🎫 Buy Tickets</a>
     </div>
   `;
 }

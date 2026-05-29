@@ -238,6 +238,40 @@ const BRACKET_NODES = [
 ];
 
 // ═══════════════════════════════════════════════════════════
+//  TICKET PRICING & STUBHUB AFFILIATE LINKS
+// ═══════════════════════════════════════════════════════════
+const TICKET_FROM = { Final: 900, SF: 500, QF: 350, R16: 200, R32: 150, '3rd': 300 };
+
+// Replace YOUR_CAMREF with your Partnerize camref once you have it
+const STUBHUB_CAMREF = 'YOUR_CAMREF';
+
+// Direct StubHub event URLs — key format: "home|away|dateISO"
+// Add each match URL here as you find them on StubHub
+const STUBHUB_EVENT_URLS = {
+  'Belgium|Egypt|2026-06-15': 'https://www.stubhub.com/world-cup-seattle-tickets-6-15-2026/event/153020522/',
+};
+
+function getTicketFrom(m) {
+  return TICKET_FROM[m.round] || 75;
+}
+
+function getStubHubUrl(m) {
+  const key = `${m.home}|${m.away}|${m.dateISO}`;
+  const direct = STUBHUB_EVENT_URLS[key];
+  if (direct) {
+    if (STUBHUB_CAMREF === 'YOUR_CAMREF') return direct;
+    return `https://prf.hn/click/camref:${STUBHUB_CAMREF}/destination:${encodeURIComponent(direct)}`;
+  }
+  // Fallback: StubHub search
+  const query = m.group
+    ? `${m.home} vs ${m.away} FIFA World Cup 2026`
+    : `FIFA World Cup 2026 ${ROUND_LABEL[m.round] || m.round}`;
+  const searchUrl = `https://www.stubhub.com/search/?q=${encodeURIComponent(query)}`;
+  if (STUBHUB_CAMREF === 'YOUR_CAMREF') return searchUrl;
+  return `https://prf.hn/click/camref:${STUBHUB_CAMREF}/destination:${encodeURIComponent(searchUrl)}`;
+}
+
+// ═══════════════════════════════════════════════════════════
 //  CITY COUNTS  (across all matches)
 // ═══════════════════════════════════════════════════════════
 const CITY_COUNTS = {};

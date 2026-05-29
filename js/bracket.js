@@ -66,7 +66,7 @@ function buildBracket() {
     const isFinal = n.round === 'Final';
     const venuePin = `<svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="flex-shrink:0"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>`;
     cardsHtml += `
-      <div class="br-card ${isFinal ? 'br-final-card' : ''}" style="left:${colX(n.round)}px;top:${cardTop(n.row)}px;width:${CARD_W}px;height:${CARD_H}px;">
+      <div class="br-card ${isFinal ? 'br-final-card' : ''}" data-ticket-from="${TICKET_FROM[n.round] || 75}" data-ticket-url="${getStubHubUrl(n)}" style="left:${colX(n.round)}px;top:${cardTop(n.row)}px;width:${CARD_W}px;height:${CARD_H}px;">
         <div class="br-card-header" style="background:${ac}18;border-top:2px solid ${ac};">
           <span class="br-match-id" style="color:${ac}">M${n.id}</span>
           <span class="br-match-date">${n.date}${timeById[n.id] ? ' · ' + timeById[n.id] : ''}</span>
@@ -88,7 +88,7 @@ function buildBracket() {
     <div style="position:absolute;left:${thirdX}px;top:${thirdY - 22}px;color:#546e7a;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;">
       3rd Place Play-off · ${n3.date}${timeById[n3.id] ? ' · ' + timeById[n3.id] : ''}
     </div>
-    <div class="br-card" style="left:${thirdX}px;top:${thirdY}px;width:${CARD_W * 2 + COL_GAP}px;height:${CARD_H}px;">
+    <div class="br-card" data-ticket-from="${TICKET_FROM['3rd']}" data-ticket-url="${getStubHubUrl(n3)}" style="left:${thirdX}px;top:${thirdY}px;width:${CARD_W * 2 + COL_GAP}px;height:${CARD_H}px;">
       <div class="br-card-header" style="background:#37474f20;border-top:2px solid #546e7a;">
         <span class="br-match-id" style="color:#78909c">M103 · 3RD PLACE</span>
         <span class="br-match-date">${n3.date}${timeById[n3.id] ? ' · ' + timeById[n3.id] : ''}</span>
