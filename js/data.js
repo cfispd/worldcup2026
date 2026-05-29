@@ -94,9 +94,7 @@ function roundL(round, group) {
   if (group) return LANG === 'zh' ? `${group}组` : `GROUP ${group}`;
   return LANG === 'zh' ? (ROUND_LABEL_ZH[round] || ROUND_LABEL[round]) : ROUND_LABEL[round];
 }
-function tzL(tz) {
-  return LANG === 'zh' ? ({ ET:'美东', CT:'美中', PT:'美太' }[tz] || tz) : tz;
-}
+function tzL(tz) { return tz; }
 function fmtDateL(iso) {
   const d = new Date(iso + 'T12:00:00');
   if (LANG === 'zh') return `${d.getMonth()+1}月${d.getDate()}日`;

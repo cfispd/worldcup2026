@@ -234,7 +234,7 @@ function buildSchedule() {
   const allDatesLabel   = LANG === 'zh' ? '全部日期' : 'All Dates';
   const selectAllLabel  = LANG === 'zh' ? '全选' : 'Select All';
   const clearAllLabel   = LANG === 'zh' ? '清除全部' : 'Clear All';
-  const timeHint        = LANG === 'zh' ? '⏰ 所有时间均为当地时间（美东 · 美中 · 美太）' : '⏰ All times shown are local venue time (ET · CT · PT)';
+  const timeHint        = LANG === 'zh' ? '⏰ 所有时间均为当地时间（ET · CT · PT）' : '⏰ All times shown are local venue time (ET · CT · PT)';
   const noResultsText   = LANG === 'zh' ? '没有符合条件的比赛。' : 'No matches found for the selected filters.';
 
   container.innerHTML = `
