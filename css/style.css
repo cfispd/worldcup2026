@@ -398,8 +398,8 @@ footer { text-align:center; padding:20px; font-size:.8rem; color:#455a64; border
 .cal-match.cal-selected .cal-num { color: #ffd700; }
 
 /* ── MAP VIEW ────────────────────────────────────────────── */
-#view-map {
-  display: flex !important;
+#view-map.active {
+  display: flex;
   height: calc(100vh - 190px);
   min-height: 500px;
   gap: 8px;
@@ -678,7 +678,7 @@ footer { text-align:center; padding:20px; font-size:.8rem; color:#455a64; border
   .tip-btn    { font-size: .66rem; padding: 7px 3px; }
 
   /* ── MAP: stack vertically instead of side-by-side ── */
-  #view-map {
+  #view-map.active {
     flex-direction: column;
     height: auto;
     min-height: 0;
