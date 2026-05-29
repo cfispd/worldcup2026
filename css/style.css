@@ -758,6 +758,58 @@ footer { text-align:center; padding:20px; font-size:.8rem; color:#9ca3af; border
 }
 
 /* ══════════════════════════════════════════════════════════
+   FLIGHT PICKER MODAL
+══════════════════════════════════════════════════════════ */
+.fp-modal { max-width: 440px; }
+.fp-body { padding: 20px 24px 28px; }
+
+.fp-dest-row {
+  display: flex; align-items: center; gap: 14px;
+  background: #f0f0ff; border: 1px solid rgba(99,102,241,.15);
+  border-radius: 12px; padding: 13px 16px; margin-bottom: 22px;
+}
+.fp-dest-icon { font-size: 1.6rem; line-height: 1; }
+.fp-dest-label {
+  font-size: .7rem; color: #9ca3af; text-transform: uppercase;
+  letter-spacing: 1px; margin-bottom: 3px;
+}
+.fp-dest-city { font-size: 1.1rem; font-weight: 700; color: #1e2a5e; }
+
+.fp-field-label {
+  display: block; font-size: .73rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1px; color: #6b7280;
+  margin-bottom: 8px;
+}
+.fp-select-wrap { position: relative; margin-bottom: 14px; }
+.fp-select {
+  width: 100%; appearance: none; -webkit-appearance: none;
+  background: #ffffff; border: 1px solid rgba(99,102,241,.25);
+  border-radius: 10px; padding: 11px 40px 11px 14px;
+  font-size: .92rem; color: #1e2a5e; cursor: pointer;
+  font-family: inherit; transition: border-color .15s;
+}
+.fp-select:focus { outline: none; border-color: #4f46e5; box-shadow: 0 0 0 3px rgba(79,70,229,.12); }
+.fp-chevron {
+  position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+  pointer-events: none; color: #9ca3af;
+}
+.fp-remember-row {
+  display: flex; align-items: center; gap: 9px; cursor: pointer;
+  margin-bottom: 22px; font-size: .85rem; color: #6b7280; user-select: none;
+}
+.fp-remember-row input[type=checkbox] {
+  width: 16px; height: 16px; accent-color: #4f46e5; cursor: pointer; flex-shrink: 0;
+}
+.fp-go-btn {
+  width: 100%; padding: 13px; border-radius: 12px; border: none;
+  background: linear-gradient(135deg, #4f46e5, #7c3aed); color: #fff;
+  font-size: .95rem; font-weight: 700; cursor: pointer; letter-spacing: .5px;
+  transition: opacity .15s, transform .12s; font-family: inherit;
+}
+.fp-go-btn:hover { opacity: .88; transform: translateY(-1px); }
+.fp-go-btn:active { transform: translateY(0); }
+
+/* ══════════════════════════════════════════════════════════
    THEME TOGGLE BUTTON
 ══════════════════════════════════════════════════════════ */
 .theme-toggle {
@@ -1048,6 +1100,21 @@ body.night .mp-date { color: #546e7a; }
 body.night .mp-teams { color: #cdd6f4; }
 body.night .mp-vs { color: #546e7a; }
 body.night .mp-time { color: #37474f; }
+
+/* Flight picker night overrides */
+body.night .fp-dest-row { background: #1a2035; border-color: #2a3260; }
+body.night .fp-dest-label { color: #546e7a; }
+body.night .fp-dest-city { color: #e8eaf0; }
+body.night .fp-field-label { color: #90a4ae; }
+body.night .fp-select {
+  background: #141829; border-color: #2a3260; color: #e8eaf0;
+}
+body.night .fp-select:focus { border-color: #7986cb; box-shadow: 0 0 0 3px rgba(121,134,203,.15); }
+body.night .fp-select option { background: #141829; color: #e8eaf0; }
+body.night .fp-chevron { color: #546e7a; }
+body.night .fp-remember-row { color: #90a4ae; }
+body.night .fp-remember-row input[type=checkbox] { accent-color: #7986cb; }
+body.night .fp-go-btn { background: linear-gradient(135deg, #1a237e, #0d47a1); }
 
 @media (max-width: 640px) {
   body.night #map-sidebar.open { border-color: #1e2d4a; }

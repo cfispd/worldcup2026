@@ -224,6 +224,39 @@
   Flags by <a href="https://flagcdn.com" style="color:#546e7a;text-decoration:none">flagcdn.com</a>
 </footer>
 
+<!-- FLIGHT PICKER MODAL -->
+<div class="overlay" id="flightPickerOverlay">
+  <div class="modal fp-modal">
+    <div class="modal-header">
+      <div class="modal-letter" style="background:linear-gradient(135deg,#4f46e5,#7c3aed);font-size:1.3rem;line-height:1">✈️</div>
+      <div class="modal-title">
+        <h2 id="fpTitle">Book Flights</h2>
+        <p id="fpSub">Choose your departure airport</p>
+      </div>
+      <button class="modal-close" id="flightPickerClose">×</button>
+    </div>
+    <div class="fp-body">
+      <div class="fp-dest-row">
+        <span class="fp-dest-icon">🏟️</span>
+        <div>
+          <div class="fp-dest-label" id="fpDestLabel">Flying to</div>
+          <div class="fp-dest-city" id="fpDestCity">—</div>
+        </div>
+      </div>
+      <label class="fp-field-label" for="fpDepSelect" id="fpDepLabel">Departure City</label>
+      <div class="fp-select-wrap">
+        <select id="fpDepSelect" class="fp-select"></select>
+        <svg class="fp-chevron" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <label class="fp-remember-row">
+        <input type="checkbox" id="fpRemember">
+        <span id="fpRememberLabel">Remember my departure city</span>
+      </label>
+      <button class="fp-go-btn" onclick="doFlightSearch()" id="fpGoBtn">🔍 Search Flights</button>
+    </div>
+  </div>
+</div>
+
 <!-- BRACKET TOOLTIP -->
 <div id="ticket-tip" class="ticket-tip">
   <div class="tip-header">🎫 Ticket Info</div>
@@ -232,7 +265,7 @@
   <div class="tip-actions">
     <a id="tip-link"   href="#" class="tip-btn"             target="_blank" rel="noopener">🎫 Tickets</a>
     <a id="tip-hotel"  href="#" class="tip-btn tip-hotel-btn"  target="_blank" rel="noopener">🏨 Hotel</a>
-    <a id="tip-flight" href="#" class="tip-btn tip-flight-btn" target="_blank" rel="noopener">✈️ Flights</a>
+    <a id="tip-flight" href="#" class="tip-btn tip-flight-btn" onclick="event.preventDefault();closeTicketTip();openFlightPicker(this.dataset.dest,this.dataset.date)">✈️ Flights</a>
   </div>
 </div>
 
