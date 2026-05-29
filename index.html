@@ -8,8 +8,15 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
 <body>
+<script>if(localStorage.getItem('wc_theme')==='night')document.body.classList.add('night');</script>
 
 <header>
+  <div class="theme-toggle">
+    <button class="theme-btn" id="themeBtn" onclick="toggleTheme()">
+      <span class="theme-icon">🌙</span>
+      <span class="theme-label" id="themeLabel">夜间</span>
+    </button>
+  </div>
   <div class="lang-toggle" id="langToggle">
     <button class="lang-btn active" data-lang="en">EN</button>
     <button class="lang-btn" data-lang="zh">中文</button>

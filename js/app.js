@@ -1,4 +1,32 @@
 // ═══════════════════════════════════════════════════════════
+//  THEME TOGGLE
+// ═══════════════════════════════════════════════════════════
+(function initTheme() {
+  const saved = localStorage.getItem('wc_theme') || 'day';
+  updateThemeBtn(saved);
+})();
+
+function toggleTheme() {
+  const isNight = document.body.classList.toggle('night');
+  const theme = isNight ? 'night' : 'day';
+  localStorage.setItem('wc_theme', theme);
+  updateThemeBtn(theme);
+}
+
+function updateThemeBtn(theme) {
+  const btn = document.getElementById('themeBtn');
+  const label = document.getElementById('themeLabel');
+  if (!btn) return;
+  if (theme === 'night') {
+    btn.querySelector('.theme-icon').textContent = '☀️';
+    label.textContent = LANG === 'zh' ? '白天' : 'Day';
+  } else {
+    btn.querySelector('.theme-icon').textContent = '🌙';
+    label.textContent = LANG === 'zh' ? '夜间' : 'Night';
+  }
+}
+
+// ═══════════════════════════════════════════════════════════
 //  LANGUAGE TOGGLE
 // ═══════════════════════════════════════════════════════════
 const TAB_LABELS = {
@@ -52,6 +80,10 @@ function setLang(lang) {
   buildSchedule();
   buildBracket();
   if (typeof updateMapLang === 'function') updateMapLang();
+
+  // Sync theme button label language
+  const currentTheme = document.body.classList.contains('night') ? 'night' : 'day';
+  updateThemeBtn(currentTheme);
 }
 
 // Init lang toggle buttons
