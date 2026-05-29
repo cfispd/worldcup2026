@@ -336,9 +336,19 @@ function getBookingUrl(venue, dateISO) {
   return `https://www.booking.com/searchresults.html?ss=${encodeURIComponent(city)}&${base}`;
 }
 
-function getFlightsUrl(city) {
+function dateOffset(iso, days) {
+  const d = new Date(iso + 'T12:00:00');
+  d.setDate(d.getDate() + days);
+  return d.toISOString().slice(0, 10);
+}
+
+function getFlightsUrl(city, dateISO) {
   const cleanCity = city.replace(/\/.*$/, '').trim();
-  return `https://www.google.com/travel/flights?q=${encodeURIComponent('flights to ' + cleanCity)}`;
+  if (!dateISO) return `https://www.google.com/travel/flights?q=${encodeURIComponent('flights to ' + cleanCity)}`;
+  const dep = dateOffset(dateISO, -1);
+  const ret = dateOffset(dateISO, +1);
+  const q   = `round trip flights to ${cleanCity} ${fmtDate(dep)} 2026 return ${fmtDate(ret)} 2026`;
+  return `https://www.google.com/travel/flights?q=${encodeURIComponent(q)}`;
 }
 
 // ═══════════════════════════════════════════════════════════
