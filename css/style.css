@@ -402,27 +402,33 @@ footer { text-align:center; padding:20px; font-size:.8rem; color:#455a64; border
   display: flex !important;
   height: calc(100vh - 190px);
   min-height: 500px;
-  border-radius: 12px;
-  overflow: hidden;
-  border: 1px solid #1e2d4a;
+  gap: 8px;
 }
 #map-sidebar {
   width: 0;
   min-width: 0;
   flex-shrink: 0;
   background: #0b1120;
-  border-right: 0px solid #1e2d4a;
-  overflow: hidden;
-  transition: width .25s ease, min-width .25s ease, border-right-width .25s;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  overflow-y: auto;
+  overflow-x: hidden;
+  transition: width .25s ease, min-width .25s ease, border-color .25s;
 }
 #map-sidebar.open {
   width: 380px;
   min-width: 380px;
-  border-right-width: 1px;
-  overflow-y: auto;
+  border-color: #1e2d4a;
 }
 #map-sidebar-content { padding: 16px; min-width: 380px; }
-#wc-map { flex: 1; height: 100%; min-width: 0; }
+#wc-map {
+  flex: 1;
+  height: 100%;
+  min-width: 0;
+  border-radius: 12px;
+  border: 1px solid #1e2d4a;
+  overflow: hidden;
+}
 /* City name labels on map (divIcon approach) */
 .wcm-wrap {
   display: flex;
@@ -450,7 +456,6 @@ footer { text-align:center; padding:20px; font-size:.8rem; color:#455a64; border
   background: rgba(8,13,28,.72);
   padding: 2px 6px;
   border-radius: 4px;
-  pointer-events: none;
 }
 .wcm-wrap.active .wcm-dot {
   background: #ff5252;
@@ -470,19 +475,21 @@ footer { text-align:center; padding:20px; font-size:.8rem; color:#455a64; border
 .ms-city    { font-size: 1.1rem; font-weight: 800; color: #ffd700; margin-bottom: 2px; }
 .ms-stadium { font-size: .7rem; color: #546e7a; }
 .ms-close {
-  background: none;
-  border: 1px solid #2a3a60;
-  color: #546e7a;
-  border-radius: 6px;
-  width: 26px;
-  height: 26px;
+  background: rgba(255,255,255,.06);
+  border: 1px solid #3a4d6e;
+  color: #90a4ae;
+  border-radius: 7px;
+  width: 28px;
+  height: 28px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 16px;
+  font-weight: 700;
   line-height: 1;
   flex-shrink: 0;
-  transition: border-color .15s, color .15s;
+  margin-right: 6px;
+  transition: background .15s, border-color .15s, color .15s;
 }
-.ms-close:hover { border-color: #ffd700; color: #ffd700; }
+.ms-close:hover { background: rgba(255,82,82,.18); border-color: #ff5252; color: #ff5252; }
 .ms-count {
   font-size: .7rem;
   color: #90a4ae;
@@ -615,3 +622,100 @@ footer { text-align:center; padding:20px; font-size:.8rem; color:#455a64; border
 }
 .mp-vs   { font-size: .58rem; color: #546e7a; font-weight: 700; }
 .mp-time { font-size: .62rem; color: #37474f; }
+
+/* ═══════════════════════════════════════════════════════════
+   MOBILE  (≤ 640px)
+═══════════════════════════════════════════════════════════ */
+@media (max-width: 640px) {
+
+  /* ── Header ── */
+  header { padding: 18px 14px 0; }
+  .trophy { font-size: 1.6rem; margin-bottom: 4px; }
+  header h1 { font-size: clamp(1.15rem, 6vw, 1.6rem); letter-spacing: 1px; }
+  header p  { font-size: .68rem; letter-spacing: .4px; margin-top: 4px; }
+  .tabs     { margin-top: 14px; gap: 2px; }
+  .tab-btn  { padding: 8px 10px; font-size: .72rem; gap: 4px; }
+  .tab-btn svg { width: 13px; height: 13px; }
+
+  /* ── Main ── */
+  main { padding: 16px 10px 40px; }
+
+  /* ── Group cards ── */
+  .grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .group-header { padding: 12px 14px 10px; gap: 10px; }
+  .group-letter { width: 38px; height: 38px; font-size: 1.1rem; }
+  .group-title  { font-size: .92rem; }
+  .team-item    { padding: 8px 14px; gap: 9px; }
+  .team-flag    { width: 28px; height: 19px; }
+  .team-name    { font-size: .82rem; }
+  .card-footer  { padding: 8px 14px 10px; font-size: .7rem; }
+
+  /* ── Modal ── */
+  .modal { margin: 12px; border-radius: 14px; max-height: 90vh; }
+  .modal-header { padding: 14px 16px; }
+  .match-card   { padding: 12px 14px; }
+  .match-teams  { gap: 6px; }
+  .match-meta   { gap: 8px; }
+
+  /* ── Schedule filter ── */
+  .filter-row { gap: 8px; margin-bottom: 20px; }
+  .dropdown-trigger { min-width: 0; padding: 8px 12px; font-size: .8rem; }
+
+  /* ── Calendar ── */
+  .cal-block { min-width: 130px; }
+  .cal-month-title { font-size: .65rem; }
+  .cal-cell .cal-num { font-size: .6rem; }
+  .cal-cnt { font-size: .48rem; }
+
+  /* ── Schedule cards ── */
+  .schedule-matches { grid-template-columns: 1fr; }
+  .sched-card       { padding: 12px 14px; }
+  .sched-team span  { font-size: .8rem; }
+  .card-link-btn    { font-size: .66rem; padding: 6px 3px; }
+
+  /* ── Bracket tooltip ── */
+  .ticket-tip { min-width: 260px; max-width: calc(100vw - 24px); }
+  .tip-btn    { font-size: .66rem; padding: 7px 3px; }
+
+  /* ── MAP: stack vertically instead of side-by-side ── */
+  #view-map {
+    flex-direction: column;
+    height: auto;
+    min-height: 0;
+    gap: 8px;
+  }
+  #wc-map {
+    height: 45vh;
+    min-height: 240px;
+    width: 100%;
+    flex: none;
+  }
+  #map-sidebar {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-height: 0;
+    border-radius: 12px;
+    border-color: transparent;
+    transition: max-height .3s ease, border-color .3s;
+    overflow: hidden;
+  }
+  #map-sidebar.open {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-height: 60vh;
+    overflow-y: auto;
+    border-color: #1e2d4a;
+  }
+  #map-sidebar-content { min-width: 0; padding: 14px 12px; }
+  .ms-city    { font-size: .95rem; }
+  .ms-links   { flex-wrap: wrap; }
+  .ms-btn     { min-width: 60px; flex: none; }
+}
+
+/* ── Tablet / landscape phone (641px – 900px) ── */
+@media (max-width: 900px) and (min-width: 641px) {
+  .tab-btn { padding: 10px 16px; font-size: .82rem; }
+  #map-sidebar.open { width: 320px; min-width: 320px; }
+  #map-sidebar-content { min-width: 320px; }
+  .grid { grid-template-columns: repeat(auto-fill, minmax(220px,1fr)); gap: 16px; }
+}
