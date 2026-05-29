@@ -41,10 +41,42 @@ const CITY_GROUPS = [
   { country:'Canada',        flag:'ca', cities:['Toronto','Vancouver'] },
 ];
 
+// City → country reverse lookup (derived from CITY_GROUPS)
+const CITY_COUNTRY = {};
+CITY_GROUPS.forEach(g => g.cities.forEach(c => { CITY_COUNTRY[c] = g.country; }));
+
+// Group stage times are stored in ET; these offsets convert to local venue time
+const CITY_TZ_OFFSET = {
+  Atlanta:0, Boston:0, Miami:0, 'New York/NJ':0, Philadelphia:0, Toronto:0,
+  Dallas:-1, Houston:-1, 'Kansas City':-1, Guadalajara:-1, 'Mexico City':-1, Monterrey:-1,
+  'Los Angeles':-3, 'San Francisco':-3, Seattle:-3, Vancouver:-3,
+};
+
 // ═══════════════════════════════════════════════════════════
 //  HELPER FUNCTIONS
 // ═══════════════════════════════════════════════════════════
 function getCity(venue) { return venue.split(', ').pop(); }
+
+function getCountry(venue) { return CITY_COUNTRY[getCity(venue)] || ''; }
+
+function toLocalTime(timeStr, city) {
+  const off = CITY_TZ_OFFSET[city];
+  if (!off) return timeStr;
+  const m = timeStr.match(/^(\d+):(\d+)\s*(AM|PM)$/i);
+  if (!m) return timeStr;
+  let h = parseInt(m[1]); const min = m[2], ap = m[3].toUpperCase();
+  if (ap === 'PM' && h !== 12) h += 12;
+  if (ap === 'AM' && h === 12) h = 0;
+  h += off;
+  if (h < 0) h += 24; if (h >= 24) h -= 24;
+  const newAp = h < 12 ? 'AM' : 'PM';
+  return `${h % 12 || 12}:${min} ${newAp}`;
+}
+
+function getLocalTZ(city) {
+  const off = CITY_TZ_OFFSET[city];
+  return off === -3 ? 'PT' : off === -1 ? 'CT' : 'ET';
+}
 
 function flagImg(team, w=30, h=20) {
   const code = FLAGS[team] || null;
@@ -269,6 +301,44 @@ function getStubHubUrl(m) {
   const searchUrl = `https://www.stubhub.com/search/?q=${encodeURIComponent(query)}`;
   if (STUBHUB_CAMREF === 'YOUR_CAMREF') return searchUrl;
   return `https://prf.hn/click/camref:${STUBHUB_CAMREF}/destination:${encodeURIComponent(searchUrl)}`;
+}
+
+const VENUE_COORDS = {
+  'Estadio Azteca':          { lat: 19.3026,  lng: -99.1507  },
+  'Estadio Akron':           { lat: 20.6696,  lng: -103.3967 },
+  'Estadio BBVA':            { lat: 25.6694,  lng: -100.2432 },
+  'Mercedes-Benz Stadium':   { lat: 33.7555,  lng: -84.4010  },
+  'Gillette Stadium':        { lat: 42.0909,  lng: -71.2643  },
+  'AT&T Stadium':            { lat: 32.7480,  lng: -97.0929  },
+  'NRG Stadium':             { lat: 29.6847,  lng: -95.4107  },
+  'Arrowhead Stadium':       { lat: 39.0489,  lng: -94.4839  },
+  'SoFi Stadium':            { lat: 33.9535,  lng: -118.3392 },
+  'Hard Rock Stadium':       { lat: 25.9580,  lng: -80.2389  },
+  'MetLife Stadium':         { lat: 40.8135,  lng: -74.0745  },
+  'Lincoln Financial Field': { lat: 39.9009,  lng: -75.1675  },
+  "Levi's Stadium":          { lat: 37.4033,  lng: -121.9694 },
+  'Lumen Field':             { lat: 47.5952,  lng: -122.3316 },
+  'BMO Field':               { lat: 43.6333,  lng: -79.4181  },
+  'BC Place':                { lat: 49.2767,  lng: -123.1118 },
+};
+
+function getBookingUrl(venue, dateISO) {
+  const stadium = venue.split(',')[0].trim();
+  const d = new Date(dateISO + 'T12:00:00');
+  d.setDate(d.getDate() + 1);
+  const checkout = d.toISOString().slice(0, 10);
+  const base = `checkin=${dateISO}&checkout=${checkout}&group_adults=2`;
+  const coords = VENUE_COORDS[stadium];
+  if (coords) {
+    return `https://www.booking.com/searchresults.html?latitude=${coords.lat}&longitude=${coords.lng}&ss=${encodeURIComponent(stadium)}&${base}`;
+  }
+  const city = venue.split(',').pop().trim().replace(/\/.*$/, '');
+  return `https://www.booking.com/searchresults.html?ss=${encodeURIComponent(city)}&${base}`;
+}
+
+function getFlightsUrl(city) {
+  const cleanCity = city.replace(/\/.*$/, '').trim();
+  return `https://www.google.com/travel/flights?q=${encodeURIComponent('flights to ' + cleanCity)}`;
 }
 
 // ═══════════════════════════════════════════════════════════

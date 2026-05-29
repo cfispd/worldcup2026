@@ -33,7 +33,7 @@ function openModal(groupKey) {
   const pinIcon = `<svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>`;
 
   document.getElementById('matchList').innerHTML = matches.map(m => `
-    <div class="match-card" data-ticket-from="${getTicketFrom(m)}" data-ticket-url="${getStubHubUrl(m)}">
+    <div class="match-card">
       <div class="match-teams">
         <div class="match-team">${flagImg(m.home)}<span>${m.home}</span></div>
         <span class="match-vs">VS</span>
@@ -41,10 +41,14 @@ function openModal(groupKey) {
       </div>
       <div class="match-meta">
         <span class="meta-item">${calIcon} ${fmtDate(m.dateISO)}, 2026</span>
-        <span class="meta-item">${clkIcon} ${m.time}</span>
-        <span class="meta-item">${pinIcon} ${m.venue}</span>
+        <span class="meta-item">${clkIcon} ${toLocalTime(m.time, getCity(m.venue))} ${getLocalTZ(getCity(m.venue))}</span>
+        <span class="meta-item">${pinIcon} <span class="venue-stadium">${m.venue.split(',')[0].trim()}</span><span class="venue-sep"> · </span><span class="venue-city">${getCity(m.venue)}, ${getCountry(m.venue)}</span></span>
       </div>
-      <a href="${getStubHubUrl(m)}" class="card-ticket-btn" target="_blank" rel="noopener">🎫 Buy Tickets</a>
+      <div class="card-links">
+        <a href="${getStubHubUrl(m)}" class="card-link-btn card-ticket-btn" target="_blank" rel="noopener">🎫 Tickets</a>
+        <a href="${getBookingUrl(m.venue, m.dateISO)}" class="card-link-btn card-hotel-btn" target="_blank" rel="noopener">🏨 Hotel</a>
+        <a href="${getFlightsUrl(getCity(m.venue))}" class="card-link-btn card-flight-btn" target="_blank" rel="noopener">✈️ Flights</a>
+      </div>
     </div>
   `).join('');
 
@@ -67,19 +71,30 @@ document.getElementById('overlay').addEventListener('click', e => {
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
 // ═══════════════════════════════════════════════════════════
-//  FLOATING TICKET TOOLTIP  (click to open / close)
+//  FLOATING TOOLTIP  (bracket only)
 // ═══════════════════════════════════════════════════════════
-const ticketTip = document.getElementById('ticket-tip');
-const tipAmount = document.getElementById('tip-amount');
-const tipLink   = document.getElementById('tip-link');
+const ticketTip  = document.getElementById('ticket-tip');
+const tipAmount  = document.getElementById('tip-amount');
+const tipLink    = document.getElementById('tip-link');
+const tipHotel   = document.getElementById('tip-hotel');
+const tipFlight  = document.getElementById('tip-flight');
 let   activeCard = null;
+
+function bracketDateToISO(dateStr) {
+  const M = {Jan:'01',Feb:'02',Mar:'03',Apr:'04',May:'05',Jun:'06',Jul:'07',Aug:'08'};
+  const [mon, day] = dateStr.split(' ');
+  return `2026-${M[mon]}-${day.padStart(2,'0')}`;
+}
 
 function openTicketTip(card) {
   tipAmount.textContent = '$' + card.dataset.ticketFrom;
-  tipLink.href = card.dataset.ticketUrl || '#';
+  tipLink.href   = card.dataset.ticketUrl || '#';
+  const dateISO  = bracketDateToISO(card.dataset.date);
+  tipHotel.href  = getBookingUrl(card.dataset.venue, dateISO);
+  tipFlight.href = getFlightsUrl(getCity(card.dataset.venue));
 
   const rect = card.getBoundingClientRect();
-  const TW = 250, TH = 130;
+  const TW = 290, TH = 150;
   let x = rect.left;
   let y = rect.top - TH - 10;
   if (y < 8)                          y = rect.bottom + 10;
@@ -97,7 +112,7 @@ function closeTicketTip() {
 }
 
 document.addEventListener('click', e => {
-  const card = e.target.closest('[data-ticket-from]');
+  const card = e.target.closest('.br-card');
   if (card) {
     e.stopPropagation();
     if (activeCard === card) { closeTicketTip(); return; }

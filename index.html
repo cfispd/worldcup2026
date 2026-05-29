@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>FIFA World Cup 2026</title>
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
 <body>
 
@@ -27,6 +28,10 @@
       <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="22 17 13 17 13 7"/><polyline points="2 7 11 7 11 17"/><line x1="13" y1="12" x2="22" y2="12"/><line x1="2" y1="12" x2="11" y2="12"/></svg>
       Bracket
     </button>
+    <button class="tab-btn" data-tab="map">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+      Map
+    </button>
   </div>
 </header>
 
@@ -38,7 +43,7 @@
     <div class="grid">
 
       <div class="group-card g-a" data-group="A">
-        <div class="group-header"><div class="group-letter">A</div><div><div class="group-title">Group A</div><div class="group-subtitle">4 teams · 6 matches</div></div></div>
+        <div class="group-header"><div class="group-letter">A</div><div><div class="group-title">Group A</div></div></div>
         <ul class="team-list">
           <li class="team-item"><img class="team-flag" src="https://flagcdn.com/w40/mx.png" alt="Mexico"><span class="team-name">Mexico</span><span class="host-badge">HOST</span></li>
           <li class="team-item"><img class="team-flag" src="https://flagcdn.com/w40/kr.png" alt="South Korea"><span class="team-name">South Korea</span></li>
@@ -49,7 +54,7 @@
       </div>
 
       <div class="group-card g-b" data-group="B">
-        <div class="group-header"><div class="group-letter">B</div><div><div class="group-title">Group B</div><div class="group-subtitle">4 teams · 6 matches</div></div></div>
+        <div class="group-header"><div class="group-letter">B</div><div><div class="group-title">Group B</div></div></div>
         <ul class="team-list">
           <li class="team-item"><img class="team-flag" src="https://flagcdn.com/w40/ca.png" alt="Canada"><span class="team-name">Canada</span><span class="host-badge">HOST</span></li>
           <li class="team-item"><img class="team-flag" src="https://flagcdn.com/w40/ch.png" alt="Switzerland"><span class="team-name">Switzerland</span></li>
@@ -60,7 +65,7 @@
       </div>
 
       <div class="group-card g-c" data-group="C">
-        <div class="group-header"><div class="group-letter">C</div><div><div class="group-title">Group C</div><div class="group-subtitle">4 teams · 6 matches</div></div></div>
+        <div class="group-header"><div class="group-letter">C</div><div><div class="group-title">Group C</div></div></div>
         <ul class="team-list">
           <li class="team-item"><img class="team-flag" src="https://flagcdn.com/w40/br.png" alt="Brazil"><span class="team-name">Brazil</span></li>
           <li class="team-item"><img class="team-flag" src="https://flagcdn.com/w40/ma.png" alt="Morocco"><span class="team-name">Morocco</span></li>
@@ -71,7 +76,7 @@
       </div>
 
       <div class="group-card g-d" data-group="D">
-        <div class="group-header"><div class="group-letter">D</div><div><div class="group-title">Group D</div><div class="group-subtitle">4 teams · 6 matches</div></div></div>
+        <div class="group-header"><div class="group-letter">D</div><div><div class="group-title">Group D</div></div></div>
         <ul class="team-list">
           <li class="team-item"><img class="team-flag" src="https://flagcdn.com/w40/us.png" alt="United States"><span class="team-name">United States</span><span class="host-badge">HOST</span></li>
           <li class="team-item"><img class="team-flag" src="https://flagcdn.com/w40/py.png" alt="Paraguay"><span class="team-name">Paraguay</span></li>
@@ -82,7 +87,7 @@
       </div>
 
       <div class="group-card g-e" data-group="E">
-        <div class="group-header"><div class="group-letter">E</div><div><div class="group-title">Group E</div><div class="group-subtitle">4 teams · 6 matches</div></div></div>
+        <div class="group-header"><div class="group-letter">E</div><div><div class="group-title">Group E</div></div></div>
         <ul class="team-list">
           <li class="team-item"><img class="team-flag" src="https://flagcdn.com/w40/de.png" alt="Germany"><span class="team-name">Germany</span></li>
           <li class="team-item"><img class="team-flag" src="https://flagcdn.com/w40/ec.png" alt="Ecuador"><span class="team-name">Ecuador</span></li>
@@ -93,7 +98,7 @@
       </div>
 
       <div class="group-card g-f" data-group="F">
-        <div class="group-header"><div class="group-letter">F</div><div><div class="group-title">Group F</div><div class="group-subtitle">4 teams · 6 matches</div></div></div>
+        <div class="group-header"><div class="group-letter">F</div><div><div class="group-title">Group F</div></div></div>
         <ul class="team-list">
           <li class="team-item"><img class="team-flag" src="https://flagcdn.com/w40/nl.png" alt="Netherlands"><span class="team-name">Netherlands</span></li>
           <li class="team-item"><img class="team-flag" src="https://flagcdn.com/w40/jp.png" alt="Japan"><span class="team-name">Japan</span></li>
@@ -104,7 +109,7 @@
       </div>
 
       <div class="group-card g-g" data-group="G">
-        <div class="group-header"><div class="group-letter">G</div><div><div class="group-title">Group G</div><div class="group-subtitle">4 teams · 6 matches</div></div></div>
+        <div class="group-header"><div class="group-letter">G</div><div><div class="group-title">Group G</div></div></div>
         <ul class="team-list">
           <li class="team-item"><img class="team-flag" src="https://flagcdn.com/w40/be.png" alt="Belgium"><span class="team-name">Belgium</span></li>
           <li class="team-item"><img class="team-flag" src="https://flagcdn.com/w40/ir.png" alt="Iran"><span class="team-name">Iran</span></li>
@@ -115,7 +120,7 @@
       </div>
 
       <div class="group-card g-h" data-group="H">
-        <div class="group-header"><div class="group-letter">H</div><div><div class="group-title">Group H</div><div class="group-subtitle">4 teams · 6 matches</div></div></div>
+        <div class="group-header"><div class="group-letter">H</div><div><div class="group-title">Group H</div></div></div>
         <ul class="team-list">
           <li class="team-item"><img class="team-flag" src="https://flagcdn.com/w40/es.png" alt="Spain"><span class="team-name">Spain</span></li>
           <li class="team-item"><img class="team-flag" src="https://flagcdn.com/w40/uy.png" alt="Uruguay"><span class="team-name">Uruguay</span></li>
@@ -126,7 +131,7 @@
       </div>
 
       <div class="group-card g-i" data-group="I">
-        <div class="group-header"><div class="group-letter">I</div><div><div class="group-title">Group I</div><div class="group-subtitle">4 teams · 6 matches</div></div></div>
+        <div class="group-header"><div class="group-letter">I</div><div><div class="group-title">Group I</div></div></div>
         <ul class="team-list">
           <li class="team-item"><img class="team-flag" src="https://flagcdn.com/w40/fr.png" alt="France"><span class="team-name">France</span></li>
           <li class="team-item"><img class="team-flag" src="https://flagcdn.com/w40/sn.png" alt="Senegal"><span class="team-name">Senegal</span></li>
@@ -137,7 +142,7 @@
       </div>
 
       <div class="group-card g-j" data-group="J">
-        <div class="group-header"><div class="group-letter">J</div><div><div class="group-title">Group J</div><div class="group-subtitle">4 teams · 6 matches</div></div></div>
+        <div class="group-header"><div class="group-letter">J</div><div><div class="group-title">Group J</div></div></div>
         <ul class="team-list">
           <li class="team-item"><img class="team-flag" src="https://flagcdn.com/w40/ar.png" alt="Argentina"><span class="team-name">Argentina</span></li>
           <li class="team-item"><img class="team-flag" src="https://flagcdn.com/w40/at.png" alt="Austria"><span class="team-name">Austria</span></li>
@@ -148,7 +153,7 @@
       </div>
 
       <div class="group-card g-k" data-group="K">
-        <div class="group-header"><div class="group-letter">K</div><div><div class="group-title">Group K</div><div class="group-subtitle">4 teams · 6 matches</div></div></div>
+        <div class="group-header"><div class="group-letter">K</div><div><div class="group-title">Group K</div></div></div>
         <ul class="team-list">
           <li class="team-item"><img class="team-flag" src="https://flagcdn.com/w40/pt.png" alt="Portugal"><span class="team-name">Portugal</span></li>
           <li class="team-item"><img class="team-flag" src="https://flagcdn.com/w40/co.png" alt="Colombia"><span class="team-name">Colombia</span></li>
@@ -159,7 +164,7 @@
       </div>
 
       <div class="group-card g-l" data-group="L">
-        <div class="group-header"><div class="group-letter">L</div><div><div class="group-title">Group L</div><div class="group-subtitle">4 teams · 6 matches</div></div></div>
+        <div class="group-header"><div class="group-letter">L</div><div><div class="group-title">Group L</div></div></div>
         <ul class="team-list">
           <li class="team-item"><img class="team-flag" src="https://flagcdn.com/w40/gb-eng.png" alt="England"><span class="team-name">England</span></li>
           <li class="team-item"><img class="team-flag" src="https://flagcdn.com/w40/hr.png" alt="Croatia"><span class="team-name">Croatia</span></li>
@@ -177,6 +182,14 @@
 
   <!-- ── BRACKET VIEW ── -->
   <div class="view" id="view-bracket"></div>
+
+  <!-- ── MAP VIEW ── -->
+  <div class="view" id="view-map">
+    <div id="map-sidebar">
+      <div id="map-sidebar-content"></div>
+    </div>
+    <div id="wc-map"></div>
+  </div>
 
 </main>
 
@@ -200,19 +213,25 @@
   Flags by <a href="https://flagcdn.com" style="color:#546e7a;text-decoration:none">flagcdn.com</a>
 </footer>
 
-<!-- TICKET TOOLTIP -->
+<!-- BRACKET TOOLTIP -->
 <div id="ticket-tip" class="ticket-tip">
   <div class="tip-header">🎫 Ticket Info</div>
   <div class="tip-price">From <span id="tip-amount"></span></div>
   <div class="tip-cats">Multiple price categories available</div>
-  <a id="tip-link" href="#" class="tip-btn" target="_blank" rel="noopener">Buy Tickets →</a>
+  <div class="tip-actions">
+    <a id="tip-link"   href="#" class="tip-btn"             target="_blank" rel="noopener">🎫 Tickets</a>
+    <a id="tip-hotel"  href="#" class="tip-btn tip-hotel-btn"  target="_blank" rel="noopener">🏨 Hotel</a>
+    <a id="tip-flight" href="#" class="tip-btn tip-flight-btn" target="_blank" rel="noopener">✈️ Flights</a>
+  </div>
 </div>
 
-<!-- Scripts: load order matters (data → schedule → bracket → app) -->
+<!-- Scripts: load order matters (data → schedule → bracket → app → map) -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="js/data.js"></script>
 <script src="js/schedule.js"></script>
 <script src="js/bracket.js"></script>
 <script src="js/app.js"></script>
+<script src="js/map.js"></script>
 
 </body>
 </html>

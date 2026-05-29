@@ -10,28 +10,24 @@ let selectedDates  = new Set();
 function applyFilter() {
   let anyVisible = false;
 
-  // City filter on individual cards
   document.querySelectorAll('.sched-card').forEach(card => {
     const show = selectedCities.size === 0 || selectedCities.has(card.dataset.city);
     card.style.display = show ? '' : 'none';
   });
 
-  // Date filter on day blocks + recount visible cards
   document.querySelectorAll('.schedule-day').forEach(day => {
-    const iso = day.dataset.day;
+    const iso    = day.dataset.day;
     const dateOk = selectedDates.size === 0 || selectedDates.has(iso);
-    const vis = dateOk ? [...day.querySelectorAll('.sched-card')].filter(c => c.style.display !== 'none') : [];
-    const show = vis.length > 0;
+    const vis    = dateOk ? [...day.querySelectorAll('.sched-card')].filter(c => c.style.display !== 'none') : [];
+    const show   = vis.length > 0;
     day.style.display = show ? '' : 'none';
     if (show) anyVisible = true;
     const cnt = document.getElementById('count-' + iso);
     if (cnt) cnt.textContent = vis.length + ' match' + (vis.length !== 1 ? 'es' : '');
   });
 
-  // Stage-divider: hide if all following days are hidden
   document.querySelectorAll('.stage-divider').forEach(div => {
-    let next = div.nextElementSibling;
-    let hasVisible = false;
+    let next = div.nextElementSibling, hasVisible = false;
     while (next && !next.classList.contains('stage-divider')) {
       if (next.classList.contains('schedule-day') && next.style.display !== 'none') { hasVisible = true; break; }
       next = next.nextElementSibling;
@@ -42,7 +38,7 @@ function applyFilter() {
   document.getElementById('noResults').style.display = anyVisible ? 'none' : '';
   updateCityTriggerLabel();
   updateCityTags();
-  updateDateTriggerLabel();
+  updateCalTriggerLabel();
   updateDateTags();
 }
 
@@ -67,10 +63,10 @@ function updateCityTags() {
   `).join('');
 }
 
-// ── Date dropdown label & tags ────────────────────────────
-function updateDateTriggerLabel() {
-  const trigger = document.getElementById('dateDdTrigger');
-  const label   = document.getElementById('dateDdLabel');
+// ── Calendar trigger label & date tags ───────────────────
+function updateCalTriggerLabel() {
+  const trigger = document.getElementById('calTrigger');
+  const label   = document.getElementById('calTriggerLabel');
   if (!trigger) return;
   if (selectedDates.size === 0) {
     label.textContent = 'All Dates'; trigger.classList.remove('has-selection');
@@ -94,29 +90,36 @@ function updateDateTags() {
 //  SCHEDULE CARD TEMPLATE
 // ═══════════════════════════════════════════════════════════
 function schedCardHtml(m) {
-  const city     = getCity(m.venue);
-  const isGroup  = !!m.group;
-  const accent   = isGroup ? GROUP_ACCENT[m.group] : ROUND_ACCENT[m.round];
-  const pill     = isGroup ? `GROUP ${m.group}` : ROUND_LABEL[m.round];
-  const f1       = isGroup ? flagImg(m.home, 32, 21) : '';
-  const f2       = isGroup ? flagImg(m.away, 32, 21) : '';
-  const timeNote = isGroup ? 'ET' : 'local';
+  const city      = getCity(m.venue);
+  const country   = getCountry(m.venue);
+  const stadium   = m.venue.split(',')[0].trim();
+  const isGroup   = !!m.group;
+  const accent    = isGroup ? GROUP_ACCENT[m.group] : ROUND_ACCENT[m.round];
+  const pill      = isGroup ? `GROUP ${m.group}` : ROUND_LABEL[m.round];
+  const f1        = isGroup ? flagImg(m.home, 32, 21) : '';
+  const f2        = isGroup ? flagImg(m.away, 32, 21) : '';
+  const localTime = isGroup ? toLocalTime(m.time, city) : m.time;
+  const tz        = getLocalTZ(city);
   const clockIcon = `<svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="display:inline;vertical-align:middle;margin-right:3px"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>`;
   const pinIcon   = `<svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>`;
 
   return `
-    <div class="sched-card" data-city="${city}" data-ticket-from="${getTicketFrom(m)}" data-ticket-url="${getStubHubUrl(m)}">
+    <div class="sched-card" data-city="${city}">
       <div class="sched-top">
         <span class="group-pill" style="background:${accent}">${pill}</span>
-        <span class="sched-time">${clockIcon}${m.time} ${timeNote}</span>
+        <span class="sched-time">${clockIcon}${localTime} ${tz}</span>
       </div>
       <div class="sched-teams">
         <div class="sched-team">${f1}<span>${m.home}</span></div>
         <span class="sched-vs">VS</span>
         <div class="sched-team right"><span>${m.away}</span>${f2}</div>
       </div>
-      <div class="sched-venue">${pinIcon} ${m.venue}</div>
-      <a href="${getStubHubUrl(m)}" class="card-ticket-btn" target="_blank" rel="noopener">🎫 Buy Tickets</a>
+      <div class="sched-venue">${pinIcon} <span class="venue-stadium">${stadium}</span><span class="venue-sep"> · </span><span class="venue-city">${city}, ${country}</span></div>
+      <div class="card-links">
+        <a href="${getStubHubUrl(m)}" class="card-link-btn card-ticket-btn" target="_blank" rel="noopener">🎫 Tickets</a>
+        <a href="${getBookingUrl(m.venue, m.dateISO)}" class="card-link-btn card-hotel-btn" target="_blank" rel="noopener">🏨 Hotel</a>
+        <a href="${getFlightsUrl(city)}" class="card-link-btn card-flight-btn" target="_blank" rel="noopener">✈️ Flights</a>
+      </div>
     </div>
   `;
 }
@@ -131,27 +134,7 @@ function buildSchedule() {
   const sorted    = Object.keys(byDate).sort();
   const container = document.getElementById('view-schedule');
 
-  // ── Date dropdown HTML ────────────────────────────────────
-  const dateGroupsHtml = [
-    { label: 'June 2026', isos: sorted.filter(d => d.startsWith('2026-06')) },
-    { label: 'July 2026', isos: sorted.filter(d => d.startsWith('2026-07')) },
-  ].filter(g => g.isos.length > 0).map(g => `
-    <div class="dropdown-group">
-      <div class="group-header-dd">
-        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-        ${g.label}
-      </div>
-      ${g.isos.map(iso => `
-        <label class="city-option">
-          <input type="checkbox" class="date-cb" value="${iso}">
-          <span class="city-name">${fmtWeekday(iso)}, ${fmtDate(iso)}</span>
-          <span class="city-count">${byDate[iso].length}</span>
-        </label>
-      `).join('')}
-    </div>
-  `).join('');
-
-  // ── City dropdown HTML ────────────────────────────────────
+  // ── City dropdown ─────────────────────────────────────────
   const cityGroupsHtml = CITY_GROUPS.map(g => `
     <div class="dropdown-group">
       <div class="group-header-dd">
@@ -168,11 +151,44 @@ function buildSchedule() {
     </div>
   `).join('');
 
-  // ── Day blocks HTML ───────────────────────────────────────
+  // ── Calendar panel ────────────────────────────────────────
+  const matchDateSet = new Set(sorted);
+
+  function calMonth(mo) {
+    const NAMES = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug'];
+    const first = new Date(2026, mo - 1, 1).getDay();
+    const days  = new Date(2026, mo, 0).getDate();
+    let cells = '';
+    for (let i = 0; i < first; i++) cells += '<div class="cal-cell"></div>';
+    for (let d = 1; d <= days; d++) {
+      const iso = `2026-${String(mo).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+      if (matchDateSet.has(iso)) {
+        const cnt = (byDate[iso] || []).length;
+        cells += `<div class="cal-cell cal-match" data-iso="${iso}"><span class="cal-num">${d}</span><span class="cal-cnt">${cnt}</span></div>`;
+      } else {
+        cells += `<div class="cal-cell"><span class="cal-num">${d}</span></div>`;
+      }
+    }
+    return `<div class="cal-block">
+      <div class="cal-month-title">${NAMES[mo - 1]} 2026</div>
+      <div class="cal-dow"><span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span></div>
+      <div class="cal-cells">${cells}</div>
+    </div>`;
+  }
+
+  const calPanelHtml = `<div class="cal-panel" id="calPanel">
+    <div class="cal-top-row">
+      <span style="font-size:.72rem;color:#546e7a">Click a date to filter · click again to deselect</span>
+      <button class="cal-clear-btn" id="calClearBtn">Clear</button>
+    </div>
+    <div class="cal-months">${calMonth(6)}${calMonth(7)}</div>
+  </div>`;
+
+  // ── Day blocks ────────────────────────────────────────────
   let lastStage = null;
   const daysHtml = sorted.map(iso => {
-    const matches   = byDate[iso];
-    const stage     = matches[0].round ? 'knockout' : 'group';
+    const matches = byDate[iso];
+    const stage   = matches[0].round ? 'knockout' : 'group';
     let divider = '';
     if (stage !== lastStage && stage === 'knockout') {
       divider = `
@@ -218,25 +234,20 @@ function buildSchedule() {
         </div>
       </div>
       <span class="filter-label">Date</span>
-      <div class="dropdown-wrapper" id="dateDdWrapper">
-        <button class="dropdown-trigger" id="dateDdTrigger">
+      <div class="dropdown-wrapper" id="calTriggerWrapper">
+        <button class="dropdown-trigger" id="calTrigger">
           <span class="trigger-left">
             <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-            <span id="dateDdLabel">All Dates</span>
+            <span id="calTriggerLabel">All Dates</span>
           </span>
           <svg class="chevron" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
-        <div class="dropdown-panel" id="dateDdPanel">
-          <div class="dropdown-actions">
-            <button class="dd-action" id="dateDdSelectAll">Select All</button>
-            <button class="dd-action" id="dateDdClearAll">Clear All</button>
-          </div>
-          ${dateGroupsHtml}
-        </div>
       </div>
     </div>
     <div class="selected-tags" id="selectedTags"></div>
+    ${calPanelHtml}
     <div class="selected-tags" id="selectedDateTags"></div>
+    <p class="hint" style="margin:4px 0 16px">⏰ All times shown are local venue time &nbsp;(ET · CT · PT)</p>
     ${daysHtml}
     <div class="no-results" id="noResults" style="display:none">No matches found for the selected filters.</div>
   `;
@@ -278,46 +289,59 @@ function buildSchedule() {
     if (cb) cb.checked = false;
     applyFilter();
   });
+  container.addEventListener('change', e => {
+    if (e.target.classList.contains('city-cb')) {
+      e.target.checked ? selectedCities.add(e.target.value) : selectedCities.delete(e.target.value);
+      applyFilter();
+    }
+  });
 
-  // ── Date dropdown events ──────────────────────────────────
-  const dateTrigger = document.getElementById('dateDdTrigger');
-  const datePanel   = document.getElementById('dateDdPanel');
+  // ── Calendar toggle ───────────────────────────────────────
+  const calTrigger = document.getElementById('calTrigger');
+  const calPanel   = document.getElementById('calPanel');
 
-  dateTrigger.addEventListener('click', e => {
+  calTrigger.addEventListener('click', e => {
     e.stopPropagation();
-    const open = datePanel.classList.toggle('open');
-    dateTrigger.classList.toggle('open', open);
+    const open = calPanel.classList.toggle('open');
+    calTrigger.classList.toggle('open', open);
   });
   document.addEventListener('click', e => {
-    const w = document.getElementById('dateDdWrapper');
-    if (w && !w.contains(e.target)) { datePanel.classList.remove('open'); dateTrigger.classList.remove('open'); }
+    const w = document.getElementById('calTriggerWrapper');
+    if (w && !w.contains(e.target) && !calPanel.contains(e.target)) {
+      calPanel.classList.remove('open');
+      calTrigger.classList.remove('open');
+    }
   });
-  document.getElementById('dateDdSelectAll').addEventListener('click', () => {
-    container.querySelectorAll('.date-cb').forEach(cb => { cb.checked = true; selectedDates.add(cb.value); });
+
+  // ── Calendar cell clicks ──────────────────────────────────
+  calPanel.addEventListener('click', e => {
+    if (e.target.closest('#calClearBtn')) {
+      selectedDates.clear();
+      calPanel.querySelectorAll('.cal-selected').forEach(c => c.classList.remove('cal-selected'));
+      applyFilter();
+      return;
+    }
+    const cell = e.target.closest('.cal-match');
+    if (!cell) return;
+    const iso = cell.dataset.iso;
+    if (selectedDates.has(iso)) {
+      selectedDates.delete(iso);
+      cell.classList.remove('cal-selected');
+    } else {
+      selectedDates.add(iso);
+      cell.classList.add('cal-selected');
+    }
     applyFilter();
   });
-  document.getElementById('dateDdClearAll').addEventListener('click', () => {
-    container.querySelectorAll('.date-cb').forEach(cb => cb.checked = false);
-    selectedDates.clear(); applyFilter();
-  });
+
+  // ── Date tag remove ───────────────────────────────────────
   document.getElementById('selectedDateTags').addEventListener('click', e => {
     const btn = e.target.closest('.date-tag-remove');
     if (!btn) return;
     const iso = btn.dataset.date;
     selectedDates.delete(iso);
-    const cb = container.querySelector(`.date-cb[value="${iso}"]`);
-    if (cb) cb.checked = false;
+    const cell = calPanel.querySelector(`.cal-match[data-iso="${iso}"]`);
+    if (cell) cell.classList.remove('cal-selected');
     applyFilter();
-  });
-
-  // ── Combined checkbox handler ─────────────────────────────
-  container.addEventListener('change', e => {
-    if (e.target.classList.contains('city-cb')) {
-      e.target.checked ? selectedCities.add(e.target.value) : selectedCities.delete(e.target.value);
-      applyFilter();
-    } else if (e.target.classList.contains('date-cb')) {
-      e.target.checked ? selectedDates.add(e.target.value) : selectedDates.delete(e.target.value);
-      applyFilter();
-    }
   });
 }

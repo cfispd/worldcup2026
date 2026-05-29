@@ -120,7 +120,12 @@ main { max-width: 1400px; margin: 0 auto; padding: 36px 20px 60px; }
 .sched-team img { width:32px; height:21px; object-fit:cover; border-radius:3px; flex-shrink:0; box-shadow:0 1px 4px rgba(0,0,0,.5); }
 .sched-team span { font-size:.88rem; font-weight:600; color:#e0e4f0; }
 .sched-vs { font-size:.72rem; font-weight:700; color:#546e7a; background:#111624; padding:3px 8px; border-radius:6px; flex-shrink:0; }
-.sched-venue { display:flex; align-items:center; gap:5px; font-size:.75rem; color:#607d8b; }
+.sched-venue { display:flex; align-items:center; gap:5px; font-size:.76rem; color:#78909c; flex-wrap:wrap; }
+.venue-stadium { color:#90caf9; font-weight:600; }
+.venue-sep     { color:#37474f; }
+.venue-city    { color:#607d8b; }
+.meta-item .venue-stadium { color:#90caf9; font-weight:600; }
+.meta-item .venue-city    { color:#546e7a; }
 
 .stage-divider { display:flex; align-items:center; gap:16px; margin: 40px 0 32px; }
 .stage-divider-line { flex:1; height:1px; background:linear-gradient(to right,transparent,#ffd70044,transparent); }
@@ -190,8 +195,8 @@ footer { text-align:center; padding:20px; font-size:.8rem; color:#455a64; border
   border: 1px solid rgba(255,215,0,.45);
   border-radius: 14px;
   padding: 16px 18px;
-  min-width: 230px;
-  max-width: 270px;
+  min-width: 290px;
+  max-width: 330px;
   box-shadow: 0 16px 40px rgba(0,0,0,.75), 0 0 0 1px rgba(255,215,0,.07);
   pointer-events: none;
   opacity: 0;
@@ -227,36 +232,386 @@ footer { text-align:center; padding:20px; font-size:.8rem; color:#455a64; border
   color: #455a64;
   margin-bottom: 14px;
 }
+.tip-actions {
+  display: flex;
+  gap: 6px;
+}
 .tip-btn {
-  display: block;
+  flex: 1;
   text-align: center;
-  background: rgba(255,215,0,.1);
-  border: 1px solid rgba(255,215,0,.35);
-  color: #ffd700;
   text-decoration: none;
-  font-size: .78rem;
+  font-size: .72rem;
   font-weight: 700;
-  padding: 8px 12px;
+  padding: 8px 4px;
   border-radius: 9px;
   letter-spacing: .3px;
   transition: background .15s;
+  background: rgba(255,215,0,.1);
+  border: 1px solid rgba(255,215,0,.35);
+  color: #ffd700;
 }
 .tip-btn:hover { background: rgba(255,215,0,.22); }
+.tip-hotel-btn  { background: rgba(64,196,255,.07);  border-color: rgba(64,196,255,.35);  color: #40c4ff; }
+.tip-hotel-btn:hover  { background: rgba(64,196,255,.18); }
+.tip-flight-btn { background: rgba(105,240,174,.07); border-color: rgba(105,240,174,.35); color: #69f0ae; }
+.tip-flight-btn:hover { background: rgba(105,240,174,.18); }
 
-/* ── BUY TICKETS BUTTON (inline on card) ─────── */
-.card-ticket-btn {
-  display: block;
-  text-align: center;
+/* ── CARD ACTION BUTTONS ROW ─────── */
+.card-links {
+  display: flex;
+  gap: 6px;
   margin-top: 10px;
-  padding: 7px 12px;
-  background: rgba(255,215,0,.07);
-  border: 1px solid rgba(255,215,0,.28);
+}
+.card-link-btn {
+  flex: 1;
+  text-align: center;
+  padding: 7px 4px;
   border-radius: 8px;
-  color: #ffd700;
   text-decoration: none;
-  font-size: .76rem;
+  font-size: .72rem;
   font-weight: 700;
   letter-spacing: .3px;
   transition: background .15s, border-color .15s;
 }
+.card-ticket-btn {
+  background: rgba(255,215,0,.07);
+  border: 1px solid rgba(255,215,0,.28);
+  color: #ffd700;
+}
 .card-ticket-btn:hover { background: rgba(255,215,0,.18); border-color: rgba(255,215,0,.5); }
+.card-hotel-btn {
+  background: rgba(64,196,255,.07);
+  border: 1px solid rgba(64,196,255,.28);
+  color: #40c4ff;
+}
+.card-hotel-btn:hover { background: rgba(64,196,255,.18); border-color: rgba(64,196,255,.5); }
+.card-flight-btn {
+  background: rgba(105,240,174,.07);
+  border: 1px solid rgba(105,240,174,.28);
+  color: #69f0ae;
+}
+.card-flight-btn:hover { background: rgba(105,240,174,.18); border-color: rgba(105,240,174,.5); }
+
+/* ── CALENDAR DATE FILTER ─────────────────────────────── */
+.cal-panel {
+  display: none;
+  background: #0b1120;
+  border: 1px solid #1e2d4a;
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 12px;
+}
+.cal-panel.open { display: block; }
+.cal-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.cal-clear-btn {
+  background: none;
+  border: 1px solid #2a3a60;
+  color: #546e7a;
+  border-radius: 6px;
+  padding: 3px 12px;
+  font-size: .72rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color .15s, color .15s;
+}
+.cal-clear-btn:hover { border-color: #ffd700; color: #ffd700; }
+.cal-months {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.cal-block {
+  flex: 1;
+  min-width: 196px;
+  max-width: 280px;
+}
+.cal-month-title {
+  text-align: center;
+  font-size: .72rem;
+  font-weight: 700;
+  color: #90a4ae;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+.cal-dow {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-bottom: 3px;
+}
+.cal-dow span {
+  text-align: center;
+  font-size: .58rem;
+  color: #37474f;
+  font-weight: 700;
+  padding: 2px 0;
+}
+.cal-cells {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+.cal-cell {
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  border: 1px solid transparent;
+}
+.cal-cell .cal-num {
+  font-size: .68rem;
+  color: #263a50;
+  line-height: 1;
+}
+.cal-match {
+  cursor: pointer;
+  background: rgba(255,215,0,.06);
+  border-color: rgba(255,215,0,.18);
+  transition: background .12s, border-color .12s;
+}
+.cal-match .cal-num {
+  color: #cdd6f4;
+  font-weight: 600;
+}
+.cal-cnt {
+  font-size: .52rem;
+  color: #ffd700;
+  font-weight: 700;
+  line-height: 1;
+  margin-top: 1px;
+}
+.cal-match:hover {
+  background: rgba(255,215,0,.14);
+  border-color: rgba(255,215,0,.4);
+}
+.cal-match.cal-selected {
+  background: rgba(255,215,0,.22);
+  border-color: #ffd700;
+}
+.cal-match.cal-selected .cal-num { color: #ffd700; }
+
+/* ── MAP VIEW ────────────────────────────────────────────── */
+#view-map {
+  display: flex !important;
+  height: calc(100vh - 190px);
+  min-height: 500px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #1e2d4a;
+}
+#map-sidebar {
+  width: 0;
+  min-width: 0;
+  flex-shrink: 0;
+  background: #0b1120;
+  border-right: 0px solid #1e2d4a;
+  overflow: hidden;
+  transition: width .25s ease, min-width .25s ease, border-right-width .25s;
+}
+#map-sidebar.open {
+  width: 380px;
+  min-width: 380px;
+  border-right-width: 1px;
+  overflow-y: auto;
+}
+#map-sidebar-content { padding: 16px; min-width: 380px; }
+#wc-map { flex: 1; height: 100%; min-width: 0; }
+/* City name labels on map (divIcon approach) */
+.wcm-wrap {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  cursor: pointer;
+  white-space: nowrap;
+  pointer-events: all;
+}
+.wcm-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ffd700;
+  border: 2px solid #7a5c00;
+  flex-shrink: 0;
+  box-shadow: 0 0 6px rgba(255,215,0,.45);
+  transition: background .15s, border-color .15s, transform .15s;
+}
+.wcm-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: #eef2ff;
+  letter-spacing: .25px;
+  background: rgba(8,13,28,.72);
+  padding: 2px 6px;
+  border-radius: 4px;
+  pointer-events: none;
+}
+.wcm-wrap.active .wcm-dot {
+  background: #ff5252;
+  border-color: #b71c1c;
+  box-shadow: 0 0 10px rgba(255,82,82,.6);
+  transform: scale(1.3);
+}
+.wcm-wrap:hover .wcm-dot { transform: scale(1.15); }
+
+/* Map sidebar content */
+.ms-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+.ms-city    { font-size: 1.1rem; font-weight: 800; color: #ffd700; margin-bottom: 2px; }
+.ms-stadium { font-size: .7rem; color: #546e7a; }
+.ms-close {
+  background: none;
+  border: 1px solid #2a3a60;
+  color: #546e7a;
+  border-radius: 6px;
+  width: 26px;
+  height: 26px;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+  flex-shrink: 0;
+  transition: border-color .15s, color .15s;
+}
+.ms-close:hover { border-color: #ffd700; color: #ffd700; }
+.ms-count {
+  font-size: .7rem;
+  color: #90a4ae;
+  background: rgba(255,215,0,.07);
+  border: 1px solid rgba(255,215,0,.15);
+  border-radius: 6px;
+  padding: 3px 8px;
+  display: inline-block;
+  margin-bottom: 12px;
+}
+.ms-matches { display: flex; flex-direction: column; gap: 8px; }
+.ms-match {
+  background: rgba(255,255,255,.03);
+  border: 1px solid #1e2d4a;
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+.ms-match-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+.ms-pill {
+  font-size: .58rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  color: #fff;
+  padding: 2px 7px;
+  border-radius: 4px;
+}
+.ms-date   { font-size: .62rem; color: #546e7a; }
+.ms-teams  {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: .78rem;
+  font-weight: 600;
+  color: #cdd6f4;
+  margin-bottom: 4px;
+  flex-wrap: wrap;
+}
+.ms-vs     { font-size: .6rem; color: #455a64; font-weight: 700; }
+.ms-time   { font-size: .63rem; color: #37474f; margin-bottom: 8px; }
+.ms-links  { display: flex; gap: 5px; }
+.ms-btn {
+  flex: 1;
+  text-align: center;
+  padding: 5px 4px;
+  border-radius: 7px;
+  text-decoration: none;
+  font-size: .68rem;
+  font-weight: 700;
+  transition: background .15s;
+}
+.ms-ticket { background: rgba(255,215,0,.08); border: 1px solid rgba(255,215,0,.25); color: #ffd700; }
+.ms-ticket:hover { background: rgba(255,215,0,.18); }
+.ms-hotel  { background: rgba(64,196,255,.07); border: 1px solid rgba(64,196,255,.25); color: #40c4ff; }
+.ms-hotel:hover  { background: rgba(64,196,255,.18); }
+.ms-flight { background: rgba(105,240,174,.07); border: 1px solid rgba(105,240,174,.25); color: #69f0ae; }
+.ms-flight:hover { background: rgba(105,240,174,.18); }
+
+.wc-popup .leaflet-popup-content-wrapper {
+  background: #0d1221;
+  border: 1px solid rgba(255,215,0,.3);
+  border-radius: 12px;
+  color: #cdd6f4;
+  box-shadow: 0 8px 32px rgba(0,0,0,.75);
+  padding: 0;
+}
+.wc-popup .leaflet-popup-content {
+  margin: 0;
+  width: auto !important;
+}
+.wc-popup .leaflet-popup-tip-container { display: none; }
+.wc-popup .leaflet-popup-close-button { color: #546e7a !important; top: 8px; right: 10px; font-size: 18px; }
+.wc-popup .leaflet-popup-close-button:hover { color: #ffd700 !important; }
+.mp-popup {
+  padding: 14px 16px;
+  max-height: 380px;
+  overflow-y: auto;
+  min-width: 260px;
+}
+.mp-city-name {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #ffd700;
+  margin-bottom: 2px;
+}
+.mp-stadium-name {
+  font-size: .7rem;
+  color: #546e7a;
+  margin-bottom: 8px;
+}
+.mp-match-count {
+  font-size: .7rem;
+  color: #90a4ae;
+  background: rgba(255,215,0,.07);
+  border: 1px solid rgba(255,215,0,.15);
+  border-radius: 6px;
+  padding: 3px 8px;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+.mp-match-list { display: flex; flex-direction: column; gap: 7px; }
+.mp-match {
+  background: rgba(255,255,255,.03);
+  border: 1px solid #1e2d4a;
+  border-radius: 8px;
+  padding: 7px 10px;
+}
+.mp-match-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+.mp-label { font-size: .58rem; font-weight: 700; color: #ffd700; text-transform: uppercase; letter-spacing: .5px; }
+.mp-date  { font-size: .62rem; color: #546e7a; }
+.mp-teams {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: .74rem;
+  color: #cdd6f4;
+  font-weight: 600;
+  margin-bottom: 3px;
+  flex-wrap: wrap;
+}
+.mp-vs   { font-size: .58rem; color: #546e7a; font-weight: 700; }
+.mp-time { font-size: .62rem; color: #37474f; }
