@@ -407,17 +407,18 @@ const VENUE_COORDS = {
 };
 
 function getBookingUrl(venue, dateISO) {
-  const stadium = venue.split(',')[0].trim();
+  const stadium  = venue.split(',')[0].trim();
   const d = new Date(dateISO + 'T12:00:00');
   d.setDate(d.getDate() + 1);
   const checkout = d.toISOString().slice(0, 10);
-  const base = `checkin=${dateISO}&checkout=${checkout}&group_adults=2`;
-  const coords = VENUE_COORDS[stadium];
+  const base     = `checkin=${dateISO}&checkout=${checkout}&group_adults=2`;
+  const langParam = LANG === 'zh' ? '&lang=zh-cn' : '';
+  const coords   = VENUE_COORDS[stadium];
   if (coords) {
-    return `https://www.booking.com/searchresults.html?latitude=${coords.lat}&longitude=${coords.lng}&ss=${encodeURIComponent(stadium)}&${base}`;
+    return `https://www.booking.com/searchresults.html?latitude=${coords.lat}&longitude=${coords.lng}&ss=${encodeURIComponent(stadium)}&${base}${langParam}`;
   }
   const city = venue.split(',').pop().trim().replace(/\/.*$/, '');
-  return `https://www.booking.com/searchresults.html?ss=${encodeURIComponent(city)}&${base}`;
+  return `https://www.booking.com/searchresults.html?ss=${encodeURIComponent(city)}&${base}${langParam}`;
 }
 
 function dateOffset(iso, days) {

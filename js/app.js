@@ -193,13 +193,15 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeTicketT
 //  FLIGHT LINK HANDLER  (EN → SEA Seattle, ZH → PVG Shanghai)
 // ═══════════════════════════════════════════════════════════
 function openFlightLink(destCity, dateISO) {
-  const homeIata = LANG === 'zh' ? 'PVG' : 'SEA';
+  const isZH    = LANG === 'zh';
+  const homeIata = isZH ? 'PVG' : 'SEA';
   const destIata = CITY_IATA[destCity];
   if (!destIata) return;
-  const dep  = isoToTripDate(dateOffset(dateISO, -1));
-  const ret  = isoToTripDate(dateOffset(dateISO, +1));
-  const path = `${homeIata}-to-${encodeURIComponent(destCity)}`;
-  const url  = `https://www.trip.com/flights/${path}/tickets-${homeIata}-${destIata}?flighttype=D&dcity=${homeIata}&acity=${destIata}&ddate=${dep}&rdate=${ret}&${TRIP_AFFILIATE}`;
+  const dep    = isoToTripDate(dateOffset(dateISO, isZH ? -2 : -1));
+  const ret    = isoToTripDate(dateOffset(dateISO, +1));
+  const domain = isZH ? 'hk.trip.com' : 'www.trip.com';
+  const path   = `${homeIata}-to-${encodeURIComponent(destCity)}`;
+  const url    = `https://${domain}/flights/${path}/tickets-${homeIata}-${destIata}?flighttype=D&dcity=${homeIata}&acity=${destIata}&ddate=${dep}&rdate=${ret}&${TRIP_AFFILIATE}`;
   window.open(url, '_blank', 'noopener');
 }
 
