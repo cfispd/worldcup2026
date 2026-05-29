@@ -41,6 +41,72 @@ const CITY_GROUPS = [
   { country:'Canada',        flag:'ca', cities:['Toronto','Vancouver'] },
 ];
 
+// ═══════════════════════════════════════════════════════════
+//  LANGUAGE  (default: English)
+// ═══════════════════════════════════════════════════════════
+let LANG = localStorage.getItem('wc_lang') || 'en';
+
+const TEAM_NAMES_ZH = {
+  'Mexico':'墨西哥','South Korea':'韩国','South Africa':'南非',
+  'Czech Republic':'捷克','Canada':'加拿大','Switzerland':'瑞士',
+  'Qatar':'卡塔尔','Bosnia-Herzegovina':'波黑','Brazil':'巴西',
+  'Morocco':'摩洛哥','Scotland':'苏格兰','Haiti':'海地',
+  'United States':'美国','Paraguay':'巴拉圭','Australia':'澳大利亚',
+  'Turkey':'土耳其','Germany':'德国','Ecuador':'厄瓜多尔',
+  'Ivory Coast':'科特迪瓦','Curaçao':'库拉索','Netherlands':'荷兰',
+  'Japan':'日本','Sweden':'瑞典','Tunisia':'突尼斯',
+  'Belgium':'比利时','Iran':'伊朗','Egypt':'埃及','New Zealand':'新西兰',
+  'Spain':'西班牙','Uruguay':'乌拉圭','Saudi Arabia':'沙特阿拉伯',
+  'Cape Verde':'佛得角','France':'法国','Senegal':'塞内加尔',
+  'Norway':'挪威','Iraq':'伊拉克','Argentina':'阿根廷',
+  'Austria':'奥地利','Algeria':'阿尔及利亚','Jordan':'约旦',
+  'Portugal':'葡萄牙','Colombia':'哥伦比亚','Uzbekistan':'乌兹别克斯坦',
+  'DR Congo':'刚果民主共和国','England':'英格兰','Croatia':'克罗地亚',
+  'Panama':'巴拿马','Ghana':'加纳',
+};
+
+const CITY_NAMES_ZH = {
+  'Guadalajara':'瓜达拉哈拉','Mexico City':'墨西哥城','Monterrey':'蒙特雷',
+  'Atlanta':'亚特兰大','Boston':'波士顿','Dallas':'达拉斯',
+  'Houston':'休斯顿','Kansas City':'堪萨斯城','Los Angeles':'洛杉矶',
+  'Miami':'迈阿密','New York/NJ':'纽约/新泽西','Philadelphia':'费城',
+  'San Francisco':'旧金山','Seattle':'西雅图','Toronto':'多伦多',
+  'Vancouver':'温哥华',
+};
+
+const COUNTRY_NAMES_ZH = {
+  'Mexico':'墨西哥','United States':'美国','Canada':'加拿大',
+};
+
+const ROUND_LABEL_ZH = {
+  R32:'32强', R16:'16强', QF:'四分之一决赛',
+  SF:'半决赛', Final:'决赛', '3rd':'季军赛',
+};
+
+const WEEKDAYS_ZH = ['日','一','二','三','四','五','六'];
+
+// Language helper functions
+function teamName(n)    { return LANG === 'zh' && TEAM_NAMES_ZH[n] ? TEAM_NAMES_ZH[n] : n; }
+function cityName(c)    { return LANG === 'zh' && CITY_NAMES_ZH[c] ? CITY_NAMES_ZH[c] : c; }
+function countryName(c) { return LANG === 'zh' && COUNTRY_NAMES_ZH[c] ? COUNTRY_NAMES_ZH[c] : c; }
+
+function roundL(round, group) {
+  if (group) return LANG === 'zh' ? `${group}组` : `GROUP ${group}`;
+  return LANG === 'zh' ? (ROUND_LABEL_ZH[round] || ROUND_LABEL[round]) : ROUND_LABEL[round];
+}
+function tzL(tz) {
+  return LANG === 'zh' ? ({ ET:'美东', CT:'美中', PT:'美太' }[tz] || tz) : tz;
+}
+function fmtDateL(iso) {
+  const d = new Date(iso + 'T12:00:00');
+  if (LANG === 'zh') return `${d.getMonth()+1}月${d.getDate()}日`;
+  return `${MONTHS[d.getMonth()]} ${d.getDate()}`;
+}
+function fmtWeekdayL(iso) {
+  const d = new Date(iso + 'T12:00:00');
+  return LANG === 'zh' ? `周${WEEKDAYS_ZH[d.getDay()]}` : WEEKDAYS[d.getDay()];
+}
+
 // City → IATA airport code
 const CITY_IATA = {
   'Atlanta':      'ATL',

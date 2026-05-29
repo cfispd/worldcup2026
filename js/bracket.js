@@ -11,7 +11,9 @@ function buildBracket() {
   const PAD_TOP = 44;         // room for round labels
 
   const ROUND_COL   = { R32:0, R16:1, QF:2, SF:3, Final:4 };
-  const ROUND_NAMES = { R32:'Round of 32', R16:'Round of 16', QF:'Quarter-Finals', SF:'Semi-Finals', Final:'⚽ Final' };
+  const ROUND_NAMES_EN = { R32:'Round of 32', R16:'Round of 16', QF:'Quarter-Finals', SF:'Semi-Finals', Final:'⚽ Final' };
+  const ROUND_NAMES_ZH = { R32:'32强', R16:'16强', QF:'四分之一决赛', SF:'半决赛', Final:'⚽ 决赛' };
+  const ROUND_NAMES = LANG === 'zh' ? ROUND_NAMES_ZH : ROUND_NAMES_EN;
   const LINE_CLR    = '#2a3a60';
 
   function colX(round)    { return ROUND_COL[round] * COL_STP; }
@@ -72,8 +74,8 @@ function buildBracket() {
           <span class="br-match-date">${n.date}${timeById[n.id] ? ' · ' + timeById[n.id] : ''}</span>
         </div>
         <div class="br-card-teams">
-          <div class="br-team">${n.home}</div>
-          <div class="br-team">${n.away}</div>
+          <div class="br-team">${teamName(n.home)}</div>
+          <div class="br-team">${teamName(n.away)}</div>
         </div>
         <div class="br-venue">${venuePin} ${n.venue}</div>
       </div>`;
@@ -94,9 +96,9 @@ function buildBracket() {
         <span class="br-match-date">${n3.date}${timeById[n3.id] ? ' · ' + timeById[n3.id] : ''}</span>
       </div>
       <div class="br-card-teams" style="display:flex;gap:12px;align-items:center;padding:6px 10px 4px;">
-        <div class="br-team" style="flex:1">${n3.home}</div>
+        <div class="br-team" style="flex:1">${teamName(n3.home)}</div>
         <span style="font-size:.65rem;color:#546e7a;font-weight:700;">VS</span>
-        <div class="br-team" style="flex:1;text-align:right">${n3.away}</div>
+        <div class="br-team" style="flex:1;text-align:right">${teamName(n3.away)}</div>
       </div>
       <div class="br-venue">${venuePin} ${n3.venue}</div>
     </div>`;
@@ -106,7 +108,7 @@ function buildBracket() {
   const totalSvgH = TOTAL_H + 160;
 
   document.getElementById('view-bracket').innerHTML = `
-    <p class="hint">⏰ All times shown are local venue time</p>
+    <p class="hint">⏰ ${LANG === 'zh' ? '所有时间均为当地时间' : 'All times shown are local venue time'}</p>
     <div class="bracket-outer">
       <div class="bracket-wrap" style="width:${totalW}px;height:${TOTAL_H + 160}px;margin-top:${PAD_TOP}px;">
         <svg style="position:absolute;top:0;left:0;width:${totalW}px;height:${totalSvgH}px;overflow:visible;pointer-events:none;">

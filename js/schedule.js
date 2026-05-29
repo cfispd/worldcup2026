@@ -23,7 +23,7 @@ function applyFilter() {
     day.style.display = show ? '' : 'none';
     if (show) anyVisible = true;
     const cnt = document.getElementById('count-' + iso);
-    if (cnt) cnt.textContent = vis.length + ' match' + (vis.length !== 1 ? 'es' : '');
+    if (cnt) cnt.textContent = vis.length + (LANG === 'zh' ? '场比赛' : ' match' + (vis.length !== 1 ? 'es' : ''));
   });
 
   document.querySelectorAll('.stage-divider').forEach(div => {
@@ -48,9 +48,12 @@ function updateCityTriggerLabel() {
   const label   = document.getElementById('dropdownLabel');
   if (!trigger) return;
   if (selectedCities.size === 0) {
-    label.textContent = 'All Cities'; trigger.classList.remove('has-selection');
+    label.textContent = LANG === 'zh' ? '全部城市' : 'All Cities';
+    trigger.classList.remove('has-selection');
   } else {
-    label.textContent = selectedCities.size === 1 ? [...selectedCities][0] : `${selectedCities.size} cities selected`;
+    label.textContent = selectedCities.size === 1
+      ? cityName([...selectedCities][0])
+      : (LANG === 'zh' ? `已选 ${selectedCities.size} 个城市` : `${selectedCities.size} cities selected`);
     trigger.classList.add('has-selection');
   }
 }
@@ -59,7 +62,7 @@ function updateCityTags() {
   const container = document.getElementById('selectedTags');
   if (!container) return;
   container.innerHTML = [...selectedCities].map(city => `
-    <span class="selected-tag">${city}<span class="tag-remove" data-city="${city}">&#x2715;</span></span>
+    <span class="selected-tag">${cityName(city)}<span class="tag-remove" data-city="${city}">&#x2715;</span></span>
   `).join('');
 }
 
@@ -69,12 +72,15 @@ function updateCalTriggerLabel() {
   const label   = document.getElementById('calTriggerLabel');
   if (!trigger) return;
   if (selectedDates.size === 0) {
-    label.textContent = 'All Dates'; trigger.classList.remove('has-selection');
+    label.textContent = LANG === 'zh' ? '全部日期' : 'All Dates';
+    trigger.classList.remove('has-selection');
   } else if (selectedDates.size === 1) {
     const iso = [...selectedDates][0];
-    label.textContent = `${fmtWeekday(iso)}, ${fmtDate(iso)}`; trigger.classList.add('has-selection');
+    label.textContent = `${fmtWeekdayL(iso)}, ${fmtDateL(iso)}`;
+    trigger.classList.add('has-selection');
   } else {
-    label.textContent = `${selectedDates.size} dates selected`; trigger.classList.add('has-selection');
+    label.textContent = LANG === 'zh' ? `已选 ${selectedDates.size} 个日期` : `${selectedDates.size} dates selected`;
+    trigger.classList.add('has-selection');
   }
 }
 
@@ -82,7 +88,7 @@ function updateDateTags() {
   const container = document.getElementById('selectedDateTags');
   if (!container) return;
   container.innerHTML = [...selectedDates].sort().map(iso => `
-    <span class="date-tag">${fmtWeekday(iso)}, ${fmtDate(iso)}<span class="tag-remove date-tag-remove" data-date="${iso}">&#x2715;</span></span>
+    <span class="date-tag">${fmtWeekdayL(iso)}, ${fmtDateL(iso)}<span class="tag-remove date-tag-remove" data-date="${iso}">&#x2715;</span></span>
   `).join('');
 }
 
@@ -95,11 +101,11 @@ function schedCardHtml(m) {
   const stadium   = m.venue.split(',')[0].trim();
   const isGroup   = !!m.group;
   const accent    = isGroup ? GROUP_ACCENT[m.group] : ROUND_ACCENT[m.round];
-  const pill      = isGroup ? `GROUP ${m.group}` : ROUND_LABEL[m.round];
+  const pill      = roundL(m.round, isGroup ? m.group : null);
   const f1        = isGroup ? flagImg(m.home, 32, 21) : '';
   const f2        = isGroup ? flagImg(m.away, 32, 21) : '';
   const localTime = isGroup ? toLocalTime(m.time, city) : m.time;
-  const tz        = getLocalTZ(city);
+  const tz        = tzL(getLocalTZ(city));
   const clockIcon = `<svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="display:inline;vertical-align:middle;margin-right:3px"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>`;
   const pinIcon   = `<svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>`;
 
@@ -110,15 +116,15 @@ function schedCardHtml(m) {
         <span class="sched-time">${clockIcon}${localTime} ${tz}</span>
       </div>
       <div class="sched-teams">
-        <div class="sched-team">${f1}<span>${m.home}</span></div>
+        <div class="sched-team">${f1}<span>${teamName(m.home)}</span></div>
         <span class="sched-vs">VS</span>
-        <div class="sched-team right"><span>${m.away}</span>${f2}</div>
+        <div class="sched-team right"><span>${teamName(m.away)}</span>${f2}</div>
       </div>
-      <div class="sched-venue">${pinIcon} <span class="venue-stadium">${stadium}</span><span class="venue-sep"> · </span><span class="venue-city">${city}, ${country}</span></div>
+      <div class="sched-venue">${pinIcon} <span class="venue-stadium">${stadium}</span><span class="venue-sep"> · </span><span class="venue-city">${cityName(city)}, ${countryName(country)}</span></div>
       <div class="card-links">
-        <a href="${getStubHubUrl(m)}" class="card-link-btn card-ticket-btn" target="_blank" rel="noopener">🎫 Tickets</a>
-        <a href="${getBookingUrl(m.venue, m.dateISO)}" class="card-link-btn card-hotel-btn" target="_blank" rel="noopener">🏨 Hotel</a>
-        <a href="#" class="card-link-btn card-flight-btn" onclick="openFlightLink('${city}','${m.dateISO}');return false;">✈️ Flights</a>
+        <a href="${getStubHubUrl(m)}" class="card-link-btn card-ticket-btn" target="_blank" rel="noopener">🎫 ${LANG === 'zh' ? '购票' : 'Tickets'}</a>
+        <a href="${getBookingUrl(m.venue, m.dateISO)}" class="card-link-btn card-hotel-btn" target="_blank" rel="noopener">🏨 ${LANG === 'zh' ? '酒店' : 'Hotel'}</a>
+        <a href="#" class="card-link-btn card-flight-btn" onclick="openFlightLink('${city}','${m.dateISO}');return false;">✈️ ${LANG === 'zh' ? '机票' : 'Flights'}</a>
       </div>
     </div>
   `;
@@ -128,6 +134,9 @@ function schedCardHtml(m) {
 //  BUILD SCHEDULE VIEW
 // ═══════════════════════════════════════════════════════════
 function buildSchedule() {
+  selectedCities = new Set();
+  selectedDates  = new Set();
+
   const byDate = {};
   ALL_MATCHES.forEach(m => (byDate[m.dateISO] = byDate[m.dateISO] || []).push(m));
 
@@ -139,25 +148,28 @@ function buildSchedule() {
     <div class="dropdown-group">
       <div class="group-header-dd">
         <img src="https://flagcdn.com/w40/${g.flag}.png" alt="${g.country}">
-        ${g.country}
+        ${countryName(g.country)}
       </div>
       ${g.cities.map(city => `
         <label class="city-option">
           <input type="checkbox" class="city-cb" value="${city}">
-          <span class="city-name">${city}</span>
+          <span class="city-name">${cityName(city)}</span>
           <span class="city-count">${CITY_COUNTS[city] || 0}</span>
         </label>
       `).join('')}
     </div>
   `).join('');
 
-  // ── Calendar panel ────────────────────────────────────────
+  // ── Calendar ──────────────────────────────────────────────
   const matchDateSet = new Set(sorted);
 
   function calMonth(mo) {
-    const NAMES = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug'];
     const first = new Date(2026, mo - 1, 1).getDay();
     const days  = new Date(2026, mo, 0).getDate();
+    const title = LANG === 'zh' ? `2026年${mo}月` : `${ ['','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug'][mo] } 2026`;
+    const dowHtml = LANG === 'zh'
+      ? '<span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span>'
+      : '<span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span>';
     let cells = '';
     for (let i = 0; i < first; i++) cells += '<div class="cal-cell"></div>';
     for (let d = 1; d <= days; d++) {
@@ -170,16 +182,17 @@ function buildSchedule() {
       }
     }
     return `<div class="cal-block">
-      <div class="cal-month-title">${NAMES[mo - 1]} 2026</div>
-      <div class="cal-dow"><span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span></div>
+      <div class="cal-month-title">${title}</div>
+      <div class="cal-dow">${dowHtml}</div>
       <div class="cal-cells">${cells}</div>
     </div>`;
   }
 
+  const calHint = LANG === 'zh' ? '点击日期筛选 · 再次点击取消' : 'Click a date to filter · click again to deselect';
   const calPanelHtml = `<div class="cal-panel" id="calPanel">
     <div class="cal-top-row">
-      <span style="font-size:.72rem;color:#546e7a">Click a date to filter · click again to deselect</span>
-      <button class="cal-clear-btn" id="calClearBtn">Clear</button>
+      <span style="font-size:.72rem;color:#546e7a">${calHint}</span>
+      <button class="cal-clear-btn" id="calClearBtn">${LANG === 'zh' ? '清除' : 'Clear'}</button>
     </div>
     <div class="cal-months">${calMonth(6)}${calMonth(7)}</div>
   </div>`;
@@ -194,51 +207,61 @@ function buildSchedule() {
       divider = `
         <div class="stage-divider">
           <div class="stage-divider-line"></div>
-          <div class="stage-divider-label">Knockout Stage</div>
+          <div class="stage-divider-label">${LANG === 'zh' ? '淘汰赛阶段' : 'Knockout Stage'}</div>
           <div class="stage-divider-line"></div>
         </div>`;
     }
     lastStage = stage;
+    const n = matches.length;
+    const countStr = LANG === 'zh' ? `${n}场比赛` : `${n} match${n !== 1 ? 'es' : ''}`;
     return `${divider}
       <div class="schedule-day" data-day="${iso}">
         <div class="day-header">
           <div class="day-label">
-            <div class="weekday">${fmtWeekday(iso)}</div>
-            <div class="date-str">${fmtDate(iso)}</div>
+            <div class="weekday">${fmtWeekdayL(iso)}</div>
+            <div class="date-str">${fmtDateL(iso)}</div>
           </div>
           <div class="day-divider"></div>
-          <div class="day-count" id="count-${iso}"></div>
+          <div class="day-count" id="count-${iso}">${countStr}</div>
         </div>
         <div class="schedule-matches">${matches.map(schedCardHtml).join('')}</div>
       </div>`;
   }).join('');
 
-  // ── Render ────────────────────────────────────────────────
+  const filterCityLabel = LANG === 'zh' ? '按城市筛选' : 'Filter by City';
+  const filterDateLabel = LANG === 'zh' ? '日期' : 'Date';
+  const allCitiesLabel  = LANG === 'zh' ? '全部城市' : 'All Cities';
+  const allDatesLabel   = LANG === 'zh' ? '全部日期' : 'All Dates';
+  const selectAllLabel  = LANG === 'zh' ? '全选' : 'Select All';
+  const clearAllLabel   = LANG === 'zh' ? '清除全部' : 'Clear All';
+  const timeHint        = LANG === 'zh' ? '⏰ 所有时间均为当地时间（美东 · 美中 · 美太）' : '⏰ All times shown are local venue time (ET · CT · PT)';
+  const noResultsText   = LANG === 'zh' ? '没有符合条件的比赛。' : 'No matches found for the selected filters.';
+
   container.innerHTML = `
     <div class="filter-row">
-      <span class="filter-label">Filter by City</span>
+      <span class="filter-label">${filterCityLabel}</span>
       <div class="dropdown-wrapper" id="dropdownWrapper">
         <button class="dropdown-trigger" id="dropdownTrigger">
           <span class="trigger-left">
             <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            <span id="dropdownLabel">All Cities</span>
+            <span id="dropdownLabel">${allCitiesLabel}</span>
           </span>
           <svg class="chevron" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
         <div class="dropdown-panel" id="dropdownPanel">
           <div class="dropdown-actions">
-            <button class="dd-action" id="ddSelectAll">Select All</button>
-            <button class="dd-action" id="ddClearAll">Clear All</button>
+            <button class="dd-action" id="ddSelectAll">${selectAllLabel}</button>
+            <button class="dd-action" id="ddClearAll">${clearAllLabel}</button>
           </div>
           ${cityGroupsHtml}
         </div>
       </div>
-      <span class="filter-label">Date</span>
+      <span class="filter-label">${filterDateLabel}</span>
       <div class="dropdown-wrapper" id="calTriggerWrapper">
         <button class="dropdown-trigger" id="calTrigger">
           <span class="trigger-left">
             <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-            <span id="calTriggerLabel">All Dates</span>
+            <span id="calTriggerLabel">${allDatesLabel}</span>
           </span>
           <svg class="chevron" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
@@ -247,16 +270,16 @@ function buildSchedule() {
     <div class="selected-tags" id="selectedTags"></div>
     ${calPanelHtml}
     <div class="selected-tags" id="selectedDateTags"></div>
-    <p class="hint" style="margin:4px 0 16px">⏰ All times shown are local venue time &nbsp;(ET · CT · PT)</p>
+    <p class="hint" style="margin:4px 0 16px">${timeHint}</p>
     ${daysHtml}
-    <div class="no-results" id="noResults" style="display:none">No matches found for the selected filters.</div>
+    <div class="no-results" id="noResults" style="display:none">${noResultsText}</div>
   `;
 
   // ── Initial match counts ──────────────────────────────────
   document.querySelectorAll('.schedule-day').forEach(day => {
     const cnt = document.getElementById('count-' + day.dataset.day);
     const n   = day.querySelectorAll('.sched-card').length;
-    if (cnt) cnt.textContent = n + ' match' + (n !== 1 ? 'es' : '');
+    if (cnt) cnt.textContent = LANG === 'zh' ? `${n}场比赛` : `${n} match${n !== 1 ? 'es' : ''}`;
   });
 
   // ── City dropdown events ──────────────────────────────────
@@ -334,7 +357,6 @@ function buildSchedule() {
     applyFilter();
   });
 
-  // ── Date tag remove ───────────────────────────────────────
   document.getElementById('selectedDateTags').addEventListener('click', e => {
     const btn = e.target.closest('.date-tag-remove');
     if (!btn) return;

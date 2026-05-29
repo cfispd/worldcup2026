@@ -1,4 +1,69 @@
 // ═══════════════════════════════════════════════════════════
+//  LANGUAGE TOGGLE
+// ═══════════════════════════════════════════════════════════
+const TAB_LABELS = {
+  groups:   ['Groups',   '小组赛'],
+  schedule: ['Schedule', '赛程'],
+  bracket:  ['Bracket',  '淘汰赛'],
+  map:      ['Map',      '地图'],
+};
+
+function setLang(lang) {
+  LANG = lang;
+  localStorage.setItem('wc_lang', lang);
+
+  // Toggle button state
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+
+  // Tab labels
+  document.querySelectorAll('.tab-btn[data-tab]').forEach(btn => {
+    const lbl = btn.querySelector('.tab-label');
+    if (lbl) lbl.textContent = TAB_LABELS[btn.dataset.tab]?.[lang === 'zh' ? 1 : 0] ?? lbl.textContent;
+  });
+
+  // Header subtitle
+  document.getElementById('headerSubtitle').innerHTML = lang === 'zh'
+    ? '加拿大 &nbsp;·&nbsp; 墨西哥 &nbsp;·&nbsp; 美国 &nbsp;&nbsp;|&nbsp;&nbsp; 48支球队 &nbsp;·&nbsp; 12个小组'
+    : 'Canada &nbsp;·&nbsp; Mexico &nbsp;·&nbsp; United States &nbsp;&nbsp;|&nbsp;&nbsp; 48 Teams &nbsp;·&nbsp; 12 Groups';
+
+  // Groups view: team names, group titles, HOST badge, hint
+  document.querySelectorAll('.team-name').forEach(el => {
+    if (!el.dataset.en) el.dataset.en = el.textContent.trim();
+    el.textContent = lang === 'zh' ? (TEAM_NAMES_ZH[el.dataset.en] || el.dataset.en) : el.dataset.en;
+  });
+  document.querySelectorAll('.group-title').forEach(el => {
+    if (!el.dataset.en) el.dataset.en = el.textContent.trim();
+    if (lang === 'zh') {
+      const m = el.dataset.en.match(/Group ([A-L])/);
+      el.textContent = m ? `${m[1]}组` : el.dataset.en;
+    } else {
+      el.textContent = el.dataset.en;
+    }
+  });
+  document.querySelectorAll('.host-badge').forEach(el => {
+    el.textContent = lang === 'zh' ? '主办' : 'HOST';
+  });
+  const groupsHint = document.querySelector('#view-groups .hint');
+  if (groupsHint) groupsHint.textContent = lang === 'zh'
+    ? '点击小组卡片查看比赛时间表'
+    : 'Click any group card to see the match schedule';
+
+  // Re-render dynamic views
+  buildSchedule();
+  buildBracket();
+  if (typeof updateMapLang === 'function') updateMapLang();
+}
+
+// Init lang toggle buttons
+document.getElementById('langToggle').addEventListener('click', e => {
+  const btn = e.target.closest('.lang-btn');
+  if (btn) setLang(btn.dataset.lang);
+});
+
+// Apply saved language on load
+setLang(LANG);
+
+// ═══════════════════════════════════════════════════════════
 //  TAB SWITCHING
 // ═══════════════════════════════════════════════════════════
 document.querySelectorAll('.tab-btn').forEach(btn => {
@@ -25,8 +90,8 @@ function openModal(groupKey) {
   document.getElementById('modalLetter').textContent      = groupKey;
   document.getElementById('modalLetter').style.background = accent;
   document.getElementById('modalLetter').style.color      = '#fff';
-  document.getElementById('modalTitle').textContent       = `Group ${groupKey} – Match Schedule`;
-  document.getElementById('modalSubtitle').textContent    = '6 matches · Round Robin · All times ET';
+  document.getElementById('modalTitle').textContent    = LANG === 'zh' ? `${groupKey}组 – 比赛时间表` : `Group ${groupKey} – Match Schedule`;
+  document.getElementById('modalSubtitle').textContent = LANG === 'zh' ? '6场比赛 · 循环赛 · 当地时间' : '6 matches · Round Robin · Local time';
 
   const calIcon = `<svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>`;
   const clkIcon = `<svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>`;
@@ -35,19 +100,19 @@ function openModal(groupKey) {
   document.getElementById('matchList').innerHTML = matches.map(m => `
     <div class="match-card">
       <div class="match-teams">
-        <div class="match-team">${flagImg(m.home)}<span>${m.home}</span></div>
+        <div class="match-team">${flagImg(m.home)}<span>${teamName(m.home)}</span></div>
         <span class="match-vs">VS</span>
-        <div class="match-team right"><span>${m.away}</span>${flagImg(m.away)}</div>
+        <div class="match-team right"><span>${teamName(m.away)}</span>${flagImg(m.away)}</div>
       </div>
       <div class="match-meta">
-        <span class="meta-item">${calIcon} ${fmtDate(m.dateISO)}, 2026</span>
-        <span class="meta-item">${clkIcon} ${toLocalTime(m.time, getCity(m.venue))} ${getLocalTZ(getCity(m.venue))}</span>
-        <span class="meta-item">${pinIcon} <span class="venue-stadium">${m.venue.split(',')[0].trim()}</span><span class="venue-sep"> · </span><span class="venue-city">${getCity(m.venue)}, ${getCountry(m.venue)}</span></span>
+        <span class="meta-item">${calIcon} ${fmtDateL(m.dateISO)}, 2026</span>
+        <span class="meta-item">${clkIcon} ${toLocalTime(m.time, getCity(m.venue))} ${tzL(getLocalTZ(getCity(m.venue)))}</span>
+        <span class="meta-item">${pinIcon} <span class="venue-stadium">${m.venue.split(',')[0].trim()}</span><span class="venue-sep"> · </span><span class="venue-city">${cityName(getCity(m.venue))}, ${countryName(getCountry(m.venue))}</span></span>
       </div>
       <div class="card-links">
-        <a href="${getStubHubUrl(m)}" class="card-link-btn card-ticket-btn" target="_blank" rel="noopener">🎫 Tickets</a>
-        <a href="${getBookingUrl(m.venue, m.dateISO)}" class="card-link-btn card-hotel-btn" target="_blank" rel="noopener">🏨 Hotel</a>
-        <a href="#" class="card-link-btn card-flight-btn" onclick="openFlightLink('${getCity(m.venue)}','${m.dateISO}');return false;">✈️ Flights</a>
+        <a href="${getStubHubUrl(m)}" class="card-link-btn card-ticket-btn" target="_blank" rel="noopener">🎫 ${LANG === 'zh' ? '购票' : 'Tickets'}</a>
+        <a href="${getBookingUrl(m.venue, m.dateISO)}" class="card-link-btn card-hotel-btn" target="_blank" rel="noopener">🏨 ${LANG === 'zh' ? '酒店' : 'Hotel'}</a>
+        <a href="#" class="card-link-btn card-flight-btn" onclick="openFlightLink('${getCity(m.venue)}','${m.dateISO}');return false;">✈️ ${LANG === 'zh' ? '机票' : 'Flights'}</a>
       </div>
     </div>
   `).join('');
@@ -125,10 +190,10 @@ document.addEventListener('click', e => {
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeTicketTip(); });
 
 // ═══════════════════════════════════════════════════════════
-//  FLIGHT LINK HANDLER  (departure: Shanghai PVG)
+//  FLIGHT LINK HANDLER  (EN → SEA Seattle, ZH → PVG Shanghai)
 // ═══════════════════════════════════════════════════════════
 function openFlightLink(destCity, dateISO) {
-  const homeIata = 'PVG';
+  const homeIata = LANG === 'zh' ? 'PVG' : 'SEA';
   const destIata = CITY_IATA[destCity];
   if (!destIata) return;
   const dep  = isoToTripDate(dateOffset(dateISO, -1));
@@ -138,8 +203,4 @@ function openFlightLink(destCity, dateISO) {
   window.open(url, '_blank', 'noopener');
 }
 
-// ═══════════════════════════════════════════════════════════
-//  INIT
-// ═══════════════════════════════════════════════════════════
-buildSchedule();
-buildBracket();
+// setLang() called above already triggers buildSchedule() + buildBracket()
