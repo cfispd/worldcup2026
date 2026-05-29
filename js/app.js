@@ -125,16 +125,34 @@ document.addEventListener('click', e => {
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeTicketTip(); });
 
 // ═══════════════════════════════════════════════════════════
-//  FLIGHT LINK HANDLER  (default departure: Shanghai PVG)
+//  DEPARTURE CITY  (auto-detected via IP, fallback: PVG)
+// ═══════════════════════════════════════════════════════════
+let _homeIata = 'PVG';
+
+(async function detectHomeCity() {
+  try {
+    const cached = sessionStorage.getItem('wc_home_iata');
+    if (cached) { _homeIata = cached; return; }
+    const res  = await fetch('https://ipapi.co/json/');
+    const data = await res.json();
+    const iata = CITY_IATA_MAP[data.city];
+    if (iata) {
+      _homeIata = iata;
+      sessionStorage.setItem('wc_home_iata', iata);
+    }
+  } catch (e) { /* silently fall back to PVG */ }
+})();
+
+// ═══════════════════════════════════════════════════════════
+//  FLIGHT LINK HANDLER
 // ═══════════════════════════════════════════════════════════
 function openFlightLink(destCity, dateISO) {
-  const homeIata = 'PVG';
   const destIata = CITY_IATA[destCity];
   if (!destIata) return;
   const dep  = isoToTripDate(dateOffset(dateISO, -1));
   const ret  = isoToTripDate(dateOffset(dateISO, +1));
-  const path = `${homeIata}-to-${encodeURIComponent(destCity)}`;
-  const url  = `https://www.trip.com/flights/${path}/tickets-${homeIata}-${destIata}?flighttype=D&dcity=${homeIata}&acity=${destIata}&ddate=${dep}&rdate=${ret}&${TRIP_AFFILIATE}`;
+  const path = `${_homeIata}-to-${encodeURIComponent(destCity)}`;
+  const url  = `https://www.trip.com/flights/${path}/tickets-${_homeIata}-${destIata}?flighttype=D&dcity=${_homeIata}&acity=${destIata}&ddate=${dep}&rdate=${ret}&${TRIP_AFFILIATE}`;
   window.open(url, '_blank', 'noopener');
 }
 

@@ -41,6 +41,63 @@ const CITY_GROUPS = [
   { country:'Canada',        flag:'ca', cities:['Toronto','Vancouver'] },
 ];
 
+// Comprehensive city name (as returned by IP geolocation) → nearest IATA
+const CITY_IATA_MAP = {
+  // ── China ──────────────────────────────────────────────
+  'Shanghai':'PVG','Beijing':'PEK','Guangzhou':'CAN','Shenzhen':'SZX',
+  'Chengdu':'CTU','Hangzhou':'HGH','Nanjing':'NKG','Wuhan':'WUH',
+  "Xi'an":'XIY','Xian':'XIY','Chongqing':'CKG','Kunming':'KMG',
+  'Qingdao':'TAO','Tianjin':'TSN','Dalian':'DLC','Shenyang':'SHE',
+  'Harbin':'HRB','Zhengzhou':'CGO','Changsha':'CSX','Fuzhou':'FOC',
+  'Xiamen':'XMN','Ningbo':'NGB','Wenzhou':'WNZ','Guiyang':'KWE',
+  'Nanning':'NNG','Urumqi':'URC','Haikou':'HAK','Sanya':'SYX',
+  'Suzhou':'PVG','Wuxi':'WUX','Nanchang':'KHN','Lanzhou':'LHW',
+  'Hefei':'HFE','Shijiazhuang':'SJW','Taiyuan':'TYN','Hohhot':'HET',
+  'Changchun':'CGQ','Jinan':'TNA','Yantai':'YNT','Zhuhai':'ZUH',
+  'Guilin':'KWL','Lijiang':'LJG','Lhasa':'LXA','Yinchuan':'INC',
+  // ── Hong Kong / Macau / Taiwan ──────────────────────────
+  'Hong Kong':'HKG','Macau':'MFM','Taipei':'TPE','Taichung':'RMQ',
+  'Kaohsiung':'KHH',
+  // ── USA ────────────────────────────────────────────────
+  'New York':'JFK','New York City':'JFK','Manhattan':'JFK','Brooklyn':'JFK',
+  'Los Angeles':'LAX','San Francisco':'SFO','Chicago':'ORD',
+  'Houston':'IAH','Dallas':'DFW','Miami':'MIA','Seattle':'SEA',
+  'Boston':'BOS','Atlanta':'ATL','Philadelphia':'PHL','Denver':'DEN',
+  'Las Vegas':'LAS','Phoenix':'PHX','Portland':'PDX','San Diego':'SAN',
+  'Minneapolis':'MSP','Detroit':'DTW','Baltimore':'BWI','Washington':'IAD',
+  'Orlando':'MCO','Tampa':'TPA','Nashville':'BNA','Austin':'AUS',
+  // ── Canada ─────────────────────────────────────────────
+  'Toronto':'YYZ','Vancouver':'YVR','Montreal':'YUL','Calgary':'YYC',
+  'Ottawa':'YOW','Edmonton':'YEG','Winnipeg':'YWG','Quebec City':'YQB',
+  // ── UK ─────────────────────────────────────────────────
+  'London':'LHR','Manchester':'MAN','Edinburgh':'EDI','Birmingham':'BHX',
+  // ── Europe ─────────────────────────────────────────────
+  'Paris':'CDG','Frankfurt':'FRA','Amsterdam':'AMS','Madrid':'MAD',
+  'Barcelona':'BCN','Rome':'FCO','Milan':'MXP','Vienna':'VIE',
+  'Zurich':'ZRH','Brussels':'BRU','Copenhagen':'CPH','Stockholm':'ARN',
+  'Oslo':'OSL','Helsinki':'HEL','Warsaw':'WAW','Prague':'PRG',
+  'Budapest':'BUD','Athens':'ATH','Lisbon':'LIS','Dublin':'DUB',
+  'Munich':'MUC','Hamburg':'HAM','Dusseldorf':'DUS',
+  // ── Asia Pacific ───────────────────────────────────────
+  'Tokyo':'NRT','Osaka':'KIX','Fukuoka':'FUK','Sapporo':'CTS',
+  'Seoul':'ICN','Busan':'PUS','Singapore':'SIN','Bangkok':'BKK',
+  'Kuala Lumpur':'KUL','Jakarta':'CGK','Manila':'MNL','Ho Chi Minh City':'SGN',
+  'Hanoi':'HAN','Bali':'DPS','Sydney':'SYD','Melbourne':'MEL',
+  'Brisbane':'BNE','Perth':'PER','Auckland':'AKL','Christchurch':'CHC',
+  // ── Middle East ────────────────────────────────────────
+  'Dubai':'DXB','Abu Dhabi':'AUH','Doha':'DOH','Istanbul':'IST',
+  'Tel Aviv':'TLV','Riyadh':'RUH','Kuwait City':'KWI','Muscat':'MCT',
+  // ── India ──────────────────────────────────────────────
+  'Mumbai':'BOM','Delhi':'DEL','New Delhi':'DEL','Bangalore':'BLR',
+  'Bengaluru':'BLR','Chennai':'MAA','Hyderabad':'HYD','Kolkata':'CCU',
+  // ── Others ─────────────────────────────────────────────
+  'Mexico City':'MEX','Cancun':'CUN','Sao Paulo':'GRU','Rio de Janeiro':'GIG',
+  'Buenos Aires':'EZE','Bogota':'BOG','Lima':'LIM','Santiago':'SCL',
+  'Johannesburg':'JNB','Cape Town':'CPT','Cairo':'CAI','Nairobi':'NBO',
+  'Lagos':'LOS','Casablanca':'CMN','Addis Ababa':'ADD',
+  'Moscow':'SVO','Saint Petersburg':'LED',
+};
+
 // City → IATA airport code
 const CITY_IATA = {
   'Atlanta':      'ATL',
