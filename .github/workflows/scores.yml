@@ -1,0 +1,40 @@
+name: World Cup Score Updater
+
+on:
+  schedule:
+    # Every 10 minutes
+    - cron: '*/10 * * * *'
+  workflow_dispatch:   # allow manual trigger from Actions tab
+
+jobs:
+  update-scores:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write   # needed to push scores.json back to the repo
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install anthropic
+
+      - name: Run score updater
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python scripts/score_updater.py
+
+      - name: Commit & push updated scores
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add js/scores.json
+          git diff --staged --quiet \
+            && echo "No score changes — nothing to commit." \
+            || (git commit -m "chore: update match scores [skip ci]" && git push)

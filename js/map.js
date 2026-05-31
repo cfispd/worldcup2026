@@ -20,8 +20,8 @@ function buildSidebarMatch(city, m) {
   const isGroup  = !!m.group;
   const accent   = isGroup ? GROUP_ACCENT[m.group] : ROUND_ACCENT[m.round];
   const label    = roundL(m.round, isGroup ? m.group : null);
-  const dispTime = isGroup ? toLocalTime(m.time, city) : m.time;
-  const tz       = tzL(getLocalTZ(city));
+  const dispTime = toUserLocalTime(m.time, m.dateISO);
+  const tz       = userTzLabel();
   const ticketLabel = LANG === 'zh' ? '购票' : 'Tickets';
   const hotelLabel  = LANG === 'zh' ? '酒店' : 'Hotel';
   const flightLabel = LANG === 'zh' ? '机票' : 'Flights';

@@ -108,7 +108,6 @@ function buildBracket() {
   const totalSvgH = TOTAL_H + 160;
 
   document.getElementById('view-bracket').innerHTML = `
-    <p class="hint">⏰ ${LANG === 'zh' ? '所有时间均为当地时间' : 'All times shown are local venue time'}</p>
     <div class="bracket-outer">
       <div class="bracket-wrap" style="width:${totalW}px;height:${TOTAL_H + 160}px;margin-top:${PAD_TOP}px;">
         <svg style="position:absolute;top:0;left:0;width:${totalW}px;height:${totalSvgH}px;overflow:visible;pointer-events:none;">

@@ -104,8 +104,8 @@ function schedCardHtml(m) {
   const pill      = roundL(m.round, isGroup ? m.group : null);
   const f1        = isGroup ? flagImg(m.home, 32, 21) : '';
   const f2        = isGroup ? flagImg(m.away, 32, 21) : '';
-  const localTime = isGroup ? toLocalTime(m.time, city) : m.time;
-  const tz        = tzL(getLocalTZ(city));
+  const localTime = toUserLocalTime(m.time, m.dateISO);
+  const tz        = userTzLabel();
   const clockIcon = `<svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="display:inline;vertical-align:middle;margin-right:3px"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>`;
   const pinIcon   = `<svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>`;
 
@@ -234,7 +234,6 @@ function buildSchedule() {
   const allDatesLabel   = LANG === 'zh' ? '全部日期' : 'All Dates';
   const selectAllLabel  = LANG === 'zh' ? '全选' : 'Select All';
   const clearAllLabel   = LANG === 'zh' ? '清除全部' : 'Clear All';
-  const timeHint        = LANG === 'zh' ? '⏰ 所有时间均为当地时间（ET · CT · PT）' : '⏰ All times shown are local venue time (ET · CT · PT)';
   const noResultsText   = LANG === 'zh' ? '没有符合条件的比赛。' : 'No matches found for the selected filters.';
 
   container.innerHTML = `
@@ -270,7 +269,6 @@ function buildSchedule() {
     <div class="selected-tags" id="selectedTags"></div>
     ${calPanelHtml}
     <div class="selected-tags" id="selectedDateTags"></div>
-    <p class="hint" style="margin:4px 0 16px">${timeHint}</p>
     ${daysHtml}
     <div class="no-results" id="noResults" style="display:none">${noResultsText}</div>
   `;

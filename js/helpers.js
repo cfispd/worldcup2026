@@ -27,6 +27,52 @@ function fmtWeekday(iso) {
   return WEEKDAYS[d.getDay()];
 }
 
+// Converts a match's ET time + date to a UTC Date (EDT = UTC-4, June–July 2026).
+function matchToUTC(dateISO, timeET) {
+  const m = timeET.trim().match(/^(\d+):(\d+)\s*(AM|PM)$/i);
+  if (!m) return null;
+  let h = parseInt(m[1]);
+  const min = parseInt(m[2]), ap = m[3].toUpperCase();
+  if (ap === 'PM' && h !== 12) h += 12;
+  if (ap === 'AM' && h === 12) h = 0;
+  const [y, mo, d] = dateISO.split('-').map(Number);
+  return new Date(Date.UTC(y, mo - 1, d, h, min) + 4 * 3600000);
+}
+
+// Formats a match time in the user's browser timezone (auto-detected).
+function toUserLocalTime(timeET, dateISO) {
+  const utc = matchToUTC(dateISO, timeET);
+  if (!utc) return timeET;
+  return utc.toLocaleTimeString(LANG === 'zh' ? 'zh-CN' : 'en-US', {
+    hour: 'numeric', minute: '2-digit', hour12: true
+  });
+}
+
+// Returns the appropriate watch/stream URL based on user's detected timezone.
+function watchUrl() {
+  try {
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    if (/^Asia\/(Shanghai|Chongqing|Harbin|Chungking)/.test(tz)) {
+      return 'https://tv.cctv.com/live/cctv5/'; // CCTV5 — mainland China
+    }
+    if (tz === 'Asia/Hong_Kong' || tz === 'Asia/Macau') {
+      return 'https://nowtv.now.com/';           // Now TV — HK/Macau
+    }
+    if (tz === 'Asia/Taipei') {
+      return 'https://ctitv.com.tw/';            // CTi TV — Taiwan
+    }
+  } catch {}
+  return 'https://www.fubo.tv';                  // default — fuboTV
+}
+
+// Short timezone label for the user's browser timezone (e.g. "EDT", "GMT+8").
+function userTzLabel() {
+  try {
+    const s = new Date().toLocaleTimeString('en-US', { timeZoneName: 'short' });
+    return s.split(' ').pop();
+  } catch { return ''; }
+}
+
 // Converts a group-stage ET time string to the venue's local time.
 // Group stage times are stored in ET; CITY_TZ_OFFSET holds the offset per city.
 function toLocalTime(timeStr, city) {
@@ -76,8 +122,21 @@ function tzL(tz) { return tz; } // timezone labels kept untranslated
 
 // ── Language / i18n  (reads LANG + *_ZH tables) ──────────
 
+// Resolve bracket placeholder → real team name, then translate.
+// BRACKET_TEAMS: { "1st Group A": "Mexico", "3rd Grp A/B/C/D/F": "Czech Republic", ... }
+// MATCH_WINNERS: { "73": "Mexico", "74": "Germany", ... }
 function teamName(name) {
-  return LANG === 'zh' && TEAM_NAMES_ZH[name] ? TEAM_NAMES_ZH[name] : name;
+  // Resolve "1st/2nd/3rd Group X" and "W/L Match N" via live data
+  let resolved = name;
+  if (typeof BRACKET_TEAMS !== 'undefined' && BRACKET_TEAMS[name]) {
+    resolved = BRACKET_TEAMS[name];
+  } else if (typeof MATCH_WINNERS !== 'undefined') {
+    const w = name.match(/^W Match (\d+)$/);
+    const l = name.match(/^L Match (\d+)$/);
+    if (w && MATCH_WINNERS[w[1]]) resolved = MATCH_WINNERS[w[1]];
+    if (l && MATCH_WINNERS['L' + l[1]]) resolved = MATCH_WINNERS['L' + l[1]];
+  }
+  return LANG === 'zh' && TEAM_NAMES_ZH[resolved] ? TEAM_NAMES_ZH[resolved] : resolved;
 }
 function cityName(city) {
   return LANG === 'zh' && CITY_NAMES_ZH[city] ? CITY_NAMES_ZH[city] : city;
@@ -146,11 +205,12 @@ function computeStandings(groupKey) {
     else                                { h.d++; h.pts++;    a.d++; a.pts++; }
   });
 
+  const seed = GROUP_SEED_ORDER[groupKey] || [];
   return Object.values(teams).sort((a, b) =>
     b.pts       - a.pts       ||
     (b.gf-b.ga) - (a.gf-a.ga)||
     b.gf        - a.gf        ||
-    a.team.localeCompare(b.team)
+    seed.indexOf(a.team) - seed.indexOf(b.team)
   );
 }
 

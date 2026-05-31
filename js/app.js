@@ -1,3 +1,8 @@
+// Bracket resolution maps — populated by fetchScores(), read by teamName() in helpers.js
+// Must be declared before setLang() runs to avoid TDZ ReferenceError.
+var BRACKET_TEAMS = {};  // "1st Group A" → "Mexico", "3rd Grp …" → actual team
+var MATCH_WINNERS = {};  // "73" → winner team,  "L73" → loser team
+
 // ═══════════════════════════════════════════════════════════
 //  THEME TOGGLE
 // ═══════════════════════════════════════════════════════════
@@ -82,6 +87,8 @@ function setLang(lang) {
   // Sync theme button label language
   const currentTheme = document.body.classList.contains('night') ? 'night' : 'day';
   updateThemeBtn(currentTheme);
+
+  renderMatchdayStrip();
 }
 
 // Init lang toggle buttons
@@ -119,37 +126,45 @@ const HOST_NATIONS   = new Set(['Mexico', 'United States', 'Canada']);
 
 function renderStandingsMini(rows, groupKey) {
   const z = LANG === 'zh';
-  const hdr = `<div class="sm-head">
-    <span></span><span></span><span class="sm-stat-hd">${z?'胜':'W'}</span>
-    <span class="sm-stat-hd">${z?'平':'D'}</span><span class="sm-stat-hd">${z?'负':'L'}</span>
-    <span class="sm-pts-hd">${z?'积分':'Pts'}</span>
-  </div>`;
-  return hdr + rows.map((r, i) => {
+  const thead = `<thead><tr>
+    <th class="smt-c-pos"></th>
+    <th class="smt-c-team"></th>
+    <th>${z?'胜':'W'}</th>
+    <th>${z?'平':'D'}</th>
+    <th>${z?'负':'L'}</th>
+    <th>${z?'进':'GF'}</th>
+    <th>${z?'失':'GA'}</th>
+    <th>${z?'净':'GD'}</th>
+    <th class="smt-c-pts">${z?'分':'Pts'}</th>
+  </tr></thead>`;
+  const tbody = rows.map((r, i) => {
     const fl   = FLAGS[r.team] ? `<img src="https://flagcdn.com/w40/${FLAGS[r.team]}.png" alt="" class="sm-flag">` : '';
     const nm   = z ? (TEAM_NAMES_ZH[r.team] || r.team) : r.team;
     const host = HOST_NATIONS.has(r.team) ? `<span class="sm-host">${z?'主办':'HOST'}</span>` : '';
-    return `<div class="sm-row">
-      <span class="sm-pos ${QUALIFY_CLASS[i]}">${i+1}</span>
-      ${fl}<span class="sm-team-cell"><span class="sm-name">${nm}</span>${host}</span>
-      <span class="sm-stat">${r.w}</span>
-      <span class="sm-stat">${r.d}</span>
-      <span class="sm-stat">${r.l}</span>
-      <span class="sm-pts">${r.pts}</span>
-    </div>`;
+    const gd   = r.gf - r.ga;
+    return `<tr class="${QUALIFY_CLASS[i]}">
+      <td class="smt-pos ${QUALIFY_CLASS[i]}">${i+1}</td>
+      <td class="smt-team"><div class="smt-team-inner">${fl}<span class="sm-name">${nm}</span>${host}</div></td>
+      <td>${r.w}</td><td>${r.d}</td><td>${r.l}</td>
+      <td>${r.gf}</td><td>${r.ga}</td>
+      <td class="smt-gd">${gd>0?'+'+gd:gd}</td>
+      <td class="smt-pts">${r.pts}</td>
+    </tr>`;
   }).join('');
+  return `<table class="sm-table">${thead}<tbody>${tbody}</tbody></table>`;
 }
 
 function renderStandingsFull(rows) {
   const z = LANG === 'zh';
   const ths = `<th>#</th><th class="st-th-team">${z?'球队':'Team'}</th>
-    <th title="${z?'场次':'Played'}">MP</th>
-    <th title="${z?'胜':'Win'}">W</th>
-    <th title="${z?'平':'Draw'}">D</th>
-    <th title="${z?'负':'Loss'}">L</th>
-    <th title="${z?'进球':'Goals For'}">GF</th>
-    <th title="${z?'失球':'Goals Against'}">GA</th>
-    <th title="${z?'净胜球':'Goal Diff'}">GD</th>
-    <th title="${z?'积分':'Points'}">${z?'积分':'Pts'}</th>`;
+    <th>${z?'场次':'MP'}</th>
+    <th>${z?'胜':'W'}</th>
+    <th>${z?'平':'D'}</th>
+    <th>${z?'负':'L'}</th>
+    <th>${z?'进球':'GF'}</th>
+    <th>${z?'失球':'GA'}</th>
+    <th>${z?'净胜球':'GD'}</th>
+    <th>${z?'积分':'Pts'}</th>`;
   const trs = rows.map((r, i) => {
     const fl   = FLAGS[r.team] ? `<img src="https://flagcdn.com/w40/${FLAGS[r.team]}.png" alt="" class="st-flag">` : '';
     const nm   = z ? (TEAM_NAMES_ZH[r.team] || r.team) : r.team;
@@ -177,7 +192,7 @@ function openModal(groupKey) {
   document.getElementById('modalTitle').textContent    = LANG === 'zh' ? `${groupKey}组` : `Group ${groupKey}`;
   document.getElementById('modalSubtitle').textContent = LANG === 'zh' ? '4支球队 · 循环赛' : '4 teams · Round Robin';
   document.getElementById('standingsTitle').textContent    = LANG === 'zh' ? '积分榜' : 'Standings';
-  document.getElementById('matchScheduleH3').textContent  = LANG === 'zh' ? '赛程（当地时间）' : 'Match Schedule (local time)';
+  document.getElementById('matchScheduleH3').textContent  = LANG === 'zh' ? '赛程（当地时间）' : 'Match Schedule';
 
   const standings = computeStandings(groupKey);
   document.getElementById('standingsTable').innerHTML = renderStandingsFull(standings);
@@ -195,7 +210,7 @@ function openModal(groupKey) {
       </div>
       <div class="match-meta">
         <span class="meta-item">${calIcon} ${fmtDateL(m.dateISO)}, 2026</span>
-        <span class="meta-item">${clkIcon} ${toLocalTime(m.time, getCity(m.venue))} ${tzL(getLocalTZ(getCity(m.venue)))}</span>
+        <span class="meta-item">${clkIcon} ${toUserLocalTime(m.time, m.dateISO)} ${userTzLabel()}</span>
         <span class="meta-item">${pinIcon} <span class="venue-stadium">${m.venue.split(',')[0].trim()}</span><span class="venue-sep"> · </span><span class="venue-city">${cityName(getCity(m.venue))}, ${countryName(getCountry(m.venue))}</span></span>
       </div>
       <div class="card-links">
@@ -458,3 +473,205 @@ document.getElementById('flightPickerOverlay').addEventListener('click', e => {
 document.getElementById('flightPickerClose').addEventListener('click', closeFlight);
 
 // setLang() called above already triggers buildSchedule() + buildBracket()
+
+// ═══════════════════════════════════════════════════════════
+//  MATCHDAY STRIP  — today's live/finished + tomorrow upcoming
+// ═══════════════════════════════════════════════════════════
+
+function localDateISO(offsetDays) {
+  const d = new Date();
+  d.setDate(d.getDate() + offsetDays);
+  return d.getFullYear() + '-' +
+    String(d.getMonth() + 1).padStart(2, '0') + '-' +
+    String(d.getDate()).padStart(2, '0');
+}
+
+function mdsStartUTC(dateISO, timeET) {
+  try {
+    const [tp, pd] = timeET.trim().split(' ');
+    let [h, m] = tp.split(':').map(Number);
+    if (pd === 'PM' && h !== 12) h += 12;
+    if (pd === 'AM' && h === 12) h = 0;
+    const [y, mo, d] = dateISO.split('-').map(Number);
+    return new Date(Date.UTC(y, mo - 1, d, h, m) + 4 * 3600000); // EDT = UTC-4
+  } catch { return null; }
+}
+
+function mdsStatus(m, todayISO) {
+  if (m.dateISO !== todayISO) return null;
+  if (typeof m.homeScore === 'number') return 'finished';
+  const start = mdsStartUTC(m.dateISO, m.time);
+  if (!start) return 'upcoming';
+  const diff = (Date.now() - start) / 60000;
+  if (diff < -15)  return 'upcoming';
+  if (diff < 115)  return 'live';
+  return 'finished';
+}
+
+function mdsCard(m, status) {
+  const z = LANG === 'zh';
+  const accent = m.group ? GROUP_ACCENT[m.group] : (ROUND_ACCENT[m.round] || '#555');
+  const pill   = m.group || (z ? ROUND_LABEL_ZH[m.round] : ROUND_LABEL[m.round]) || m.round || '';
+  const hName  = z ? (TEAM_NAMES_ZH[m.home] || m.home) : m.home;
+  const aName  = z ? (TEAM_NAMES_ZH[m.away] || m.away) : m.away;
+  const hFlag  = FLAGS[m.home] ? `<img class="mds-flag" src="https://flagcdn.com/w40/${FLAGS[m.home]}.png" alt="">` : '';
+  const aFlag  = FLAGS[m.away] ? `<img class="mds-flag" src="https://flagcdn.com/w40/${FLAGS[m.away]}.png" alt="">` : '';
+  const city   = getCity(m.venue);
+  const cityLbl = z ? (CITY_NAMES_ZH[city] || city) : city;
+
+  let badge, mid;
+  if (status === 'live') {
+    const start   = mdsStartUTC(m.dateISO, m.time);
+    const elapsed = start ? Math.min(90, Math.max(0, Math.floor((Date.now() - start) / 60000))) : 0;
+    badge = `<span class="mds-minute">${elapsed}'</span>`;
+    const hs = typeof m.homeScore === 'number' ? m.homeScore : 0;
+    const as = typeof m.awayScore === 'number' ? m.awayScore : 0;
+    mid = `${hs} – ${as}`;
+  } else if (status === 'finished') {
+    badge = `<span class="mds-ft">${z ? '完场' : 'FT'}</span>`;
+    mid   = typeof m.homeScore === 'number' ? `${m.homeScore} – ${m.awayScore}` : 'VS';
+  } else {
+    badge = `<span class="mds-time">${toUserLocalTime(m.time, m.dateISO)}</span>`;
+    mid   = 'VS';
+  }
+
+  const extraClass = status === 'live' ? ' mds-card-live' : status === 'finished' ? ' mds-card-done' : '';
+
+  const start    = mdsStartUTC(m.dateISO, m.time);
+  const diffMin  = start ? (Date.now() - start) / 60000 : null;
+  const showWatch = diffMin !== null && diffMin >= -60 && diffMin <= 180;
+  const playIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>`;
+  const watchBtn = showWatch
+    ? `<a class="mds-watch" href="${watchUrl()}" target="_blank" rel="noopener" title="${z?'观看直播':'Watch Live'}">${playIcon}</a>`
+    : '';
+  return `<div class="mds-card${extraClass}">
+    <div class="mds-card-info">
+      <div class="mds-top"><span class="mds-gpill" style="background:${accent}">${pill}</span>${badge}</div>
+      <div class="mds-matchup">
+        <div class="mds-team">${hFlag}<span class="mds-tname">${hName}</span></div>
+        <span class="mds-mid">${mid}</span>
+        <div class="mds-team mds-team-r"><span class="mds-tname">${aName}</span>${aFlag}</div>
+      </div>
+      <div class="mds-city">${cityLbl}</div>
+    </div>
+    ${watchBtn}
+  </div>`;
+}
+
+function renderMatchdayStrip() {
+  const strip = document.getElementById('matchday-strip');
+  if (!strip) return;
+
+  const todayISO    = localDateISO(0);
+  const tomorrowISO = localDateISO(1);
+  const z = LANG === 'zh';
+
+  const live = [], today = [], tomorrow = [];
+  ALL_MATCHES.forEach(m => {
+    const s = mdsStatus(m, todayISO);
+    if      (s === 'live')                  live.push([m, s]);
+    else if (s === 'upcoming' || s === 'finished') today.push([m, s]);
+    else if (m.dateISO === tomorrowISO)     tomorrow.push([m, 'upcoming']);
+  });
+
+  if (!live.length && !today.length && !tomorrow.length) {
+    strip.style.display = 'none';
+    return;
+  }
+
+  strip.style.display = '';
+  const parts = [];
+
+  if (live.length) {
+    const dot = '<span class="mds-live-dot"></span>';
+    parts.push(`<div class="mds-section">
+      <span class="mds-label mds-label-live">${dot}${z ? '直播中' : 'LIVE'}</span>
+      ${live.map(([m, s]) => mdsCard(m, s)).join('')}
+    </div>`);
+  }
+  if (today.length) {
+    parts.push(`<div class="mds-section">
+      <span class="mds-label mds-label-today">${z ? '今天' : 'TODAY'}</span>
+      ${today.map(([m, s]) => mdsCard(m, s)).join('')}
+    </div>`);
+  }
+  if (tomorrow.length) {
+    parts.push(`<div class="mds-section">
+      <span class="mds-label mds-label-tomorrow">${z ? '明天' : 'TOMORROW'}</span>
+      ${tomorrow.map(([m, s]) => mdsCard(m, s)).join('')}
+    </div>`);
+  }
+
+  const divider = '<div class="mds-divider"></div>';
+  strip.innerHTML = `<div class="mds-inner">${parts.join(divider)}</div>`;
+}
+
+// Refresh strip every minute so LIVE status and elapsed minutes stay current
+setInterval(renderMatchdayStrip, 60000);
+
+// ═══════════════════════════════════════════════════════════
+//  LIVE SCORE POLLER  — reads js/scores.json written by the
+//  GitHub Actions score_updater.py agent every ~10 minutes
+// ═══════════════════════════════════════════════════════════
+
+
+async function fetchScores() {
+  try {
+    const res = await fetch(`js/scores.json?t=${Date.now()}`);
+    if (!res.ok) return;
+    const data = await res.json();
+
+    let changed = false;
+
+    // ── 1. Inject match scores into ALL_MATCHES ──────────────
+    if (data.matches) {
+      ALL_MATCHES.forEach(m => {
+        const key   = `${m.dateISO}|${m.home}|${m.away}`;
+        const score = data.matches[key];
+        if (!score || score.homeScore == null) return;
+        if (m.homeScore !== score.homeScore || m.awayScore !== score.awayScore) {
+          m.homeScore   = score.homeScore;
+          m.awayScore   = score.awayScore;
+          m.matchStatus = score.status;
+          m.matchMinute = score.minute ?? null;
+          changed = true;
+        }
+        // Track winners for knockout resolution
+        if (score.status === 'finished' && m.matchNum) {
+          const mn = String(m.matchNum);
+          if (score.winner) {
+            MATCH_WINNERS[mn]        = score.winner;
+            // loser = the other team
+            MATCH_WINNERS['L' + mn]  = (score.winner === m.home) ? m.away : m.home;
+          } else if (score.homeScore !== score.awayScore) {
+            MATCH_WINNERS[mn]        = score.homeScore > score.awayScore ? m.home : m.away;
+            MATCH_WINNERS['L' + mn]  = score.homeScore > score.awayScore ? m.away : m.home;
+          }
+        }
+      });
+    }
+
+    // ── 2. Load bracket team assignments from agent ──────────
+    if (data.bracket_teams) {
+      const prev = JSON.stringify(BRACKET_TEAMS);
+      BRACKET_TEAMS = { ...data.bracket_teams };
+      if (JSON.stringify(BRACKET_TEAMS) !== prev) changed = true;
+    }
+
+    if (!changed) return;
+
+    // ── 3. Re-render affected UI ─────────────────────────────
+    document.querySelectorAll('.standings-mini[data-group]').forEach(el => {
+      el.innerHTML = renderStandingsMini(computeStandings(el.dataset.group), el.dataset.group);
+    });
+    renderMatchdayStrip();
+    buildBracket();   // refresh bracket with resolved names & scores
+    if (document.getElementById('view-schedule')?.classList.contains('active')) {
+      buildSchedule();
+    }
+  } catch { /* silently ignore network/parse errors */ }
+}
+
+// Poll every 60 s — agent writes every ~10 min, 60 s keeps UI crisp
+fetchScores();
+setInterval(fetchScores, 60000);

@@ -148,7 +148,24 @@ const STUBHUB_EVENT_URLS = {
   'Belgium|Egypt|2026-06-15': 'https://www.stubhub.com/world-cup-seattle-tickets-6-15-2026/event/153020522/',
 };
 
-// ── 6. Match data  (group stage + knockout, 104 matches) ──
+// ── 6. Seed / draw order per group ────────────────────────
+// Used as last-resort tiebreaker when all points/GD/GF are equal.
+const GROUP_SEED_ORDER = {
+  A: ['Mexico','South Korea','South Africa','Czech Republic'],
+  B: ['Canada','Switzerland','Qatar','Bosnia-Herzegovina'],
+  C: ['Brazil','Morocco','Scotland','Haiti'],
+  D: ['United States','Paraguay','Australia','Turkey'],
+  E: ['Germany','Ecuador','Ivory Coast','Curaçao'],
+  F: ['Netherlands','Japan','Sweden','Tunisia'],
+  G: ['Belgium','Iran','Egypt','New Zealand'],
+  H: ['Spain','Uruguay','Saudi Arabia','Cape Verde'],
+  I: ['France','Senegal','Norway','Iraq'],
+  J: ['Argentina','Austria','Algeria','Jordan'],
+  K: ['Portugal','Colombia','Uzbekistan','DR Congo'],
+  L: ['England','Croatia','Panama','Ghana'],
+};
+
+// ── 7. Match data  (group stage + knockout, 104 matches) ──
 
 const ALL_MATCHES = [
   // ── Group Stage ───────────────────────────────────────────
