@@ -3,10 +3,6 @@
 var BRACKET_TEAMS = {};  // "1st Group A" → "Mexico", "3rd Grp …" → actual team
 var MATCH_WINNERS = {};  // "73" → winner team,  "L73" → loser team
 
-// TEMP DEBUG — mock time to 30 min after first match (2026-06-11 3:30 PM EDT); remove before deploy
-const _DEBUG_NOW = new Date('2026-06-11T19:30:00Z');
-Date.now = () => _DEBUG_NOW.getTime();
-
 // ═══════════════════════════════════════════════════════════
 //  THEME TOGGLE
 // ═══════════════════════════════════════════════════════════
@@ -483,7 +479,7 @@ document.getElementById('flightPickerClose').addEventListener('click', closeFlig
 // ═══════════════════════════════════════════════════════════
 
 function localDateISO(offsetDays) {
-  const d = new Date(_DEBUG_NOW);
+  const d = new Date();
   d.setDate(d.getDate() + offsetDays);
   return d.getFullYear() + '-' +
     String(d.getMonth() + 1).padStart(2, '0') + '-' +
@@ -526,8 +522,18 @@ function mdsCard(m, status) {
   let badge, mid;
   if (status === 'live') {
     const start   = mdsStartUTC(m.dateISO, m.time);
-    const elapsed = start ? Math.min(90, Math.max(0, Math.floor((Date.now() - start) / 60000))) : 0;
-    badge = `<span class="mds-minute">${elapsed}'</span>`;
+    const elapsed = start ? Math.max(0, Math.floor((Date.now() - start) / 60000)) : 0;
+    const HALF = 45, BREAK = 15;
+    let minuteLabel;
+    if (elapsed <= HALF) {
+      minuteLabel = z ? `上半场 ${elapsed}'` : `1st Half ${elapsed}'`;
+    } else if (elapsed < HALF + BREAK) {
+      minuteLabel = z ? '中场休息' : 'Half Time';
+    } else {
+      const h2 = Math.min(50, elapsed - HALF - BREAK);
+      minuteLabel = z ? `下半场 ${h2}'` : `2nd Half ${h2}'`;
+    }
+    badge = `<span class="mds-minute">${minuteLabel}</span>`;
     const hs = typeof m.homeScore === 'number' ? m.homeScore : 0;
     const as = typeof m.awayScore === 'number' ? m.awayScore : 0;
     mid = `${hs} – ${as}`;
