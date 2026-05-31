@@ -3,6 +3,10 @@
 var BRACKET_TEAMS = {};  // "1st Group A" → "Mexico", "3rd Grp …" → actual team
 var MATCH_WINNERS = {};  // "73" → winner team,  "L73" → loser team
 
+// TEMP DEBUG — mock time to 30 min after first match (2026-06-11 3:30 PM EDT); remove before deploy
+const _DEBUG_NOW = new Date('2026-06-11T19:30:00Z');
+Date.now = () => _DEBUG_NOW.getTime();
+
 // ═══════════════════════════════════════════════════════════
 //  THEME TOGGLE
 // ═══════════════════════════════════════════════════════════
@@ -479,7 +483,7 @@ document.getElementById('flightPickerClose').addEventListener('click', closeFlig
 // ═══════════════════════════════════════════════════════════
 
 function localDateISO(offsetDays) {
-  const d = new Date();
+  const d = new Date(_DEBUG_NOW);
   d.setDate(d.getDate() + offsetDays);
   return d.getFullYear() + '-' +
     String(d.getMonth() + 1).padStart(2, '0') + '-' +
