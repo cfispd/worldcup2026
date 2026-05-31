@@ -24,9 +24,6 @@ POST_MIN      = 210  # stop checking 3.5 h after kickoff (covers extra time + pe
 WC_START = datetime(2026, 6, 11, tzinfo=timezone.utc)
 WC_END   = datetime(2026, 7, 20, tzinfo=timezone.utc)
 
-client = anthropic.Anthropic()
-
-
 # ── Constants ───────────────────────────────────────────────
 GROUPS = list("ABCDEFGHIJKL")
 
@@ -323,6 +320,9 @@ def main():
     if not (WC_START <= now <= WC_END):
         print("Outside World Cup window. Nothing to do.")
         return
+
+    global client
+    client = anthropic.Anthropic()
 
     schedule = parse_schedule()
     existing = load_scores()
