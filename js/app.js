@@ -54,11 +54,7 @@ function setLang(lang) {
     ? '加拿大 &nbsp;·&nbsp; 墨西哥 &nbsp;·&nbsp; 美国 &nbsp;&nbsp;|&nbsp;&nbsp; 48支球队 &nbsp;·&nbsp; 12个小组'
     : 'Canada &nbsp;·&nbsp; Mexico &nbsp;·&nbsp; United States &nbsp;&nbsp;|&nbsp;&nbsp; 48 Teams &nbsp;·&nbsp; 12 Groups';
 
-  // Groups view: team names, group titles, HOST badge, hint
-  document.querySelectorAll('.team-name').forEach(el => {
-    if (!el.dataset.en) el.dataset.en = el.textContent.trim();
-    el.textContent = lang === 'zh' ? (TEAM_NAMES_ZH[el.dataset.en] || el.dataset.en) : el.dataset.en;
-  });
+  // Groups view: group titles, hint
   document.querySelectorAll('.group-title').forEach(el => {
     if (!el.dataset.en) el.dataset.en = el.textContent.trim();
     if (lang === 'zh') {
@@ -67,9 +63,6 @@ function setLang(lang) {
     } else {
       el.textContent = el.dataset.en;
     }
-  });
-  document.querySelectorAll('.host-badge').forEach(el => {
-    el.textContent = lang === 'zh' ? '主办' : 'HOST';
   });
   const groupsHint = document.querySelector('#view-groups .hint');
   if (groupsHint) groupsHint.textContent = lang === 'zh'
@@ -121,7 +114,8 @@ ALL_MATCHES.filter(m => m.group).forEach(m => {
 });
 
 // ── Standings rendering ────────────────────────────────────
-const QUALIFY_CLASS = ['sq1','sq2','sq3','sq4'];
+const QUALIFY_CLASS  = ['sq1','sq2','sq3','sq4'];
+const HOST_NATIONS   = new Set(['Mexico', 'United States', 'Canada']);
 
 function renderStandingsMini(rows, groupKey) {
   const z = LANG === 'zh';
@@ -131,11 +125,12 @@ function renderStandingsMini(rows, groupKey) {
     <span class="sm-pts-hd">${z?'积分':'Pts'}</span>
   </div>`;
   return hdr + rows.map((r, i) => {
-    const fl = FLAGS[r.team] ? `<img src="https://flagcdn.com/w40/${FLAGS[r.team]}.png" alt="" class="sm-flag">` : '';
-    const nm = z ? (TEAM_NAMES_ZH[r.team] || r.team) : r.team;
+    const fl   = FLAGS[r.team] ? `<img src="https://flagcdn.com/w40/${FLAGS[r.team]}.png" alt="" class="sm-flag">` : '';
+    const nm   = z ? (TEAM_NAMES_ZH[r.team] || r.team) : r.team;
+    const host = HOST_NATIONS.has(r.team) ? `<span class="sm-host">${z?'主办':'HOST'}</span>` : '';
     return `<div class="sm-row">
       <span class="sm-pos ${QUALIFY_CLASS[i]}">${i+1}</span>
-      ${fl}<span class="sm-name">${nm}</span>
+      ${fl}<span class="sm-team-cell"><span class="sm-name">${nm}</span>${host}</span>
       <span class="sm-stat">${r.w}</span>
       <span class="sm-stat">${r.d}</span>
       <span class="sm-stat">${r.l}</span>
@@ -156,16 +151,16 @@ function renderStandingsFull(rows) {
     <th title="${z?'净胜球':'Goal Diff'}">GD</th>
     <th title="${z?'积分':'Points'}">${z?'积分':'Pts'}</th>`;
   const trs = rows.map((r, i) => {
-    const fl  = FLAGS[r.team] ? `<img src="https://flagcdn.com/w40/${FLAGS[r.team]}.png" alt="" class="st-flag">` : '';
-    const nm  = z ? (TEAM_NAMES_ZH[r.team] || r.team) : r.team;
-    const gd  = r.gf - r.ga;
-    const gdStr = gd > 0 ? `+${gd}` : `${gd}`;
+    const fl   = FLAGS[r.team] ? `<img src="https://flagcdn.com/w40/${FLAGS[r.team]}.png" alt="" class="st-flag">` : '';
+    const nm   = z ? (TEAM_NAMES_ZH[r.team] || r.team) : r.team;
+    const host = HOST_NATIONS.has(r.team) ? `<span class="st-host">${z?'主办':'HOST'}</span>` : '';
+    const gd   = r.gf - r.ga;
     return `<tr class="${QUALIFY_CLASS[i]}">
       <td class="st-pos">${i+1}</td>
-      <td class="st-td-team"><div class="st-team-inner">${fl}<span>${nm}</span></div></td>
+      <td class="st-td-team"><div class="st-team-inner">${fl}<span>${nm}</span>${host}</div></td>
       <td>${r.mp}</td><td>${r.w}</td><td>${r.d}</td><td>${r.l}</td>
       <td>${r.gf}</td><td>${r.ga}</td>
-      <td class="st-gd">${gdStr}</td>
+      <td class="st-gd">${gd > 0 ? '+'+gd : gd}</td>
       <td class="st-pts">${r.pts}</td>
     </tr>`;
   }).join('');
