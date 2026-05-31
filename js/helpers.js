@@ -124,6 +124,36 @@ function getBookingUrl(venue, dateISO) {
   return `https://www.booking.com/searchresults.html?ss=${encodeURIComponent(city)}&${base}${lang}`;
 }
 
+// ── Group standings calculator ────────────────────────────
+// Reads homeScore / awayScore from match objects (undefined = not played yet).
+// Returns array sorted by FIFA tie-break rules: Pts → GD → GF → name.
+function computeStandings(groupKey) {
+  const matches = ALL_MATCHES.filter(m => m.group === groupKey);
+  const teams   = {};
+
+  matches.forEach(m => {
+    if (!teams[m.home]) teams[m.home] = { team:m.home, mp:0, w:0, d:0, l:0, gf:0, ga:0, pts:0 };
+    if (!teams[m.away]) teams[m.away] = { team:m.away, mp:0, w:0, d:0, l:0, gf:0, ga:0, pts:0 };
+  });
+
+  matches.forEach(m => {
+    if (typeof m.homeScore !== 'number') return;
+    const h = teams[m.home], a = teams[m.away];
+    h.mp++; h.gf += m.homeScore; h.ga += m.awayScore;
+    a.mp++; a.gf += m.awayScore; a.ga += m.homeScore;
+    if (m.homeScore > m.awayScore)      { h.w++; h.pts += 3; a.l++; }
+    else if (m.homeScore < m.awayScore) { a.w++; a.pts += 3; h.l++; }
+    else                                { h.d++; h.pts++;    a.d++; a.pts++; }
+  });
+
+  return Object.values(teams).sort((a, b) =>
+    b.pts       - a.pts       ||
+    (b.gf-b.ga) - (a.gf-a.ga)||
+    b.gf        - a.gf        ||
+    a.team.localeCompare(b.team)
+  );
+}
+
 // ── Flight URL builder (destination-only fallback) ────────
 // Full round-trip Trip.com logic with departure city lives in app.js → openFlightLink()
 

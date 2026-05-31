@@ -76,6 +76,11 @@ function setLang(lang) {
     ? '点击小组卡片查看比赛时间表'
     : 'Click any group card to see the match schedule';
 
+  // Re-render standings on all group cards
+  document.querySelectorAll('.standings-mini[data-group]').forEach(el => {
+    el.innerHTML = renderStandingsMini(computeStandings(el.dataset.group), el.dataset.group);
+  });
+
   // Re-render dynamic views
   buildSchedule();
   buildBracket();
@@ -115,6 +120,58 @@ ALL_MATCHES.filter(m => m.group).forEach(m => {
   (MATCHES_BY_GROUP[m.group] = MATCHES_BY_GROUP[m.group] || []).push(m);
 });
 
+// ── Standings rendering ────────────────────────────────────
+const QUALIFY_CLASS = ['sq1','sq2','sq3','sq4'];
+
+function renderStandingsMini(rows, groupKey) {
+  const z = LANG === 'zh';
+  const hdr = `<div class="sm-head">
+    <span></span><span></span><span class="sm-stat-hd">${z?'胜':'W'}</span>
+    <span class="sm-stat-hd">${z?'平':'D'}</span><span class="sm-stat-hd">${z?'负':'L'}</span>
+    <span class="sm-pts-hd">${z?'积分':'Pts'}</span>
+  </div>`;
+  return hdr + rows.map((r, i) => {
+    const fl = FLAGS[r.team] ? `<img src="https://flagcdn.com/w40/${FLAGS[r.team]}.png" alt="" class="sm-flag">` : '';
+    const nm = z ? (TEAM_NAMES_ZH[r.team] || r.team) : r.team;
+    return `<div class="sm-row">
+      <span class="sm-pos ${QUALIFY_CLASS[i]}">${i+1}</span>
+      ${fl}<span class="sm-name">${nm}</span>
+      <span class="sm-stat">${r.w}</span>
+      <span class="sm-stat">${r.d}</span>
+      <span class="sm-stat">${r.l}</span>
+      <span class="sm-pts">${r.pts}</span>
+    </div>`;
+  }).join('');
+}
+
+function renderStandingsFull(rows) {
+  const z = LANG === 'zh';
+  const ths = `<th>#</th><th class="st-th-team">${z?'球队':'Team'}</th>
+    <th title="${z?'场次':'Played'}">MP</th>
+    <th title="${z?'胜':'Win'}">W</th>
+    <th title="${z?'平':'Draw'}">D</th>
+    <th title="${z?'负':'Loss'}">L</th>
+    <th title="${z?'进球':'Goals For'}">GF</th>
+    <th title="${z?'失球':'Goals Against'}">GA</th>
+    <th title="${z?'净胜球':'Goal Diff'}">GD</th>
+    <th title="${z?'积分':'Points'}">${z?'积分':'Pts'}</th>`;
+  const trs = rows.map((r, i) => {
+    const fl  = FLAGS[r.team] ? `<img src="https://flagcdn.com/w40/${FLAGS[r.team]}.png" alt="" class="st-flag">` : '';
+    const nm  = z ? (TEAM_NAMES_ZH[r.team] || r.team) : r.team;
+    const gd  = r.gf - r.ga;
+    const gdStr = gd > 0 ? `+${gd}` : `${gd}`;
+    return `<tr class="${QUALIFY_CLASS[i]}">
+      <td class="st-pos">${i+1}</td>
+      <td class="st-td-team"><div class="st-team-inner">${fl}<span>${nm}</span></div></td>
+      <td>${r.mp}</td><td>${r.w}</td><td>${r.d}</td><td>${r.l}</td>
+      <td>${r.gf}</td><td>${r.ga}</td>
+      <td class="st-gd">${gdStr}</td>
+      <td class="st-pts">${r.pts}</td>
+    </tr>`;
+  }).join('');
+  return `<table class="st-table"><thead><tr>${ths}</tr></thead><tbody>${trs}</tbody></table>`;
+}
+
 function openModal(groupKey) {
   const matches = MATCHES_BY_GROUP[groupKey];
   const accent  = GROUP_ACCENT[groupKey];
@@ -122,8 +179,13 @@ function openModal(groupKey) {
   document.getElementById('modalLetter').textContent      = groupKey;
   document.getElementById('modalLetter').style.background = accent;
   document.getElementById('modalLetter').style.color      = '#fff';
-  document.getElementById('modalTitle').textContent    = LANG === 'zh' ? `${groupKey}组 – 比赛时间表` : `Group ${groupKey} – Match Schedule`;
-  document.getElementById('modalSubtitle').textContent = LANG === 'zh' ? '6场比赛 · 循环赛 · 当地时间' : '6 matches · Round Robin · Local time';
+  document.getElementById('modalTitle').textContent    = LANG === 'zh' ? `${groupKey}组` : `Group ${groupKey}`;
+  document.getElementById('modalSubtitle').textContent = LANG === 'zh' ? '4支球队 · 循环赛' : '4 teams · Round Robin';
+  document.getElementById('standingsTitle').textContent    = LANG === 'zh' ? '积分榜' : 'Standings';
+  document.getElementById('matchScheduleH3').textContent  = LANG === 'zh' ? '赛程（当地时间）' : 'Match Schedule (local time)';
+
+  const standings = computeStandings(groupKey);
+  document.getElementById('standingsTable').innerHTML = renderStandingsFull(standings);
 
   const calIcon = `<svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>`;
   const clkIcon = `<svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>`;
@@ -158,9 +220,17 @@ function closeModal() {
   document.body.style.overflow = '';
 }
 
-document.querySelectorAll('.group-card').forEach(card =>
-  card.addEventListener('click', () => openModal(card.dataset.group))
-);
+document.querySelectorAll('.group-card').forEach(card => {
+  card.addEventListener('click', () => openModal(card.dataset.group));
+
+  // Inject mini standings table above card footer
+  const g  = card.dataset.group;
+  const el = document.createElement('div');
+  el.className = 'standings-mini';
+  el.dataset.group = g;
+  card.insertBefore(el, card.querySelector('.card-footer'));
+  el.innerHTML = renderStandingsMini(computeStandings(g), g);
+});
 document.getElementById('modalClose').addEventListener('click', closeModal);
 document.getElementById('overlay').addEventListener('click', e => {
   if (e.target === document.getElementById('overlay')) closeModal();
