@@ -3,6 +3,7 @@
 // ═══════════════════════════════════════════════════════════
 let selectedCities = new Set();
 let selectedDates  = new Set();
+let selectedTeam   = null;
 
 // ═══════════════════════════════════════════════════════════
 //  FILTER LOGIC
@@ -11,8 +12,9 @@ function applyFilter() {
   let anyVisible = false;
 
   document.querySelectorAll('.sched-card').forEach(card => {
-    const show = selectedCities.size === 0 || selectedCities.has(card.dataset.city);
-    card.style.display = show ? '' : 'none';
+    const cityOk = selectedCities.size === 0 || selectedCities.has(card.dataset.city);
+    const teamOk = !selectedTeam || card.dataset.home === selectedTeam || card.dataset.away === selectedTeam;
+    card.style.display = (cityOk && teamOk) ? '' : 'none';
   });
 
   document.querySelectorAll('.schedule-day').forEach(day => {
@@ -110,7 +112,7 @@ function schedCardHtml(m) {
   const pinIcon   = `<svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>`;
 
   return `
-    <div class="sched-card" data-city="${city}">
+    <div class="sched-card" data-city="${city}" data-home="${m.home}" data-away="${m.away}">
       <div class="sched-top">
         <span class="group-pill" style="background:${accent}">${pill}</span>
         <span class="sched-time">${clockIcon}${localTime} ${tz}</span>
@@ -136,6 +138,7 @@ function schedCardHtml(m) {
 function buildSchedule() {
   selectedCities = new Set();
   selectedDates  = new Set();
+  selectedTeam   = null;
 
   const byDate = {};
   ALL_MATCHES.forEach(m => (byDate[m.dateISO] = byDate[m.dateISO] || []).push(m));
@@ -230,14 +233,36 @@ function buildSchedule() {
 
   const filterCityLabel = LANG === 'zh' ? '按城市筛选' : 'Filter by City';
   const filterDateLabel = LANG === 'zh' ? '日期' : 'Date';
+  const filterTeamLabel = LANG === 'zh' ? '球队' : 'Team';
   const allCitiesLabel  = LANG === 'zh' ? '全部城市' : 'All Cities';
   const allDatesLabel   = LANG === 'zh' ? '全部日期' : 'All Dates';
+  const allTeamsLabel   = LANG === 'zh' ? '全部球队' : 'All Teams';
   const selectAllLabel  = LANG === 'zh' ? '全选' : 'Select All';
   const clearAllLabel   = LANG === 'zh' ? '清除全部' : 'Clear All';
   const noResultsText   = LANG === 'zh' ? '没有符合条件的比赛。' : 'No matches found for the selected filters.';
 
+  const teamList = [...new Set(
+    ALL_MATCHES.flatMap(m => [m.home, m.away])
+      .filter(t => !/^(1st|2nd|3rd|W |L )/.test(t))
+  )].sort((a, b) => {
+    const na = LANG === 'zh' ? (TEAM_NAMES_ZH[a] || a) : a;
+    const nb = LANG === 'zh' ? (TEAM_NAMES_ZH[b] || b) : b;
+    return na.localeCompare(nb);
+  });
+  const teamOptionsHtml = teamList.map(t => {
+    const name = LANG === 'zh' ? (TEAM_NAMES_ZH[t] || t) : t;
+    return `<option value="${t}">${name}</option>`;
+  }).join('');
+
   container.innerHTML = `
     <div class="filter-row">
+      <span class="filter-label">${filterTeamLabel}</span>
+      <div class="team-select-wrapper">
+        <select id="teamSelect" class="team-select">
+          <option value="">${allTeamsLabel}</option>
+          ${teamOptionsHtml}
+        </select>
+      </div>
       <span class="filter-label">${filterCityLabel}</span>
       <div class="dropdown-wrapper" id="dropdownWrapper">
         <button class="dropdown-trigger" id="dropdownTrigger">
@@ -362,6 +387,13 @@ function buildSchedule() {
     selectedDates.delete(iso);
     const cell = calPanel.querySelector(`.cal-match[data-iso="${iso}"]`);
     if (cell) cell.classList.remove('cal-selected');
+    applyFilter();
+  });
+
+  // ── Team select ───────────────────────────────────────────
+  document.getElementById('teamSelect').addEventListener('change', e => {
+    selectedTeam = e.target.value || null;
+    e.target.classList.toggle('has-selection', !!selectedTeam);
     applyFilter();
   });
 }
