@@ -3,7 +3,7 @@
 // ═══════════════════════════════════════════════════════════
 let selectedCities = new Set();
 let selectedDates  = new Set();
-let selectedTeam   = null;
+let selectedTeams  = new Set();
 
 // ═══════════════════════════════════════════════════════════
 //  FILTER LOGIC
@@ -13,7 +13,7 @@ function applyFilter() {
 
   document.querySelectorAll('.sched-card').forEach(card => {
     const cityOk = selectedCities.size === 0 || selectedCities.has(card.dataset.city);
-    const teamOk = !selectedTeam || card.dataset.home === selectedTeam || card.dataset.away === selectedTeam;
+    const teamOk = selectedTeams.size === 0 || selectedTeams.has(card.dataset.home) || selectedTeams.has(card.dataset.away);
     card.style.display = (cityOk && teamOk) ? '' : 'none';
   });
 
@@ -42,6 +42,8 @@ function applyFilter() {
   updateCityTags();
   updateCalTriggerLabel();
   updateDateTags();
+  updateTeamTriggerLabel();
+  updateTeamTags();
 }
 
 // ── City dropdown label & tags ────────────────────────────
@@ -66,6 +68,32 @@ function updateCityTags() {
   container.innerHTML = [...selectedCities].map(city => `
     <span class="selected-tag">${cityName(city)}<span class="tag-remove" data-city="${city}">&#x2715;</span></span>
   `).join('');
+}
+
+// ── Team dropdown label & tags ────────────────────────────
+function updateTeamTriggerLabel() {
+  const trigger = document.getElementById('teamDropdownTrigger');
+  const label   = document.getElementById('teamDropdownLabel');
+  if (!trigger || !label) return;
+  if (selectedTeams.size === 0) {
+    label.textContent = LANG === 'zh' ? '全部球队' : 'All Teams';
+    trigger.classList.remove('has-selection');
+  } else {
+    label.textContent = selectedTeams.size === 1
+      ? (LANG === 'zh' ? (TEAM_NAMES_ZH[[...selectedTeams][0]] || [...selectedTeams][0]) : [...selectedTeams][0])
+      : (LANG === 'zh' ? `已选 ${selectedTeams.size} 支球队` : `${selectedTeams.size} teams selected`);
+    trigger.classList.add('has-selection');
+  }
+}
+
+function updateTeamTags() {
+  const container = document.getElementById('selectedTeamTags');
+  if (!container) return;
+  container.innerHTML = [...selectedTeams].map(t => {
+    const name = LANG === 'zh' ? (TEAM_NAMES_ZH[t] || t) : t;
+    const fl   = FLAGS[t] ? `<img src="https://flagcdn.com/w40/${FLAGS[t]}.png" style="width:16px;height:11px;object-fit:cover;border-radius:1px;margin-right:4px;vertical-align:middle" alt="">` : '';
+    return `<span class="selected-tag">${fl}${name}<span class="tag-remove team-tag-remove" data-team="${t}">&#x2715;</span></span>`;
+  }).join('');
 }
 
 // ── Calendar trigger label & date tags ───────────────────
@@ -138,7 +166,7 @@ function schedCardHtml(m) {
 function buildSchedule() {
   selectedCities = new Set();
   selectedDates  = new Set();
-  selectedTeam   = null;
+  selectedTeams  = new Set();
 
   const byDate = {};
   ALL_MATCHES.forEach(m => (byDate[m.dateISO] = byDate[m.dateISO] || []).push(m));
@@ -249,20 +277,17 @@ function buildSchedule() {
     const nb = LANG === 'zh' ? (TEAM_NAMES_ZH[b] || b) : b;
     return na.localeCompare(nb);
   });
-  const teamOptionsHtml = teamList.map(t => {
+  const teamCheckboxHtml = teamList.map(t => {
     const name = LANG === 'zh' ? (TEAM_NAMES_ZH[t] || t) : t;
-    return `<option value="${t}">${name}</option>`;
+    const fl   = FLAGS[t] ? `<img src="https://flagcdn.com/w40/${FLAGS[t]}.png" class="team-option-flag" alt="">` : '';
+    return `<label class="city-option">
+      <input type="checkbox" class="team-cb" value="${t}">
+      ${fl}<span class="city-name">${name}</span>
+    </label>`;
   }).join('');
 
   container.innerHTML = `
     <div class="filter-row">
-      <span class="filter-label">${filterTeamLabel}</span>
-      <div class="team-select-wrapper">
-        <select id="teamSelect" class="team-select">
-          <option value="">${allTeamsLabel}</option>
-          ${teamOptionsHtml}
-        </select>
-      </div>
       <span class="filter-label">${filterCityLabel}</span>
       <div class="dropdown-wrapper" id="dropdownWrapper">
         <button class="dropdown-trigger" id="dropdownTrigger">
@@ -294,6 +319,26 @@ function buildSchedule() {
     <div class="selected-tags" id="selectedTags"></div>
     ${calPanelHtml}
     <div class="selected-tags" id="selectedDateTags"></div>
+    <div class="filter-row">
+      <span class="filter-label">${filterTeamLabel}</span>
+      <div class="dropdown-wrapper" id="teamDropdownWrapper">
+        <button class="dropdown-trigger" id="teamDropdownTrigger">
+          <span class="trigger-left">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+            <span id="teamDropdownLabel">${allTeamsLabel}</span>
+          </span>
+          <svg class="chevron" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="dropdown-panel team-dropdown-panel" id="teamDropdownPanel">
+          <div class="dropdown-actions">
+            <button class="dd-action" id="teamDdSelectAll">${selectAllLabel}</button>
+            <button class="dd-action" id="teamDdClearAll">${clearAllLabel}</button>
+          </div>
+          ${teamCheckboxHtml}
+        </div>
+      </div>
+    </div>
+    <div class="selected-tags" id="selectedTeamTags"></div>
     ${daysHtml}
     <div class="no-results" id="noResults" style="display:none">${noResultsText}</div>
   `;
@@ -390,10 +435,40 @@ function buildSchedule() {
     applyFilter();
   });
 
-  // ── Team select ───────────────────────────────────────────
-  document.getElementById('teamSelect').addEventListener('change', e => {
-    selectedTeam = e.target.value || null;
-    e.target.classList.toggle('has-selection', !!selectedTeam);
+  // ── Team dropdown ─────────────────────────────────────────
+  const teamTrigger = document.getElementById('teamDropdownTrigger');
+  const teamPanel   = document.getElementById('teamDropdownPanel');
+
+  teamTrigger.addEventListener('click', e => {
+    e.stopPropagation();
+    const open = teamPanel.classList.toggle('open');
+    teamTrigger.classList.toggle('open', open);
+  });
+  document.addEventListener('click', e => {
+    const w = document.getElementById('teamDropdownWrapper');
+    if (w && !w.contains(e.target)) { teamPanel.classList.remove('open'); teamTrigger.classList.remove('open'); }
+  });
+  document.getElementById('teamDdSelectAll').addEventListener('click', () => {
+    container.querySelectorAll('.team-cb').forEach(cb => { cb.checked = true; selectedTeams.add(cb.value); });
+    applyFilter();
+  });
+  document.getElementById('teamDdClearAll').addEventListener('click', () => {
+    container.querySelectorAll('.team-cb').forEach(cb => cb.checked = false);
+    selectedTeams.clear(); applyFilter();
+  });
+  container.addEventListener('change', e => {
+    if (e.target.classList.contains('team-cb')) {
+      e.target.checked ? selectedTeams.add(e.target.value) : selectedTeams.delete(e.target.value);
+      applyFilter();
+    }
+  });
+  document.getElementById('selectedTeamTags').addEventListener('click', e => {
+    const btn = e.target.closest('.team-tag-remove');
+    if (!btn) return;
+    const team = btn.dataset.team;
+    selectedTeams.delete(team);
+    const cb = container.querySelector(`.team-cb[value="${CSS.escape(team)}"]`);
+    if (cb) cb.checked = false;
     applyFilter();
   });
 }
