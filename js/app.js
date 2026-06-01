@@ -585,7 +585,19 @@ function renderMatchdayStrip() {
   });
 
   if (!live.length && !today.length && !tomorrow.length) {
-    strip.style.display = 'none';
+    // No matches today/tomorrow — find the next upcoming match day
+    const future = ALL_MATCHES
+      .filter(m => m.dateISO > todayISO)
+      .sort((a, b) => a.dateISO.localeCompare(b.dateISO));
+    if (!future.length) { strip.style.display = 'none'; return; }
+    const nextISO = future[0].dateISO;
+    const nextMatches = future.filter(m => m.dateISO === nextISO);
+    const dateLbl = fmtDateL(nextISO);
+    strip.style.display = '';
+    strip.innerHTML = `<div class="mds-section">
+      <span class="mds-label mds-label-upcoming">${dateLbl}</span>
+      ${nextMatches.map(m => mdsCard(m, 'upcoming')).join('')}
+    </div>`;
     return;
   }
 

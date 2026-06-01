@@ -846,6 +846,7 @@ footer { text-align:center; padding:20px; font-size:.8rem; color:#9ca3af; border
 @keyframes mds-pulse { 0%,100%{opacity:1} 50%{opacity:.2} }
 .mds-label-today    { color: #4f46e5; }
 .mds-label-tomorrow { color: #9ca3af; }
+.mds-label-upcoming { color: #0ea5e9; }
 
 .mds-card {
   flex-shrink: 0; background: #fff; border: 1px solid rgba(99,102,241,.15);
@@ -1255,6 +1256,7 @@ body.night .matchday-strip { background: rgba(9,29,56,.92); border-bottom-color:
 body.night .mds-divider    { background: rgba(255,255,255,.08); }
 body.night .mds-label-today    { color: #818cf8; }
 body.night .mds-label-tomorrow { color: #546e7a; }
+body.night .mds-label-upcoming { color: #38bdf8; }
 body.night .mds-card      { background: #141829; border-color: #242d4e; }
 body.night .mds-card-live { background: rgba(127,29,29,.25); border-color: rgba(239,68,68,.3); }
 body.night .mds-tname { color: #e0e4f0; }
