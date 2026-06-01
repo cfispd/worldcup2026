@@ -124,6 +124,29 @@ ALL_MATCHES.filter(m => m.group).forEach(m => {
 const QUALIFY_CLASS  = ['sq1','sq2','sq3','sq4'];
 const HOST_NATIONS   = new Set(['Mexico', 'United States', 'Canada']);
 
+function tournamentHasStarted() {
+  return localDateISO(0) >= '2026-06-10';
+}
+
+function renderTeamListMini(groupKey) {
+  const z = LANG === 'zh';
+  const teams = [];
+  (MATCHES_BY_GROUP[groupKey] || []).forEach(m => {
+    if (!teams.includes(m.home)) teams.push(m.home);
+    if (!teams.includes(m.away)) teams.push(m.away);
+  });
+  const rows = teams.map((t, i) => {
+    const fl   = FLAGS[t] ? `<img src="https://flagcdn.com/w40/${FLAGS[t]}.png" alt="" class="sm-flag">` : '';
+    const nm   = z ? (TEAM_NAMES_ZH[t] || t) : t;
+    const host = HOST_NATIONS.has(t) ? `<span class="sm-host">${z?'主办':'HOST'}</span>` : '';
+    return `<tr class="${QUALIFY_CLASS[i]||''}">
+      <td class="smt-pos ${QUALIFY_CLASS[i]||''}">${i+1}</td>
+      <td class="smt-team"><div class="smt-team-inner">${fl}<span class="sm-name">${nm}</span>${host}</div></td>
+    </tr>`;
+  }).join('');
+  return `<table class="sm-table"><tbody>${rows}</tbody></table>`;
+}
+
 function renderStandingsMini(rows, groupKey) {
   const z = LANG === 'zh';
   const thead = `<thead><tr>
@@ -228,6 +251,50 @@ function openModal(groupKey) {
 function closeModal() {
   document.getElementById('overlay').classList.remove('open');
   document.body.style.overflow = '';
+  document.querySelector('.standings-section').style.display = '';
+}
+
+function openMatchModal(m) {
+  const z = LANG === 'zh';
+  const accent = m.group ? GROUP_ACCENT[m.group] : (ROUND_ACCENT[m.round] || '#555');
+  const label  = m.group
+    ? (z ? `${m.group}组` : `Group ${m.group}`)
+    : (z ? ROUND_LABEL_ZH[m.round] : ROUND_LABEL[m.round]) || m.round || '';
+
+  document.getElementById('modalLetter').textContent      = m.group || '🏆';
+  document.getElementById('modalLetter').style.background = accent;
+  document.getElementById('modalLetter').style.color      = '#fff';
+  document.getElementById('modalTitle').textContent       = `${teamName(m.home)} vs ${teamName(m.away)}`;
+  document.getElementById('modalSubtitle').textContent    = label;
+
+  document.querySelector('.standings-section').style.display = 'none';
+  document.getElementById('matchScheduleH3').textContent = z ? '比赛信息' : 'Match Info';
+
+  const calIcon = `<svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>`;
+  const clkIcon = `<svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>`;
+  const pinIcon = `<svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>`;
+
+  document.getElementById('matchList').innerHTML = `
+    <div class="match-card">
+      <div class="match-teams">
+        <div class="match-team">${flagImg(m.home)}<span>${teamName(m.home)}</span></div>
+        <span class="match-vs">VS</span>
+        <div class="match-team right"><span>${teamName(m.away)}</span>${flagImg(m.away)}</div>
+      </div>
+      <div class="match-meta">
+        <span class="meta-item">${calIcon} ${fmtDateL(m.dateISO)}, 2026</span>
+        <span class="meta-item">${clkIcon} ${toUserLocalTime(m.time, m.dateISO)} ${userTzLabel()}</span>
+        <span class="meta-item">${pinIcon} <span class="venue-stadium">${m.venue.split(',')[0].trim()}</span><span class="venue-sep"> · </span><span class="venue-city">${cityName(getCity(m.venue))}, ${countryName(getCountry(m.venue))}</span></span>
+      </div>
+      <div class="card-links">
+        <a href="${getStubHubUrl(m)}" class="card-link-btn card-ticket-btn" target="_blank" rel="noopener">🎫 ${z ? '购票' : 'Tickets'}</a>
+        <a href="${getBookingUrl(m.venue, m.dateISO)}" class="card-link-btn card-hotel-btn" target="_blank" rel="noopener">🏨 ${z ? '酒店' : 'Hotel'}</a>
+        <a href="#" class="card-link-btn card-flight-btn" onclick="openFlightLink('${getCity(m.venue)}','${m.dateISO}');return false;">✈️ ${z ? '机票' : 'Flights'}</a>
+      </div>
+    </div>`;
+
+  document.getElementById('overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
 }
 
 document.querySelectorAll('.group-card').forEach(card => {
@@ -239,7 +306,9 @@ document.querySelectorAll('.group-card').forEach(card => {
   el.className = 'standings-mini';
   el.dataset.group = g;
   card.insertBefore(el, card.querySelector('.card-footer'));
-  el.innerHTML = renderStandingsMini(computeStandings(g), g);
+  el.innerHTML = tournamentHasStarted()
+    ? renderStandingsMini(computeStandings(g), g)
+    : renderTeamListMini(g);
 });
 document.getElementById('modalClose').addEventListener('click', closeModal);
 document.getElementById('overlay').addEventListener('click', e => {
@@ -554,7 +623,7 @@ function mdsCard(m, status) {
   const watchBtn = showWatch
     ? `<a class="mds-watch" href="${watchUrl()}" target="_blank" rel="noopener" title="${z?'观看直播':'Watch Live'}">${playIcon}</a>`
     : '';
-  return `<div class="mds-card${extraClass}">
+  return `<div class="mds-card${extraClass}" data-matchkey="${m.dateISO}|${m.home}|${m.away}" style="cursor:pointer">
     <div class="mds-card-info">
       <div class="mds-top"><span class="mds-gpill" style="background:${accent}">${pill}</span>${badge}</div>
       <div class="mds-matchup">
@@ -684,7 +753,9 @@ async function fetchScores() {
 
     // ── 3. Re-render affected UI ─────────────────────────────
     document.querySelectorAll('.standings-mini[data-group]').forEach(el => {
-      el.innerHTML = renderStandingsMini(computeStandings(el.dataset.group), el.dataset.group);
+      el.innerHTML = tournamentHasStarted()
+        ? renderStandingsMini(computeStandings(el.dataset.group), el.dataset.group)
+        : renderTeamListMini(el.dataset.group);
     });
     renderMatchdayStrip();
     buildBracket();   // refresh bracket with resolved names & scores
@@ -693,6 +764,16 @@ async function fetchScores() {
     }
   } catch { /* silently ignore network/parse errors */ }
 }
+
+// Matchday strip click → ticket/hotel/flight modal
+document.getElementById('matchday-strip').addEventListener('click', e => {
+  if (e.target.closest('.mds-watch')) return;
+  const card = e.target.closest('.mds-card[data-matchkey]');
+  if (!card) return;
+  const [dateISO, home, away] = card.dataset.matchkey.split('|');
+  const m = ALL_MATCHES.find(x => x.dateISO === dateISO && x.home === home && x.away === away);
+  if (m) openMatchModal(m);
+});
 
 // Poll every 60 s — agent writes every ~10 min, 60 s keeps UI crisp
 fetchScores();
