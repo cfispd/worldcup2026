@@ -95,43 +95,35 @@ def fetch_scores(matches):
         for m in matches
     )
 
-    prompt = f"""You must search the web RIGHT NOW for live or final FIFA World Cup 2026 scores.
+    prompt = f"""Search the web for the current FIFA World Cup 2026 scores for these matches.
+Search each match by name, e.g. "{matches[0]['home']} vs {matches[0]['away']} World Cup 2026 score".
 
-Matches to look up:
 {lines}
 
-Search strategy — do ALL of the following searches:
-1. Search "FIFA World Cup 2026 live scores today" for an overview
-2. For each match above, search "[Team A] vs [Team B] score 2026 World Cup" individually
-3. Check ESPN, BBC Sport, or Google search results for real-time scoreboards
+CRITICAL rules:
+- 0-0 is a valid score: use homeScore=0, awayScore=0 — NOT null
+- homeScore/awayScore = null ONLY if the match has not started yet
+- status = "live" if in progress, "finished" if full time confirmed, "upcoming" if not started
+- minute = current match minute, or null
 
-CRITICAL scoring rules:
-- A score of 0-0 is VALID — use homeScore=0, awayScore=0, NOT null
-- homeScore/awayScore = null ONLY if the match has not kicked off yet
-- status = "live" if the match is currently in progress (any minute 1–120)
-- status = "finished" if full time or extra time has been confirmed
-- status = "upcoming" if not started yet
-- minute = the current match minute shown on the scoreboard, or null
-
-Return ONLY a raw JSON object (no markdown, no explanation):
+Return ONLY a raw JSON object (no markdown):
 {{
   "<key>": {{
     "homeScore": <integer or null>,
     "awayScore": <integer or null>,
     "status": "live" | "finished" | "upcoming",
     "minute": <integer or null>
-  }},
-  ...
+  }}
 }}
 """
 
     response = client.messages.create(
-        model="claude-sonnet-4-6",
-        max_tokens=2048,
+        model="claude-haiku-4-5-20251001",
+        max_tokens=1024,
         tools=[{
             "type": "web_search_20250305",
             "name": "web_search",
-            "max_uses": 12
+            "max_uses": 6
         }],
         messages=[{"role": "user", "content": prompt}]
     )
