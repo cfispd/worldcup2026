@@ -91,40 +91,47 @@ def match_key(m):
 def fetch_scores(matches):
     """Ask Claude to search the web for current scores."""
     lines = "\n".join(
-        f"- {m['home']} vs {m['away']}  |  date: {m['dateISO']}  |  key: \"{match_key(m)}\""
+        f"- {m['home']} vs {m['away']}  (date: {m['dateISO']}, key: \"{match_key(m)}\")"
         for m in matches
     )
 
-    prompt = f"""Search the web for the latest FIFA World Cup 2026 scores for these matches:
+    prompt = f"""You must search the web RIGHT NOW for live or final FIFA World Cup 2026 scores.
 
+Matches to look up:
 {lines}
 
-Return ONLY a JSON object — no prose, no markdown fences — using exactly this schema:
+Search strategy — do ALL of the following searches:
+1. Search "FIFA World Cup 2026 live scores today" for an overview
+2. For each match above, search "[Team A] vs [Team B] score 2026 World Cup" individually
+3. Check ESPN, BBC Sport, or Google search results for real-time scoreboards
 
+CRITICAL scoring rules:
+- A score of 0-0 is VALID — use homeScore=0, awayScore=0, NOT null
+- homeScore/awayScore = null ONLY if the match has not kicked off yet
+- status = "live" if the match is currently in progress (any minute 1–120)
+- status = "finished" if full time or extra time has been confirmed
+- status = "upcoming" if not started yet
+- minute = the current match minute shown on the scoreboard, or null
+
+Return ONLY a raw JSON object (no markdown, no explanation):
 {{
-  "<key as shown above>": {{
+  "<key>": {{
     "homeScore": <integer or null>,
     "awayScore": <integer or null>,
     "status": "live" | "finished" | "upcoming",
     "minute": <integer or null>
-  }}
+  }},
+  ...
 }}
-
-Rules:
-- Use the exact key strings provided (dateISO|HomeTeam|AwayTeam).
-- Set homeScore/awayScore to null if the match has not kicked off yet.
-- Set status to "finished" when full time has been confirmed.
-- Set status to "live" while the match is in progress.
-- minute should be the current match minute (1-90+), or null.
 """
 
     response = client.messages.create(
-        model="claude-haiku-4-5-20251001",
-        max_tokens=1024,
+        model="claude-sonnet-4-6",
+        max_tokens=2048,
         tools=[{
             "type": "web_search_20250305",
             "name": "web_search",
-            "max_uses": 5
+            "max_uses": 12
         }],
         messages=[{"role": "user", "content": prompt}]
     )
@@ -134,19 +141,19 @@ Rules:
         block.text for block in response.content
         if hasattr(block, "text")
     )
+    print(f"  Claude response preview: {text[:300]}")
 
     # Extract the first JSON object from the response
     json_match = re.search(r"\{[\s\S]*\}", text)
     if not json_match:
         print("⚠️  No JSON found in Claude response.")
-        print("Response:", text[:500])
         return {}
 
     try:
         return json.loads(json_match.group())
     except json.JSONDecodeError as e:
         print(f"⚠️  JSON parse error: {e}")
-        print("Raw:", json_match.group()[:500])
+        print("Raw:", json_match.group()[:300])
         return {}
 
 

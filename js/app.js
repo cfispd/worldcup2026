@@ -731,8 +731,8 @@ async function fetchScores() {
       ALL_MATCHES.forEach(m => {
         const key   = `${m.dateISO}|${m.home}|${m.away}`;
         const score = data.matches[key];
-        if (!score || score.homeScore == null) return;
-        if (m.homeScore !== score.homeScore || m.awayScore !== score.awayScore) {
+        if (!score || score.status === 'upcoming') return;
+        if (m.homeScore !== score.homeScore || m.awayScore !== score.awayScore || m.matchStatus !== score.status) {
           m.homeScore   = score.homeScore;
           m.awayScore   = score.awayScore;
           m.matchStatus = score.status;
