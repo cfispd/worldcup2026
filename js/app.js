@@ -568,7 +568,10 @@ function mdsStartUTC(dateISO, timeET) {
 
 function mdsStatus(m, todayISO) {
   if (m.dateISO !== todayISO) return null;
-  if (typeof m.homeScore === 'number') return 'finished';
+  // Prioritise confirmed status from scores.json
+  if (m.matchStatus === 'finished') return 'finished';
+  if (m.matchStatus === 'live')     return 'live';
+  // No confirmed status — fall back to time-based detection
   const start = mdsStartUTC(m.dateISO, m.time);
   if (!start) return 'upcoming';
   const diff = (Date.now() - start) / 60000;
@@ -618,7 +621,7 @@ function mdsCard(m, status) {
 
   const start    = mdsStartUTC(m.dateISO, m.time);
   const diffMin  = start ? (Date.now() - start) / 60000 : null;
-  const showWatch = diffMin !== null && diffMin >= -60 && diffMin <= 180;
+  const showWatch = status === 'live';
   const playIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>`;
   const watchBtn = showWatch
     ? `<a class="mds-watch" href="${watchUrl()}" target="_blank" rel="noopener" title="${z?'观看直播':'Watch Live'}">${playIcon}</a>`
