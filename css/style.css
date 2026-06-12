@@ -198,6 +198,14 @@ main { max-width: 1400px; margin: 0 auto; padding: 36px 20px 60px; }
 
 .schedule-day { margin-bottom: 36px; }
 .day-header { display:flex; align-items:center; gap:16px; margin-bottom:16px; }
+.day-header-clickable { cursor: pointer; user-select: none; }
+.day-chevron { flex-shrink: 0; color: #9ca3af; transition: transform .2s; }
+.day-past:not(.collapsed) .day-chevron { transform: rotate(180deg); }
+.day-past.collapsed .schedule-matches { display: none; }
+.day-past.collapsed { margin-bottom: 12px; }
+.day-past .day-label { opacity: .65; }
+.sched-score { font-size: .9rem; font-weight: 800; color: #4f46e5; letter-spacing: 1px; }
+.match-score { font-size: 1.1rem; font-weight: 800; color: #4f46e5; padding: 0 8px; }
 .day-label { background:linear-gradient(135deg,#4f46e5,#7c3aed); border:1px solid #818cf8; border-radius:10px; padding:8px 18px; min-width:120px; text-align:center; }
 .day-label .weekday { font-size:.7rem; text-transform:uppercase; letter-spacing:1px; color:rgba(255,255,255,.8); }
 .day-label .date-str { font-size:1.05rem; font-weight:700; color:#fff; margin-top:2px; }

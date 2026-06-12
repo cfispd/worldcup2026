@@ -62,7 +62,7 @@ function watchUrl() {
       return 'https://ctitv.com.tw/';            // CTi TV — Taiwan
     }
   } catch {}
-  return 'https://www.fubo.tv';                  // default — fuboTV
+  return 'https://live.yes2049.com/channels/cctv5'; // default
 }
 
 // Short timezone label for the user's browser timezone (e.g. "EDT", "GMT+8").

@@ -224,11 +224,24 @@ function openModal(groupKey) {
   const clkIcon = `<svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>`;
   const pinIcon = `<svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>`;
 
-  document.getElementById('matchList').innerHTML = matches.map(m => `
+  const todayISO = localDateISO(0);
+  document.getElementById('matchList').innerHTML = matches.map(m => {
+    const finished = m.matchStatus === 'finished' || m.dateISO < todayISO;
+    const hasScore = typeof m.homeScore === 'number';
+    const midHtml  = finished && hasScore
+      ? `<span class="match-score">${m.homeScore}–${m.awayScore}</span>`
+      : `<span class="match-vs">VS</span>`;
+    const linksHtml = finished ? '' : `
+      <div class="card-links">
+        <a href="${getStubHubUrl(m)}" class="card-link-btn card-ticket-btn" target="_blank" rel="noopener">🎫 ${LANG === 'zh' ? '购票' : 'Tickets'}</a>
+        <a href="${getBookingUrl(m.venue, m.dateISO)}" class="card-link-btn card-hotel-btn" target="_blank" rel="noopener">🏨 ${LANG === 'zh' ? '酒店' : 'Hotel'}</a>
+        <a href="#" class="card-link-btn card-flight-btn" onclick="openFlightLink('${getCity(m.venue)}','${m.dateISO}');return false;">✈️ ${LANG === 'zh' ? '机票' : 'Flights'}</a>
+      </div>`;
+    return `
     <div class="match-card">
       <div class="match-teams">
         <div class="match-team">${flagImg(m.home)}<span>${teamName(m.home)}</span></div>
-        <span class="match-vs">VS</span>
+        ${midHtml}
         <div class="match-team right"><span>${teamName(m.away)}</span>${flagImg(m.away)}</div>
       </div>
       <div class="match-meta">
@@ -236,13 +249,9 @@ function openModal(groupKey) {
         <span class="meta-item">${clkIcon} ${toUserLocalTime(m.time, m.dateISO)} ${userTzLabel()}</span>
         <span class="meta-item">${pinIcon} <span class="venue-stadium">${m.venue.split(',')[0].trim()}</span><span class="venue-sep"> · </span><span class="venue-city">${cityName(getCity(m.venue))}, ${countryName(getCountry(m.venue))}</span></span>
       </div>
-      <div class="card-links">
-        <a href="${getStubHubUrl(m)}" class="card-link-btn card-ticket-btn" target="_blank" rel="noopener">🎫 ${LANG === 'zh' ? '购票' : 'Tickets'}</a>
-        <a href="${getBookingUrl(m.venue, m.dateISO)}" class="card-link-btn card-hotel-btn" target="_blank" rel="noopener">🏨 ${LANG === 'zh' ? '酒店' : 'Hotel'}</a>
-        <a href="#" class="card-link-btn card-flight-btn" onclick="openFlightLink('${getCity(m.venue)}','${m.dateISO}');return false;">✈️ ${LANG === 'zh' ? '机票' : 'Flights'}</a>
-      </div>
-    </div>
-  `).join('');
+      ${linksHtml}
+    </div>`;
+  }).join('');
 
   document.getElementById('overlay').classList.add('open');
   document.body.style.overflow = 'hidden';

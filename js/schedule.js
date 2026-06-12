@@ -38,6 +38,14 @@ function applyFilter() {
   });
 
   document.getElementById('noResults').style.display = anyVisible ? 'none' : '';
+
+  // Auto-expand past days that have visible matches when a filter is active
+  const hasFilter = selectedCities.size > 0 || selectedDates.size > 0 || selectedTeams.size > 0;
+  document.querySelectorAll('.day-past').forEach(day => {
+    const hasVisible = [...day.querySelectorAll('.sched-card')].some(c => c.style.display !== 'none');
+    if (hasFilter && hasVisible) day.classList.remove('collapsed');
+    else if (!hasFilter && day.style.display !== 'none') day.classList.add('collapsed');
+  });
   updateCityTriggerLabel();
   updateCityTags();
   updateCalTriggerLabel();
@@ -139,23 +147,30 @@ function schedCardHtml(m) {
   const clockIcon = `<svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="display:inline;vertical-align:middle;margin-right:3px"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>`;
   const pinIcon   = `<svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>`;
 
-  return `
-    <div class="sched-card" data-city="${city}" data-home="${m.home}" data-away="${m.away}">
-      <div class="sched-top">
-        <span class="group-pill" style="background:${accent}">${pill}</span>
-        <span class="sched-time">${clockIcon}${localTime} ${tz}</span>
-      </div>
-      <div class="sched-teams">
-        <div class="sched-team">${f1}<span>${teamName(m.home)}</span></div>
-        <span class="sched-vs">VS</span>
-        <div class="sched-team right"><span>${teamName(m.away)}</span>${f2}</div>
-      </div>
-      <div class="sched-venue">${pinIcon} <span class="venue-stadium">${stadium}</span><span class="venue-sep"> · </span><span class="venue-city">${cityName(city)}, ${countryName(country)}</span></div>
+  const finished  = m.matchStatus === 'finished' || m.dateISO < localDateISO(0);
+  const hasScore  = typeof m.homeScore === 'number';
+  const scoreStr  = finished && hasScore ? `${m.homeScore}–${m.awayScore}` : null;
+  const linksHtml = finished ? '' : `
       <div class="card-links">
         <a href="${getStubHubUrl(m)}" class="card-link-btn card-ticket-btn" target="_blank" rel="noopener">🎫 ${LANG === 'zh' ? '购票' : 'Tickets'}</a>
         <a href="${getBookingUrl(m.venue, m.dateISO)}" class="card-link-btn card-hotel-btn" target="_blank" rel="noopener">🏨 ${LANG === 'zh' ? '酒店' : 'Hotel'}</a>
         <a href="#" class="card-link-btn card-flight-btn" onclick="openFlightLink('${city}','${m.dateISO}');return false;">✈️ ${LANG === 'zh' ? '机票' : 'Flights'}</a>
+      </div>`;
+  return `
+    <div class="sched-card" data-city="${city}" data-home="${m.home}" data-away="${m.away}">
+      <div class="sched-top">
+        <span class="group-pill" style="background:${accent}">${pill}</span>
+        ${scoreStr
+          ? `<span class="sched-score">${scoreStr}</span>`
+          : `<span class="sched-time">${clockIcon}${localTime} ${tz}</span>`}
       </div>
+      <div class="sched-teams">
+        <div class="sched-team">${f1}<span>${teamName(m.home)}</span></div>
+        <span class="sched-vs">${scoreStr ? scoreStr : 'VS'}</span>
+        <div class="sched-team right"><span>${teamName(m.away)}</span>${f2}</div>
+      </div>
+      <div class="sched-venue">${pinIcon} <span class="venue-stadium">${stadium}</span><span class="venue-sep"> · </span><span class="venue-city">${cityName(city)}, ${countryName(country)}</span></div>
+      ${linksHtml}
     </div>
   `;
 }
@@ -229,6 +244,8 @@ function buildSchedule() {
   </div>`;
 
   // ── Day blocks ────────────────────────────────────────────
+  const todayISO  = localDateISO(0);
+  const chevronSvg = `<svg class="day-chevron" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>`;
   let lastStage = null;
   const daysHtml = sorted.map(iso => {
     const matches = byDate[iso];
@@ -243,17 +260,20 @@ function buildSchedule() {
         </div>`;
     }
     lastStage = stage;
+    const isPast     = iso < todayISO;
+    const collapseCls = isPast ? ' day-past collapsed' : '';
     const n = matches.length;
     const countStr = LANG === 'zh' ? `${n}场比赛` : `${n} match${n !== 1 ? 'es' : ''}`;
     return `${divider}
-      <div class="schedule-day" data-day="${iso}">
-        <div class="day-header">
+      <div class="schedule-day${collapseCls}" data-day="${iso}">
+        <div class="day-header${isPast ? ' day-header-clickable' : ''}">
           <div class="day-label">
             <div class="weekday">${fmtWeekdayL(iso)}</div>
             <div class="date-str">${fmtDateL(iso)}</div>
           </div>
           <div class="day-divider"></div>
           <div class="day-count" id="count-${iso}">${countStr}</div>
+          ${isPast ? chevronSvg : ''}
         </div>
         <div class="schedule-matches">${matches.map(schedCardHtml).join('')}</div>
       </div>`;
@@ -433,6 +453,11 @@ function buildSchedule() {
     const cell = calPanel.querySelector(`.cal-match[data-iso="${iso}"]`);
     if (cell) cell.classList.remove('cal-selected');
     applyFilter();
+  });
+
+  // ── Collapsible past days ─────────────────────────────────
+  container.querySelectorAll('.day-past .day-header-clickable').forEach(header => {
+    header.addEventListener('click', () => header.closest('.day-past').classList.toggle('collapsed'));
   });
 
   // ── Team dropdown ─────────────────────────────────────────
