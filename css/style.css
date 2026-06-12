@@ -881,6 +881,7 @@ footer { text-align:center; padding:20px; font-size:.8rem; color:#9ca3af; border
 .mds-tname { font-size: .8rem; font-weight: 600; color: #1e2a5e; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 72px; }
 .mds-mid { font-size: .92rem; font-weight: 800; color: #1e2a5e; white-space: nowrap; flex-shrink: 0; padding: 0 2px; }
 .mds-city { font-size: .64rem; color: #9ca3af; margin-top: 1px; }
+.mds-commentary { font-size: .68rem; color: #4b5563; margin-top: 5px; line-height: 1.4; font-style: italic; border-top: 1px solid rgba(99,102,241,.08); padding-top: 5px; }
 .mds-watch {
   width: 42px; height: 42px; border-radius: 50%; flex-shrink: 0;
   background: linear-gradient(135deg, #f43f5e, #dc2626);
@@ -1275,6 +1276,7 @@ body.night .mds-mid   { color: #e0e4f0; }
 body.night .mds-time  { color: #90a4ae; }
 body.night .mds-ft    { color: #546e7a; }
 body.night .mds-city  { color: #546e7a; }
+body.night .mds-commentary { color: #6b7280; border-top-color: rgba(255,255,255,.06); }
 
 /* Flight picker night overrides */
 body.night .fp-dest-row { background: #1a2035; border-color: #2a3260; }

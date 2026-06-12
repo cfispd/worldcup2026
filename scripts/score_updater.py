@@ -105,6 +105,7 @@ CRITICAL rules:
 - homeScore/awayScore = null ONLY if the match has not started yet
 - status = "live" if in progress, "finished" if full time confirmed, "upcoming" if not started
 - minute = current match minute, or null
+- commentary = 1-2 sentences in English summarising the current match situation or final result (goals, key events). Empty string if not started.
 
 Return ONLY a raw JSON object (no markdown):
 {{
@@ -112,7 +113,8 @@ Return ONLY a raw JSON object (no markdown):
     "homeScore": <integer or null>,
     "awayScore": <integer or null>,
     "status": "live" | "finished" | "upcoming",
-    "minute": <integer or null>
+    "minute": <integer or null>,
+    "commentary": "<string>"
   }}
 }}
 """

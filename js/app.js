@@ -644,6 +644,7 @@ function mdsCard(m, status) {
         <div class="mds-team mds-team-r"><span class="mds-tname">${aName}</span>${aFlag}</div>
       </div>
       <div class="mds-city">${cityLbl}</div>
+      ${m.commentary && status !== 'upcoming' ? `<div class="mds-commentary">${m.commentary}</div>` : ''}
     </div>
     ${watchBtn}
   </div>`;
@@ -732,11 +733,12 @@ async function fetchScores() {
         const key   = `${m.dateISO}|${m.home}|${m.away}`;
         const score = data.matches[key];
         if (!score || score.status === 'upcoming') return;
-        if (m.homeScore !== score.homeScore || m.awayScore !== score.awayScore || m.matchStatus !== score.status) {
+        if (m.homeScore !== score.homeScore || m.awayScore !== score.awayScore || m.matchStatus !== score.status || m.commentary !== score.commentary) {
           m.homeScore   = score.homeScore;
           m.awayScore   = score.awayScore;
           m.matchStatus = score.status;
           m.matchMinute = score.minute ?? null;
+          m.commentary  = score.commentary || '';
           changed = true;
         }
         // Track winners for knockout resolution
