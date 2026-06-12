@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-12T19:26:10.763220+00:00",
+  "updated": "2026-06-12T21:16:31.182845+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -14,11 +14,11 @@
       "minute": null
     },
     "2026-06-12|Canada|Bosnia-Herzegovina": {
-      "homeScore": null,
-      "awayScore": null,
-      "status": "live",
+      "homeScore": 1,
+      "awayScore": 1,
+      "status": "finished",
       "minute": null,
-      "commentary": "Match is underway at BMO Field in Toronto with early action from both teams."
+      "commentary": "Canada and Bosnia and Herzegovina drew 1-1 in the first men's World Cup match on Canadian soil. Jovo Lukic gave Bosnia the lead in the 21st minute, and Cyle Larin equalized in the 78th minute."
     }
   },
   "bracket_teams": {}
