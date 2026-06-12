@@ -204,7 +204,8 @@ main { max-width: 1400px; margin: 0 auto; padding: 36px 20px 60px; }
 .day-past.collapsed .schedule-matches { display: none; }
 .day-past.collapsed { margin-bottom: 12px; }
 .day-past .day-label { opacity: .65; }
-.sched-score { font-size: .9rem; font-weight: 800; color: #4f46e5; letter-spacing: 1px; }
+.sched-score { font-size: 1.15rem; font-weight: 900; color: #4f46e5; letter-spacing: 1px; background: #ede9fe; padding: 2px 8px; border-radius: 6px; }
+.sched-vs.is-score { font-size: 1.5rem; font-weight: 900; color: #4f46e5; background: #ede9fe; padding: 4px 14px; border-radius: 8px; letter-spacing: 1px; }
 .match-score { font-size: 1.1rem; font-weight: 800; color: #4f46e5; padding: 0 8px; }
 .day-label { background:linear-gradient(135deg,#4f46e5,#7c3aed); border:1px solid #818cf8; border-radius:10px; padding:8px 18px; min-width:120px; text-align:center; }
 .day-label .weekday { font-size:.7rem; text-transform:uppercase; letter-spacing:1px; color:rgba(255,255,255,.8); }

@@ -42,9 +42,15 @@ function applyFilter() {
   // Auto-expand past days that have visible matches when a filter is active
   const hasFilter = selectedCities.size > 0 || selectedDates.size > 0 || selectedTeams.size > 0;
   document.querySelectorAll('.day-past').forEach(day => {
+    const sm = day.querySelector('.schedule-matches');
     const hasVisible = [...day.querySelectorAll('.sched-card')].some(c => c.style.display !== 'none');
-    if (hasFilter && hasVisible) day.classList.remove('collapsed');
-    else if (!hasFilter && day.style.display !== 'none') day.classList.add('collapsed');
+    if (hasFilter && hasVisible) {
+      day.classList.remove('collapsed');
+      if (sm) sm.style.display = '';
+    } else if (!hasFilter && day.style.display !== 'none') {
+      day.classList.add('collapsed');
+      if (sm) sm.style.display = 'none';
+    }
   });
   updateCityTriggerLabel();
   updateCityTags();
@@ -166,7 +172,7 @@ function schedCardHtml(m) {
       </div>
       <div class="sched-teams">
         <div class="sched-team">${f1}<span>${teamName(m.home)}</span></div>
-        <span class="sched-vs">${scoreStr ? scoreStr : 'VS'}</span>
+        <span class="${scoreStr ? 'sched-vs is-score' : 'sched-vs'}">${scoreStr ? scoreStr : 'VS'}</span>
         <div class="sched-team right"><span>${teamName(m.away)}</span>${f2}</div>
       </div>
       <div class="sched-venue">${pinIcon} <span class="venue-stadium">${stadium}</span><span class="venue-sep"> · </span><span class="venue-city">${cityName(city)}, ${countryName(country)}</span></div>
@@ -456,8 +462,17 @@ function buildSchedule() {
   });
 
   // ── Collapsible past days ─────────────────────────────────
+  // Explicitly hide schedule-matches on load (belt-and-suspenders with CSS)
+  container.querySelectorAll('.day-past.collapsed .schedule-matches').forEach(el => {
+    el.style.display = 'none';
+  });
   container.querySelectorAll('.day-past .day-header-clickable').forEach(header => {
-    header.addEventListener('click', () => header.closest('.day-past').classList.toggle('collapsed'));
+    header.addEventListener('click', () => {
+      const day = header.closest('.day-past');
+      day.classList.toggle('collapsed');
+      const sm = day.querySelector('.schedule-matches');
+      if (sm) sm.style.display = day.classList.contains('collapsed') ? 'none' : '';
+    });
   });
 
   // ── Team dropdown ─────────────────────────────────────────
