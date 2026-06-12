@@ -105,7 +105,7 @@ CRITICAL rules:
 - homeScore/awayScore = null ONLY if the match has not started yet
 - status = "live" if in progress, "finished" if full time confirmed, "upcoming" if not started
 - minute = current match minute, or null
-- commentary = 1-2 sentences in English summarising the current match situation or final result (goals, key events). Empty string if not started.
+- commentary = compact goal log only, format: "21' Bosnia Lukic; 78' Canada Larin". Each goal: "minute' TeamShortName ScorerSurname". Separate with "; ". Empty string if no goals or not started. MAX 80 chars total.
 
 Return ONLY a raw JSON object (no markdown):
 {{
