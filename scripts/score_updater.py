@@ -105,7 +105,8 @@ CRITICAL rules:
 - homeScore/awayScore = null ONLY if the match has not started yet
 - status = "live" if in progress, "finished" if full time confirmed, "upcoming" if not started
 - minute = current match minute, or null
-- commentary = compact goal log only, format: "21' Bosnia Lukic; 78' Canada Larin". Each goal: "minute' TeamShortName ScorerSurname". Separate with "; ". Empty string if no goals or not started. MAX 80 chars total.
+- homeGoals = goals scored by the HOME team only, format: "78' Larin; 90+2' Smith". Each goal: "minute' ScorerSurname". Separate multiple goals with "; ". Empty string if none.
+- awayGoals = goals scored by the AWAY team only, same format. Empty string if none.
 
 Return ONLY a raw JSON object (no markdown):
 {{
@@ -114,7 +115,8 @@ Return ONLY a raw JSON object (no markdown):
     "awayScore": <integer or null>,
     "status": "live" | "finished" | "upcoming",
     "minute": <integer or null>,
-    "commentary": "<string>"
+    "homeGoals": "<string>",
+    "awayGoals": "<string>"
   }}
 }}
 """

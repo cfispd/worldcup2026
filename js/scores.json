@@ -18,7 +18,8 @@
       "awayScore": 1,
       "status": "finished",
       "minute": null,
-      "commentary": "21' Bosnia Lukic; 78' Canada Larin"
+      "homeGoals": "78' Larin",
+      "awayGoals": "21' Lukic"
     }
   },
   "bracket_teams": {}
