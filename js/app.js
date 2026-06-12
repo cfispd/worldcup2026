@@ -109,6 +109,7 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
     document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
     btn.classList.add('active');
     document.getElementById('view-' + btn.dataset.tab).classList.add('active');
+    if (btn.dataset.tab === 'schedule') buildSchedule();
   });
 });
 
