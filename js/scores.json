@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-12T17:17:01.581955+00:00",
+  "updated": "2026-06-12T19:26:10.763220+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -12,6 +12,13 @@
       "awayScore": 1,
       "status": "finished",
       "minute": null
+    },
+    "2026-06-12|Canada|Bosnia-Herzegovina": {
+      "homeScore": null,
+      "awayScore": null,
+      "status": "live",
+      "minute": null,
+      "commentary": "Match is underway at BMO Field in Toronto with early action from both teams."
     }
   },
   "bracket_teams": {}
