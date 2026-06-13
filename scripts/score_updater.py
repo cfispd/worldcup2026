@@ -337,6 +337,7 @@ def main():
     schedule = parse_schedule()
     existing = load_scores()
     scores_db = existing.get("matches", {})
+    old_snapshot = json.dumps(scores_db, sort_keys=True)  # capture before any modifications
 
     # ══════════════════════════════════════════════════════════
     # BRACKET-ONLY MODE  (daily midnight run)
@@ -405,7 +406,6 @@ def main():
         print("No knockout matches in active window.")
 
     # ── C. Save (only write if scores actually changed) ──────────
-    old_snapshot = json.dumps(existing.get("matches", {}), sort_keys=True)
     new_snapshot = json.dumps(scores_db, sort_keys=True)
     if old_snapshot != new_snapshot:
         existing["matches"] = scores_db

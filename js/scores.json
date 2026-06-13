@@ -30,11 +30,11 @@
       "awayGoals": ""
     },
     "2026-06-13|Qatar|Switzerland": {
-      "homeScore": 0,
+      "homeScore": 1,
       "awayScore": 1,
-      "status": "live",
-      "minute": 67,
-      "homeGoals": "",
+      "status": "finished",
+      "minute": null,
+      "homeGoals": "90+4' Khoukhi",
       "awayGoals": "17' Embolo"
     }
   },
