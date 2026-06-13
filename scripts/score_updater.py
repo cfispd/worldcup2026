@@ -67,18 +67,26 @@ def match_start_utc(m):
     return datetime(y, mo, d, h, mi, tzinfo=timezone.utc) + timedelta(hours=4)
 
 
-def active_matches(schedule):
-    """Return matches currently inside the live window."""
+def active_matches(schedule, scores_db=None):
+    """Return matches inside the live window, plus any still marked 'live' in scores_db."""
     now = datetime.now(timezone.utc)
     result = []
+    in_window = set()
     for m in schedule:
         try:
             start = match_start_utc(m)
             diff = (now - start).total_seconds() / 60
             if -PRE_MIN <= diff <= POST_MIN:
                 result.append(m)
+                in_window.add(match_key(m))
         except Exception:
             pass
+    # Also include any match still marked "live" in scores_db (keeps querying until confirmed finished)
+    if scores_db:
+        for m in schedule:
+            key = match_key(m)
+            if key not in in_window and scores_db.get(key, {}).get("status") == "live":
+                result.append(m)
     return result
 
 
@@ -361,7 +369,7 @@ def main():
     bracket_teams = existing.get("bracket_teams", {})
 
     # ── A. Group stage scores ─────────────────────────────────
-    live_group = active_matches(schedule)
+    live_group = active_matches(schedule, scores_db)
     has_pending = False
     if live_group:
         pending = [m for m in live_group
