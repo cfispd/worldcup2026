@@ -103,20 +103,19 @@ def fetch_scores(matches):
         for m in matches
     )
 
-    prompt = f"""Search the web for the current FIFA World Cup 2026 scores for these matches.
-Search each match by name, e.g. "{matches[0]['home']} vs {matches[0]['away']} World Cup 2026 score".
+    prompt = f"""Search the web for FIFA World Cup 2026 scores. Return ONLY valid JSON, no explanations.
 
+Matches to look up:
 {lines}
 
-CRITICAL rules:
-- 0-0 is a valid score: use homeScore=0, awayScore=0 — NOT null
-- homeScore/awayScore = null ONLY if the match has not started yet
-- status = "live" if in progress, "finished" if full time confirmed, "upcoming" if not started
-- minute = current match minute, or null
-- homeGoals = goals scored by the HOME team only, format: "78' Larin; 90+2' Smith". Each goal: "minute' ScorerSurname". Separate multiple goals with "; ". Empty string if none.
-- awayGoals = goals scored by the AWAY team only, same format. Empty string if none.
+JSON rules (no exceptions):
+- homeScore/awayScore: integer (0 is valid), null only if not started
+- status: "live" | "finished" | "upcoming"
+- minute: integer or null
+- homeGoals: HOME team goals only, e.g. "17' Embolo; 45' Schar" — empty string if none
+- awayGoals: AWAY team goals only, same format — empty string if none
 
-Return ONLY a raw JSON object (no markdown):
+Output ONLY this JSON, nothing else:
 {{
   "<key>": {{
     "homeScore": <integer or null>,

@@ -28,6 +28,14 @@
       "minute": null,
       "homeGoals": "7' Bobadilla (OG); 31' Balogun; 45+5' Balogun",
       "awayGoals": ""
+    },
+    "2026-06-13|Qatar|Switzerland": {
+      "homeScore": 0,
+      "awayScore": 1,
+      "status": "live",
+      "minute": 67,
+      "homeGoals": "",
+      "awayGoals": "17' Embolo"
     }
   },
   "bracket_teams": {}
