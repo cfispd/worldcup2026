@@ -2,14 +2,18 @@ name: World Cup Score Updater
 
 on:
   schedule:
-    # Hourly watchdog — loops automatically during active match windows
+    # Fallback hourly trigger (cron-job.org is the primary every-12-min trigger)
     - cron: '0 * * * *'
-  workflow_dispatch:   # allow manual trigger from Actions tab
+  workflow_dispatch:
+
+concurrency:
+  group: score-updater
+  cancel-in-progress: true   # skip duplicate runs; only one at a time
 
 jobs:
   update-scores:
     runs-on: ubuntu-latest
-    timeout-minutes: 240   # 4-hour cap (covers full match + extra time)
+    timeout-minutes: 10
     permissions:
       contents: write
 
@@ -26,33 +30,22 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Run score updater (loop during active matches)
+      - name: Run score updater
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
+          EXIT=0
+          python scripts/score_updater.py || EXIT=true
+
+      - name: Commit & push if scores changed
+        run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-
-          while true; do
-            EXIT=0
-            python scripts/score_updater.py || EXIT=$?
-
-            # Commit & push only if scores.json actually changed on disk
-            git add js/scores.json
-            if ! git diff --staged --quiet; then
-              git commit -m "chore: update match scores [skip ci]"
-              git pull --rebase origin main
-              git push
-            else
-              echo "No score changes — nothing to commit."
-            fi
-
-            # Exit 1 from script = no active matches → stop looping
-            if [ $EXIT -ne 0 ]; then
-              echo "No active matches. Job done."
-              break
-            fi
-
-            echo "Active match in progress — next update in 12 minutes…"
-            sleep 720
-          done
+          git add js/scores.json
+          if ! git diff --staged --quiet; then
+            git commit -m "chore: update match scores [skip ci]"
+            git pull --rebase origin main
+            git push
+          else
+            echo "No score changes — nothing to commit."
+          fi
