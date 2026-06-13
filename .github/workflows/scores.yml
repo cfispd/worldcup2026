@@ -34,8 +34,8 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
           while true; do
-            python scripts/score_updater.py
-            EXIT=$?
+            EXIT=0
+            python scripts/score_updater.py || EXIT=$?
 
             # Commit & push if scores changed
             git add js/scores.json
