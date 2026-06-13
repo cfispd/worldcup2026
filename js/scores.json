@@ -24,8 +24,8 @@
     "2026-06-12|United States|Paraguay": {
       "homeScore": 3,
       "awayScore": 0,
-      "status": "live",
-      "minute": 45,
+      "status": "finished",
+      "minute": null,
       "homeGoals": "7' Bobadilla (OG); 31' Balogun; 45+5' Balogun",
       "awayGoals": ""
     }
