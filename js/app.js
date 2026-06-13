@@ -637,8 +637,9 @@ function mdsCard(m, status) {
     ? `<a class="mds-watch" href="${watchUrl()}" target="_blank" rel="noopener" title="${z?'观看直播':'Watch Live'}">${playIcon}</a>`
     : '';
   const hasGoals = (m.homeGoals || m.awayGoals) && status !== 'upcoming';
+  const fmtGoals = s => s ? s.split('; ').join('<br>') : '';
   const goalsBar = hasGoals
-    ? `<div class="mds-goals-bar"><span class="mds-goals">${m.homeGoals || ''}</span><span class="mds-goals mds-goals-r">${m.awayGoals || ''}</span></div>`
+    ? `<div class="mds-goals-bar"><span class="mds-goals">${fmtGoals(m.homeGoals)}</span><span class="mds-goals mds-goals-r">${fmtGoals(m.awayGoals)}</span></div>`
     : '';
   return `<div class="mds-card${extraClass}" data-matchkey="${m.dateISO}|${m.home}|${m.away}" style="cursor:pointer">
     <div class="mds-card-info">
