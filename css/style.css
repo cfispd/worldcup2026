@@ -875,11 +875,11 @@ footer { text-align:center; padding:20px; font-size:.8rem; color:#9ca3af; border
 .mds-time   { font-size: .72rem; font-weight: 600; color: #6b7280; }
 .mds-ft     { font-size: .72rem; font-weight: 700; color: #9ca3af; }
 
-.mds-matchup { display: flex; align-items: flex-start; gap: 6px; margin-bottom: 4px; }
-.mds-team { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; flex: 1; min-width: 0; }
-.mds-team-r { align-items: flex-end; }
-.mds-team-row { display: flex; align-items: center; gap: 5px; }
-.mds-goals { font-size: .62rem; color: #4f46e5; font-style: italic; line-height: 1.3; }
+.mds-matchup { display: flex; align-items: center; gap: 6px; margin-bottom: 2px; }
+.mds-team { display: flex; align-items: center; gap: 5px; flex: 1; min-width: 0; }
+.mds-team-r { justify-content: flex-end; }
+.mds-goals-bar { display: flex; justify-content: space-between; gap: 4px; margin-bottom: 2px; }
+.mds-goals { font-size: .62rem; color: #4f46e5; font-style: italic; flex: 1; line-height: 1.3; }
 .mds-goals-r { text-align: right; }
 .mds-flag { width: 20px; height: 13px; object-fit: cover; border-radius: 2px; flex-shrink: 0; }
 .mds-tname { font-size: .8rem; font-weight: 600; color: #1e2a5e; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 72px; }

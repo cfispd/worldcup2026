@@ -636,16 +636,19 @@ function mdsCard(m, status) {
   const watchBtn = showWatch
     ? `<a class="mds-watch" href="${watchUrl()}" target="_blank" rel="noopener" title="${z?'观看直播':'Watch Live'}">${playIcon}</a>`
     : '';
-  const hGoals = (m.homeGoals && status !== 'upcoming') ? `<div class="mds-goals">${m.homeGoals}</div>` : '';
-  const aGoals = (m.awayGoals && status !== 'upcoming') ? `<div class="mds-goals mds-goals-r">${m.awayGoals}</div>` : '';
+  const hasGoals = (m.homeGoals || m.awayGoals) && status !== 'upcoming';
+  const goalsBar = hasGoals
+    ? `<div class="mds-goals-bar"><span class="mds-goals">${m.homeGoals || ''}</span><span class="mds-goals mds-goals-r">${m.awayGoals || ''}</span></div>`
+    : '';
   return `<div class="mds-card${extraClass}" data-matchkey="${m.dateISO}|${m.home}|${m.away}" style="cursor:pointer">
     <div class="mds-card-info">
       <div class="mds-top"><span class="mds-gpill" style="background:${accent}">${pill}</span>${badge}</div>
       <div class="mds-matchup">
-        <div class="mds-team"><div class="mds-team-row">${hFlag}<span class="mds-tname">${hName}</span></div>${hGoals}</div>
+        <div class="mds-team">${hFlag}<span class="mds-tname">${hName}</span></div>
         <span class="mds-mid">${mid}</span>
-        <div class="mds-team mds-team-r"><div class="mds-team-row"><span class="mds-tname">${aName}</span>${aFlag}</div>${aGoals}</div>
+        <div class="mds-team mds-team-r"><span class="mds-tname">${aName}</span>${aFlag}</div>
       </div>
+      ${goalsBar}
       <div class="mds-city">${cityLbl}</div>
     </div>
     ${watchBtn}
