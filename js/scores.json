@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-13T22:49:02.929670+00:00",
+  "updated": "2026-06-13T23:01:05.147365+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -41,9 +41,9 @@
       "homeScore": 1,
       "awayScore": 1,
       "status": "live",
-      "minute": null,
-      "homeGoals": "Vini Junior",
-      "awayGoals": "Saibari"
+      "minute": 30,
+      "homeGoals": "45' Vinicius Junior",
+      "awayGoals": "21' Saibari"
     }
   },
   "bracket_teams": {}
