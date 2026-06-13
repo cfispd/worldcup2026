@@ -397,11 +397,16 @@ def main():
     else:
         print("No knockout matches in active window.")
 
-    # ── C. Save ───────────────────────────────────────────────
-    existing["matches"] = scores_db
-    existing["updated"] = now.isoformat()
-    save_scores(existing)
-    print("✅ scores.json updated.")
+    # ── C. Save (only write if scores actually changed) ──────────
+    old_snapshot = json.dumps(existing.get("matches", {}), sort_keys=True)
+    new_snapshot = json.dumps(scores_db, sort_keys=True)
+    if old_snapshot != new_snapshot:
+        existing["matches"] = scores_db
+        existing["updated"] = now.isoformat()
+        save_scores(existing)
+        print("✅ scores.json updated.")
+    else:
+        print("ℹ️  No score changes — skipping write.")
 
     # Exit 0 = active matches still in progress (workflow should loop)
     # Exit 1 = no active matches (workflow can stop until next hourly check)

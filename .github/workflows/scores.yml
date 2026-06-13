@@ -37,11 +37,11 @@ jobs:
             EXIT=0
             python scripts/score_updater.py || EXIT=$?
 
-            # Commit & push if scores changed
+            # Commit & push only if scores.json actually changed on disk
             git add js/scores.json
             if ! git diff --staged --quiet; then
-              git pull --rebase origin main
               git commit -m "chore: update match scores [skip ci]"
+              git pull --rebase origin main
               git push
             else
               echo "No score changes — nothing to commit."
