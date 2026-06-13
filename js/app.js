@@ -605,7 +605,7 @@ function mdsCard(m, status) {
   if (status === 'live') {
     const start   = mdsStartUTC(m.dateISO, m.time);
     const elapsed = start ? Math.max(0, Math.floor((Date.now() - start) / 60000)) : 0;
-    const HALF = 45, BREAK = 15;
+    const HALF = 45, BREAK = 20;
     let minuteLabel;
     if (elapsed <= HALF) {
       minuteLabel = z ? `上半场 ${elapsed}'` : `1st Half ${elapsed}'`;
