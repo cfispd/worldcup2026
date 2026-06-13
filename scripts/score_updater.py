@@ -362,12 +362,14 @@ def main():
 
     # ── A. Group stage scores ─────────────────────────────────
     live_group = active_matches(schedule)
+    has_pending = False
     if live_group:
         pending = [m for m in live_group
                    if scores_db.get(match_key(m), {}).get("status") != "finished"]
         if not pending:
             print("All active group matches already finished.")
         else:
+            has_pending = True
             print(f"Querying Claude for {len(pending)} group match(es)…")
             new_scores = fetch_scores(pending)
             for key, score in new_scores.items():
@@ -385,6 +387,7 @@ def main():
         if not pending_ko:
             print("All active knockout matches already finished.")
         else:
+            has_pending = True
             print(f"Querying Claude for {len(pending_ko)} knockout match(es)…")
             ko_scores = fetch_scores(pending_ko)
             for key, score in ko_scores.items():
@@ -399,6 +402,11 @@ def main():
     existing["updated"] = now.isoformat()
     save_scores(existing)
     print("✅ scores.json updated.")
+
+    # Exit 0 = active matches still in progress (workflow should loop)
+    # Exit 1 = no active matches (workflow can stop until next hourly check)
+    if not has_pending:
+        sys.exit(1)
 
 
 if __name__ == "__main__":

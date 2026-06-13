@@ -2,19 +2,16 @@ name: World Cup Score Updater
 
 on:
   schedule:
-    # Every 12 minutes via explicit entries (more reliable than */12 wildcard)
+    # Hourly watchdog — loops automatically during active match windows
     - cron: '0 * * * *'
-    - cron: '12 * * * *'
-    - cron: '24 * * * *'
-    - cron: '36 * * * *'
-    - cron: '48 * * * *'
   workflow_dispatch:   # allow manual trigger from Actions tab
 
 jobs:
   update-scores:
     runs-on: ubuntu-latest
+    timeout-minutes: 240   # 4-hour cap (covers full match + extra time)
     permissions:
-      contents: write   # needed to push scores.json back to the repo
+      contents: write
 
     steps:
       - name: Checkout repository
@@ -29,16 +26,33 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Run score updater
+      - name: Run score updater (loop during active matches)
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-        run: python scripts/score_updater.py
-
-      - name: Commit & push updated scores
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add js/scores.json
-          git diff --staged --quiet \
-            && echo "No score changes — nothing to commit." \
-            || (git commit -m "chore: update match scores [skip ci]" && git push)
+
+          while true; do
+            python scripts/score_updater.py
+            EXIT=$?
+
+            # Commit & push if scores changed
+            git add js/scores.json
+            if ! git diff --staged --quiet; then
+              git pull --rebase origin main
+              git commit -m "chore: update match scores [skip ci]"
+              git push
+            else
+              echo "No score changes — nothing to commit."
+            fi
+
+            # Exit 1 from script = no active matches → stop looping
+            if [ $EXIT -ne 0 ]; then
+              echo "No active matches. Job done."
+              break
+            fi
+
+            echo "Active match in progress — next update in 12 minutes…"
+            sleep 720
+          done
