@@ -380,7 +380,17 @@ def main():
             has_pending = True
             print(f"Querying Claude for {len(pending)} group match(es)…")
             new_scores = fetch_scores(pending)
-            for key, score in new_scores.items():
+            for m in pending:
+                key = match_key(m)
+                score = new_scores.get(key)
+                if not score:
+                    continue
+                # Guard: don't trust "finished" if < 95 min since kickoff
+                if score.get("status") == "finished":
+                    elapsed = (now - match_start_utc(m)).total_seconds() / 60
+                    if elapsed < 95:
+                        print(f"  ⚠️  Ignoring premature 'finished' for {key} ({elapsed:.0f} min elapsed)")
+                        score["status"] = "live"
                 if score.get("homeScore") is not None or key not in scores_db:
                     scores_db[key] = score
             print(f"  → {len(new_scores)} result(s).")
@@ -398,7 +408,16 @@ def main():
             has_pending = True
             print(f"Querying Claude for {len(pending_ko)} knockout match(es)…")
             ko_scores = fetch_scores(pending_ko)
-            for key, score in ko_scores.items():
+            for m in pending_ko:
+                key = match_key(m)
+                score = ko_scores.get(key)
+                if not score:
+                    continue
+                if score.get("status") == "finished":
+                    elapsed = (now - match_start_utc(m)).total_seconds() / 60
+                    if elapsed < 95:
+                        print(f"  ⚠️  Ignoring premature 'finished' for {key} ({elapsed:.0f} min elapsed)")
+                        score["status"] = "live"
                 if score.get("homeScore") is not None or key not in scores_db:
                     scores_db[key] = score
             print(f"  → {len(ko_scores)} result(s).")
