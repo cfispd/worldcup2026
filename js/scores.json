@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-13T23:36:35.160811+00:00",
+  "updated": "2026-06-14T00:01:12.124760+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -38,12 +38,12 @@
       "awayGoals": "17' Embolo"
     },
     "2026-06-13|Brazil|Morocco": {
-      "homeScore": 1,
+      "homeScore": 0,
       "awayScore": 1,
       "status": "live",
-      "minute": 67,
-      "homeGoals": "32' Vinícius Júnior",
-      "awayGoals": "21' Ismael Saibari"
+      "minute": 90,
+      "homeGoals": "",
+      "awayGoals": "21' Saibari"
     }
   },
   "bracket_teams": {}
