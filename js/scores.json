@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-14T00:12:29.384011+00:00",
+  "updated": "2026-06-14T01:01:10.903242+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -44,6 +44,22 @@
       "minute": null,
       "homeGoals": "45' Vinicius Jr",
       "awayGoals": "21' Saibari"
+    },
+    "2026-06-13|Haiti|Scotland": {
+      "homeScore": null,
+      "awayScore": null,
+      "status": "upcoming",
+      "minute": null,
+      "homeGoals": "",
+      "awayGoals": ""
+    },
+    "2026-06-13|Australia|Turkey": {
+      "homeScore": null,
+      "awayScore": null,
+      "status": "upcoming",
+      "minute": null,
+      "homeGoals": "",
+      "awayGoals": ""
     }
   },
   "bracket_teams": {}
