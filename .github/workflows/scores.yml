@@ -3,7 +3,7 @@ name: World Cup Score Updater
 on:
   schedule:
     # Fallback trigger — cron-job.org is the primary every-25-min trigger
-    - cron: '*/25 * * * *'
+    - cron: '*/30 * * * *'
   workflow_dispatch:
 
 concurrency:
