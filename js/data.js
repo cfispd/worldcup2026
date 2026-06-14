@@ -192,9 +192,9 @@ const ALL_MATCHES = [
   {group:'C',home:'Morocco',  away:'Haiti',    dateISO:'2026-06-24',time:'6:00 PM', venue:'Mercedes-Benz Stadium, Atlanta'},
   // Group D
   {group:'D',home:'United States', away:'Paraguay',      dateISO:'2026-06-12',time:'9:00 PM',  venue:'SoFi Stadium, Los Angeles'},
-  {group:'D',home:'Australia',     away:'Turkey',        dateISO:'2026-06-13',time:'9:00 PM',  venue:'BC Place, Vancouver'},
+  {group:'D',home:'Australia',     away:'Turkey',        dateISO:'2026-06-14',time:'12:00 AM', venue:'BC Place, Vancouver'},
   {group:'D',home:'United States', away:'Australia',     dateISO:'2026-06-19',time:'3:00 PM',  venue:'Lumen Field, Seattle'},
-  {group:'D',home:'Turkey',        away:'Paraguay',      dateISO:'2026-06-19',time:'12:00 AM', venue:"Levi's Stadium, San Francisco"},
+  {group:'D',home:'Turkey',        away:'Paraguay',      dateISO:'2026-06-20',time:'12:00 AM', venue:"Levi's Stadium, San Francisco"},
   {group:'D',home:'Turkey',        away:'United States', dateISO:'2026-06-25',time:'10:00 PM', venue:'SoFi Stadium, Los Angeles'},
   {group:'D',home:'Paraguay',      away:'Australia',     dateISO:'2026-06-25',time:'10:00 PM', venue:"Levi's Stadium, San Francisco"},
   // Group E
@@ -208,11 +208,11 @@ const ALL_MATCHES = [
   {group:'F',home:'Netherlands', away:'Japan',        dateISO:'2026-06-14',time:'4:00 PM',  venue:'AT&T Stadium, Dallas'},
   {group:'F',home:'Sweden',      away:'Tunisia',      dateISO:'2026-06-14',time:'10:00 PM', venue:'Estadio BBVA, Monterrey'},
   {group:'F',home:'Netherlands', away:'Sweden',       dateISO:'2026-06-20',time:'1:00 PM',  venue:'NRG Stadium, Houston'},
-  {group:'F',home:'Tunisia',     away:'Japan',        dateISO:'2026-06-20',time:'12:00 AM', venue:'Estadio BBVA, Monterrey'},
+  {group:'F',home:'Tunisia',     away:'Japan',        dateISO:'2026-06-21',time:'12:00 AM', venue:'Estadio BBVA, Monterrey'},
   {group:'F',home:'Japan',       away:'Sweden',       dateISO:'2026-06-25',time:'7:00 PM',  venue:'AT&T Stadium, Dallas'},
   {group:'F',home:'Tunisia',     away:'Netherlands',  dateISO:'2026-06-25',time:'7:00 PM',  venue:'Arrowhead Stadium, Kansas City'},
   // Group G
-  {group:'G',home:'Belgium',     away:'Egypt',       dateISO:'2026-06-15',time:'3:00 PM',  venue:'BC Place, Vancouver'},
+  {group:'G',home:'Belgium',     away:'Egypt',       dateISO:'2026-06-15',time:'3:00 PM',  venue:'Lumen Field, Seattle'},
   {group:'G',home:'Iran',        away:'New Zealand', dateISO:'2026-06-15',time:'9:00 PM',  venue:'SoFi Stadium, Los Angeles'},
   {group:'G',home:'New Zealand', away:'Egypt',       dateISO:'2026-06-21',time:'9:00 PM',  venue:'BC Place, Vancouver'},
   {group:'G',home:'Belgium',     away:'Iran',        dateISO:'2026-06-21',time:'3:00 PM',  venue:'SoFi Stadium, Los Angeles'},
@@ -234,7 +234,7 @@ const ALL_MATCHES = [
   {group:'I',home:'Senegal', away:'Iraq',    dateISO:'2026-06-26',time:'3:00 PM', venue:'BMO Field, Toronto'},
   // Group J
   {group:'J',home:'Argentina', away:'Algeria',   dateISO:'2026-06-16',time:'9:00 PM',  venue:'Arrowhead Stadium, Kansas City'},
-  {group:'J',home:'Austria',   away:'Jordan',    dateISO:'2026-06-16',time:'12:00 AM', venue:"Levi's Stadium, San Francisco"},
+  {group:'J',home:'Austria',   away:'Jordan',    dateISO:'2026-06-17',time:'12:00 AM', venue:"Levi's Stadium, San Francisco"},
   {group:'J',home:'Argentina', away:'Austria',   dateISO:'2026-06-22',time:'1:00 PM',  venue:'AT&T Stadium, Dallas'},
   {group:'J',home:'Jordan',    away:'Algeria',   dateISO:'2026-06-22',time:'11:00 PM', venue:"Levi's Stadium, San Francisco"},
   {group:'J',home:'Algeria',   away:'Austria',   dateISO:'2026-06-27',time:'10:00 PM', venue:'Arrowhead Stadium, Kansas City'},
