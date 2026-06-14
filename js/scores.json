@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-14T02:48:26.879381+00:00",
+  "updated": "2026-06-14T03:48:30.582832+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -52,6 +52,14 @@
       "minute": null,
       "homeGoals": "",
       "awayGoals": "28' McGinn"
+    },
+    "2026-06-13|Australia|Turkey": {
+      "homeScore": null,
+      "awayScore": null,
+      "status": "live",
+      "minute": null,
+      "homeGoals": "",
+      "awayGoals": ""
     }
   },
   "bracket_teams": {}
