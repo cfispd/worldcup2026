@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-14T18:31:00.606077+00:00",
+  "updated": "2026-06-14T19:01:07.328632+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -62,11 +62,11 @@
       "awayGoals": ""
     },
     "2026-06-14|Germany|Curaçao": {
-      "homeScore": 4,
+      "homeScore": 7,
       "awayScore": 1,
-      "status": "live",
-      "minute": 54,
-      "homeGoals": "6' Nmecha; 38' Schlotterbeck; 45'+5' Havertz (P); 47' Musiala",
+      "status": "finished",
+      "minute": null,
+      "homeGoals": "6' Nmecha; 38' Nmecha; 45'+5' Havertz (P); 47' Musiala; 68' Schlotterbeck; 78' Undav; 88' Havertz",
       "awayGoals": "21' Comenencia"
     }
   },
