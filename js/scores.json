@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-14T02:24:30.503422+00:00",
+  "updated": "2026-06-14T02:36:27.944431+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -49,7 +49,7 @@
       "homeScore": 0,
       "awayScore": 1,
       "status": "live",
-      "minute": null,
+      "minute": 57,
       "homeGoals": "",
       "awayGoals": "28' McGinn"
     },
