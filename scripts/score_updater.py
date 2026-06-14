@@ -134,7 +134,7 @@ Output ONLY this JSON, nothing else:
         tools=[{
             "type": "web_search_20250305",
             "name": "web_search",
-            "max_uses": 6
+            "max_uses": 2
         }],
         messages=[{"role": "user", "content": prompt}]
     )
