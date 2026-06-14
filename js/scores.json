@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-14T19:01:07.328632+00:00",
+  "updated": "2026-06-14T20:01:06.111562+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -68,6 +68,14 @@
       "minute": null,
       "homeGoals": "6' Nmecha; 38' Nmecha; 45'+5' Havertz (P); 47' Musiala; 68' Schlotterbeck; 78' Undav; 88' Havertz",
       "awayGoals": "21' Comenencia"
+    },
+    "2026-06-14|Netherlands|Japan": {
+      "homeScore": null,
+      "awayScore": null,
+      "status": "upcoming",
+      "minute": null,
+      "homeGoals": "",
+      "awayGoals": ""
     }
   },
   "bracket_teams": {}
