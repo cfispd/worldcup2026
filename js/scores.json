@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-14T22:01:10.125050+00:00",
+  "updated": "2026-06-14T23:01:07.440945+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -76,6 +76,14 @@
       "minute": null,
       "homeGoals": "50' Van Dijk; 64' Summerville",
       "awayGoals": "57' Nakamura; 88' Kamada"
+    },
+    "2026-06-14|Ivory Coast|Ecuador": {
+      "homeScore": null,
+      "awayScore": null,
+      "status": "upcoming",
+      "minute": null,
+      "homeGoals": "",
+      "awayGoals": ""
     }
   },
   "bracket_teams": {}
