@@ -153,7 +153,7 @@ function schedCardHtml(m) {
   const clockIcon = `<svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="display:inline;vertical-align:middle;margin-right:3px"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>`;
   const pinIcon   = `<svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>`;
 
-  const finished  = m.matchStatus === 'finished' || m.dateISO < localDateISO(0);
+  const finished  = m.matchStatus === 'finished' || matchLocalDateISO(m.dateISO, m.time) < localDateISO(0);
   const hasScore  = typeof m.homeScore === 'number';
   const scoreStr  = finished && hasScore ? `${m.homeScore}–${m.awayScore}` : null;
   const linksHtml = finished ? '' : `
@@ -190,7 +190,10 @@ function buildSchedule() {
   selectedTeams  = new Set();
 
   const byDate = {};
-  ALL_MATCHES.forEach(m => (byDate[m.dateISO] = byDate[m.dateISO] || []).push(m));
+  ALL_MATCHES.forEach(m => {
+    const localISO = matchLocalDateISO(m.dateISO, m.time);
+    (byDate[localISO] = byDate[localISO] || []).push(m);
+  });
 
   const sorted    = Object.keys(byDate).sort();
   const container = document.getElementById('view-schedule');

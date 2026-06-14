@@ -227,7 +227,7 @@ function openModal(groupKey) {
 
   const todayISO = localDateISO(0);
   document.getElementById('matchList').innerHTML = matches.map(m => {
-    const finished = m.matchStatus === 'finished' || m.dateISO < todayISO;
+    const finished = m.matchStatus === 'finished' || matchLocalDateISO(m.dateISO, m.time) < todayISO;
     const hasScore = typeof m.homeScore === 'number';
     const midHtml  = finished && hasScore
       ? `<span class="match-score">${m.homeScore}–${m.awayScore}</span>`
@@ -577,7 +577,7 @@ function mdsStartUTC(dateISO, timeET) {
 }
 
 function mdsStatus(m, todayISO) {
-  if (m.dateISO !== todayISO) return null;
+  if (matchLocalDateISO(m.dateISO, m.time) !== todayISO) return null;
   // Prioritise confirmed status from scores.json
   if (m.matchStatus === 'finished') return 'finished';
   if (m.matchStatus === 'live')     return 'live';
@@ -669,17 +669,17 @@ function renderMatchdayStrip() {
     const s = mdsStatus(m, todayISO);
     if      (s === 'live')                  live.push([m, s]);
     else if (s === 'upcoming' || s === 'finished') today.push([m, s]);
-    else if (m.dateISO === tomorrowISO)     tomorrow.push([m, 'upcoming']);
+    else if (matchLocalDateISO(m.dateISO, m.time) === tomorrowISO) tomorrow.push([m, 'upcoming']);
   });
 
   if (!live.length && !today.length && !tomorrow.length) {
     // No matches today/tomorrow — find the next upcoming match day
     const future = ALL_MATCHES
-      .filter(m => m.dateISO > todayISO)
-      .sort((a, b) => a.dateISO.localeCompare(b.dateISO));
+      .filter(m => matchLocalDateISO(m.dateISO, m.time) > todayISO)
+      .sort((a, b) => matchLocalDateISO(a.dateISO, a.time).localeCompare(matchLocalDateISO(b.dateISO, b.time)));
     if (!future.length) { strip.style.display = 'none'; return; }
-    const nextISO = future[0].dateISO;
-    const nextMatches = future.filter(m => m.dateISO === nextISO);
+    const nextISO = matchLocalDateISO(future[0].dateISO, future[0].time);
+    const nextMatches = future.filter(m => matchLocalDateISO(m.dateISO, m.time) === nextISO);
     const dateLbl = fmtDateL(nextISO);
     strip.style.display = '';
     strip.innerHTML = `<div class="mds-section">

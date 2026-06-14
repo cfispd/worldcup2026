@@ -39,6 +39,15 @@ function matchToUTC(dateISO, timeET) {
   return new Date(Date.UTC(y, mo - 1, d, h, min) + 4 * 3600000);
 }
 
+// Returns the match kickoff date as YYYY-MM-DD in the user's local timezone.
+function matchLocalDateISO(dateISO, timeET) {
+  const utc = matchToUTC(dateISO, timeET);
+  if (!utc) return dateISO;
+  return utc.getFullYear() + '-' +
+    String(utc.getMonth() + 1).padStart(2, '0') + '-' +
+    String(utc.getDate()).padStart(2, '0');
+}
+
 // Formats a match time in the user's browser timezone (auto-detected).
 function toUserLocalTime(timeET, dateISO) {
   const utc = matchToUTC(dateISO, timeET);
