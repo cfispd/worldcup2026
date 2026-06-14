@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-14T02:01:08.862209+00:00",
+  "updated": "2026-06-14T02:24:30.503422+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -54,11 +54,11 @@
       "awayGoals": "28' McGinn"
     },
     "2026-06-13|Australia|Turkey": {
-      "homeScore": null,
-      "awayScore": null,
-      "status": "upcoming",
+      "homeScore": 1,
+      "awayScore": 0,
+      "status": "finished",
       "minute": null,
-      "homeGoals": "",
+      "homeGoals": "Behich",
       "awayGoals": ""
     }
   },
