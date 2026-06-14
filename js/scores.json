@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-14T17:57:09.633400+00:00",
+  "updated": "2026-06-14T18:01:12.260759+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -65,8 +65,8 @@
       "homeScore": 3,
       "awayScore": 1,
       "status": "live",
-      "minute": 40,
-      "homeGoals": "6' Nmecha; 38' Schlotterbeck; 45+5' Havertz (P)",
+      "minute": null,
+      "homeGoals": "6' Nmecha; 38' Schlotterbeck",
       "awayGoals": "21' Comenencia"
     }
   },
