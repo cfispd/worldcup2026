@@ -52,14 +52,6 @@
       "minute": null,
       "homeGoals": "",
       "awayGoals": "28' McGinn"
-    },
-    "2026-06-14|Australia|Turkey": {
-      "homeScore": 1,
-      "awayScore": 0,
-      "status": "finished",
-      "minute": null,
-      "homeGoals": "Behich",
-      "awayGoals": ""
     }
   },
   "bracket_teams": {}
