@@ -192,7 +192,7 @@ const ALL_MATCHES = [
   {group:'C',home:'Morocco',  away:'Haiti',    dateISO:'2026-06-24',time:'6:00 PM', venue:'Mercedes-Benz Stadium, Atlanta'},
   // Group D
   {group:'D',home:'United States', away:'Paraguay',      dateISO:'2026-06-12',time:'9:00 PM',  venue:'SoFi Stadium, Los Angeles'},
-  {group:'D',home:'Australia',     away:'Turkey',        dateISO:'2026-06-13',time:'12:00 AM', venue:'BC Place, Vancouver'},
+  {group:'D',home:'Australia',     away:'Turkey',        dateISO:'2026-06-14',time:'12:00 AM', venue:'BC Place, Vancouver'},
   {group:'D',home:'United States', away:'Australia',     dateISO:'2026-06-19',time:'3:00 PM',  venue:'Lumen Field, Seattle'},
   {group:'D',home:'Turkey',        away:'Paraguay',      dateISO:'2026-06-20',time:'12:00 AM', venue:"Levi's Stadium, San Francisco"},
   {group:'D',home:'Turkey',        away:'United States', dateISO:'2026-06-25',time:'10:00 PM', venue:'SoFi Stadium, Los Angeles'},
