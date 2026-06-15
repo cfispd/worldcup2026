@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-15T19:31:14.134526+00:00",
+  "updated": "2026-06-15T20:01:08.553264+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -105,9 +105,9 @@
       "homeScore": 0,
       "awayScore": 1,
       "status": "live",
-      "minute": 29,
+      "minute": 42,
       "homeGoals": "",
-      "awayGoals": "19' Emam Ashour"
+      "awayGoals": "19' Ashour"
     }
   },
   "bracket_teams": {}
