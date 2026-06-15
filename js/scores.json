@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-15T20:55:10.391166+00:00",
+  "updated": "2026-06-15T21:01:13.657918+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -104,8 +104,8 @@
     "2026-06-15|Belgium|Egypt": {
       "homeScore": 1,
       "awayScore": 1,
-      "status": "live",
-      "minute": 80,
+      "status": "finished",
+      "minute": null,
       "homeGoals": "66' Mohamed Hany (OG)",
       "awayGoals": "19' Emam Ashour"
     }
