@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-15T01:01:08.664767+00:00",
+  "updated": "2026-06-15T02:01:08.714762+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -83,6 +83,14 @@
       "status": "finished",
       "minute": null,
       "homeGoals": "90+4' Diallo",
+      "awayGoals": ""
+    },
+    "2026-06-14|Sweden|Tunisia": {
+      "homeScore": null,
+      "awayScore": null,
+      "status": "upcoming",
+      "minute": null,
+      "homeGoals": "",
       "awayGoals": ""
     }
   },
