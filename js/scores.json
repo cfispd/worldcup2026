@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-15T21:01:13.657918+00:00",
+  "updated": "2026-06-15T22:01:15.632814+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -108,6 +108,14 @@
       "minute": null,
       "homeGoals": "66' Mohamed Hany (OG)",
       "awayGoals": "19' Emam Ashour"
+    },
+    "2026-06-15|Saudi Arabia|Uruguay": {
+      "homeScore": null,
+      "awayScore": null,
+      "status": "upcoming",
+      "minute": null,
+      "homeGoals": "",
+      "awayGoals": ""
     }
   },
   "bracket_teams": {}
