@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-15T03:31:03.646469+00:00",
+  "updated": "2026-06-15T04:01:15.786498+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -86,12 +86,12 @@
       "awayGoals": ""
     },
     "2026-06-14|Sweden|Tunisia": {
-      "homeScore": 3,
+      "homeScore": 5,
       "awayScore": 1,
-      "status": "live",
+      "status": "finished",
       "minute": null,
-      "homeGoals": "6' Ayari; 29' Isak; 59' Gyökeres",
-      "awayGoals": "42' Rekik"
+      "homeGoals": "7' Yasin Ayari; 30' Alexander Isak; 59' Viktor Gyokeres; 84' Mattias Svanberg; 90+6' Yasin Ayari",
+      "awayGoals": "43' Omar Rekik"
     }
   },
   "bracket_teams": {}
