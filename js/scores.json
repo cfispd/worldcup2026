@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-15T16:01:31.818985+00:00",
+  "updated": "2026-06-15T16:31:07.232214+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -94,9 +94,9 @@
       "awayGoals": "43' Omar Rekik"
     },
     "2026-06-15|Spain|Cape Verde": {
-      "homeScore": null,
-      "awayScore": null,
-      "status": "upcoming",
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "live",
       "minute": null,
       "homeGoals": "",
       "awayGoals": ""
