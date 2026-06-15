@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-15T04:19:36.595142+00:00",
+  "updated": "2026-06-15T16:01:31.818985+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -92,6 +92,14 @@
       "minute": null,
       "homeGoals": "7' Yasin Ayari; 30' Alexander Isak; 59' Viktor Gyokeres; 84' Mattias Svanberg; 90+6' Yasin Ayari",
       "awayGoals": "43' Omar Rekik"
+    },
+    "2026-06-15|Spain|Cape Verde": {
+      "homeScore": null,
+      "awayScore": null,
+      "status": "upcoming",
+      "minute": null,
+      "homeGoals": "",
+      "awayGoals": ""
     }
   },
   "bracket_teams": {}
