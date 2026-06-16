@@ -1,9 +1,10 @@
 // ═══════════════════════════════════════════════════════════
 //  SCHEDULE STATE
 // ═══════════════════════════════════════════════════════════
-let selectedCities = new Set();
-let selectedDates  = new Set();
-let selectedTeams  = new Set();
+let selectedCities  = new Set();
+let selectedDates   = new Set();
+let selectedTeams   = new Set();
+let hideFinished    = false;
 
 // ═══════════════════════════════════════════════════════════
 //  FILTER LOGIC
@@ -12,13 +13,16 @@ function applyFilter() {
   let anyVisible = false;
 
   document.querySelectorAll('.sched-card').forEach(card => {
-    const cityOk = selectedCities.size === 0 || selectedCities.has(card.dataset.city);
-    const teamOk = selectedTeams.size === 0 || selectedTeams.has(card.dataset.home) || selectedTeams.has(card.dataset.away);
-    card.style.display = (cityOk && teamOk) ? '' : 'none';
+    const cityOk     = selectedCities.size === 0 || selectedCities.has(card.dataset.city);
+    const teamOk     = selectedTeams.size === 0 || selectedTeams.has(card.dataset.home) || selectedTeams.has(card.dataset.away);
+    const finishedOk = !hideFinished || card.dataset.finished !== '1';
+    card.style.display = (cityOk && teamOk && finishedOk) ? '' : 'none';
   });
 
   document.querySelectorAll('.schedule-day').forEach(day => {
     const iso    = day.dataset.day;
+    const isPast = day.classList.contains('day-past');
+    if (hideFinished && isPast) { day.style.display = 'none'; return; }
     const dateOk = selectedDates.size === 0 || selectedDates.has(iso);
     const vis    = dateOk ? [...day.querySelectorAll('.sched-card')].filter(c => c.style.display !== 'none') : [];
     const show   = vis.length > 0;
@@ -58,6 +62,12 @@ function applyFilter() {
   updateDateTags();
   updateTeamTriggerLabel();
   updateTeamTags();
+  const hfBtn = document.getElementById('hideFinishedBtn');
+  if (hfBtn) {
+    const z = LANG === 'zh';
+    hfBtn.textContent = hideFinished ? (z ? '显示全部比赛' : 'Show All') : (z ? '隐藏已结束' : 'Hide Finished');
+    hfBtn.classList.toggle('active', hideFinished);
+  }
 }
 
 // ── City dropdown label & tags ────────────────────────────
@@ -163,7 +173,7 @@ function schedCardHtml(m) {
         <a href="#" class="card-link-btn card-flight-btn" onclick="openFlightLink('${city}','${m.dateISO}');return false;">✈️ ${LANG === 'zh' ? '机票' : 'Flights'}</a>
       </div>`;
   return `
-    <div class="sched-card" data-city="${city}" data-home="${m.home}" data-away="${m.away}">
+    <div class="sched-card" data-city="${city}" data-home="${m.home}" data-away="${m.away}" data-finished="${finished ? '1' : '0'}">
       <div class="sched-top">
         <span class="group-pill" style="background:${accent}">${pill}</span>
         ${scoreStr
@@ -193,6 +203,14 @@ function buildSchedule() {
   ALL_MATCHES.forEach(m => {
     const localISO = matchLocalDateISO(m.dateISO, m.time);
     (byDate[localISO] = byDate[localISO] || []).push(m);
+  });
+  // Sort matches within each day by kickoff time
+  Object.keys(byDate).forEach(iso => {
+    byDate[iso].sort((a, b) => {
+      const tA = matchToUTC(a.dateISO, a.time);
+      const tB = matchToUTC(b.dateISO, b.time);
+      return (tA ? tA.getTime() : 0) - (tB ? tB.getTime() : 0);
+    });
   });
 
   const sorted    = Object.keys(byDate).sort();
@@ -368,6 +386,11 @@ function buildSchedule() {
       </div>
     </div>
     <div class="selected-tags" id="selectedTeamTags"></div>
+    <div class="hide-finished-row">
+      <button class="hide-finished-btn${hideFinished ? ' active' : ''}" id="hideFinishedBtn">
+        ${hideFinished ? (LANG === 'zh' ? '显示全部比赛' : 'Show All') : (LANG === 'zh' ? '隐藏已结束' : 'Hide Finished')}
+      </button>
+    </div>
     ${daysHtml}
     <div class="no-results" id="noResults" style="display:none">${noResultsText}</div>
   `;
@@ -512,6 +535,12 @@ function buildSchedule() {
     selectedTeams.delete(team);
     const cb = container.querySelector(`.team-cb[value="${CSS.escape(team)}"]`);
     if (cb) cb.checked = false;
+    applyFilter();
+  });
+
+  // ── Hide Finished toggle ───────────────────────────────────
+  document.getElementById('hideFinishedBtn').addEventListener('click', () => {
+    hideFinished = !hideFinished;
     applyFilter();
   });
 }
