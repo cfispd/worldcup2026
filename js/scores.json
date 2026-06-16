@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-15T23:30:57.678590+00:00",
+  "updated": "2026-06-16T00:31:06.282186+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -111,11 +111,11 @@
     },
     "2026-06-15|Saudi Arabia|Uruguay": {
       "homeScore": 1,
-      "awayScore": 0,
-      "status": "live",
-      "minute": 55,
-      "homeGoals": "Al-Amri",
-      "awayGoals": ""
+      "awayScore": 1,
+      "status": "finished",
+      "minute": null,
+      "homeGoals": "Abdulelah Al-Amri",
+      "awayGoals": "Maxi Araujo"
     }
   },
   "bracket_teams": {}
