@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-16T04:10:25.857684+00:00",
+  "updated": "2026-06-16T17:31:04.453479+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -118,12 +118,12 @@
       "awayGoals": "Maxi Araujo"
     },
     "2026-06-15|Iran|New Zealand": {
-      "homeScore": 1,
-      "awayScore": 1,
-      "status": "live",
-      "minute": 45,
-      "homeGoals": "32' Ramin Rezaeian",
-      "awayGoals": "7' Elijah Just"
+      "homeScore": 2,
+      "awayScore": 2,
+      "status": "finished",
+      "minute": null,
+      "homeGoals": "32' Rezaeian; 64' Mohebbi",
+      "awayGoals": "7' Just; 54' Just"
     }
   },
   "bracket_teams": {}
