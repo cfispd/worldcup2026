@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-16T19:01:18.173865+00:00",
+  "updated": "2026-06-16T19:31:06.245590+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -126,9 +126,9 @@
       "awayGoals": "7' Just; 54' Just"
     },
     "2026-06-16|France|Senegal": {
-      "homeScore": null,
-      "awayScore": null,
-      "status": "upcoming",
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "live",
       "minute": null,
       "homeGoals": "",
       "awayGoals": ""
