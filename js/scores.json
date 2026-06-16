@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-16T19:31:06.245590+00:00",
+  "updated": "2026-06-16T20:31:10.491142+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -126,11 +126,11 @@
       "awayGoals": "7' Just; 54' Just"
     },
     "2026-06-16|France|Senegal": {
-      "homeScore": 0,
+      "homeScore": 1,
       "awayScore": 0,
       "status": "live",
-      "minute": null,
-      "homeGoals": "",
+      "minute": 66,
+      "homeGoals": "66' Mbappé",
       "awayGoals": ""
     }
   },
