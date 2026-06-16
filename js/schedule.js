@@ -4,7 +4,7 @@
 let selectedCities  = new Set();
 let selectedDates   = new Set();
 let selectedTeams   = new Set();
-let hideFinished    = false;
+let hideFinished    = true;
 
 // ═══════════════════════════════════════════════════════════
 //  FILTER LOGIC
