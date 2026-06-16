@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-16T23:01:10.994057+00:00",
+  "updated": "2026-06-16T23:05:17.296684+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -137,7 +137,7 @@
       "homeScore": 1,
       "awayScore": 2,
       "status": "live",
-      "minute": null,
+      "minute": 45,
       "homeGoals": "39' Aymen Hussein",
       "awayGoals": "29' Erling Haaland; 43' Erling Haaland"
     }
