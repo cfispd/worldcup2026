@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-16T22:01:09.790249+00:00",
+  "updated": "2026-06-16T22:31:00.346469+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -134,10 +134,10 @@
       "awayGoals": "90+5' Mbaye"
     },
     "2026-06-16|Iraq|Norway": {
-      "homeScore": null,
-      "awayScore": null,
-      "status": "upcoming",
-      "minute": null,
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "live",
+      "minute": 28,
       "homeGoals": "",
       "awayGoals": ""
     }
