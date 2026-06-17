@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-17T20:01:17.637579+00:00",
+  "updated": "2026-06-17T20:30:58.902638+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -166,11 +166,11 @@
       "awayGoals": "45+5' Yoane Wissa"
     },
     "2026-06-17|England|Croatia": {
-      "homeScore": null,
-      "awayScore": null,
-      "status": "upcoming",
-      "minute": null,
-      "homeGoals": "",
+      "homeScore": 1,
+      "awayScore": 0,
+      "status": "live",
+      "minute": 45,
+      "homeGoals": "45' Kane (pen)",
       "awayGoals": ""
     }
   },
