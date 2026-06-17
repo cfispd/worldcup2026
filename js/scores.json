@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-17T18:01:12.983085+00:00",
+  "updated": "2026-06-17T18:31:03.014930+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -161,9 +161,9 @@
       "homeScore": 1,
       "awayScore": 1,
       "status": "live",
-      "minute": 45,
-      "homeGoals": "6' João Neves",
-      "awayGoals": "45+5' Yoane Wissa"
+      "minute": 65,
+      "homeGoals": "6' Neves",
+      "awayGoals": "45+1' Wissa"
     }
   },
   "bracket_teams": {}
