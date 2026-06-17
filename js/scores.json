@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-17T17:30:57.285447+00:00",
+  "updated": "2026-06-17T18:01:12.983085+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -159,11 +159,11 @@
     },
     "2026-06-17|Portugal|DR Congo": {
       "homeScore": 1,
-      "awayScore": 0,
+      "awayScore": 1,
       "status": "live",
-      "minute": 29,
+      "minute": 45,
       "homeGoals": "6' João Neves",
-      "awayGoals": ""
+      "awayGoals": "45+5' Yoane Wissa"
     }
   },
   "bracket_teams": {}
