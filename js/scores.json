@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-17T06:01:15.015998+00:00",
+  "updated": "2026-06-17T17:01:11.600259+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -156,6 +156,14 @@
       "minute": null,
       "homeGoals": "20' Romano Schmid; 76' Yazan Al Arab (OG)",
       "awayGoals": "50' Ali Olwan"
+    },
+    "2026-06-17|Portugal|DR Congo": {
+      "homeScore": null,
+      "awayScore": null,
+      "status": "upcoming",
+      "minute": null,
+      "homeGoals": "",
+      "awayGoals": ""
     }
   },
   "bracket_teams": {}
