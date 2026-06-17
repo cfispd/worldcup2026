@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-17T21:06:07.651267+00:00",
+  "updated": "2026-06-17T21:31:11.108296+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -167,11 +167,11 @@
     },
     "2026-06-17|England|Croatia": {
       "homeScore": 2,
-      "awayScore": 1,
+      "awayScore": 2,
       "status": "live",
-      "minute": null,
-      "homeGoals": "Kane (pen); Kane",
-      "awayGoals": "Baturina"
+      "minute": 45,
+      "homeGoals": "12' Kane (Pen); 42' Kane",
+      "awayGoals": "36' Baturina; 45'+5' Musa"
     }
   },
   "bracket_teams": {}
