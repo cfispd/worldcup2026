@@ -671,6 +671,14 @@ function renderMatchdayStrip() {
     else if (s === 'upcoming' || s === 'finished') today.push([m, s]);
     else if (matchLocalDateISO(m.dateISO, m.time) === tomorrowISO) tomorrow.push([m, 'upcoming']);
   });
+  const byKickoff = ([a], [b]) => {
+    const tA = mdsStartUTC(a.dateISO, a.time);
+    const tB = mdsStartUTC(b.dateISO, b.time);
+    return (tA ? tA.getTime() : 0) - (tB ? tB.getTime() : 0);
+  };
+  live.sort(byKickoff);
+  today.sort(byKickoff);
+  tomorrow.sort(byKickoff);
 
   if (!live.length && !today.length && !tomorrow.length) {
     // No matches today/tomorrow — find the next upcoming match day
