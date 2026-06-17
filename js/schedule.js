@@ -543,4 +543,7 @@ function buildSchedule() {
     hideFinished = !hideFinished;
     applyFilter();
   });
+
+  // Apply initial filter state (e.g. hideFinished = true on first load)
+  applyFilter();
 }
