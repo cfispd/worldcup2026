@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-17T19:01:11.309952+00:00",
+  "updated": "2026-06-17T20:01:17.637579+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -164,6 +164,14 @@
       "minute": null,
       "homeGoals": "6' Joao Neves",
       "awayGoals": "45+5' Yoane Wissa"
+    },
+    "2026-06-17|England|Croatia": {
+      "homeScore": null,
+      "awayScore": null,
+      "status": "upcoming",
+      "minute": null,
+      "homeGoals": "",
+      "awayGoals": ""
     }
   },
   "bracket_teams": {}
