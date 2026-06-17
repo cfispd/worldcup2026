@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-17T02:31:01.622753+00:00",
+  "updated": "2026-06-17T03:01:06.520951+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -142,11 +142,11 @@
       "awayGoals": "29' Erling Haaland; 43' Erling Haaland; 76' Leo Ostigard"
     },
     "2026-06-16|Argentina|Algeria": {
-      "homeScore": 2,
+      "homeScore": 3,
       "awayScore": 0,
-      "status": "live",
-      "minute": 66,
-      "homeGoals": "17' Messi; 60' Messi",
+      "status": "finished",
+      "minute": null,
+      "homeGoals": "17' Messi; 60' Messi; 76' Messi",
       "awayGoals": ""
     }
   },
