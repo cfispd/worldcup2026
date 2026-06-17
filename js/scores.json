@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-17T22:57:44.906273+00:00",
+  "updated": "2026-06-17T23:31:04.492289+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -174,10 +174,10 @@
       "awayGoals": "36' Baturina, 45'+5' Musa"
     },
     "2026-06-17|Ghana|Panama": {
-      "homeScore": null,
-      "awayScore": null,
-      "status": "upcoming",
-      "minute": null,
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "live",
+      "minute": 28,
       "homeGoals": "",
       "awayGoals": ""
     }
