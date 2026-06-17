@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-17T00:01:15.318632+00:00",
+  "updated": "2026-06-17T01:01:08.830506+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -140,6 +140,14 @@
       "minute": null,
       "homeGoals": "39' Aymen Hussein",
       "awayGoals": "29' Erling Haaland; 43' Erling Haaland; 76' Leo Ostigard"
+    },
+    "2026-06-16|Argentina|Algeria": {
+      "homeScore": null,
+      "awayScore": null,
+      "status": "live",
+      "minute": null,
+      "homeGoals": "",
+      "awayGoals": ""
     }
   },
   "bracket_teams": {}
