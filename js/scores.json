@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-17T17:01:11.600259+00:00",
+  "updated": "2026-06-17T17:30:57.285447+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -158,11 +158,11 @@
       "awayGoals": "50' Ali Olwan"
     },
     "2026-06-17|Portugal|DR Congo": {
-      "homeScore": null,
-      "awayScore": null,
-      "status": "upcoming",
-      "minute": null,
-      "homeGoals": "",
+      "homeScore": 1,
+      "awayScore": 0,
+      "status": "live",
+      "minute": 29,
+      "homeGoals": "6' João Neves",
       "awayGoals": ""
     }
   },
