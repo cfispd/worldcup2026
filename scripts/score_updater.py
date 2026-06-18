@@ -112,7 +112,7 @@ JSON rules (no exceptions):
 - homeScore/awayScore: integer (0 is valid), null only if not started
 - status: "live" | "finished" | "upcoming"
 - minute: integer or null
-- homeGoals: HOME team goals only, e.g. "17' Embolo; 45' Schar" — empty string if none
+- homeGoals: HOME team goals only, e.g. "17' Embolo; 45' Schar" — separate with semicolons (;) NOT commas — empty string if none
 - awayGoals: AWAY team goals only, same format — empty string if none
 
 Output ONLY this JSON, nothing else:
