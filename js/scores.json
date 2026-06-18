@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-18T16:31:41.524202+00:00",
+  "updated": "2026-06-18T18:01:09.932990+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -192,9 +192,9 @@
     "2026-06-18|Czech Republic|South Africa": {
       "homeScore": 1,
       "awayScore": 1,
-      "status": "live",
+      "status": "finished",
       "minute": null,
-      "homeGoals": "6' Sadilek",
+      "homeGoals": "Sadílek",
       "awayGoals": ""
     }
   },
