@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-18T02:01:18.115175+00:00",
+  "updated": "2026-06-18T03:30:55.536473+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -182,12 +182,12 @@
       "awayGoals": ""
     },
     "2026-06-17|Uzbekistan|Colombia": {
-      "homeScore": null,
-      "awayScore": null,
-      "status": "upcoming",
-      "minute": null,
-      "homeGoals": "",
-      "awayGoals": ""
+      "homeScore": 1,
+      "awayScore": 1,
+      "status": "live",
+      "minute": 50,
+      "homeGoals": "45' Fayzullaev",
+      "awayGoals": "17' Munoz"
     }
   },
   "bracket_teams": {}
