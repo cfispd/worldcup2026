@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-18T18:01:09.932990+00:00",
+  "updated": "2026-06-18T19:01:14.384648+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -196,6 +196,14 @@
       "minute": null,
       "homeGoals": "Sadílek",
       "awayGoals": ""
+    },
+    "2026-06-18|Switzerland|Bosnia-Herzegovina": {
+      "homeScore": 1,
+      "awayScore": 1,
+      "status": "live",
+      "minute": null,
+      "homeGoals": "22' Embolo",
+      "awayGoals": "39' Lukic"
     }
   },
   "bracket_teams": {}
