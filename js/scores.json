@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-18T22:30:56.775617+00:00",
+  "updated": "2026-06-18T23:01:07.773899+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -206,11 +206,11 @@
       "awayGoals": "90+3' Mahmic"
     },
     "2026-06-18|Canada|Qatar": {
-      "homeScore": 2,
+      "homeScore": 3,
       "awayScore": 0,
       "status": "live",
-      "minute": 29,
-      "homeGoals": "16' Larin",
+      "minute": null,
+      "homeGoals": "16' Larin; 29' David; 33' David",
       "awayGoals": ""
     }
   },
