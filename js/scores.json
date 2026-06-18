@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-18T20:01:07.748000+00:00",
+  "updated": "2026-06-18T21:30:58.806647+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -198,12 +198,12 @@
       "awayGoals": ""
     },
     "2026-06-18|Switzerland|Bosnia-Herzegovina": {
-      "homeScore": 1,
+      "homeScore": 4,
       "awayScore": 1,
-      "status": "live",
+      "status": "finished",
       "minute": null,
-      "homeGoals": "17' Embolo",
-      "awayGoals": "1' Lukic"
+      "homeGoals": "74' Manzambi; 84' Vargas; 90' Manzambi; 90+7' Xhaka",
+      "awayGoals": "90+3' Mahmic"
     }
   },
   "bracket_teams": {}
