@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-18T23:44:52.640079+00:00",
+  "updated": "2026-06-19T00:01:16.007034+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -206,11 +206,11 @@
       "awayGoals": "90+3' Mahmic"
     },
     "2026-06-18|Canada|Qatar": {
-      "homeScore": 5,
+      "homeScore": 6,
       "awayScore": 0,
       "status": "live",
-      "minute": null,
-      "homeGoals": "16' Larin; Jonathan David; Nathan Saliba; 75' Saliba",
+      "minute": 90,
+      "homeGoals": "16' Larin; 29' David; 45' David; Saliba; Shaffelburg own goal; David",
       "awayGoals": ""
     }
   },
