@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-19T00:30:58.969467+00:00",
+  "updated": "2026-06-19T01:01:11.759073+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -211,6 +211,14 @@
       "status": "finished",
       "minute": null,
       "homeGoals": "16' Larin; 29' David; 45'+3' David; 64' Saliba; 75' Manai (OG); 90'+2' David",
+      "awayGoals": ""
+    },
+    "2026-06-18|Mexico|South Korea": {
+      "homeScore": null,
+      "awayScore": null,
+      "status": "upcoming",
+      "minute": null,
+      "homeGoals": "",
       "awayGoals": ""
     }
   },
