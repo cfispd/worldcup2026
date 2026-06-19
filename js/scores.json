@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-19T01:01:11.759073+00:00",
+  "updated": "2026-06-19T02:30:57.612277+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -214,12 +214,12 @@
       "awayGoals": ""
     },
     "2026-06-18|Mexico|South Korea": {
-      "homeScore": null,
-      "awayScore": null,
-      "status": "upcoming",
+      "homeScore": 2,
+      "awayScore": 1,
+      "status": "live",
       "minute": null,
-      "homeGoals": "",
-      "awayGoals": ""
+      "homeGoals": "9' Quiñones; 67' Jiménez",
+      "awayGoals": "In-Beom"
     }
   },
   "bracket_teams": {}
