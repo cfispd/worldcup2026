@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-19T19:01:06.519426+00:00",
+  "updated": "2026-06-19T19:30:56.625940+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -222,11 +222,11 @@
       "awayGoals": ""
     },
     "2026-06-19|United States|Australia": {
-      "homeScore": null,
-      "awayScore": null,
-      "status": "upcoming",
-      "minute": null,
-      "homeGoals": "",
+      "homeScore": 1,
+      "awayScore": 0,
+      "status": "live",
+      "minute": 45,
+      "homeGoals": "11' OG Burgess",
       "awayGoals": ""
     }
   },
