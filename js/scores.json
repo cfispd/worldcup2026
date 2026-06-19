@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-19T20:14:29.816427+00:00",
+  "updated": "2026-06-19T20:31:01.150588+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -225,8 +225,8 @@
       "homeScore": 2,
       "awayScore": 0,
       "status": "live",
-      "minute": null,
-      "homeGoals": "11' Burgess OG; Freeman",
+      "minute": 51,
+      "homeGoals": "11' Cameron Burgess OG; 43' Alex Freeman",
       "awayGoals": ""
     }
   },
