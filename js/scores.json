@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-19T22:31:00.473941+00:00",
+  "updated": "2026-06-19T22:57:27.462300+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -233,9 +233,9 @@
       "homeScore": 0,
       "awayScore": 1,
       "status": "live",
-      "minute": 30,
+      "minute": 45,
       "homeGoals": "",
-      "awayGoals": "2' I. Saibari"
+      "awayGoals": "2' Saibari"
     }
   },
   "bracket_teams": {}
