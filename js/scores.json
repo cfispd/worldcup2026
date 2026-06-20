@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-20T20:14:28.889585+00:00",
+  "updated": "2026-06-20T20:31:02.503117+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -262,8 +262,8 @@
       "awayGoals": "59' Elanga"
     },
     "2026-06-20|Germany|Ivory Coast": {
-      "homeScore": 0,
-      "awayScore": 0,
+      "homeScore": 1,
+      "awayScore": 1,
       "status": "live",
       "minute": null,
       "homeGoals": "",
