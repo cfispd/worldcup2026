@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-20T01:31:00.679092+00:00",
+  "updated": "2026-06-20T02:30:59.939838+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -238,11 +238,11 @@
       "awayGoals": "70' Saibari"
     },
     "2026-06-19|Brazil|Haiti": {
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 3,
+      "awayScore": 0,
       "status": "live",
-      "minute": null,
-      "homeGoals": "",
+      "minute": 50,
+      "homeGoals": "Matheus Cunha; Matheus Cunha; Vini Jr.",
       "awayGoals": ""
     }
   },
