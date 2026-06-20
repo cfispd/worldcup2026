@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-20T06:01:12.347075+00:00",
+  "updated": "2026-06-20T17:00:42.676381+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -252,6 +252,14 @@
       "minute": null,
       "homeGoals": "",
       "awayGoals": "2' Galarza"
+    },
+    "2026-06-20|Netherlands|Sweden": {
+      "homeScore": null,
+      "awayScore": null,
+      "status": "upcoming",
+      "minute": null,
+      "homeGoals": "",
+      "awayGoals": ""
     }
   },
   "bracket_teams": {}
