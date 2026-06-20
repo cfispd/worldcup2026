@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-19T23:31:01.956454+00:00",
+  "updated": "2026-06-20T00:01:15.071122+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -232,10 +232,10 @@
     "2026-06-19|Scotland|Morocco": {
       "homeScore": 0,
       "awayScore": 1,
-      "status": "live",
-      "minute": 66,
+      "status": "finished",
+      "minute": null,
       "homeGoals": "",
-      "awayGoals": "2' Saibari"
+      "awayGoals": "70' Saibari"
     }
   },
   "bracket_teams": {}
