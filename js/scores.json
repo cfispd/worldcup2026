@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-20T03:41:54.386570+00:00",
+  "updated": "2026-06-20T04:01:10.251602+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -244,6 +244,14 @@
       "minute": null,
       "homeGoals": "9' Cunha; 32' Cunha; 45+2' Vini Jr",
       "awayGoals": ""
+    },
+    "2026-06-20|Turkey|Paraguay": {
+      "homeScore": 0,
+      "awayScore": 1,
+      "status": "live",
+      "minute": 43,
+      "homeGoals": "",
+      "awayGoals": "2' Galarza"
     }
   },
   "bracket_teams": {}
