@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-20T19:01:15.402004+00:00",
+  "updated": "2026-06-20T20:01:18.283023+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -260,6 +260,14 @@
       "minute": null,
       "homeGoals": "5' Brobbey; 17' Brobbey; 47' Gakpo; 54' Gakpo; 89' Summerville",
       "awayGoals": "59' Elanga"
+    },
+    "2026-06-20|Germany|Ivory Coast": {
+      "homeScore": null,
+      "awayScore": null,
+      "status": "upcoming",
+      "minute": null,
+      "homeGoals": "",
+      "awayGoals": ""
     }
   },
   "bracket_teams": {}
