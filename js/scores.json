@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-20T18:30:58.499085+00:00",
+  "updated": "2026-06-20T18:54:34.611492+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -254,11 +254,11 @@
       "awayGoals": "2' Galarza"
     },
     "2026-06-20|Netherlands|Sweden": {
-      "homeScore": 4,
+      "homeScore": 5,
       "awayScore": 1,
       "status": "live",
-      "minute": 67,
-      "homeGoals": "5' Brobbey; 17' Brobbey; 47' Gakpo; 54' Gakpo",
+      "minute": 91,
+      "homeGoals": "5' Brobbey; 17' Brobbey; 47' Gakpo; 54' Gakpo; 89' Summerville",
       "awayGoals": "59' Elanga"
     }
   },
