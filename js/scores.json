@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-21T00:01:17.924857+00:00",
+  "updated": "2026-06-21T01:31:00.139175+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -270,9 +270,9 @@
       "awayGoals": "30' Kessie"
     },
     "2026-06-20|Ecuador|Curaçao": {
-      "homeScore": null,
-      "awayScore": null,
-      "status": "upcoming",
+      "homeScore": 1,
+      "awayScore": 0,
+      "status": "live",
       "minute": null,
       "homeGoals": "",
       "awayGoals": ""
