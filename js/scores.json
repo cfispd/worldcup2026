@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-21T17:04:56.722976+00:00",
+  "updated": "2026-06-21T17:30:58.237254+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -286,11 +286,11 @@
       "awayGoals": "4' Kamada; 31' Ueda; 69' Ito; 84' Ueda"
     },
     "2026-06-21|Spain|Saudi Arabia": {
-      "homeScore": 3,
+      "homeScore": 4,
       "awayScore": 0,
       "status": "live",
-      "minute": null,
-      "homeGoals": "10' Yamal; 21' Oyarzabal; 24' Oyarzabal",
+      "minute": 68,
+      "homeGoals": "10' Yamal; 21' Oyarzabal; 24' Oyarzabal; 49' Altambakti (OG)",
       "awayGoals": ""
     }
   },
