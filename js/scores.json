@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-21T22:30:57.417335+00:00",
+  "updated": "2026-06-21T23:01:08.435674+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -302,11 +302,11 @@
       "awayGoals": ""
     },
     "2026-06-21|Uruguay|Cape Verde": {
-      "homeScore": 0,
+      "homeScore": 2,
       "awayScore": 1,
       "status": "live",
-      "minute": 30,
-      "homeGoals": "",
+      "minute": 45,
+      "homeGoals": "44' Maxi Araújo; 45+6' Agustín Canobbio",
       "awayGoals": "21' Kevin Pina"
     }
   },
