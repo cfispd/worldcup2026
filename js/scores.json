@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-21T22:01:08.819513+00:00",
+  "updated": "2026-06-21T22:30:57.417335+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -302,12 +302,12 @@
       "awayGoals": ""
     },
     "2026-06-21|Uruguay|Cape Verde": {
-      "homeScore": null,
-      "awayScore": null,
-      "status": "upcoming",
-      "minute": null,
+      "homeScore": 0,
+      "awayScore": 1,
+      "status": "live",
+      "minute": 30,
       "homeGoals": "",
-      "awayGoals": ""
+      "awayGoals": "21' Kevin Pina"
     }
   },
   "bracket_teams": {}
