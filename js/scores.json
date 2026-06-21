@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-21T06:01:09.475082+00:00",
+  "updated": "2026-06-21T16:01:14.899201+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -284,6 +284,14 @@
       "minute": null,
       "homeGoals": "",
       "awayGoals": "4' Kamada; 31' Ueda; 69' Ito; 84' Ueda"
+    },
+    "2026-06-21|Spain|Saudi Arabia": {
+      "homeScore": 0,
+      "awayScore": 1,
+      "status": "live",
+      "minute": null,
+      "homeGoals": "",
+      "awayGoals": "A. Al-Amri"
     }
   },
   "bracket_teams": {}
