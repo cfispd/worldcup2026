@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-21T16:30:58.422275+00:00",
+  "updated": "2026-06-21T17:01:06.838106+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -289,8 +289,8 @@
       "homeScore": 3,
       "awayScore": 0,
       "status": "live",
-      "minute": 25,
-      "homeGoals": "10' Lamine Yamal; 21' Mikel Oyarzabal; 24' Mikel Oyarzabal",
+      "minute": 45,
+      "homeGoals": "10' Yamal; 21' Oyarzabal; 24' Oyarzabal",
       "awayGoals": ""
     }
   },
