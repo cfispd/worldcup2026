@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-21T18:31:01.494782+00:00",
+  "updated": "2026-06-21T18:59:45.812740+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -291,6 +291,14 @@
       "status": "finished",
       "minute": null,
       "homeGoals": "10' Lamine Yamal; 21' Mikel Oyarzabal; 24' Mikel Oyarzabal; 49' Hassan Altambakti (OG)",
+      "awayGoals": ""
+    },
+    "2026-06-21|Belgium|Iran": {
+      "homeScore": null,
+      "awayScore": null,
+      "status": "upcoming",
+      "minute": null,
+      "homeGoals": "",
       "awayGoals": ""
     }
   },
