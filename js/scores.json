@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-21T23:50:38.901557+00:00",
+  "updated": "2026-06-22T00:01:12.984487+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -305,8 +305,8 @@
       "homeScore": 2,
       "awayScore": 2,
       "status": "live",
-      "minute": 84,
-      "homeGoals": "44' Araújo; 46' Canobbio",
+      "minute": 90,
+      "homeGoals": "44' Araújo; 45+6' Canobbio",
       "awayGoals": "21' Pina; 61' Varela"
     }
   },
