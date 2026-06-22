@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-22T00:01:12.984487+00:00",
+  "updated": "2026-06-22T00:31:06.413596+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -304,10 +304,10 @@
     "2026-06-21|Uruguay|Cape Verde": {
       "homeScore": 2,
       "awayScore": 2,
-      "status": "live",
-      "minute": 90,
-      "homeGoals": "44' Araújo; 45+6' Canobbio",
-      "awayGoals": "21' Pina; 61' Varela"
+      "status": "finished",
+      "minute": null,
+      "homeGoals": "44' Maxi Araujo; 45+6' Agustin Canobbio",
+      "awayGoals": "21' Kevin Pina; 61' Helio Varela"
     }
   },
   "bracket_teams": {}
