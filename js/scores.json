@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-22T19:01:12.000316+00:00",
+  "updated": "2026-06-22T19:26:30.134743+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -320,9 +320,9 @@
     "2026-06-22|Argentina|Austria": {
       "homeScore": 2,
       "awayScore": 0,
-      "status": "live",
-      "minute": 95,
-      "homeGoals": "38' Messi; 90' Messi",
+      "status": "finished",
+      "minute": null,
+      "homeGoals": "38' Messi; 90+5' Messi",
       "awayGoals": ""
     }
   },
