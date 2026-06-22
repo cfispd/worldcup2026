@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-22T21:01:13.802158+00:00",
+  "updated": "2026-06-22T21:38:22.499310+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -326,11 +326,11 @@
       "awayGoals": ""
     },
     "2026-06-22|France|Iraq": {
-      "homeScore": null,
-      "awayScore": null,
-      "status": "upcoming",
+      "homeScore": 1,
+      "awayScore": 0,
+      "status": "live",
       "minute": null,
-      "homeGoals": "",
+      "homeGoals": "Mbappé",
       "awayGoals": ""
     }
   },
