@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-22T17:31:06.445402+00:00",
+  "updated": "2026-06-22T18:01:19.533511+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -318,11 +318,11 @@
       "awayGoals": "58' Zico; 67' Salah; 84' Trezeguet"
     },
     "2026-06-22|Argentina|Austria": {
-      "homeScore": 0,
+      "homeScore": 1,
       "awayScore": 0,
       "status": "live",
-      "minute": 28,
-      "homeGoals": "",
+      "minute": 45,
+      "homeGoals": "38' Messi",
       "awayGoals": ""
     }
   },
