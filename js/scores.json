@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-22T18:01:19.533511+00:00",
+  "updated": "2026-06-22T18:31:06.414651+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -321,7 +321,7 @@
       "homeScore": 1,
       "awayScore": 0,
       "status": "live",
-      "minute": 45,
+      "minute": 66,
       "homeGoals": "38' Messi",
       "awayGoals": ""
     }
