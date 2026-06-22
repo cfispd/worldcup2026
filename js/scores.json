@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-22T01:01:12.923825+00:00",
+  "updated": "2026-06-22T01:31:00.617164+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -310,12 +310,12 @@
       "awayGoals": "21' Kevin Pina; 61' Helio Varela"
     },
     "2026-06-21|New Zealand|Egypt": {
-      "homeScore": 0,
-      "awayScore": 1,
+      "homeScore": 1,
+      "awayScore": 0,
       "status": "live",
       "minute": null,
-      "homeGoals": "",
-      "awayGoals": "E. Ashour"
+      "homeGoals": "17' Just",
+      "awayGoals": ""
     }
   },
   "bracket_teams": {}
