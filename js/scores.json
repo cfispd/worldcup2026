@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-23T05:01:14.575420+00:00",
+  "updated": "2026-06-23T17:01:21.863905+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -348,6 +348,14 @@
       "minute": null,
       "homeGoals": "Nizar Al Rashdan",
       "awayGoals": "Nadhir Benbouali"
+    },
+    "2026-06-23|Portugal|Uzbekistan": {
+      "homeScore": null,
+      "awayScore": null,
+      "status": "upcoming",
+      "minute": null,
+      "homeGoals": "",
+      "awayGoals": ""
     }
   },
   "bracket_teams": {}
