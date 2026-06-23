@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-23T18:19:51.850888+00:00",
+  "updated": "2026-06-23T19:01:20.080737+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -350,11 +350,11 @@
       "awayGoals": "Nadhir Benbouali"
     },
     "2026-06-23|Portugal|Uzbekistan": {
-      "homeScore": 3,
+      "homeScore": 5,
       "awayScore": 0,
-      "status": "live",
+      "status": "finished",
       "minute": null,
-      "homeGoals": "6' Ronaldo; 45' Mendes; Ronaldo",
+      "homeGoals": "6' Cristiano Ronaldo; 17' Nuno Mendes; 39' Cristiano Ronaldo; 60' Abduvohid Nematov (OG); 87' Rafael Leao",
       "awayGoals": ""
     }
   },
