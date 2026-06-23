@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-23T00:30:59.262494+00:00",
+  "updated": "2026-06-23T01:01:13.615575+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -334,12 +334,12 @@
       "awayGoals": ""
     },
     "2026-06-22|Norway|Senegal": {
-      "homeScore": 1,
-      "awayScore": 0,
+      "homeScore": 2,
+      "awayScore": 1,
       "status": "live",
       "minute": null,
-      "homeGoals": "",
-      "awayGoals": ""
+      "homeGoals": "17' Haaland; 45' Ørsted",
+      "awayGoals": "1' Mbaye"
     }
   },
   "bracket_teams": {}
