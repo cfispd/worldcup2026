@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-23T20:31:05.345462+00:00",
+  "updated": "2026-06-23T20:32:44.560171+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -361,7 +361,7 @@
       "homeScore": 0,
       "awayScore": 0,
       "status": "live",
-      "minute": 26,
+      "minute": null,
       "homeGoals": "",
       "awayGoals": ""
     }
