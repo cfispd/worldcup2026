@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-22T23:31:00.301729+00:00",
+  "updated": "2026-06-23T00:01:12.404095+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -331,6 +331,14 @@
       "status": "live",
       "minute": null,
       "homeGoals": "Mbappé",
+      "awayGoals": ""
+    },
+    "2026-06-22|Norway|Senegal": {
+      "homeScore": null,
+      "awayScore": null,
+      "status": "upcoming",
+      "minute": null,
+      "homeGoals": "",
       "awayGoals": ""
     }
   },
