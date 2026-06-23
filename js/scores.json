@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-23T04:31:05.420732+00:00",
+  "updated": "2026-06-23T05:01:14.575420+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -343,11 +343,11 @@
     },
     "2026-06-22|Jordan|Algeria": {
       "homeScore": 1,
-      "awayScore": 0,
-      "status": "live",
+      "awayScore": 1,
+      "status": "finished",
       "minute": null,
       "homeGoals": "Nizar Al Rashdan",
-      "awayGoals": ""
+      "awayGoals": "Nadhir Benbouali"
     }
   },
   "bracket_teams": {}
