@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-24T22:01:13.716780+00:00",
+  "updated": "2026-06-24T22:30:59.138105+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -398,20 +398,20 @@
       "awayGoals": "42' Alhaydos"
     },
     "2026-06-24|Scotland|Brazil": {
-      "homeScore": null,
-      "awayScore": null,
-      "status": "upcoming",
-      "minute": null,
+      "homeScore": 0,
+      "awayScore": 1,
+      "status": "live",
+      "minute": 25,
       "homeGoals": "",
-      "awayGoals": ""
+      "awayGoals": "7' Vinicius Junior"
     },
     "2026-06-24|Morocco|Haiti": {
-      "homeScore": null,
-      "awayScore": null,
-      "status": "upcoming",
+      "homeScore": 0,
+      "awayScore": 1,
+      "status": "live",
       "minute": null,
       "homeGoals": "",
-      "awayGoals": ""
+      "awayGoals": "Lenny Joseph"
     }
   },
   "bracket_teams": {}
