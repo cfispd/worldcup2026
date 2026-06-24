@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-24T21:01:13.010141+00:00",
+  "updated": "2026-06-24T22:01:13.716780+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -396,6 +396,22 @@
       "minute": null,
       "homeGoals": "34' Albrake (OG); 42' Alhaydos",
       "awayGoals": "42' Alhaydos"
+    },
+    "2026-06-24|Scotland|Brazil": {
+      "homeScore": null,
+      "awayScore": null,
+      "status": "upcoming",
+      "minute": null,
+      "homeGoals": "",
+      "awayGoals": ""
+    },
+    "2026-06-24|Morocco|Haiti": {
+      "homeScore": null,
+      "awayScore": null,
+      "status": "upcoming",
+      "minute": null,
+      "homeGoals": "",
+      "awayGoals": ""
     }
   },
   "bracket_teams": {}
