@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-24T20:01:11.249033+00:00",
+  "updated": "2026-06-24T20:31:19.092178+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -382,20 +382,20 @@
       "awayGoals": ""
     },
     "2026-06-24|Switzerland|Canada": {
-      "homeScore": 0,
+      "homeScore": 2,
       "awayScore": 0,
       "status": "live",
-      "minute": 45,
-      "homeGoals": "",
+      "minute": 68,
+      "homeGoals": "46' Ruben Vargas; 57' Johan Manzambi",
       "awayGoals": ""
     },
     "2026-06-24|Bosnia-Herzegovina|Qatar": {
       "homeScore": 2,
       "awayScore": 1,
       "status": "live",
-      "minute": 45,
-      "homeGoals": "29' Alajbegovic; 35' (OG Sultan Al-Brake)",
-      "awayGoals": "41' Al-Haydos"
+      "minute": null,
+      "homeGoals": "31' Kerim Alajbegovic; 34' Own Goal",
+      "awayGoals": "42' Hassan Al-Haydos"
     }
   },
   "bracket_teams": {}
