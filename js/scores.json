@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-24T19:30:58.622352+00:00",
+  "updated": "2026-06-24T19:45:06.391211+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -385,16 +385,16 @@
       "homeScore": 0,
       "awayScore": 0,
       "status": "live",
-      "minute": 30,
+      "minute": 43,
       "homeGoals": "",
       "awayGoals": ""
     },
     "2026-06-24|Bosnia-Herzegovina|Qatar": {
-      "homeScore": 0,
+      "homeScore": 2,
       "awayScore": 0,
       "status": "live",
       "minute": null,
-      "homeGoals": "",
+      "homeGoals": "Kerim Alajbegovic",
       "awayGoals": ""
     }
   },
