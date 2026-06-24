@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-24T19:01:11.766006+00:00",
+  "updated": "2026-06-24T19:30:58.622352+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -382,17 +382,17 @@
       "awayGoals": ""
     },
     "2026-06-24|Switzerland|Canada": {
-      "homeScore": null,
-      "awayScore": null,
-      "status": "upcoming",
-      "minute": null,
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "live",
+      "minute": 30,
       "homeGoals": "",
       "awayGoals": ""
     },
     "2026-06-24|Bosnia-Herzegovina|Qatar": {
-      "homeScore": null,
-      "awayScore": null,
-      "status": "upcoming",
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "live",
       "minute": null,
       "homeGoals": "",
       "awayGoals": ""
