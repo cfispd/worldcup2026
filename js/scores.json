@@ -349,6 +349,22 @@
       "homeGoals": "Nizar Al Rashdan",
       "awayGoals": "Nadhir Benbouali"
     },
+    "2026-06-23|Colombia|DR Congo": {
+      "homeScore": 1,
+      "awayScore": 0,
+      "status": "finished",
+      "minute": null,
+      "homeGoals": "",
+      "awayGoals": ""
+    },
+    "2026-06-23|Panama|Croatia": {
+      "homeScore": 0,
+      "awayScore": 1,
+      "status": "finished",
+      "minute": null,
+      "homeGoals": "",
+      "awayGoals": ""
+    },
     "2026-06-23|Portugal|Uzbekistan": {
       "homeScore": 5,
       "awayScore": 0,
