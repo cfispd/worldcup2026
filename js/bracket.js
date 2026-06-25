@@ -1,6 +1,23 @@
 // ═══════════════════════════════════════════════════════════
 //  BUILD BRACKET VIEW
 // ═══════════════════════════════════════════════════════════
+
+// Render team name + flag (flag pinned to the right)
+function brTeam(name) {
+  let resolved = name;
+  if (BRACKET_TEAMS[name]) resolved = BRACKET_TEAMS[name];
+  else {
+    const w = name.match(/^W Match (\d+)$/);
+    const l = name.match(/^L Match (\d+)$/);
+    if (w && MATCH_WINNERS[w[1]]) resolved = MATCH_WINNERS[w[1]];
+    if (l && MATCH_WINNERS['L' + l[1]]) resolved = MATCH_WINNERS['L' + l[1]];
+  }
+  const label = LANG === 'zh' && TEAM_NAMES_ZH[resolved] ? TEAM_NAMES_ZH[resolved] : resolved;
+  const fc    = FLAGS[resolved];
+  const flag  = fc ? `<img src="https://flagcdn.com/w40/${fc}.png" alt="${resolved}" class="br-team-flag">` : '';
+  return `<span class="br-team-name">${label}</span>${flag}`;
+}
+
 function buildBracket() {
   const BASE    = 100;  // px per R32 slot (controls vertical spacing)
   const CARD_H  = 95;   // card height — tall enough for header + 2 teams + venue
@@ -74,8 +91,8 @@ function buildBracket() {
           <span class="br-match-date">${n.date}${timeById[n.id] ? ' · ' + timeById[n.id] : ''}</span>
         </div>
         <div class="br-card-teams">
-          <div class="br-team">${teamName(n.home)}</div>
-          <div class="br-team">${teamName(n.away)}</div>
+          <div class="br-team">${brTeam(n.home)}</div>
+          <div class="br-team">${brTeam(n.away)}</div>
         </div>
         <div class="br-venue">${venuePin} ${n.venue}</div>
       </div>`;
@@ -96,9 +113,9 @@ function buildBracket() {
         <span class="br-match-date">${n3.date}${timeById[n3.id] ? ' · ' + timeById[n3.id] : ''}</span>
       </div>
       <div class="br-card-teams" style="display:flex;gap:12px;align-items:center;padding:6px 10px 4px;">
-        <div class="br-team" style="flex:1">${teamName(n3.home)}</div>
+        <div class="br-team" style="flex:1">${brTeam(n3.home)}</div>
         <span style="font-size:.65rem;color:#546e7a;font-weight:700;">VS</span>
-        <div class="br-team" style="flex:1;text-align:right">${teamName(n3.away)}</div>
+        <div class="br-team" style="flex:1">${brTeam(n3.away)}</div>
       </div>
       <div class="br-venue">${venuePin} ${n3.venue}</div>
     </div>`;
