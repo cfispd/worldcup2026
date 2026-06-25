@@ -1353,6 +1353,15 @@ body.night .fp-go-btn { background: linear-gradient(135deg, #1a237e, #0d47a1); }
 .sc-team-inner span { color: #4b5563; font-size: .88rem; }
 .sc-flag { width: 28px; height: 19px; object-fit: cover; border-radius: 2px; box-shadow: 0 1px 4px rgba(0,0,0,.3); flex-shrink: 0; }
 .sc-goals { text-align: center; padding: 12px 16px; font-weight: 800; font-size: 1.15rem; color: #4f46e5; }
+.sc-hidden { display: none; }
+.sc-see-more {
+  display: block; margin: 16px auto 0;
+  background: transparent; border: 1px solid rgba(99,102,241,.3);
+  color: #6366f1; font-size: .85rem; font-weight: 600;
+  padding: 8px 24px; border-radius: 20px; cursor: pointer;
+  transition: background .18s, border-color .18s, color .18s;
+}
+.sc-see-more:hover { background: rgba(99,102,241,.07); border-color: #6366f1; color: #4f46e5; }
 .scorers-note { text-align: center; font-size: .74rem; color: #9ca3af; margin-top: 14px; line-height: 1.5; }
 
 body.night .scorers-title { color: #e8eaf0; }
@@ -1367,3 +1376,5 @@ body.night .sc-name { color: #e8eaf0; }
 body.night .sc-team-inner span { color: #90a4ae; }
 body.night .sc-goals { color: #818cf8; }
 body.night .scorers-note { color: #455a64; }
+body.night .sc-see-more { border-color: #2a3260; color: #7986cb; }
+body.night .sc-see-more:hover { background: rgba(255,255,255,.05); border-color: #ffd700; color: #ffd700; }

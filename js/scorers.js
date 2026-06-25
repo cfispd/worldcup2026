@@ -3,6 +3,8 @@
 //  Depends on: data.js, helpers.js  (loaded first)
 // ═══════════════════════════════════════════════════════════
 
+const SCORERS_INITIAL = 8;
+
 function parseTopScorers() {
   const scorers = {};
 
@@ -29,9 +31,31 @@ function parseTopScorers() {
     });
   });
 
+  // Merge single-word names into matching full names from same team
+  // e.g., "Haaland|Norway" → absorbs into "Erling Haaland|Norway"
+  Object.keys(scorers).forEach(key => {
+    const s = scorers[key];
+    if (s.name.indexOf(' ') !== -1) return; // only process single-word names
+    const lastName = s.name;
+    const fullKey = Object.keys(scorers).find(k => {
+      if (k === key) return false;
+      const other = scorers[k];
+      return other.team === s.team && other.name.endsWith(' ' + lastName);
+    });
+    if (fullKey) {
+      scorers[fullKey].goals += s.goals;
+      delete scorers[key];
+    }
+  });
+
   return Object.values(scorers)
     .filter(s => s.goals > 0)
     .sort((a, b) => b.goals - a.goals || a.name.localeCompare(b.name));
+}
+
+function scorersShowAll(btn) {
+  document.querySelectorAll('#view-scorers .sc-hidden').forEach(el => el.classList.remove('sc-hidden'));
+  btn.style.display = 'none';
 }
 
 function buildScorers() {
@@ -55,13 +79,19 @@ function buildScorers() {
       : '';
     const teamLabel = z ? (TEAM_NAMES_ZH[s.team] || s.team) : s.team;
     const rankCell  = rank <= 3 ? medals[rank - 1] : rank;
-    return `<tr class="${rank <= 3 ? 'sc-row-medal' : ''}">
+    const hidden    = i >= SCORERS_INITIAL ? ' sc-hidden' : '';
+    return `<tr class="${rank <= 3 ? 'sc-row-medal' : ''}${hidden}">
       <td class="sc-rank">${rankCell}</td>
       <td class="sc-name">${s.name}</td>
       <td class="sc-team-cell"><div class="sc-team-inner">${fl}<span>${teamLabel}</span></div></td>
       <td class="sc-goals">${s.goals}</td>
     </tr>`;
   }).join('');
+
+  const hasMore = scorers.length > SCORERS_INITIAL;
+  const seeMoreBtn = hasMore
+    ? `<button class="sc-see-more" onclick="scorersShowAll(this)">${z ? `查看全部 ${scorers.length} 名 ↓` : `See All ${scorers.length} Scorers ↓`}</button>`
+    : '';
 
   view.innerHTML = `
     <div class="scorers-wrap">
@@ -77,6 +107,7 @@ function buildScorers() {
           <tbody>${rows}</tbody>
         </table>
       </div>
+      ${seeMoreBtn}
       <p class="scorers-note">${z
         ? '* 进球数据来自比赛记录，未记录进球者的场次不计入统计'
         : '* Parsed from match goal records; matches without scorer data are excluded'
