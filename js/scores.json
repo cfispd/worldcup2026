@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-25T00:13:01.356101+00:00",
+  "updated": "2026-06-25T01:01:11.722173+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -412,6 +412,22 @@
       "minute": null,
       "homeGoals": "39' Achraf Hakimi; 45'+1' Ismael Saibari; 78' Soufiane Rahimi; 89' Gessime Yassine",
       "awayGoals": "10' Yassine Bounou (OG); 43' Wilson Isidor"
+    },
+    "2026-06-24|Czech Republic|Mexico": {
+      "homeScore": null,
+      "awayScore": null,
+      "status": "upcoming",
+      "minute": null,
+      "homeGoals": "",
+      "awayGoals": ""
+    },
+    "2026-06-24|South Africa|South Korea": {
+      "homeScore": null,
+      "awayScore": null,
+      "status": "upcoming",
+      "minute": null,
+      "homeGoals": "",
+      "awayGoals": ""
     }
   },
   "bracket_teams": {}
