@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-25T03:01:07.555733+00:00",
+  "updated": "2026-06-25T03:35:29.344950+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -430,5 +430,12 @@
       "awayGoals": ""
     }
   },
-  "bracket_teams": {}
+  "bracket_teams": {
+    "1st Group A": "Mexico",
+    "2nd Group A": "South Africa",
+    "1st Group B": "Switzerland",
+    "2nd Group B": "Canada",
+    "1st Group C": "Brazil",
+    "2nd Group C": "Morocco"
+  }
 }
