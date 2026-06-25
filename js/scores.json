@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-25T02:31:04.352480+00:00",
+  "updated": "2026-06-25T03:01:07.555733+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -414,19 +414,19 @@
       "awayGoals": "10' Yassine Bounou (OG); 43' Wilson Isidor"
     },
     "2026-06-24|Czech Republic|Mexico": {
-      "homeScore": null,
-      "awayScore": null,
-      "status": "upcoming",
+      "homeScore": 0,
+      "awayScore": 3,
+      "status": "finished",
       "minute": null,
       "homeGoals": "",
-      "awayGoals": ""
+      "awayGoals": "Chavez Garcia; Quinones; 3rd goal"
     },
     "2026-06-24|South Africa|South Korea": {
       "homeScore": 1,
       "awayScore": 0,
-      "status": "live",
-      "minute": 69,
-      "homeGoals": "63' Thapelo Maseko",
+      "status": "finished",
+      "minute": null,
+      "homeGoals": "Maseko",
       "awayGoals": ""
     }
   },
