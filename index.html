@@ -45,6 +45,10 @@
       <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
       <span class="tab-label">Map</span>
     </button>
+    <button class="tab-btn" data-tab="scorers">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+      <span class="tab-label">Scorers</span>
+    </button>
   </div>
 </header>
 
@@ -126,6 +130,9 @@
   <!-- ── BRACKET VIEW ── -->
   <div class="view" id="view-bracket"></div>
 
+  <!-- ── SCORERS VIEW ── -->
+  <div class="view" id="view-scorers"></div>
+
   <!-- ── MAP VIEW ── -->
   <div class="view" id="view-map">
     <div id="map-sidebar">
@@ -205,12 +212,13 @@
   </div>
 </div>
 
-<!-- Scripts load order: data → helpers → views → app → map -->
+<!-- Scripts load order: data → helpers → views → app → map → scorers -->
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="js/data.js"></script>
 <script src="js/helpers.js"></script>
 <script src="js/schedule.js"></script>
 <script src="js/bracket.js"></script>
+<script src="js/scorers.js"></script>
 <script src="js/app.js"></script>
 <script src="js/map.js"></script>
 

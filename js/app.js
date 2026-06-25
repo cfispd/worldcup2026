@@ -39,6 +39,7 @@ const TAB_LABELS = {
   schedule: ['Schedule', '赛程'],
   bracket:  ['Bracket',  '淘汰赛'],
   map:      ['Map',      '地图'],
+  scorers:  ['Scorers',  '射手榜'],
 };
 
 function setLang(lang) {
@@ -82,6 +83,7 @@ function setLang(lang) {
   // Re-render dynamic views
   buildSchedule();
   buildBracket();
+  buildScorers();
   if (typeof updateMapLang === 'function') updateMapLang();
 
   // Sync theme button label language
@@ -110,6 +112,7 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
     btn.classList.add('active');
     document.getElementById('view-' + btn.dataset.tab).classList.add('active');
     if (btn.dataset.tab === 'schedule') buildSchedule();
+    if (btn.dataset.tab === 'scorers')  buildScorers();
   });
 });
 
@@ -790,6 +793,9 @@ async function fetchScores() {
     buildBracket();   // refresh bracket with resolved names & scores
     if (document.getElementById('view-schedule')?.classList.contains('active')) {
       buildSchedule();
+    }
+    if (document.getElementById('view-scorers')?.classList.contains('active')) {
+      buildScorers();
     }
   } catch { /* silently ignore network/parse errors */ }
 }
