@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-25T20:57:12.292274+00:00",
+  "updated": "2026-06-25T21:01:03.895467+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -434,16 +434,16 @@
       "awayScore": 1,
       "status": "live",
       "minute": 45,
-      "homeGoals": "",
-      "awayGoals": ""
+      "homeGoals": "45' Angulo",
+      "awayGoals": "19' Sane"
     },
     "2026-06-25|Curaçao|Ivory Coast": {
       "homeScore": 0,
       "awayScore": 1,
       "status": "live",
-      "minute": 19,
+      "minute": 27,
       "homeGoals": "",
-      "awayGoals": "19' Pepe"
+      "awayGoals": "7' Pepe"
     }
   },
   "bracket_teams": {
