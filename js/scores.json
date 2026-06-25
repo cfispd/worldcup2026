@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-24T23:31:01.816230+00:00",
+  "updated": "2026-06-25T00:01:24.640370+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -401,16 +401,16 @@
       "homeScore": 0,
       "awayScore": 3,
       "status": "live",
-      "minute": 64,
+      "minute": 88,
       "homeGoals": "",
       "awayGoals": "7' Vinicius Junior; 45'+3' Vinicius Junior; 60' Matheus Cunha"
     },
     "2026-06-24|Morocco|Haiti": {
-      "homeScore": 2,
+      "homeScore": 4,
       "awayScore": 2,
       "status": "live",
-      "minute": 68,
-      "homeGoals": "39' Achraf Hakimi; 45'+1' Ismael Saibari",
+      "minute": 92,
+      "homeGoals": "39' Achraf Hakimi; 45'+1' Ismael Saibari; 78' Soufiane Rahimi; 89' Gessime Yassine",
       "awayGoals": "10' Yassine Bounou (OG); 43' Wilson Isidor"
     }
   },
