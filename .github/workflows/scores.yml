@@ -2,9 +2,10 @@ name: World Cup Score Updater
 
 on:
   schedule:
-    # Triggers every 30 min; Python script calls Claude only in fixed windows
-    # anchored to kickoff: T+15, T+75, T+135, T+195 (±20 min each)
-    - cron: '*/30 * * * *'
+    # Triggers every 15 min; Python script calls Claude only in fixed windows
+    # anchored to kickoff: T+15, T+75, T+135, T+195 (±8 min each)
+    # For integer-hour kickoffs this fires exactly at :15 past each hour
+    - cron: '*/15 * * * *'
   workflow_dispatch:
 
 concurrency:
