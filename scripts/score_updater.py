@@ -424,7 +424,6 @@ def main():
             new_scores = fetch_scores(pending)
             for m in pending:
                 key = match_key(m)
-                last_queried[key] = now.isoformat()   # record query time
                 score = new_scores.get(key)
                 if not score:
                     continue
@@ -434,8 +433,12 @@ def main():
                     if elapsed < 95:
                         print(f"  ⚠️  Ignoring premature 'finished' for {key} ({elapsed:.0f} min elapsed)")
                         score["status"] = "live"
-                if score.get("homeScore") is not None or key not in scores_db:
+                got_score = score.get("homeScore") is not None
+                if got_score or key not in scores_db:
                     scores_db[key] = score
+                if got_score:
+                    last_queried[key] = now.isoformat()  # only throttle after real score
+                # else: null response → don't set last_queried so we retry next run
             print(f"  → {len(new_scores)} result(s).")
     else:
         print("No group matches in active window.")
@@ -454,7 +457,6 @@ def main():
             ko_scores = fetch_scores(pending_ko)
             for m in pending_ko:
                 key = match_key(m)
-                last_queried[key] = now.isoformat()   # record query time
                 score = ko_scores.get(key)
                 if not score:
                     continue
@@ -463,8 +465,11 @@ def main():
                     if elapsed < 95:
                         print(f"  ⚠️  Ignoring premature 'finished' for {key} ({elapsed:.0f} min elapsed)")
                         score["status"] = "live"
-                if score.get("homeScore") is not None or key not in scores_db:
+                got_score = score.get("homeScore") is not None
+                if got_score or key not in scores_db:
                     scores_db[key] = score
+                if got_score:
+                    last_queried[key] = now.isoformat()
             print(f"  → {len(ko_scores)} result(s).")
     else:
         print("No knockout matches in active window.")

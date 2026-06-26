@@ -508,8 +508,5 @@
     "1st Group F": "Netherlands",
     "2nd Group F": "Japan"
   },
-  "last_queried": {
-    "2026-06-26|Norway|France": "2026-06-26T19:31:01.340913+00:00",
-    "2026-06-26|Senegal|Iraq": "2026-06-26T19:31:01.340913+00:00"
-  }
+  "last_queried": {}
 }
