@@ -1385,27 +1385,29 @@ body.night .sc-see-more:hover { background: rgba(255,255,255,.05); border-color:
    THIRD-PLACE STANDINGS — FAB + bottom-sheet panel
    ════════════════════════════════════════════════════════════ */
 
-/* FAB button */
-.thirds-fab {
+/* Bar button (inline in groups view) */
+.t3-bar-btn {
   display: flex;
   align-items: center;
-  gap: 6px;
-  position: fixed;
-  bottom: 24px;
-  right: 20px;
-  z-index: 800;
-  padding: 10px 16px;
-  background: linear-gradient(135deg,#7c3aed,#4f46e5);
+  gap: 10px;
+  width: 100%;
+  padding: 14px 20px;
+  margin-bottom: 14px;
+  background: linear-gradient(135deg,#7c3aed 0%,#4f46e5 60%,#2563eb 100%);
   color: #fff;
   border: none;
-  border-radius: 999px;
-  font-size: .82rem;
+  border-radius: 14px;
+  font-size: .92rem;
   font-weight: 700;
   cursor: pointer;
-  box-shadow: 0 4px 16px rgba(124,58,237,.4);
+  box-shadow: 0 4px 18px rgba(79,70,229,.35);
   transition: transform .15s, box-shadow .15s;
+  text-align: left;
 }
-.thirds-fab:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(124,58,237,.5); }
+.t3-bar-btn:hover { transform: translateY(-2px); box-shadow: 0 7px 24px rgba(79,70,229,.45); }
+.t3-bar-main { flex: 1; letter-spacing: .2px; }
+.t3-bar-arr { font-size: 1.3rem; opacity: .85; }
+body.night .t3-bar-btn { box-shadow: 0 4px 18px rgba(79,70,229,.5); }
 
 /* Overlay */
 .thirds-overlay {

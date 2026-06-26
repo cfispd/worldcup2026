@@ -74,6 +74,10 @@ function setLang(lang) {
   if (groupsHint) groupsHint.textContent = lang === 'zh'
     ? '点击小组卡片查看比赛时间表'
     : 'Click any group card to see the match schedule';
+  const t3Label = document.getElementById('t3-bar-label');
+  if (t3Label) t3Label.innerHTML = lang === 'zh'
+    ? '第三名排名 &nbsp;·&nbsp; 前8名晋级淘汰赛'
+    : '3rd Place Standings &nbsp;·&nbsp; Top 8 advance to knockout';
 
   // Re-render standings on all group cards
   document.querySelectorAll('.standings-mini[data-group]').forEach(el => {
@@ -114,8 +118,6 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
     document.getElementById('view-' + btn.dataset.tab).classList.add('active');
     if (btn.dataset.tab === 'schedule') buildSchedule();
     if (btn.dataset.tab === 'scorers')  buildScorers();
-    const fab = document.getElementById('thirds-fab');
-    if (fab) fab.style.display = btn.dataset.tab === 'groups' ? 'flex' : 'none';
     if (btn.dataset.tab !== 'groups') closeThirdsPanel();
   });
 });

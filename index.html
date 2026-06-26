@@ -58,6 +58,11 @@
 
   <!-- ── GROUPS VIEW ── -->
   <div class="view active" id="view-groups">
+    <button class="t3-bar-btn" onclick="openThirdsPanel()">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><rect x="2" y="10" width="6" height="12" rx="1"/><rect x="9" y="4" width="6" height="18" rx="1"/><rect x="16" y="7" width="6" height="15" rx="1"/></svg>
+      <span class="t3-bar-main" id="t3-bar-label">3rd Place Standings &nbsp;·&nbsp; Top 8 advance to knockout</span>
+      <span class="t3-bar-arr">›</span>
+    </button>
     <p class="hint">Click any group card to see the match schedule</p>
     <div class="grid">
 
@@ -212,11 +217,7 @@
   </div>
 </div>
 
-<!-- THIRDS FAB + PANEL -->
-<button id="thirds-fab" class="thirds-fab" onclick="openThirdsPanel()">
-  <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="10" width="6" height="12" rx="1"/><rect x="9" y="4" width="6" height="18" rx="1"/><rect x="16" y="7" width="6" height="15" rx="1"/></svg>
-  <span>3rd</span>
-</button>
+<!-- THIRDS PANEL -->
 <div id="thirds-overlay" class="thirds-overlay" onclick="closeThirdsPanel()"></div>
 <div id="thirds-panel" class="thirds-panel">
   <div class="t3-drag-handle"></div>
