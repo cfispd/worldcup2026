@@ -9,7 +9,7 @@ function parseTopScorers() {
   const scorers = {};
 
   ALL_MATCHES.forEach(m => {
-    if (m.matchStatus !== 'finished') return;
+    if (m.matchStatus !== 'finished' && m.matchStatus !== 'live') return;
 
     [[m.homeGoals, m.home], [m.awayGoals, m.away]].forEach(([goalsStr, team]) => {
       if (!goalsStr) return;
