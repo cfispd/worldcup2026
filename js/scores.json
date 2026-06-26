@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-26T03:30:54.136350+00:00",
+  "updated": "2026-06-26T03:42:45.762300+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -484,6 +484,10 @@
     "1st Group B": "Switzerland",
     "2nd Group B": "Canada",
     "1st Group C": "Brazil",
-    "2nd Group C": "Morocco"
+    "2nd Group C": "Morocco",
+    "1st Group E": "Germany",
+    "2nd Group E": "Ivory Coast",
+    "1st Group F": "Netherlands",
+    "2nd Group F": "Japan"
   }
 }
