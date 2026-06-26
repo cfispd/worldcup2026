@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-26T19:31:01.340913+00:00",
+  "updated": "2026-06-26T20:31:00.189966+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -481,16 +481,16 @@
       "homeScore": 1,
       "awayScore": 3,
       "status": "live",
-      "minute": 60,
-      "homeGoals": "21' Thelo Aasgaard",
-      "awayGoals": "7' Ousmane Dembélé; 20' Ousmane Dembélé; 32' Ousmane Dembélé"
+      "minute": 65,
+      "homeGoals": "21' Aasgaard",
+      "awayGoals": "7' Dembele; 20' Dembele; 32' Dembele"
     },
     "2026-06-26|Senegal|Iraq": {
-      "homeScore": 2,
+      "homeScore": 3,
       "awayScore": 0,
       "status": "live",
-      "minute": 57,
-      "homeGoals": "4' Habib Diarra; 56' Ismaïla Sarr",
+      "minute": 61,
+      "homeGoals": "4' Diarra; 56' Sarr; 59' Gueye",
       "awayGoals": ""
     }
   },
@@ -508,5 +508,8 @@
     "1st Group F": "Netherlands",
     "2nd Group F": "Japan"
   },
-  "last_queried": {}
+  "last_queried": {
+    "2026-06-26|Norway|France": "2026-06-26T20:31:00.189966+00:00",
+    "2026-06-26|Senegal|Iraq": "2026-06-26T20:31:00.189966+00:00"
+  }
 }
