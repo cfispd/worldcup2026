@@ -20,9 +20,10 @@ DATA_JS_FILE  = "js/data.js"
 PRE_MIN       = 5    # start checking 5 min before kickoff
 POST_MIN      = 210  # stop checking 3.5 h after kickoff (covers extra time + penalties)
 
-# Fetch throttle: first call at T+15 min, then once per hour
-FETCH_DELAY_MIN    = 15   # don't call Claude until 15 min after kickoff
-FETCH_INTERVAL_MIN = 55   # minimum gap between Claude calls per match (55 min → ~hourly)
+# Fetch windows anchored to kickoff: T+15, T+75, T+135, T+195
+# Cron fires every 30 min; ±20 min window ensures each slot is always caught
+UPDATE_OFFSETS = [15, 75, 135, 195]   # minutes after kickoff
+UPDATE_WINDOW  = 20                    # ±minutes around each offset
 
 # World Cup window — skip runs outside this range to save Actions minutes
 WC_START = datetime(2026, 6, 11, tzinfo=timezone.utc)
@@ -99,33 +100,39 @@ def match_key(m):
 
 
 def should_fetch_now(m, now, last_queried):
-    """Return True if this match is due for a Claude fetch.
+    """Return True if now falls in an update window AND we haven't already
+    fetched during that window.
 
-    Rules:
-      - Skip if fewer than FETCH_DELAY_MIN minutes have elapsed since kickoff.
-      - Fetch if this match has never been queried.
-      - Fetch if at least FETCH_INTERVAL_MIN minutes have passed since last query.
-    This produces a T+15, T+75, T+135 … schedule regardless of cron frequency.
+    Update windows are anchored to kickoff: T+15, T+75, T+135, T+195 (±20 min).
+    This guarantees updates happen near the expected times regardless of when
+    previous fetches occurred or which cron slot fired.
     """
     try:
         elapsed = (now - match_start_utc(m)).total_seconds() / 60
     except Exception:
         return False
 
-    if elapsed < FETCH_DELAY_MIN:
-        return False   # too early — match just started
+    # Find which update window we're currently in
+    current_offset = next(
+        (off for off in UPDATE_OFFSETS if abs(elapsed - off) <= UPDATE_WINDOW),
+        None
+    )
+    if current_offset is None:
+        return False   # between windows — skip
 
+    # Check if we already fetched during this window
     key = match_key(m)
     last_str = last_queried.get(key)
     if last_str is None:
-        return True    # never queried this match yet
+        return True    # never fetched
 
     try:
-        last_dt = datetime.fromisoformat(last_str)
-        since_last = (now - last_dt).total_seconds() / 60
-        return since_last >= FETCH_INTERVAL_MIN
+        last_dt  = datetime.fromisoformat(last_str)
+        last_off = (last_dt - match_start_utc(m)).total_seconds() / 60
+        already_done = abs(last_off - current_offset) <= UPDATE_WINDOW
+        return not already_done
     except Exception:
-        return True    # unparseable timestamp — allow fetch
+        return True
 
 
 # ── Claude score fetch ────────────────────────────────────────
