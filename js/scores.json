@@ -478,19 +478,19 @@
       "awayGoals": ""
     },
     "2026-06-26|Norway|France": {
-      "homeScore": null,
-      "awayScore": null,
-      "status": "upcoming",
-      "minute": null,
-      "homeGoals": "",
-      "awayGoals": ""
+      "homeScore": 1,
+      "awayScore": 3,
+      "status": "live",
+      "minute": 60,
+      "homeGoals": "21' Thelo Aasgaard",
+      "awayGoals": "7' Ousmane Dembélé; 20' Ousmane Dembélé; 32' Ousmane Dembélé"
     },
     "2026-06-26|Senegal|Iraq": {
-      "homeScore": null,
-      "awayScore": null,
-      "status": "upcoming",
-      "minute": null,
-      "homeGoals": "",
+      "homeScore": 2,
+      "awayScore": 0,
+      "status": "live",
+      "minute": 57,
+      "homeGoals": "4' Habib Diarra; 56' Ismaïla Sarr",
       "awayGoals": ""
     }
   },
