@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-26T01:30:58.459747+00:00",
+  "updated": "2026-06-26T02:01:10.141219+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -460,6 +460,22 @@
       "minute": null,
       "homeGoals": "54' Mastouri",
       "awayGoals": "3' Skhiri (OG); 7' Brobbey; 62' Van Hecke"
+    },
+    "2026-06-25|Turkey|United States": {
+      "homeScore": null,
+      "awayScore": null,
+      "status": "upcoming",
+      "minute": null,
+      "homeGoals": "",
+      "awayGoals": ""
+    },
+    "2026-06-25|Paraguay|Australia": {
+      "homeScore": null,
+      "awayScore": null,
+      "status": "upcoming",
+      "minute": null,
+      "homeGoals": "",
+      "awayGoals": ""
     }
   },
   "bracket_teams": {
