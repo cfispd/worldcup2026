@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-26T03:01:05.671960+00:00",
+  "updated": "2026-06-26T03:30:54.136350+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -463,17 +463,17 @@
     },
     "2026-06-25|Turkey|United States": {
       "homeScore": 2,
-      "awayScore": 1,
+      "awayScore": 2,
       "status": "live",
       "minute": null,
-      "homeGoals": "Arda Guler; Orkun Kokcu",
-      "awayGoals": "Auston Trusty"
+      "homeGoals": "",
+      "awayGoals": "17' Trusty"
     },
     "2026-06-25|Paraguay|Australia": {
       "homeScore": 0,
       "awayScore": 0,
       "status": "live",
-      "minute": null,
+      "minute": 64,
       "homeGoals": "",
       "awayGoals": ""
     }
