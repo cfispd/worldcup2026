@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-26T19:01:12.616777+00:00",
+  "updated": "2026-06-26T19:31:01.340913+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -507,5 +507,9 @@
     "2nd Group E": "Ivory Coast",
     "1st Group F": "Netherlands",
     "2nd Group F": "Japan"
+  },
+  "last_queried": {
+    "2026-06-26|Norway|France": "2026-06-26T19:31:01.340913+00:00",
+    "2026-06-26|Senegal|Iraq": "2026-06-26T19:31:01.340913+00:00"
   }
 }
