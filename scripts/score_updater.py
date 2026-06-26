@@ -424,9 +424,18 @@ def main():
     else:
         print("No knockout matches in active window.")
 
-    # ── C. Save (only write if scores actually changed) ──────────
+    # ── C. Recompute bracket 1st/2nd (pure Python, no API) ──────
+    new_bracket = compute_partial_bracket_teams(schedule, scores_db)
+    prev_bracket = existing.get("bracket_teams", {})
+    bracket_changed = any(prev_bracket.get(k) != v for k, v in new_bracket.items())
+    if bracket_changed:
+        prev_bracket.update(new_bracket)
+        existing["bracket_teams"] = prev_bracket
+        print(f"  → bracket_teams updated: {list(new_bracket.keys())}")
+
+    # ── D. Save (only write if scores or bracket changed) ────────
     new_snapshot = json.dumps(scores_db, sort_keys=True)
-    if old_snapshot != new_snapshot:
+    if old_snapshot != new_snapshot or bracket_changed:
         existing["matches"] = scores_db
         existing["updated"] = now.isoformat()
         save_scores(existing)
