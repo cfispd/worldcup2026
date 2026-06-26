@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-26T03:42:45.762300+00:00",
+  "updated": "2026-06-26T04:01:07.993206+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -465,15 +465,15 @@
       "homeScore": 2,
       "awayScore": 2,
       "status": "live",
-      "minute": null,
+      "minute": 90,
       "homeGoals": "",
-      "awayGoals": "17' Trusty"
+      "awayGoals": "Auston Trusty"
     },
     "2026-06-25|Paraguay|Australia": {
       "homeScore": 0,
       "awayScore": 0,
       "status": "live",
-      "minute": 64,
+      "minute": 94,
       "homeGoals": "",
       "awayGoals": ""
     }
