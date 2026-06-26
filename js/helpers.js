@@ -147,6 +147,16 @@ function teamName(name) {
   }
   return LANG === 'zh' && TEAM_NAMES_ZH[resolved] ? TEAM_NAMES_ZH[resolved] : resolved;
 }
+function resolveTeamEn(name) {
+  if (typeof BRACKET_TEAMS !== 'undefined' && BRACKET_TEAMS[name]) return BRACKET_TEAMS[name];
+  if (typeof MATCH_WINNERS !== 'undefined') {
+    const w = name.match(/^W Match (\d+)$/);
+    const l = name.match(/^L Match (\d+)$/);
+    if (w && MATCH_WINNERS[w[1]]) return MATCH_WINNERS[w[1]];
+    if (l && MATCH_WINNERS['L' + l[1]]) return MATCH_WINNERS['L' + l[1]];
+  }
+  return name;
+}
 function cityName(city) {
   return LANG === 'zh' && CITY_NAMES_ZH[city] ? CITY_NAMES_ZH[city] : city;
 }

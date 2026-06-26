@@ -156,8 +156,8 @@ function schedCardHtml(m) {
   const isGroup   = !!m.group;
   const accent    = isGroup ? GROUP_ACCENT[m.group] : ROUND_ACCENT[m.round];
   const pill      = roundL(m.round, isGroup ? m.group : null);
-  const f1        = isGroup ? flagImg(m.home, 32, 21) : '';
-  const f2        = isGroup ? flagImg(m.away, 32, 21) : '';
+  const f1        = flagImg(resolveTeamEn(m.home), 32, 21);
+  const f2        = flagImg(resolveTeamEn(m.away), 32, 21);
   const localTime = toUserLocalTime(m.time, m.dateISO);
   const tz        = userTzLabel();
   const clockIcon = `<svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="display:inline;vertical-align:middle;margin-right:3px"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>`;
