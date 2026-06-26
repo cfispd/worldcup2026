@@ -2,7 +2,8 @@ name: World Cup Score Updater
 
 on:
   schedule:
-    # Fallback trigger — cron-job.org is the primary every-25-min trigger
+    # Triggers every 30 min; Python script throttles actual Claude calls to
+    # T+15 min after kickoff, then once per hour (T+75, T+135, …)
     - cron: '*/30 * * * *'
   workflow_dispatch:
 

@@ -20,6 +20,10 @@ DATA_JS_FILE  = "js/data.js"
 PRE_MIN       = 5    # start checking 5 min before kickoff
 POST_MIN      = 210  # stop checking 3.5 h after kickoff (covers extra time + penalties)
 
+# Fetch throttle: first call at T+15 min, then once per hour
+FETCH_DELAY_MIN    = 15   # don't call Claude until 15 min after kickoff
+FETCH_INTERVAL_MIN = 55   # minimum gap between Claude calls per match (55 min → ~hourly)
+
 # World Cup window — skip runs outside this range to save Actions minutes
 WC_START = datetime(2026, 6, 11, tzinfo=timezone.utc)
 WC_END   = datetime(2026, 7, 20, tzinfo=timezone.utc)
@@ -92,6 +96,36 @@ def active_matches(schedule, scores_db=None):
 
 def match_key(m):
     return f"{m['dateISO']}|{m['home']}|{m['away']}"
+
+
+def should_fetch_now(m, now, last_queried):
+    """Return True if this match is due for a Claude fetch.
+
+    Rules:
+      - Skip if fewer than FETCH_DELAY_MIN minutes have elapsed since kickoff.
+      - Fetch if this match has never been queried.
+      - Fetch if at least FETCH_INTERVAL_MIN minutes have passed since last query.
+    This produces a T+15, T+75, T+135 … schedule regardless of cron frequency.
+    """
+    try:
+        elapsed = (now - match_start_utc(m)).total_seconds() / 60
+    except Exception:
+        return False
+
+    if elapsed < FETCH_DELAY_MIN:
+        return False   # too early — match just started
+
+    key = match_key(m)
+    last_str = last_queried.get(key)
+    if last_str is None:
+        return True    # never queried this match yet
+
+    try:
+        last_dt = datetime.fromisoformat(last_str)
+        since_last = (now - last_dt).total_seconds() / 60
+        return since_last >= FETCH_INTERVAL_MIN
+    except Exception:
+        return True    # unparseable timestamp — allow fetch
 
 
 # ── Claude score fetch ────────────────────────────────────────
@@ -364,24 +398,33 @@ def main():
         return
 
     # ══════════════════════════════════════════════════════════
-    # SCORE MODE  (every 10 minutes during match windows)
+    # SCORE MODE  (throttled: T+15 first call, then hourly)
     # ══════════════════════════════════════════════════════════
     bracket_teams = existing.get("bracket_teams", {})
+    last_queried  = existing.get("last_queried", {})
 
     # ── A. Group stage scores ─────────────────────────────────
     live_group = active_matches(schedule, scores_db)
     has_pending = False
     if live_group:
         pending = [m for m in live_group
-                   if scores_db.get(match_key(m), {}).get("status") != "finished"]
+                   if scores_db.get(match_key(m), {}).get("status") != "finished"
+                   and should_fetch_now(m, now, last_queried)]
+        skipped = len(live_group) - len(pending) - sum(
+            1 for m in live_group
+            if scores_db.get(match_key(m), {}).get("status") == "finished"
+        )
+        if skipped:
+            print(f"  ⏳ {skipped} group match(es) not yet due for update (T+{FETCH_DELAY_MIN} min / {FETCH_INTERVAL_MIN} min interval).")
         if not pending:
-            print("All active group matches already finished.")
+            print("No group matches due for a Claude query right now.")
         else:
             has_pending = True
             print(f"Querying Claude for {len(pending)} group match(es)…")
             new_scores = fetch_scores(pending)
             for m in pending:
                 key = match_key(m)
+                last_queried[key] = now.isoformat()   # record query time
                 score = new_scores.get(key)
                 if not score:
                     continue
@@ -401,15 +444,17 @@ def main():
     live_ko = active_knockout_matches(schedule, scores_db, bracket_teams)
     if live_ko:
         pending_ko = [m for m in live_ko
-                      if scores_db.get(match_key(m), {}).get("status") != "finished"]
+                      if scores_db.get(match_key(m), {}).get("status") != "finished"
+                      and should_fetch_now(m, now, last_queried)]
         if not pending_ko:
-            print("All active knockout matches already finished.")
+            print("No knockout matches due for a Claude query right now.")
         else:
             has_pending = True
             print(f"Querying Claude for {len(pending_ko)} knockout match(es)…")
             ko_scores = fetch_scores(pending_ko)
             for m in pending_ko:
                 key = match_key(m)
+                last_queried[key] = now.isoformat()   # record query time
                 score = ko_scores.get(key)
                 if not score:
                     continue
@@ -433,15 +478,17 @@ def main():
         existing["bracket_teams"] = prev_bracket
         print(f"  → bracket_teams updated: {list(new_bracket.keys())}")
 
-    # ── D. Save (only write if scores or bracket changed) ────────
+    # ── D. Save (scores, bracket, or last_queried changed) ───────
     new_snapshot = json.dumps(scores_db, sort_keys=True)
-    if old_snapshot != new_snapshot or bracket_changed:
-        existing["matches"] = scores_db
-        existing["updated"] = now.isoformat()
+    queried_changed = last_queried != existing.get("last_queried", {})
+    if new_snapshot != old_snapshot or bracket_changed or queried_changed:
+        existing["matches"]      = scores_db
+        existing["last_queried"] = last_queried
+        existing["updated"]      = now.isoformat()
         save_scores(existing)
         print("✅ scores.json updated.")
     else:
-        print("ℹ️  No score changes — skipping write.")
+        print("ℹ️  No changes — skipping write.")
 
     # Exit 0 = active matches still in progress (workflow should loop)
     # Exit 1 = no active matches (workflow can stop until next hourly check)
