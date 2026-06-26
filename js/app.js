@@ -85,6 +85,7 @@ function setLang(lang) {
   buildBracket();
   buildScorers();
   if (typeof updateMapLang === 'function') updateMapLang();
+  if (document.getElementById('thirds-panel')?.classList.contains('open')) buildThirdsPanel();
 
   // Sync theme button label language
   const currentTheme = document.body.classList.contains('night') ? 'night' : 'day';
@@ -113,6 +114,9 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
     document.getElementById('view-' + btn.dataset.tab).classList.add('active');
     if (btn.dataset.tab === 'schedule') buildSchedule();
     if (btn.dataset.tab === 'scorers')  buildScorers();
+    const fab = document.getElementById('thirds-fab');
+    if (fab) fab.style.display = btn.dataset.tab === 'groups' ? 'flex' : 'none';
+    if (btn.dataset.tab !== 'groups') closeThirdsPanel();
   });
 });
 
