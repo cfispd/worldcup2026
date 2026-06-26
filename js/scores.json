@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-26T04:01:07.993206+00:00",
+  "updated": "2026-06-26T04:30:58.189261+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -462,18 +462,18 @@
       "awayGoals": "3' Skhiri (OG); 7' Brobbey; 62' Van Hecke"
     },
     "2026-06-25|Turkey|United States": {
-      "homeScore": 2,
+      "homeScore": 3,
       "awayScore": 2,
-      "status": "live",
-      "minute": 90,
-      "homeGoals": "",
-      "awayGoals": "Auston Trusty"
+      "status": "finished",
+      "minute": null,
+      "homeGoals": "10' Arda Guler; 31' Orkun Kokcu; 98' Kaan Ayhan",
+      "awayGoals": "3' Auston Trusty; 49' Sebastian Berhalter"
     },
     "2026-06-25|Paraguay|Australia": {
       "homeScore": 0,
       "awayScore": 0,
-      "status": "live",
-      "minute": 94,
+      "status": "finished",
+      "minute": null,
       "homeGoals": "",
       "awayGoals": ""
     }
