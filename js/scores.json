@@ -503,11 +503,11 @@
     },
     "2026-06-26|Uruguay|Spain": {
       "homeScore": 0,
-      "awayScore": 0,
+      "awayScore": 1,
       "status": "live",
-      "minute": null,
+      "minute": 42,
       "homeGoals": "",
-      "awayGoals": ""
+      "awayGoals": "42' Alex Baena"
     }
   },
   "bracket_teams": {
@@ -529,6 +529,6 @@
   "last_queried": {
     "2026-06-26|Norway|France": "2026-06-26T21:31:00.756554+00:00",
     "2026-06-26|Senegal|Iraq": "2026-06-26T21:31:00.756554+00:00",
-    "2026-06-26|Uruguay|Spain": "2026-06-27T00:19:37.360485+00:00"
+    "2026-06-26|Uruguay|Spain": ""
   }
 }
