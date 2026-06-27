@@ -1553,6 +1553,8 @@ body.night .t3-bar-btn { box-shadow: 0 4px 18px rgba(79,70,229,.5); }
 .t3-done    { color: #10b981; font-weight: 700; font-size: .9rem; }
 .t3-partial { color: #f59e0b; font-size: .75rem; font-weight: 600; }
 .t3-none    { color: #d1d5db; }
+.t3-live    { color: #ef4444; font-size: .72rem; font-weight: 700; letter-spacing: .02em; animation: t3-pulse 1.2s ease-in-out infinite; }
+@keyframes t3-pulse { 0%,100%{opacity:1} 50%{opacity:.45} }
 
 /* ── NIGHT MODE ───────────────────────────────────────────── */
 body.night .thirds-fab { box-shadow: 0 4px 16px rgba(124,58,237,.6); }

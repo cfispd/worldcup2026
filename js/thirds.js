@@ -11,6 +11,7 @@ function computeThirdPlaceRankings() {
     const standings = computeStandings(g);
     if (standings.length < 3) return;
     const t = standings[2];
+    const hasLive = ALL_MATCHES.some(m => m.group === g && m.matchStatus === 'live');
     thirds.push({
       group: g,
       team:  t.team,
@@ -18,7 +19,8 @@ function computeThirdPlaceRankings() {
       pts:   t.pts,
       gd:    t.gf - t.ga,
       gf:    t.gf,
-      done:  t.mp >= 3,
+      done:  t.mp >= 3 && !hasLive,
+      live:  hasLive,
     });
   });
   return thirds.sort((a, b) =>
@@ -56,7 +58,8 @@ function buildThirdsPanel() {
     const ptsStr = t.mp > 0 ? t.pts : '–';
 
     let statusHtml;
-    if (t.done)        statusHtml = `<span class="t3-done">✓</span>`;
+    if (t.live)        statusHtml = `<span class="t3-live">${z ? '比赛中' : 'Live'}</span>`;
+    else if (t.done)   statusHtml = `<span class="t3-done">✓</span>`;
     else if (t.mp > 0) statusHtml = `<span class="t3-partial">${t.mp}/3</span>`;
     else               statusHtml = `<span class="t3-none">–</span>`;
 
