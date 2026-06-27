@@ -422,7 +422,7 @@ def main():
             if scores_db.get(match_key(m), {}).get("status") == "finished"
         )
         if skipped:
-            print(f"  ⏳ {skipped} group match(es) not yet due for update (T+{FETCH_DELAY_MIN} min / {FETCH_INTERVAL_MIN} min interval).")
+            print(f"  ⏳ {skipped} group match(es) not yet due for update (windows: T+{UPDATE_OFFSETS} ±{UPDATE_WINDOW} min).")
         if not pending:
             print("No group matches due for a Claude query right now.")
         else:
