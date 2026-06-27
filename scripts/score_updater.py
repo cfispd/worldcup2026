@@ -21,9 +21,10 @@ PRE_MIN       = 5    # start checking 5 min before kickoff
 POST_MIN      = 210  # stop checking 3.5 h after kickoff (covers extra time + penalties)
 
 # Fetch windows anchored to kickoff: T+15, T+75, T+135, T+195
-# Cron fires every 15 min; ±8 min window → for integer-hour kickoffs fires exactly at :15, :15+60, …
+# Cron fires every 15 min; ±12 min window → tolerates GitHub cron delay up to ~12 min
+# For integer-hour kickoffs: T+0 cron skipped (|0-15|=15>12), T+15 cron triggers (|15-15|=0≤12) ✓
 UPDATE_OFFSETS = [15, 75, 135, 195]   # minutes after kickoff
-UPDATE_WINDOW  = 8                     # ±minutes around each offset (max drift = 7.5 min with */15 cron)
+UPDATE_WINDOW  = 12                    # ±minutes around each offset
 
 # World Cup window — skip runs outside this range to save Actions minutes
 WC_START = datetime(2026, 6, 11, tzinfo=timezone.utc)
