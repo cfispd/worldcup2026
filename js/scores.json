@@ -527,18 +527,18 @@
     },
     "2026-06-27|Panama|England": {
       "homeScore": 0,
-      "awayScore": 0,
-      "status": "live",
-      "minute": 1,
+      "awayScore": 2,
+      "status": "finished",
+      "minute": null,
       "homeGoals": "",
-      "awayGoals": ""
+      "awayGoals": "62' Jude Bellingham; 67' Harry Kane"
     },
     "2026-06-27|Croatia|Ghana": {
-      "homeScore": 0,
+      "homeScore": 1,
       "awayScore": 0,
       "status": "live",
-      "minute": 1,
-      "homeGoals": "",
+      "minute": 74,
+      "homeGoals": "31' Petar Sučić",
       "awayGoals": ""
     }
   },
