@@ -535,11 +535,11 @@
     },
     "2026-06-27|Croatia|Ghana": {
       "homeScore": 1,
-      "awayScore": 0,
+      "awayScore": 1,
       "status": "live",
-      "minute": 74,
+      "minute": 77,
       "homeGoals": "31' Petar Sučić",
-      "awayGoals": ""
+      "awayGoals": "73' Derrick Luckassen"
     }
   },
   "bracket_teams": {
