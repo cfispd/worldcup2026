@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-26T21:31:00.756554+00:00",
+  "updated": "2026-06-27T00:19:37.360485+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -492,6 +492,22 @@
       "minute": null,
       "homeGoals": "4' Habib Diarra; 56' Ismaïla Sarr; 59' Pape Gueye; Pape Gueye; 82' Iliman Ndiaye",
       "awayGoals": ""
+    },
+    "2026-06-26|Cape Verde|Saudi Arabia": {
+      "homeScore": 1,
+      "awayScore": 2,
+      "status": "live",
+      "minute": null,
+      "homeGoals": "21' Kevin Pina",
+      "awayGoals": "44' Hélio Varela"
+    },
+    "2026-06-26|Uruguay|Spain": {
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "live",
+      "minute": null,
+      "homeGoals": "",
+      "awayGoals": ""
     }
   },
   "bracket_teams": {
@@ -512,6 +528,8 @@
   },
   "last_queried": {
     "2026-06-26|Norway|France": "2026-06-26T21:31:00.756554+00:00",
-    "2026-06-26|Senegal|Iraq": "2026-06-26T21:31:00.756554+00:00"
+    "2026-06-26|Senegal|Iraq": "2026-06-26T21:31:00.756554+00:00",
+    "2026-06-26|Cape Verde|Saudi Arabia": "2026-06-27T00:19:37.360485+00:00",
+    "2026-06-26|Uruguay|Spain": "2026-06-27T00:19:37.360485+00:00"
   }
 }
