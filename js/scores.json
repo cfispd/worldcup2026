@@ -496,7 +496,7 @@
     "2026-06-26|Cape Verde|Saudi Arabia": {
       "homeScore": 0,
       "awayScore": 0,
-      "status": "live",
+      "status": "finished",
       "minute": null,
       "homeGoals": "",
       "awayGoals": ""
@@ -504,10 +504,10 @@
     "2026-06-26|Uruguay|Spain": {
       "homeScore": 0,
       "awayScore": 1,
-      "status": "live",
-      "minute": 42,
+      "status": "finished",
+      "minute": null,
       "homeGoals": "",
-      "awayGoals": "42' Alex Baena"
+      "awayGoals": "42' Álex Baena"
     }
   },
   "bracket_teams": {
