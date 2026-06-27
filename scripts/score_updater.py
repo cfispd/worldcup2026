@@ -20,9 +20,9 @@ DATA_JS_FILE  = "js/data.js"
 PRE_MIN       = 5    # start checking 5 min before kickoff
 POST_MIN      = 210  # stop checking 3.5 h after kickoff (covers extra time + penalties)
 
-# Fetch throttle: first call at T+15 min after kickoff, then every ~60 min
+# Fetch throttle: first call at T+15 min after kickoff, then every ~30 min
 FETCH_DELAY_MIN    = 15   # don't call Claude until 15 min after kickoff
-FETCH_INTERVAL_MIN = 55   # minimum gap between Claude calls per match
+FETCH_INTERVAL_MIN = 25   # minimum gap between Claude calls (cron every 30 min → updates at T+30, T+60, T+90…)
 
 # World Cup window — skip runs outside this range to save Actions minutes
 WC_START = datetime(2026, 6, 11, tzinfo=timezone.utc)
