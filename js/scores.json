@@ -508,6 +508,22 @@
       "minute": null,
       "homeGoals": "",
       "awayGoals": "42' Álex Baena"
+    },
+    "2026-06-26|Egypt|Iran": {
+      "homeScore": 1,
+      "awayScore": 1,
+      "status": "live",
+      "minute": 27,
+      "homeGoals": "5' Mahmoud Saber",
+      "awayGoals": "14' Ramin Rezaeian"
+    },
+    "2026-06-26|New Zealand|Belgium": {
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "live",
+      "minute": 27,
+      "homeGoals": "",
+      "awayGoals": ""
     }
   },
   "bracket_teams": {
