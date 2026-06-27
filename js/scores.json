@@ -511,11 +511,11 @@
     },
     "2026-06-26|Egypt|Iran": {
       "homeScore": 1,
-      "awayScore": 1,
-      "status": "finished",
-      "minute": null,
+      "awayScore": 2,
+      "status": "live",
+      "minute": 94,
       "homeGoals": "5' Mahmoud Saber",
-      "awayGoals": "14' Ramin Rezaeian"
+      "awayGoals": "14' Ramin Rezaeian; 93' Sadegh Khalilzadeh"
     },
     "2026-06-26|New Zealand|Belgium": {
       "homeScore": 1,
