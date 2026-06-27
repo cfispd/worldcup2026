@@ -519,11 +519,11 @@
     },
     "2026-06-26|New Zealand|Belgium": {
       "homeScore": 0,
-      "awayScore": 0,
+      "awayScore": 1,
       "status": "live",
-      "minute": 27,
+      "minute": 28,
       "homeGoals": "",
-      "awayGoals": ""
+      "awayGoals": "28' Leandro Trossard"
     }
   },
   "bracket_teams": {
