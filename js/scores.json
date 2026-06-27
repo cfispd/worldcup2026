@@ -512,18 +512,18 @@
     "2026-06-26|Egypt|Iran": {
       "homeScore": 1,
       "awayScore": 1,
-      "status": "live",
-      "minute": 27,
+      "status": "finished",
+      "minute": null,
       "homeGoals": "5' Mahmoud Saber",
       "awayGoals": "14' Ramin Rezaeian"
     },
     "2026-06-26|New Zealand|Belgium": {
-      "homeScore": 0,
-      "awayScore": 1,
-      "status": "live",
-      "minute": 28,
-      "homeGoals": "",
-      "awayGoals": "28' Leandro Trossard"
+      "homeScore": 1,
+      "awayScore": 4,
+      "status": "finished",
+      "minute": null,
+      "homeGoals": "84' Elijah Just",
+      "awayGoals": "28' Leandro Trossard; 50' Leandro Trossard; 66' Kevin De Bruyne; 86' Romelu Lukaku"
     }
   },
   "bracket_teams": {
@@ -539,6 +539,8 @@
     "2nd Group E": "Ivory Coast",
     "1st Group F": "Netherlands",
     "2nd Group F": "Japan",
+    "1st Group G": "Belgium",
+    "2nd Group G": "Egypt",
     "1st Group H": "Spain",
     "2nd Group H": "Cape Verde",
     "1st Group I": "France",
