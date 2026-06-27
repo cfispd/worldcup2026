@@ -519,11 +519,27 @@
     },
     "2026-06-26|New Zealand|Belgium": {
       "homeScore": 1,
-      "awayScore": 4,
+      "awayScore": 5,
       "status": "finished",
       "minute": null,
       "homeGoals": "84' Elijah Just",
-      "awayGoals": "28' Leandro Trossard; 50' Leandro Trossard; 66' Kevin De Bruyne; 86' Romelu Lukaku"
+      "awayGoals": "28' Leandro Trossard; 50' Leandro Trossard; 66' Kevin De Bruyne; 86' Romelu Lukaku; 90+4' Alexis Saelemaekers"
+    },
+    "2026-06-27|Panama|England": {
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "live",
+      "minute": 1,
+      "homeGoals": "",
+      "awayGoals": ""
+    },
+    "2026-06-27|Croatia|Ghana": {
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "live",
+      "minute": 1,
+      "homeGoals": "",
+      "awayGoals": ""
     }
   },
   "bracket_teams": {
