@@ -343,11 +343,11 @@
     },
     "2026-06-22|Jordan|Algeria": {
       "homeScore": 1,
-      "awayScore": 1,
+      "awayScore": 2,
       "status": "finished",
       "minute": null,
-      "homeGoals": "Nizar Al Rashdan",
-      "awayGoals": "Nadhir Benbouali"
+      "homeGoals": "36' Nizar Al Rashdan",
+      "awayGoals": "69' Nadhir Benbouali; 82' Amine Gouiri"
     },
     "2026-06-23|Colombia|DR Congo": {
       "homeScore": 1,
@@ -562,16 +562,16 @@
       "awayScore": 3,
       "status": "finished",
       "minute": null,
-      "homeGoals": "17' Belghali; 63' Mahrez; 90+1' Mahrez",
-      "awayGoals": "28' Arnautovic; 48' Sabitzer"
+      "homeGoals": "45' Romain Belghali; 60' Riyad Mahrez; 90+3' Riyad Mahrez",
+      "awayGoals": "28' Marko Arnautovic; 55' Marcel Sabitzer; 90+6' Sasa Kalajdzic"
     },
     "2026-06-27|Jordan|Argentina": {
       "homeScore": 1,
       "awayScore": 3,
       "status": "finished",
       "minute": null,
-      "homeGoals": "60' Tamari",
-      "awayGoals": "10' Messi (pen); 79' Messi"
+      "homeGoals": "55' Mousa Altamari",
+      "awayGoals": "19' Giovani Lo Celso; 31' Lautaro Martínez (Pen); 80' Lionel Messi"
     }
   },
   "bracket_teams": {
@@ -598,7 +598,15 @@
     "1st Group K": "Colombia",
     "2nd Group K": "Portugal",
     "1st Group J": "Argentina",
-    "2nd Group J": "Austria"
+    "2nd Group J": "Austria",
+    "3rd Grp A/B/C/D/F": "Paraguay",
+    "3rd Grp C/D/F/G/H": "Sweden",
+    "3rd Grp C/E/F/H/I": "Ecuador",
+    "3rd Grp E/H/I/J/K": "DR Congo",
+    "3rd Grp B/E/F/I/J": "Bosnia-Herzegovina",
+    "3rd Grp A/E/H/I/J": "Senegal",
+    "3rd Grp E/F/G/I/J": "Algeria",
+    "3rd Grp D/E/I/J/L": "Ghana"
   },
   "last_queried": {
     "2026-06-26|Norway|France": "2026-06-26T21:31:00.756554+00:00",
