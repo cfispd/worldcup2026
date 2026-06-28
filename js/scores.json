@@ -573,14 +573,6 @@
       "homeGoals": "55' Mousa Altamari",
       "awayGoals": "19' Giovani Lo Celso; 31' Lautaro Martínez (Pen); 80' Lionel Messi"
     },
-    "2026-06-28|2nd Group A|2nd Group B": {
-      "homeScore": 1,
-      "awayScore": 0,
-      "status": "finished",
-      "minute": null,
-      "homeGoals": "92' Eustáquio",
-      "awayGoals": ""
-    },
     "2026-06-28|South Africa|Canada": {
       "homeScore": 0,
       "awayScore": 1,
@@ -632,7 +624,6 @@
     "2026-06-27|DR Congo|Uzbekistan": "2026-06-28T01:30:56.647450+00:00",
     "2026-06-27|Algeria|Austria": "2026-06-28T04:01:13.980475+00:00",
     "2026-06-27|Jordan|Argentina": "2026-06-28T04:01:13.980475+00:00",
-    "2026-06-28|South Africa|Canada": "2026-06-28T21:01:09.433576+00:00",
-    "2026-06-28|2nd Group A|2nd Group B": "2026-06-28T21:01:09.433576+00:00"
+    "2026-06-28|South Africa|Canada": "2026-06-28T21:01:09.433576+00:00"
   }
 }
