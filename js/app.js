@@ -397,7 +397,7 @@ function openScoreTip(card, m) {
     <div class="tip-header" style="color:${isLive ? '#ef4444' : ''}">${isLive ? '🔴 ' : ''}M${m.matchNum} · ${statusLabel}</div>
     <div style="display:flex;align-items:center;gap:6px;margin:8px 0 4px">
       <div style="flex:1;text-align:right;font-size:.8rem;font-weight:600">${hFlag}${hName}</div>
-      <div style="font-size:1.55rem;font-weight:900;color:${isLive ? '#ef4444' : '#0f172a'};min-width:56px;text-align:center;letter-spacing:.04em;line-height:1">${hs} – ${as}</div>
+      <div style="font-size:1.55rem;font-weight:900;color:#ef4444;min-width:56px;text-align:center;letter-spacing:.04em;line-height:1">${hs} – ${as}</div>
       <div style="flex:1;text-align:left;font-size:.8rem;font-weight:600">${aName}${aFlag}</div>
     </div>
     <div style="display:flex;gap:6px;margin-bottom:6px">
