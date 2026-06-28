@@ -603,10 +603,12 @@ function mdsCard(m, status) {
   const z = LANG === 'zh';
   const accent = m.group ? GROUP_ACCENT[m.group] : (ROUND_ACCENT[m.round] || '#555');
   const pill   = m.group || (z ? ROUND_LABEL_ZH[m.round] : ROUND_LABEL[m.round]) || m.round || '';
-  const hName  = z ? (TEAM_NAMES_ZH[m.home] || m.home) : m.home;
-  const aName  = z ? (TEAM_NAMES_ZH[m.away] || m.away) : m.away;
-  const hFlag  = FLAGS[m.home] ? `<img class="mds-flag" src="https://flagcdn.com/w40/${FLAGS[m.home]}.png" alt="">` : '';
-  const aFlag  = FLAGS[m.away] ? `<img class="mds-flag" src="https://flagcdn.com/w40/${FLAGS[m.away]}.png" alt="">` : '';
+  const hEn    = resolveTeamEn(m.home);
+  const aEn    = resolveTeamEn(m.away);
+  const hName  = z ? (TEAM_NAMES_ZH[hEn] || hEn) : hEn;
+  const aName  = z ? (TEAM_NAMES_ZH[aEn] || aEn) : aEn;
+  const hFlag  = FLAGS[hEn] ? `<img class="mds-flag" src="https://flagcdn.com/w40/${FLAGS[hEn]}.png" alt="">` : '';
+  const aFlag  = FLAGS[aEn] ? `<img class="mds-flag" src="https://flagcdn.com/w40/${FLAGS[aEn]}.png" alt="">` : '';
   const city   = getCity(m.venue);
   const cityLbl = z ? (CITY_NAMES_ZH[city] || city) : city;
 
