@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-27T00:19:37.360485+00:00",
+  "updated": "2026-06-28T00:01:08.544873+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -540,6 +540,22 @@
       "minute": null,
       "homeGoals": "31' Petar Sučić; 82' Nikola Vlašić",
       "awayGoals": "73' Derrick Luckassen"
+    },
+    "2026-06-27|Colombia|Portugal": {
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "live",
+      "minute": null,
+      "homeGoals": "",
+      "awayGoals": ""
+    },
+    "2026-06-27|DR Congo|Uzbekistan": {
+      "homeScore": 0,
+      "awayScore": 1,
+      "status": "live",
+      "minute": 27,
+      "homeGoals": "",
+      "awayGoals": "10' Eldor SHOMURODOV"
     }
   },
   "bracket_teams": {
@@ -567,6 +583,8 @@
   "last_queried": {
     "2026-06-26|Norway|France": "2026-06-26T21:31:00.756554+00:00",
     "2026-06-26|Senegal|Iraq": "2026-06-26T21:31:00.756554+00:00",
-    "2026-06-26|Uruguay|Spain": ""
+    "2026-06-26|Uruguay|Spain": "",
+    "2026-06-27|Colombia|Portugal": "2026-06-28T00:01:08.544873+00:00",
+    "2026-06-27|DR Congo|Uzbekistan": "2026-06-28T00:01:08.544873+00:00"
   }
 }
