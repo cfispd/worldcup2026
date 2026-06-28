@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-28T01:30:56.647450+00:00",
+  "updated": "2026-06-28T02:30:55.576401+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -556,6 +556,22 @@
       "minute": null,
       "homeGoals": "68' Yoane WISSA; 78' Fiston MAYELE; 90'+1' Yoane WISSA",
       "awayGoals": "10' Eldor SHOMURODOV"
+    },
+    "2026-06-27|Algeria|Austria": {
+      "homeScore": 0,
+      "awayScore": 1,
+      "status": "live",
+      "minute": 28,
+      "homeGoals": "",
+      "awayGoals": "28' Marko Arnautovic"
+    },
+    "2026-06-27|Jordan|Argentina": {
+      "homeScore": 0,
+      "awayScore": 1,
+      "status": "live",
+      "minute": 29,
+      "homeGoals": "",
+      "awayGoals": "19' Giovani Lo Celso"
     }
   },
   "bracket_teams": {
@@ -587,6 +603,8 @@
     "2026-06-26|Senegal|Iraq": "2026-06-26T21:31:00.756554+00:00",
     "2026-06-26|Uruguay|Spain": "",
     "2026-06-27|Colombia|Portugal": "2026-06-28T01:30:56.647450+00:00",
-    "2026-06-27|DR Congo|Uzbekistan": "2026-06-28T01:30:56.647450+00:00"
+    "2026-06-27|DR Congo|Uzbekistan": "2026-06-28T01:30:56.647450+00:00",
+    "2026-06-27|Algeria|Austria": "2026-06-28T02:30:55.576401+00:00",
+    "2026-06-27|Jordan|Argentina": "2026-06-28T02:30:55.576401+00:00"
   }
 }
