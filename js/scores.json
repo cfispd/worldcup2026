@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-28T03:01:07.713911+00:00",
+  "updated": "2026-06-28T04:01:13.980475+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -558,20 +558,20 @@
       "awayGoals": "10' Eldor SHOMURODOV"
     },
     "2026-06-27|Algeria|Austria": {
-      "homeScore": 1,
-      "awayScore": 1,
-      "status": "live",
+      "homeScore": 3,
+      "awayScore": 3,
+      "status": "finished",
       "minute": null,
-      "homeGoals": "51' Belghali",
-      "awayGoals": "31' Arnautović"
+      "homeGoals": "17' Belghali; 63' Mahrez; 90+1' Mahrez",
+      "awayGoals": "28' Arnautovic; 48' Sabitzer"
     },
     "2026-06-27|Jordan|Argentina": {
-      "homeScore": 0,
-      "awayScore": 2,
-      "status": "live",
+      "homeScore": 1,
+      "awayScore": 3,
+      "status": "finished",
       "minute": null,
-      "homeGoals": "",
-      "awayGoals": "13' Lo Celso; 36' Martinez (pen)"
+      "homeGoals": "60' Tamari",
+      "awayGoals": "10' Messi (pen); 79' Messi"
     }
   },
   "bracket_teams": {
@@ -596,7 +596,9 @@
     "1st Group L": "England",
     "2nd Group L": "Croatia",
     "1st Group K": "Colombia",
-    "2nd Group K": "Portugal"
+    "2nd Group K": "Portugal",
+    "1st Group J": "Argentina",
+    "2nd Group J": "Austria"
   },
   "last_queried": {
     "2026-06-26|Norway|France": "2026-06-26T21:31:00.756554+00:00",
@@ -604,7 +606,7 @@
     "2026-06-26|Uruguay|Spain": "",
     "2026-06-27|Colombia|Portugal": "2026-06-28T01:30:56.647450+00:00",
     "2026-06-27|DR Congo|Uzbekistan": "2026-06-28T01:30:56.647450+00:00",
-    "2026-06-27|Algeria|Austria": "2026-06-28T03:01:07.713911+00:00",
-    "2026-06-27|Jordan|Argentina": "2026-06-28T03:01:07.713911+00:00"
+    "2026-06-27|Algeria|Austria": "2026-06-28T04:01:13.980475+00:00",
+    "2026-06-27|Jordan|Argentina": "2026-06-28T04:01:13.980475+00:00"
   }
 }
