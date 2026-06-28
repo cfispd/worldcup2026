@@ -351,16 +351,9 @@ function bracketDateToISO(dateStr) {
   return `2026-${M[mon]}-${day.padStart(2,'0')}`;
 }
 
-function openTicketTip(card) {
-  tipAmount.textContent = '$' + card.dataset.ticketFrom;
-  tipLink.href   = card.dataset.ticketUrl || '#';
-  const dateISO  = bracketDateToISO(card.dataset.date);
-  tipHotel.href           = getBookingUrl(card.dataset.venue, dateISO);
-  tipFlight.dataset.dest  = getCity(card.dataset.venue);
-  tipFlight.dataset.date  = dateISO;
-
+function positionTip(card) {
   const rect = card.getBoundingClientRect();
-  const TW = 290, TH = 150;
+  const TW = 290, TH = 170;
   let x = rect.left;
   let y = rect.top - TH - 10;
   if (y < 8)                          y = rect.bottom + 10;
@@ -368,6 +361,51 @@ function openTicketTip(card) {
   if (x < 8)                          x = 8;
   ticketTip.style.left = x + 'px';
   ticketTip.style.top  = y + 'px';
+}
+
+function openTicketTip(card) {
+  const z = LANG === 'zh';
+  const dateISO = bracketDateToISO(card.dataset.date);
+  ticketTip.innerHTML = `
+    <div class="tip-header">🎫 ${z ? '购票信息' : 'Ticket Info'}</div>
+    <div class="tip-price">${z ? '起价' : 'From'} <span>$${card.dataset.ticketFrom}</span></div>
+    <div class="tip-cats">${z ? '多种价格档位可选' : 'Multiple price categories available'}</div>
+    <div class="tip-actions">
+      <a href="${card.dataset.ticketUrl || '#'}" class="tip-btn" target="_blank" rel="noopener">🎫 ${z ? '购票' : 'Tickets'}</a>
+      <a href="${getBookingUrl(card.dataset.venue, dateISO)}" class="tip-btn tip-hotel-btn" target="_blank" rel="noopener">🏨 ${z ? '酒店' : 'Hotel'}</a>
+      <a href="#" class="tip-btn tip-flight-btn" onclick="event.preventDefault();closeTicketTip();openFlightPicker('${getCity(card.dataset.venue)}','${dateISO}')">✈️ ${z ? '机票' : 'Flights'}</a>
+    </div>`;
+  positionTip(card);
+  ticketTip.classList.add('visible');
+  activeCard = card;
+}
+
+function openScoreTip(card, m) {
+  const z = LANG === 'zh';
+  const hEn = resolveTeamEn(m.home), aEn = resolveTeamEn(m.away);
+  const hName = z ? (TEAM_NAMES_ZH[hEn] || hEn) : hEn;
+  const aName = z ? (TEAM_NAMES_ZH[aEn] || aEn) : aEn;
+  const hFlag = FLAGS[hEn] ? `<img src="https://flagcdn.com/w40/${FLAGS[hEn]}.png" style="height:16px;vertical-align:middle;margin-right:4px">` : '';
+  const aFlag = FLAGS[aEn] ? `<img src="https://flagcdn.com/w40/${FLAGS[aEn]}.png" style="height:16px;vertical-align:middle;margin-left:4px">` : '';
+  const isLive = m.matchStatus === 'live';
+  const isFT   = m.matchStatus === 'finished';
+  const statusLabel = isLive ? (z ? '比赛中' : 'LIVE') : (isFT ? (z ? '完场' : 'FT') : 'VS');
+  const hs = typeof m.homeScore === 'number' ? m.homeScore : '–';
+  const as = typeof m.awayScore === 'number' ? m.awayScore : '–';
+  const fmtG = s => s ? s.split('; ').map(g => `<span style="display:block;font-size:.68rem;color:#6b7280">${g}</span>`).join('') : '';
+  ticketTip.innerHTML = `
+    <div class="tip-header" style="color:${isLive ? '#ef4444' : ''}">${isLive ? '🔴 ' : ''}M${m.matchNum} · ${statusLabel}</div>
+    <div style="display:flex;align-items:center;gap:6px;margin:8px 0 4px">
+      <div style="flex:1;text-align:right;font-size:.8rem;font-weight:600">${hFlag}${hName}</div>
+      <div style="font-size:1.1rem;font-weight:800;color:#1e293b;min-width:48px;text-align:center">${hs} – ${as}</div>
+      <div style="flex:1;text-align:left;font-size:.8rem;font-weight:600">${aName}${aFlag}</div>
+    </div>
+    <div style="display:flex;gap:6px;margin-bottom:6px">
+      <div style="flex:1;text-align:right">${fmtG(m.homeGoals)}</div>
+      <div style="min-width:48px"></div>
+      <div style="flex:1;text-align:left">${fmtG(m.awayGoals)}</div>
+    </div>`;
+  positionTip(card);
   ticketTip.classList.add('visible');
   activeCard = card;
 }
@@ -382,7 +420,13 @@ document.addEventListener('click', e => {
   if (card) {
     e.stopPropagation();
     if (activeCard === card) { closeTicketTip(); return; }
-    openTicketTip(card);
+    const mn = parseInt(card.dataset.matchnum);
+    const m  = mn ? ALL_MATCHES.find(x => x.matchNum === mn) : null;
+    if (m && (m.matchStatus === 'live' || m.matchStatus === 'finished')) {
+      openScoreTip(card, m);
+    } else {
+      openTicketTip(card);
+    }
   } else if (!ticketTip.contains(e.target)) {
     closeTicketTip();
   }
@@ -752,10 +796,19 @@ async function fetchScores() {
 
     let changed = false;
 
-    // ── 1. Inject match scores into ALL_MATCHES ──────────────
+    // ── 1. Load bracket team assignments FIRST (needed for R32+ key resolution) ──
+    if (data.bracket_teams) {
+      const prev = JSON.stringify(BRACKET_TEAMS);
+      BRACKET_TEAMS = { ...data.bracket_teams };
+      if (JSON.stringify(BRACKET_TEAMS) !== prev) changed = true;
+    }
+
+    // ── 2. Inject match scores into ALL_MATCHES ──────────────
     if (data.matches) {
       ALL_MATCHES.forEach(m => {
-        const key   = `${m.dateISO}|${m.home}|${m.away}`;
+        const homeEn = resolveTeamEn(m.home);
+        const awayEn = resolveTeamEn(m.away);
+        const key   = `${m.dateISO}|${homeEn}|${awayEn}`;
         const score = data.matches[key];
         if (!score || score.status === 'upcoming') return;
         if (m.homeScore !== score.homeScore || m.awayScore !== score.awayScore || m.matchStatus !== score.status || m.homeGoals !== score.homeGoals || m.awayGoals !== score.awayGoals) {
@@ -767,26 +820,18 @@ async function fetchScores() {
           m.awayGoals   = score.awayGoals || '';
           changed = true;
         }
-        // Track winners for knockout resolution
+        // Track winners for knockout resolution (use resolved names so bracket shows real teams)
         if (score.status === 'finished' && m.matchNum) {
           const mn = String(m.matchNum);
           if (score.winner) {
-            MATCH_WINNERS[mn]        = score.winner;
-            // loser = the other team
-            MATCH_WINNERS['L' + mn]  = (score.winner === m.home) ? m.away : m.home;
+            MATCH_WINNERS[mn]       = score.winner;
+            MATCH_WINNERS['L' + mn] = (score.winner === homeEn) ? awayEn : homeEn;
           } else if (score.homeScore !== score.awayScore) {
-            MATCH_WINNERS[mn]        = score.homeScore > score.awayScore ? m.home : m.away;
-            MATCH_WINNERS['L' + mn]  = score.homeScore > score.awayScore ? m.away : m.home;
+            MATCH_WINNERS[mn]       = score.homeScore > score.awayScore ? homeEn : awayEn;
+            MATCH_WINNERS['L' + mn] = score.homeScore > score.awayScore ? awayEn : homeEn;
           }
         }
       });
-    }
-
-    // ── 2. Load bracket team assignments from agent ──────────
-    if (data.bracket_teams) {
-      const prev = JSON.stringify(BRACKET_TEAMS);
-      BRACKET_TEAMS = { ...data.bracket_teams };
-      if (JSON.stringify(BRACKET_TEAMS) !== prev) changed = true;
     }
 
     if (!changed) return;
