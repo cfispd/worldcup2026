@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-28T01:01:09.045270+00:00",
+  "updated": "2026-06-28T01:30:56.647450+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -544,18 +544,18 @@
     "2026-06-27|Colombia|Portugal": {
       "homeScore": 0,
       "awayScore": 0,
-      "status": "live",
+      "status": "finished",
       "minute": null,
       "homeGoals": "",
       "awayGoals": ""
     },
     "2026-06-27|DR Congo|Uzbekistan": {
-      "homeScore": 0,
+      "homeScore": 3,
       "awayScore": 1,
-      "status": "live",
-      "minute": 66,
-      "homeGoals": "",
-      "awayGoals": "10' Eldor Shomurodov"
+      "status": "finished",
+      "minute": null,
+      "homeGoals": "68' Yoane WISSA; 78' Fiston MAYELE; 90'+1' Yoane WISSA",
+      "awayGoals": "10' Eldor SHOMURODOV"
     }
   },
   "bracket_teams": {
@@ -578,13 +578,15 @@
     "1st Group I": "France",
     "2nd Group I": "Norway",
     "1st Group L": "England",
-    "2nd Group L": "Croatia"
+    "2nd Group L": "Croatia",
+    "1st Group K": "Colombia",
+    "2nd Group K": "Portugal"
   },
   "last_queried": {
     "2026-06-26|Norway|France": "2026-06-26T21:31:00.756554+00:00",
     "2026-06-26|Senegal|Iraq": "2026-06-26T21:31:00.756554+00:00",
     "2026-06-26|Uruguay|Spain": "",
-    "2026-06-27|Colombia|Portugal": "2026-06-28T00:01:08.544873+00:00",
-    "2026-06-27|DR Congo|Uzbekistan": "2026-06-28T01:01:09.045270+00:00"
+    "2026-06-27|Colombia|Portugal": "2026-06-28T01:30:56.647450+00:00",
+    "2026-06-27|DR Congo|Uzbekistan": "2026-06-28T01:30:56.647450+00:00"
   }
 }
