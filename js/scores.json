@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-28T00:01:08.544873+00:00",
+  "updated": "2026-06-28T00:30:58.294845+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -553,9 +553,9 @@
       "homeScore": 0,
       "awayScore": 1,
       "status": "live",
-      "minute": 27,
+      "minute": null,
       "homeGoals": "",
-      "awayGoals": "10' Eldor SHOMURODOV"
+      "awayGoals": "10' Eldor Shomurodov"
     }
   },
   "bracket_teams": {
@@ -585,6 +585,6 @@
     "2026-06-26|Senegal|Iraq": "2026-06-26T21:31:00.756554+00:00",
     "2026-06-26|Uruguay|Spain": "",
     "2026-06-27|Colombia|Portugal": "2026-06-28T00:01:08.544873+00:00",
-    "2026-06-27|DR Congo|Uzbekistan": "2026-06-28T00:01:08.544873+00:00"
+    "2026-06-27|DR Congo|Uzbekistan": "2026-06-28T00:30:58.294845+00:00"
   }
 }
