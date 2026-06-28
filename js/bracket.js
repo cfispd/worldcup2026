@@ -21,7 +21,7 @@ function brTeam(name) {
 function buildBracket() {
   const BASE    = 115;  // px per R32 slot (controls vertical spacing)
   const CARD_H  = 108;  // card height — tall enough for header + 2 teams + flag + venue
-  const CARD_W  = 215;  // card width — wide enough for long qualifier labels
+  const CARD_W  = 194;  // card width — wide enough for long qualifier labels
   const COL_GAP = 36;   // gap between columns (space for connector lines)
   const COL_STP = CARD_W + COL_GAP;
   const TOTAL_H = 16 * BASE;  // 1600 px
