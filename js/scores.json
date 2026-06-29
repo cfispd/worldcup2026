@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-29T22:30:53.576383+00:00",
+  "updated": "2026-06-29T23:00:59.393038+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -608,18 +608,18 @@
     "2026-06-29|1st Group E|3rd Grp A/B/C/D/F": {
       "homeScore": 2,
       "awayScore": 1,
-      "status": "live",
+      "status": "finished",
       "minute": null,
-      "homeGoals": "56' Casemiro; 90+5' Gabriel Martinelli",
-      "awayGoals": "29' Kaishu Sano"
+      "homeGoals": "56' Casemiro; 90+6' Martinelli",
+      "awayGoals": "29' Sano"
     },
     "2026-06-29|Germany|Paraguay": {
       "homeScore": 1,
       "awayScore": 1,
       "status": "live",
-      "minute": null,
-      "homeGoals": "57' Havertz",
-      "awayGoals": "42' Enciso"
+      "minute": 105,
+      "homeGoals": "",
+      "awayGoals": ""
     }
   },
   "bracket_teams": {
@@ -668,7 +668,7 @@
     "2026-06-28|2nd Group A|2nd Group B": "2026-06-28T21:30:58.526037+00:00",
     "2026-06-29|1st Group C|2nd Group F": "2026-06-29T19:00:58.078093+00:00",
     "2026-06-29|Brazil|Japan": "2026-06-29T19:00:58.078093+00:00",
-    "2026-06-29|1st Group E|3rd Grp A/B/C/D/F": "2026-06-29T21:05:30.383463+00:00",
-    "2026-06-29|Germany|Paraguay": "2026-06-29T22:30:53.576383+00:00"
+    "2026-06-29|1st Group E|3rd Grp A/B/C/D/F": "2026-06-29T23:00:59.393038+00:00",
+    "2026-06-29|Germany|Paraguay": "2026-06-29T23:00:59.393038+00:00"
   }
 }
