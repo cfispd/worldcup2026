@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-29T18:30:51.830050+00:00",
+  "updated": "2026-06-29T19:00:58.078093+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -590,19 +590,19 @@
       "awayGoals": "92' Eustáquio"
     },
     "2026-06-29|1st Group C|2nd Group F": {
-      "homeScore": 0,
+      "homeScore": 2,
       "awayScore": 1,
-      "status": "live",
-      "minute": 45,
-      "homeGoals": "",
-      "awayGoals": "29' Sano"
+      "status": "finished",
+      "minute": null,
+      "homeGoals": "Casemiro; Gabriel Martinelli 90+6",
+      "awayGoals": "Kaishu Sano 29"
     },
     "2026-06-29|Brazil|Japan": {
-      "homeScore": 1,
+      "homeScore": 2,
       "awayScore": 1,
-      "status": "live",
+      "status": "finished",
       "minute": null,
-      "homeGoals": "45' Casemiro",
+      "homeGoals": "45+6' Martinelli",
       "awayGoals": "29' Sano"
     }
   },
@@ -650,7 +650,7 @@
     "2026-06-27|Jordan|Argentina": "2026-06-28T04:01:13.980475+00:00",
     "2026-06-28|South Africa|Canada": "2026-06-28T21:01:09.433576+00:00",
     "2026-06-28|2nd Group A|2nd Group B": "2026-06-28T21:30:58.526037+00:00",
-    "2026-06-29|1st Group C|2nd Group F": "2026-06-29T18:01:00.099199+00:00",
-    "2026-06-29|Brazil|Japan": "2026-06-29T18:30:51.830050+00:00"
+    "2026-06-29|1st Group C|2nd Group F": "2026-06-29T19:00:58.078093+00:00",
+    "2026-06-29|Brazil|Japan": "2026-06-29T19:00:58.078093+00:00"
   }
 }
