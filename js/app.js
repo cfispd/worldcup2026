@@ -389,9 +389,21 @@ function openScoreTip(card, m) {
   const aFlag = FLAGS[aEn] ? `<img src="https://flagcdn.com/w40/${FLAGS[aEn]}.png" style="height:16px;vertical-align:middle;margin-left:4px">` : '';
   const isLive = m.matchStatus === 'live';
   const isFT   = m.matchStatus === 'finished';
-  const statusLabel = isLive ? (z ? '比赛中' : 'LIVE') : (isFT ? (z ? '完场' : 'FT') : 'VS');
+  const isPen  = m.period === 'PEN';
+  const isEt   = m.period === 'ET1' || m.period === 'ETHT' || m.period === 'ET2';
+  let statusLabel;
+  if (isLive) {
+    statusLabel = isPen ? (z ? '点球大战' : 'PENALTIES') : isEt ? (z ? '加时赛' : 'EXTRA TIME') : (z ? '比赛中' : 'LIVE');
+  } else if (isFT) {
+    statusLabel = isPen ? (z ? '点球大战获胜' : 'WON ON PENALTIES') : m.period === 'AET' ? (z ? '加时获胜' : 'AET') : (z ? '完场' : 'FT');
+  } else {
+    statusLabel = 'VS';
+  }
   const hs = typeof m.homeScore === 'number' ? m.homeScore : '–';
   const as = typeof m.awayScore === 'number' ? m.awayScore : '–';
+  const penLine = m.penalties
+    ? `<div style="text-align:center;font-size:.72rem;font-weight:700;color:#6b7280;margin:-2px 0 4px">(${z ? '点球' : 'pens'} ${m.penalties.home} – ${m.penalties.away})</div>`
+    : '';
   const fmtG = s => s ? s.split('; ').map(g => `<span style="display:block;font-size:.68rem;color:#6b7280">${g}</span>`).join('') : '';
   ticketTip.innerHTML = `
     <div class="tip-header" style="color:${isLive ? '#ef4444' : ''}">${isLive ? '🔴 ' : ''}M${m.matchNum} · ${statusLabel}</div>
@@ -400,6 +412,7 @@ function openScoreTip(card, m) {
       <div style="font-size:1.55rem;font-weight:900;color:#ef4444;min-width:56px;text-align:center;letter-spacing:.04em;line-height:1">${hs} – ${as}</div>
       <div style="flex:1;text-align:left;font-size:.8rem;font-weight:600">${aName}${aFlag}</div>
     </div>
+    ${penLine}
     <div style="display:flex;gap:6px;margin-bottom:6px">
       <div style="flex:1;text-align:right">${fmtG(m.homeGoals)}</div>
       <div style="min-width:48px"></div>
@@ -656,26 +669,49 @@ function mdsCard(m, status) {
   const city   = getCity(m.venue);
   const cityLbl = z ? (CITY_NAMES_ZH[city] || city) : city;
 
+  const LIVE_PERIOD_LABELS = {
+    '1H':   z ? '上半场'      : '1st Half',
+    'HT':   z ? '中场休息'    : 'Half Time',
+    '2H':   z ? '下半场'      : '2nd Half',
+    'ET1':  z ? '加时上半场'  : 'Extra Time 1st Half',
+    'ETHT': z ? '加时中场休息' : 'ET Break',
+    'ET2':  z ? '加时下半场'  : 'Extra Time 2nd Half',
+    'PEN':  z ? '点球大战'    : 'Penalty Shootout',
+  };
+
   let badge, mid;
   if (status === 'live') {
-    const start   = mdsStartUTC(m.dateISO, m.time);
-    const elapsed = start ? Math.max(0, Math.floor((Date.now() - start) / 60000)) : 0;
-    const HALF = 45, BREAK = 25;
     let minuteLabel;
-    if (elapsed <= HALF) {
-      minuteLabel = z ? `上半场 ${elapsed}'` : `1st Half ${elapsed}'`;
-    } else if (elapsed < HALF + BREAK) {
-      minuteLabel = z ? '中场休息' : 'Half Time';
+    if (m.period && LIVE_PERIOD_LABELS[m.period]) {
+      if (m.period === 'HT' || m.period === 'ETHT' || m.period === 'PEN') {
+        minuteLabel = LIVE_PERIOD_LABELS[m.period];
+      } else {
+        const mn = typeof m.matchMinute === 'number' ? `${m.matchMinute}'` : '';
+        minuteLabel = `${LIVE_PERIOD_LABELS[m.period]}${mn ? ' ' + mn : ''}`;
+      }
     } else {
-      const h2 = Math.min(50, elapsed - HALF - BREAK);
-      minuteLabel = z ? `下半场 ${h2}'` : `2nd Half ${h2}'`;
+      const start   = mdsStartUTC(m.dateISO, m.time);
+      const elapsed = start ? Math.max(0, Math.floor((Date.now() - start) / 60000)) : 0;
+      const HALF = 45, BREAK = 25;
+      if (elapsed <= HALF) {
+        minuteLabel = z ? `上半场 ${elapsed}'` : `1st Half ${elapsed}'`;
+      } else if (elapsed < HALF + BREAK) {
+        minuteLabel = z ? '中场休息' : 'Half Time';
+      } else {
+        const h2 = Math.min(50, elapsed - HALF - BREAK);
+        minuteLabel = z ? `下半场 ${h2}'` : `2nd Half ${h2}'`;
+      }
     }
-    badge = `<span class="mds-minute">${minuteLabel}</span>`;
+    const penClass = m.period === 'PEN' ? ' mds-pen' : '';
+    badge = `<span class="mds-minute${penClass}">${minuteLabel}</span>`;
     const hs = typeof m.homeScore === 'number' ? m.homeScore : 0;
     const as = typeof m.awayScore === 'number' ? m.awayScore : 0;
     mid = `${hs} – ${as}`;
   } else if (status === 'finished') {
-    badge = `<span class="mds-ft">${z ? '完场' : 'FT'}</span>`;
+    const aetLabel = m.period === 'PEN' && m.penalties
+      ? (z ? `点球 ${m.penalties.home}-${m.penalties.away}` : `Pens ${m.penalties.home}-${m.penalties.away}`)
+      : m.period === 'AET' ? (z ? '加时' : 'AET') : '';
+    badge = `<span class="mds-ft">${z ? '完场' : 'FT'}</span>${aetLabel ? `<span class="mds-aet">${aetLabel}</span>` : ''}`;
     mid   = typeof m.homeScore === 'number' ? `${m.homeScore} – ${m.awayScore}` : 'VS';
   } else {
     badge = `<span class="mds-time">${toUserLocalTime(m.time, m.dateISO)}</span>`;
@@ -811,13 +847,15 @@ async function fetchScores() {
         const key   = `${m.dateISO}|${homeEn}|${awayEn}`;
         const score = data.matches[key];
         if (!score || score.status === 'upcoming') return;
-        if (m.homeScore !== score.homeScore || m.awayScore !== score.awayScore || m.matchStatus !== score.status || m.homeGoals !== score.homeGoals || m.awayGoals !== score.awayGoals) {
+        if (m.homeScore !== score.homeScore || m.awayScore !== score.awayScore || m.matchStatus !== score.status || m.homeGoals !== score.homeGoals || m.awayGoals !== score.awayGoals || m.period !== (score.period || null) || JSON.stringify(m.penalties || null) !== JSON.stringify(score.penalties || null)) {
           m.homeScore   = score.homeScore;
           m.awayScore   = score.awayScore;
           m.matchStatus = score.status;
           m.matchMinute = score.minute ?? null;
           m.homeGoals   = score.homeGoals || '';
           m.awayGoals   = score.awayGoals || '';
+          m.period      = score.period || null;
+          m.penalties   = score.penalties || null;
           changed = true;
         }
         // Track winners for knockout resolution (use resolved names so bracket shows real teams)

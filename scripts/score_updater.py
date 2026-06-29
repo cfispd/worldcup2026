@@ -141,11 +141,17 @@ Matches to look up:
 {lines}
 
 JSON rules (no exceptions):
-- homeScore/awayScore: integer (0 is valid), null only if not started
+- homeScore/awayScore: integer (0 is valid), null only if not started. For knockout matches this is the score AFTER extra time (regulation + ET goals) — do NOT include penalty-shootout goals here.
 - status: "live" | "finished" | "upcoming"
 - minute: integer or null
 - homeGoals: HOME team goals only, e.g. "17' Embolo; 45' Schar" — separate with semicolons (;) NOT commas — empty string if none
 - awayGoals: AWAY team goals only, same format — empty string if none
+- period: current phase, one of "1H" | "HT" | "2H" | "ET1" | "ETHT" | "ET2" | "PEN" | "AET" | null
+  - Use "1H"/"HT"/"2H" for normal time, "ET1"/"ETHT"/"ET2" while extra time is being played (knockout matches only, when scores are level after 90 minutes), "PEN" while a penalty shootout is underway or about to start.
+  - When status is "finished": use "AET" if the match was decided in extra time (no shootout needed), "PEN" if it was decided by a penalty shootout, or null if decided in normal 90 minutes.
+  - Always null for group-stage matches.
+- penalties: {{"home": <integer>, "away": <integer>}} — the final penalty-shootout score, ONLY when period is "PEN" and status is "finished". null otherwise.
+- winner: the exact team name (home or away) that won — REQUIRED when status is "finished" AND homeScore equals awayScore (i.e. the match was decided on penalties). null otherwise.
 
 Output ONLY this JSON, nothing else:
 {{
@@ -155,7 +161,10 @@ Output ONLY this JSON, nothing else:
     "status": "live" | "finished" | "upcoming",
     "minute": <integer or null>,
     "homeGoals": "<string>",
-    "awayGoals": "<string>"
+    "awayGoals": "<string>",
+    "period": "<string or null>",
+    "penalties": {{"home": <integer>, "away": <integer>}} or null,
+    "winner": "<string or null>"
   }}
 }}
 """

@@ -889,8 +889,12 @@ footer { text-align:center; padding:20px; font-size:.8rem; color:#9ca3af; border
 .mds-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
 .mds-gpill { font-size: .6rem; font-weight: 800; color: #fff; padding: 2px 7px; border-radius: 10px; white-space: nowrap; }
 .mds-minute { font-size: .72rem; font-weight: 700; color: #ef4444; }
+.mds-minute.mds-pen { animation: mds-pen-pulse 1.2s ease-in-out infinite; }
 .mds-time   { font-size: .72rem; font-weight: 600; color: #6b7280; }
 .mds-ft     { font-size: .72rem; font-weight: 700; color: #9ca3af; }
+.mds-aet    { font-size: .62rem; font-weight: 700; color: #ef4444; margin-left: 5px; vertical-align: middle; }
+
+@keyframes mds-pen-pulse { 0%, 100% { opacity: 1; } 50% { opacity: .45; } }
 
 .mds-matchup { display: flex; align-items: center; gap: 6px; margin-bottom: 2px; }
 .mds-team { display: flex; align-items: center; gap: 5px; flex: 1; min-width: 0; }
