@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-29T23:00:59.393038+00:00",
+  "updated": "2026-06-29T23:30:50.675253+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -616,12 +616,13 @@
     "2026-06-29|Germany|Paraguay": {
       "homeScore": 1,
       "awayScore": 1,
-      "status": "live",
-      "minute": 105,
-      "homeGoals": "54' Havertz",
-      "awayGoals": "40' Enciso",
-      "period": "ET2",
-      "penalties": null
+      "status": "finished",
+      "minute": null,
+      "homeGoals": "",
+      "awayGoals": "42' Enciso",
+      "period": "PEN",
+      "penalties": null,
+      "winner": "Paraguay"
     }
   },
   "bracket_teams": {
@@ -671,6 +672,6 @@
     "2026-06-29|1st Group C|2nd Group F": "2026-06-29T19:00:58.078093+00:00",
     "2026-06-29|Brazil|Japan": "2026-06-29T19:00:58.078093+00:00",
     "2026-06-29|1st Group E|3rd Grp A/B/C/D/F": "2026-06-29T23:00:59.393038+00:00",
-    "2026-06-29|Germany|Paraguay": "2026-06-29T23:00:59.393038+00:00"
+    "2026-06-29|Germany|Paraguay": "2026-06-29T23:30:50.675253+00:00"
   }
 }
