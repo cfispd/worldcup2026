@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-29T22:01:04.663376+00:00",
+  "updated": "2026-06-29T22:30:53.576383+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -618,8 +618,8 @@
       "awayScore": 1,
       "status": "live",
       "minute": null,
-      "homeGoals": "Kai Havertz",
-      "awayGoals": "Julio Enciso"
+      "homeGoals": "57' Havertz",
+      "awayGoals": "42' Enciso"
     }
   },
   "bracket_teams": {
@@ -669,6 +669,6 @@
     "2026-06-29|1st Group C|2nd Group F": "2026-06-29T19:00:58.078093+00:00",
     "2026-06-29|Brazil|Japan": "2026-06-29T19:00:58.078093+00:00",
     "2026-06-29|1st Group E|3rd Grp A/B/C/D/F": "2026-06-29T21:05:30.383463+00:00",
-    "2026-06-29|Germany|Paraguay": "2026-06-29T22:01:04.663376+00:00"
+    "2026-06-29|Germany|Paraguay": "2026-06-29T22:30:53.576383+00:00"
   }
 }
