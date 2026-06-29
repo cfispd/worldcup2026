@@ -618,8 +618,10 @@
       "awayScore": 1,
       "status": "live",
       "minute": 105,
-      "homeGoals": "",
-      "awayGoals": ""
+      "homeGoals": "54' Havertz",
+      "awayGoals": "40' Enciso",
+      "period": "ET2",
+      "penalties": null
     }
   },
   "bracket_teams": {
