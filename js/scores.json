@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-30T04:01:01.613995+00:00",
+  "updated": "2026-06-30T17:21:47.012241+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -645,6 +645,28 @@
       "period": "PEN",
       "penalties": null,
       "winner": "Morocco"
+    },
+    "2026-06-30|2nd Group E|2nd Group I": {
+      "homeScore": null,
+      "awayScore": null,
+      "status": "upcoming",
+      "minute": null,
+      "homeGoals": "",
+      "awayGoals": "",
+      "period": null,
+      "penalties": null,
+      "winner": null
+    },
+    "2026-06-30|Ivory Coast|Norway": {
+      "homeScore": null,
+      "awayScore": null,
+      "status": "live",
+      "minute": null,
+      "homeGoals": "",
+      "awayGoals": "",
+      "period": "1H",
+      "penalties": null,
+      "winner": null
     }
   },
   "bracket_teams": {
