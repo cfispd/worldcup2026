@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-30T02:01:06.671279+00:00",
+  "updated": "2026-06-30T02:30:51.874578+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -625,24 +625,24 @@
       "winner": "Paraguay"
     },
     "2026-06-29|1st Group F|2nd Group C": {
-      "homeScore": null,
-      "awayScore": null,
-      "status": "upcoming",
+      "homeScore": 2,
+      "awayScore": 1,
+      "status": "live",
       "minute": null,
-      "homeGoals": "",
-      "awayGoals": "",
+      "homeGoals": "56' Casemiro; 90+5' Gabriel Martinelli",
+      "awayGoals": "29' Kaishu Sano",
       "period": null,
       "penalties": null,
       "winner": null
     },
     "2026-06-29|Netherlands|Morocco": {
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 0,
+      "awayScore": 0,
       "status": "live",
-      "minute": null,
+      "minute": 53,
       "homeGoals": "",
       "awayGoals": "",
-      "period": null,
+      "period": "2H",
       "penalties": null,
       "winner": null
     }
@@ -694,6 +694,8 @@
     "2026-06-29|1st Group C|2nd Group F": "2026-06-29T19:00:58.078093+00:00",
     "2026-06-29|Brazil|Japan": "2026-06-29T19:00:58.078093+00:00",
     "2026-06-29|1st Group E|3rd Grp A/B/C/D/F": "2026-06-29T23:00:59.393038+00:00",
-    "2026-06-29|Germany|Paraguay": "2026-06-29T23:30:50.675253+00:00"
+    "2026-06-29|Germany|Paraguay": "2026-06-29T23:30:50.675253+00:00",
+    "2026-06-29|1st Group F|2nd Group C": "2026-06-30T02:30:51.874578+00:00",
+    "2026-06-29|Netherlands|Morocco": "2026-06-30T02:30:51.874578+00:00"
   }
 }
