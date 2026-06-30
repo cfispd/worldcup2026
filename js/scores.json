@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-29T23:30:50.675253+00:00",
+  "updated": "2026-06-30T01:30:49.647312+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -623,6 +623,17 @@
       "period": "PEN",
       "penalties": null,
       "winner": "Paraguay"
+    },
+    "2026-06-29|1st Group F|2nd Group C": {
+      "homeScore": null,
+      "awayScore": null,
+      "status": "upcoming",
+      "minute": null,
+      "homeGoals": "",
+      "awayGoals": "",
+      "period": null,
+      "penalties": null,
+      "winner": null
     }
   },
   "bracket_teams": {
