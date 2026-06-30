@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-30T22:30:50.274553+00:00",
+  "updated": "2026-06-30T23:01:02.269934+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -671,20 +671,20 @@
     "2026-06-30|1st Group I|3rd Grp C/D/F/G/H": {
       "homeScore": 2,
       "awayScore": 1,
-      "status": "live",
+      "status": "finished",
       "minute": null,
-      "homeGoals": "",
-      "awayGoals": "",
+      "homeGoals": "39' Nusa; 86' Haaland",
+      "awayGoals": "74' Diallo",
       "period": null,
       "penalties": null,
       "winner": null
     },
     "2026-06-30|France|Sweden": {
-      "homeScore": 2,
+      "homeScore": 3,
       "awayScore": 0,
       "status": "live",
-      "minute": 71,
-      "homeGoals": "45' Mbappe; 53' Barcola",
+      "minute": 92,
+      "homeGoals": "45' Mbappe; 53' Barcola; 74' Mbappe",
       "awayGoals": "",
       "period": "2H",
       "penalties": null,
@@ -743,7 +743,7 @@
     "2026-06-29|Netherlands|Morocco": "2026-06-30T04:01:01.613995+00:00",
     "2026-06-30|2nd Group E|2nd Group I": "2026-06-30T19:01:01.059996+00:00",
     "2026-06-30|Ivory Coast|Norway": "2026-06-30T19:01:01.059996+00:00",
-    "2026-06-30|1st Group I|3rd Grp C/D/F/G/H": "2026-06-30T22:30:50.274553+00:00",
-    "2026-06-30|France|Sweden": "2026-06-30T22:30:50.274553+00:00"
+    "2026-06-30|1st Group I|3rd Grp C/D/F/G/H": "2026-06-30T23:01:02.269934+00:00",
+    "2026-06-30|France|Sweden": "2026-06-30T23:01:02.269934+00:00"
   }
 }
