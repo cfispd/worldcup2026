@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-30T03:01:04.669617+00:00",
+  "updated": "2026-06-30T04:01:01.613995+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -638,13 +638,13 @@
     "2026-06-29|Netherlands|Morocco": {
       "homeScore": 1,
       "awayScore": 1,
-      "status": "live",
+      "status": "finished",
       "minute": null,
-      "homeGoals": "71' Gakpo",
-      "awayGoals": "90' Diop",
-      "period": "2H",
+      "homeGoals": "72' Gakpo",
+      "awayGoals": "91' Diop",
+      "period": "PEN",
       "penalties": null,
-      "winner": null
+      "winner": "Morocco"
     }
   },
   "bracket_teams": {
@@ -696,6 +696,6 @@
     "2026-06-29|1st Group E|3rd Grp A/B/C/D/F": "2026-06-29T23:00:59.393038+00:00",
     "2026-06-29|Germany|Paraguay": "2026-06-29T23:30:50.675253+00:00",
     "2026-06-29|1st Group F|2nd Group C": "2026-06-30T03:01:04.669617+00:00",
-    "2026-06-29|Netherlands|Morocco": "2026-06-30T03:01:04.669617+00:00"
+    "2026-06-29|Netherlands|Morocco": "2026-06-30T04:01:01.613995+00:00"
   }
 }
