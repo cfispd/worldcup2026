@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-30T17:21:47.012241+00:00",
+  "updated": "2026-06-30T18:30:56.643457+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -647,24 +647,24 @@
       "winner": "Morocco"
     },
     "2026-06-30|2nd Group E|2nd Group I": {
-      "homeScore": null,
-      "awayScore": null,
-      "status": "upcoming",
+      "homeScore": 1,
+      "awayScore": 0,
+      "status": "live",
       "minute": null,
-      "homeGoals": "",
+      "homeGoals": "39' Nusa",
       "awayGoals": "",
       "period": null,
       "penalties": null,
       "winner": null
     },
     "2026-06-30|Ivory Coast|Norway": {
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 0,
+      "awayScore": 1,
       "status": "live",
-      "minute": null,
+      "minute": 68,
       "homeGoals": "",
-      "awayGoals": "",
-      "period": "1H",
+      "awayGoals": "39' Nusa",
+      "period": "2H",
       "penalties": null,
       "winner": null
     }
@@ -718,6 +718,8 @@
     "2026-06-29|1st Group E|3rd Grp A/B/C/D/F": "2026-06-29T23:00:59.393038+00:00",
     "2026-06-29|Germany|Paraguay": "2026-06-29T23:30:50.675253+00:00",
     "2026-06-29|1st Group F|2nd Group C": "2026-06-30T03:01:04.669617+00:00",
-    "2026-06-29|Netherlands|Morocco": "2026-06-30T04:01:01.613995+00:00"
+    "2026-06-29|Netherlands|Morocco": "2026-06-30T04:01:01.613995+00:00",
+    "2026-06-30|2nd Group E|2nd Group I": "2026-06-30T18:30:56.643457+00:00",
+    "2026-06-30|Ivory Coast|Norway": "2026-06-30T18:30:56.643457+00:00"
   }
 }
