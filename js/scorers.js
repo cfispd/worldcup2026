@@ -21,7 +21,8 @@ function parseTopScorers() {
         if (/\bOG\b/.test(goal)) return;  // skip own goals
 
         const name = goal
-          .replace(/^[\d+']+\s*/, '')           // strip minute prefix: "45+5' " or "6' "
+          .replace(/^[\d+']+\s*/, '')           // strip leading minute: "45+5' Name"
+          .replace(/\s+\d+[+\d]*'?\s*$/, '')    // strip trailing minute: "Name 86'" or "Name 90+'"
           .replace(/\s*\([Pp](?:en)?\)\s*/, '') // strip (P) / (Pen)
           .trim();
         if (!name) return;
