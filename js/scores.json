@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-01T18:01:12.152319+00:00",
+  "updated": "2026-07-01T18:30:55.841306+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -683,12 +683,12 @@
       "winner": null
     },
     "2026-07-01|1st Group L|3rd Grp E/H/I/J/K": {
-      "homeScore": null,
-      "awayScore": null,
-      "status": "upcoming",
+      "homeScore": 2,
+      "awayScore": 1,
+      "status": "finished",
       "minute": null,
-      "homeGoals": "",
-      "awayGoals": "",
+      "homeGoals": "75' Kane; 86' Kane",
+      "awayGoals": "7' Cipenga",
       "period": null,
       "penalties": null,
       "winner": null
@@ -758,6 +758,7 @@
     "2026-06-30|France|Sweden": "2026-06-30T23:30:53.695612+00:00",
     "2026-06-30|Mexico|Ecuador": "2026-07-01T03:01:00.305384+00:00",
     "2026-06-30|1st Group A|3rd Grp C/E/F/H/I": "2026-07-01T04:21:13.464384+00:00",
-    "2026-07-01|England|DR Congo": "2026-07-01T18:01:12.152319+00:00"
+    "2026-07-01|England|DR Congo": "2026-07-01T18:01:12.152319+00:00",
+    "2026-07-01|1st Group L|3rd Grp E/H/I/J/K": "2026-07-01T18:30:55.841306+00:00"
   }
 }
