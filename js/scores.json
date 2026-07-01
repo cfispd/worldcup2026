@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-01T04:21:13.464384+00:00",
+  "updated": "2026-07-01T16:31:11.667223+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -679,6 +679,28 @@
       "homeGoals": "22' Quinones; 31' Jimenez",
       "awayGoals": "",
       "period": null,
+      "penalties": null,
+      "winner": null
+    },
+    "2026-07-01|1st Group L|3rd Grp E/H/I/J/K": {
+      "homeScore": null,
+      "awayScore": null,
+      "status": "upcoming",
+      "minute": null,
+      "homeGoals": "",
+      "awayGoals": "",
+      "period": null,
+      "penalties": null,
+      "winner": null
+    },
+    "2026-07-01|England|DR Congo": {
+      "homeScore": null,
+      "awayScore": null,
+      "status": "live",
+      "minute": null,
+      "homeGoals": "",
+      "awayGoals": "Akolo",
+      "period": "1H",
       "penalties": null,
       "winner": null
     }
