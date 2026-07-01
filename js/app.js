@@ -631,14 +631,22 @@ function localDateISO(offsetDays) {
     String(d.getDate()).padStart(2, '0');
 }
 
-function mdsStartUTC(dateISO, timeET) {
+// UTC offset (hours) for each host city during summer 2026 (DST in effect)
+const CITY_UTC_OFFSET = {
+  'Mexico City': 5, 'Guadalajara': 5, 'Monterrey': 5,
+  'Dallas': 5, 'Houston': 5, 'Kansas City': 5,
+  'Los Angeles': 7, 'San Francisco': 7, 'Seattle': 7, 'Vancouver': 7,
+};
+function mdsStartUTC(dateISO, time, venue) {
   try {
-    const [tp, pd] = timeET.trim().split(' ');
+    const [tp, pd] = time.trim().split(' ');
     let [h, m] = tp.split(':').map(Number);
     if (pd === 'PM' && h !== 12) h += 12;
     if (pd === 'AM' && h === 12) h = 0;
     const [y, mo, d] = dateISO.split('-').map(Number);
-    return new Date(Date.UTC(y, mo - 1, d, h, m) + 4 * 3600000); // EDT = UTC-4
+    const city = venue ? venue.split(', ').pop() : '';
+    const offsetH = CITY_UTC_OFFSET[city] ?? 4; // default EDT = UTC-4
+    return new Date(Date.UTC(y, mo - 1, d, h, m) + offsetH * 3600000);
   } catch { return null; }
 }
 
@@ -648,7 +656,7 @@ function mdsStatus(m, todayISO) {
   if (m.matchStatus === 'finished') return 'finished';
   if (m.matchStatus === 'live')     return 'live';
   // No confirmed status — fall back to time-based detection
-  const start = mdsStartUTC(m.dateISO, m.time);
+  const start = mdsStartUTC(m.dateISO, m.time, m.venue);
   if (!start) return 'upcoming';
   const diff = (Date.now() - start) / 60000;
   if (diff < -15)  return 'upcoming';
@@ -690,7 +698,7 @@ function mdsCard(m, status) {
         minuteLabel = `${LIVE_PERIOD_LABELS[m.period]}${mn ? ' ' + mn : ''}`;
       }
     } else {
-      const start   = mdsStartUTC(m.dateISO, m.time);
+      const start   = mdsStartUTC(m.dateISO, m.time, m.venue);
       const elapsed = start ? Math.max(0, Math.floor((Date.now() - start) / 60000)) : 0;
       const HALF = 45, BREAK = 25;
       if (elapsed <= HALF) {
@@ -720,7 +728,7 @@ function mdsCard(m, status) {
 
   const extraClass = status === 'live' ? ' mds-card-live' : status === 'finished' ? ' mds-card-done' : '';
 
-  const start    = mdsStartUTC(m.dateISO, m.time);
+  const start    = mdsStartUTC(m.dateISO, m.time, m.venue);
   const diffMin  = start ? (Date.now() - start) / 60000 : null;
   const showWatch = status === 'live';
   const playIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>`;
@@ -763,8 +771,8 @@ function renderMatchdayStrip() {
     else if (matchLocalDateISO(m.dateISO, m.time) === tomorrowISO) tomorrow.push([m, 'upcoming']);
   });
   const byKickoff = ([a], [b]) => {
-    const tA = mdsStartUTC(a.dateISO, a.time);
-    const tB = mdsStartUTC(b.dateISO, b.time);
+    const tA = mdsStartUTC(a.dateISO, a.time, a.venue);
+    const tB = mdsStartUTC(b.dateISO, b.time, b.venue);
     return (tA ? tA.getTime() : 0) - (tB ? tB.getTime() : 0);
   };
   live.sort(byKickoff);

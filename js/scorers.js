@@ -11,7 +11,9 @@ function parseTopScorers() {
   ALL_MATCHES.forEach(m => {
     if (m.matchStatus !== 'finished' && m.matchStatus !== 'live') return;
 
-    [[m.homeGoals, m.home], [m.awayGoals, m.away]].forEach(([goalsStr, team]) => {
+    const homeTeam = resolveTeamEn(m.home);
+    const awayTeam = resolveTeamEn(m.away);
+    [[m.homeGoals, homeTeam], [m.awayGoals, awayTeam]].forEach(([goalsStr, team]) => {
       if (!goalsStr) return;
       goalsStr.split(';').forEach(entry => {
         const goal = entry.trim();
