@@ -581,28 +581,12 @@
       "homeGoals": "",
       "awayGoals": "90+2' Eustaquio"
     },
-    "2026-06-29|1st Group C|2nd Group F": {
-      "homeScore": 2,
-      "awayScore": 1,
-      "status": "finished",
-      "minute": null,
-      "homeGoals": "Casemiro; Gabriel Martinelli 90+6",
-      "awayGoals": "Kaishu Sano 29"
-    },
     "2026-06-29|Brazil|Japan": {
       "homeScore": 2,
       "awayScore": 1,
       "status": "finished",
       "minute": null,
       "homeGoals": "45+6' Martinelli",
-      "awayGoals": "29' Sano"
-    },
-    "2026-06-29|1st Group E|3rd Grp A/B/C/D/F": {
-      "homeScore": 2,
-      "awayScore": 1,
-      "status": "finished",
-      "minute": null,
-      "homeGoals": "56' Casemiro; 90+6' Martinelli",
       "awayGoals": "29' Sano"
     },
     "2026-06-29|Germany|Paraguay": {
@@ -615,17 +599,6 @@
       "period": "PEN",
       "penalties": null,
       "winner": "Paraguay"
-    },
-    "2026-06-29|1st Group F|2nd Group C": {
-      "homeScore": 2,
-      "awayScore": 1,
-      "status": "finished",
-      "minute": null,
-      "homeGoals": "56' Casemiro; 90+5' Gabriel Martinelli",
-      "awayGoals": "29' Kaishu Sano",
-      "period": null,
-      "penalties": null,
-      "winner": null
     },
     "2026-06-29|Netherlands|Morocco": {
       "homeScore": 1,
@@ -660,17 +633,6 @@
       "penalties": null,
       "winner": null
     },
-    "2026-06-30|1st Group A|3rd Grp C/E/F/H/I": {
-      "homeScore": 2,
-      "awayScore": 0,
-      "status": "finished",
-      "minute": null,
-      "homeGoals": "Quinones; Jimenez",
-      "awayGoals": "",
-      "period": null,
-      "penalties": null,
-      "winner": null
-    },
     "2026-06-30|Mexico|Ecuador": {
       "homeScore": 2,
       "awayScore": 0,
@@ -693,14 +655,14 @@
       "penalties": null,
       "winner": null
     },
-    "2026-07-01|1st Group L|3rd Grp E/H/I/J/K": {
-      "homeScore": 2,
+    "2026-07-01|Belgium|Senegal": {
+      "homeScore": 0,
       "awayScore": 1,
-      "status": "finished",
-      "minute": null,
+      "status": "live",
+      "minute": 60,
       "homeGoals": "",
-      "awayGoals": "",
-      "period": null,
+      "awayGoals": "24' Habib Diarra",
+      "period": "2H",
       "penalties": null,
       "winner": null
     }
@@ -759,6 +721,6 @@
     "2026-06-30|Mexico|Ecuador": "2026-07-01T03:01:00.305384+00:00",
     "2026-06-30|1st Group A|3rd Grp C/E/F/H/I": "2026-07-01T04:21:13.464384+00:00",
     "2026-07-01|England|DR Congo": "2026-07-01T18:30:55.841306+00:00",
-    "2026-07-01|1st Group L|3rd Grp E/H/I/J/K": "2026-07-01T18:55:55.039402+00:00"
+    "2026-07-01|Belgium|Senegal": "2026-07-01T19:30:00.000000+00:00"
   }
 }
