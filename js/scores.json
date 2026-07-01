@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-01T03:30:49.651041+00:00",
+  "updated": "2026-07-01T04:21:13.464384+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -663,11 +663,11 @@
     "2026-06-30|1st Group A|3rd Grp C/E/F/H/I": {
       "homeScore": 2,
       "awayScore": 0,
-      "status": "live",
+      "status": "finished",
       "minute": null,
-      "homeGoals": "22' Quinones; 31' Jimenez",
+      "homeGoals": "Quinones; Jimenez",
       "awayGoals": "",
-      "period": "HT",
+      "period": null,
       "penalties": null,
       "winner": null
     },
@@ -735,6 +735,6 @@
     "2026-06-30|Ivory Coast|Norway": "2026-06-30T19:01:01.059996+00:00",
     "2026-06-30|France|Sweden": "2026-06-30T23:30:53.695612+00:00",
     "2026-06-30|Mexico|Ecuador": "2026-07-01T03:01:00.305384+00:00",
-    "2026-06-30|1st Group A|3rd Grp C/E/F/H/I": "2026-07-01T03:30:49.651041+00:00"
+    "2026-06-30|1st Group A|3rd Grp C/E/F/H/I": "2026-07-01T04:21:13.464384+00:00"
   }
 }
