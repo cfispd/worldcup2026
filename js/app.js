@@ -631,23 +631,8 @@ function localDateISO(offsetDays) {
     String(d.getDate()).padStart(2, '0');
 }
 
-// UTC offset (hours) for each host city during summer 2026 (DST in effect)
-const CITY_UTC_OFFSET = {
-  'Mexico City': 5, 'Guadalajara': 5, 'Monterrey': 5,
-  'Dallas': 5, 'Houston': 5, 'Kansas City': 5,
-  'Los Angeles': 7, 'San Francisco': 7, 'Seattle': 7, 'Vancouver': 7,
-};
 function mdsStartUTC(dateISO, time, venue) {
-  try {
-    const [tp, pd] = time.trim().split(' ');
-    let [h, m] = tp.split(':').map(Number);
-    if (pd === 'PM' && h !== 12) h += 12;
-    if (pd === 'AM' && h === 12) h = 0;
-    const [y, mo, d] = dateISO.split('-').map(Number);
-    const city = venue ? venue.split(', ').pop() : '';
-    const offsetH = CITY_UTC_OFFSET[city] ?? 4; // default EDT = UTC-4
-    return new Date(Date.UTC(y, mo - 1, d, h, m) + offsetH * 3600000);
-  } catch { return null; }
+  return matchToUTC(dateISO, time, venue);
 }
 
 function mdsStatus(m, todayISO) {

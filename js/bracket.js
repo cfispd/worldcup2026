@@ -41,8 +41,14 @@ function buildBracket() {
   const nodeById = {};
   BRACKET_NODES.forEach(n => nodeById[n.id] = n);
 
-  const timeById = {};
-  ALL_MATCHES.forEach(m => { if (m.matchNum) timeById[m.matchNum] = m.time; });
+  const matchInfoById = {};
+  ALL_MATCHES.forEach(m => {
+    if (m.matchNum) matchInfoById[m.matchNum] = { time: m.time, dateISO: m.dateISO, venue: m.venue };
+  });
+  const localTimeById = {};
+  Object.entries(matchInfoById).forEach(([id, info]) => {
+    localTimeById[id] = info.time ? toUserLocalTime(info.time, info.dateISO, info.venue) : '';
+  });
 
   // feedMap: targetId → [src1, src2]
   const feedMap = {};
@@ -88,7 +94,7 @@ function buildBracket() {
       <div class="br-card ${isFinal ? 'br-final-card' : ''}" data-matchnum="${n.id}" data-home="${n.home}" data-away="${n.away}" data-ticket-from="${TICKET_FROM[n.round] || 75}" data-ticket-url="${getStubHubUrl(n)}" data-venue="${n.venue}" data-date="${n.date}" style="left:${colX(n.round)}px;top:${cardTop(n.row)}px;width:${CARD_W}px;height:${CARD_H}px;">
         <div class="br-card-header" style="background:${ac}18;border-top:2px solid ${ac};">
           <span class="br-match-id" style="color:${ac}">M${n.id}</span>
-          <span class="br-match-date">${n.date}${timeById[n.id] ? ' · ' + timeById[n.id] : ''}</span>
+          <span class="br-match-date">${n.date}${localTimeById[n.id] ? ' · ' + localTimeById[n.id] : ''}</span>
         </div>
         <div class="br-card-teams">
           <div class="br-team">${brTeam(n.home)}</div>
@@ -105,12 +111,12 @@ function buildBracket() {
   const venuePin = `<svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="flex-shrink:0"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>`;
   cardsHtml += `
     <div style="position:absolute;left:${thirdX}px;top:${thirdY - 22}px;color:#546e7a;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;">
-      3rd Place Play-off · ${n3.date}${timeById[n3.id] ? ' · ' + timeById[n3.id] : ''}
+      3rd Place Play-off · ${n3.date}${localTimeById[n3.id] ? ' · ' + localTimeById[n3.id] : ''}
     </div>
     <div class="br-card" data-matchnum="${n3.id}" data-home="${n3.home}" data-away="${n3.away}" data-ticket-from="${TICKET_FROM['3rd']}" data-ticket-url="${getStubHubUrl(n3)}" data-venue="${n3.venue}" data-date="${n3.date}" style="left:${thirdX}px;top:${thirdY}px;width:${CARD_W * 2 + COL_GAP}px;height:${CARD_H}px;">
       <div class="br-card-header" style="background:#37474f20;border-top:2px solid #546e7a;">
         <span class="br-match-id" style="color:#78909c">M103 · 3RD PLACE</span>
-        <span class="br-match-date">${n3.date}${timeById[n3.id] ? ' · ' + timeById[n3.id] : ''}</span>
+        <span class="br-match-date">${n3.date}${localTimeById[n3.id] ? ' · ' + localTimeById[n3.id] : ''}</span>
       </div>
       <div class="br-card-teams" style="display:flex;gap:12px;align-items:center;padding:6px 10px 4px;">
         <div class="br-team" style="flex:1">${brTeam(n3.home)}</div>

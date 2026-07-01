@@ -8,6 +8,13 @@
 function getCity(venue)    { return venue.split(', ').pop(); }
 function getCountry(venue) { return CITY_COUNTRY[getCity(venue)] || ''; }
 
+// UTC offset (hours to add) for each host city during summer 2026 (DST in effect)
+const CITY_UTC_OFFSET = {
+  'Mexico City': 5, 'Guadalajara': 5, 'Monterrey': 5,
+  'Dallas': 5, 'Houston': 5, 'Kansas City': 5,
+  'Los Angeles': 7, 'San Francisco': 7, 'Seattle': 7, 'Vancouver': 7,
+};
+
 function flagImg(team, w = 30, h = 20) {
   const code = FLAGS[team];
   if (!code) return `<span style="width:${w}px;display:inline-block"></span>`;
@@ -27,8 +34,8 @@ function fmtWeekday(iso) {
   return WEEKDAYS[d.getDay()];
 }
 
-// Converts a match's ET time + date to a UTC Date (EDT = UTC-4, June–July 2026).
-function matchToUTC(dateISO, timeET) {
+// Converts a match's local venue time + date to UTC.
+function matchToUTC(dateISO, timeET, venue) {
   const m = timeET.trim().match(/^(\d+):(\d+)\s*(AM|PM)$/i);
   if (!m) return null;
   let h = parseInt(m[1]);
@@ -36,12 +43,14 @@ function matchToUTC(dateISO, timeET) {
   if (ap === 'PM' && h !== 12) h += 12;
   if (ap === 'AM' && h === 12) h = 0;
   const [y, mo, d] = dateISO.split('-').map(Number);
-  return new Date(Date.UTC(y, mo - 1, d, h, min) + 4 * 3600000);
+  const city = venue ? getCity(venue) : '';
+  const offsetH = CITY_UTC_OFFSET[city] ?? 4; // default EDT = UTC-4
+  return new Date(Date.UTC(y, mo - 1, d, h, min) + offsetH * 3600000);
 }
 
 // Returns the match kickoff date as YYYY-MM-DD in the user's local timezone.
-function matchLocalDateISO(dateISO, timeET) {
-  const utc = matchToUTC(dateISO, timeET);
+function matchLocalDateISO(dateISO, timeET, venue) {
+  const utc = matchToUTC(dateISO, timeET, venue);
   if (!utc) return dateISO;
   return utc.getFullYear() + '-' +
     String(utc.getMonth() + 1).padStart(2, '0') + '-' +
@@ -49,8 +58,8 @@ function matchLocalDateISO(dateISO, timeET) {
 }
 
 // Formats a match time in the user's browser timezone (auto-detected).
-function toUserLocalTime(timeET, dateISO) {
-  const utc = matchToUTC(dateISO, timeET);
+function toUserLocalTime(timeET, dateISO, venue) {
+  const utc = matchToUTC(dateISO, timeET, venue);
   if (!utc) return timeET;
   return utc.toLocaleTimeString(LANG === 'zh' ? 'zh-CN' : 'en-US', {
     hour: 'numeric', minute: '2-digit', hour12: true
