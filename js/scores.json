@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-01T16:31:11.667223+00:00",
+  "updated": "2026-07-01T17:30:53.534185+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -694,13 +694,13 @@
       "winner": null
     },
     "2026-07-01|England|DR Congo": {
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 0,
+      "awayScore": 1,
       "status": "live",
-      "minute": null,
+      "minute": 64,
       "homeGoals": "",
-      "awayGoals": "Akolo",
-      "period": "1H",
+      "awayGoals": "7' Cipenga",
+      "period": "2H",
       "penalties": null,
       "winner": null
     }
@@ -757,6 +757,7 @@
     "2026-06-30|Ivory Coast|Norway": "2026-06-30T19:01:01.059996+00:00",
     "2026-06-30|France|Sweden": "2026-06-30T23:30:53.695612+00:00",
     "2026-06-30|Mexico|Ecuador": "2026-07-01T03:01:00.305384+00:00",
-    "2026-06-30|1st Group A|3rd Grp C/E/F/H/I": "2026-07-01T04:21:13.464384+00:00"
+    "2026-06-30|1st Group A|3rd Grp C/E/F/H/I": "2026-07-01T04:21:13.464384+00:00",
+    "2026-07-01|England|DR Congo": "2026-07-01T17:30:53.534185+00:00"
   }
 }
