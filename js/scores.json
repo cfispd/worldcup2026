@@ -581,14 +581,6 @@
       "homeGoals": "",
       "awayGoals": "90+2' Eustaquio"
     },
-    "2026-06-28|2nd Group A|2nd Group B": {
-      "homeScore": 0,
-      "awayScore": 1,
-      "status": "finished",
-      "minute": null,
-      "homeGoals": "",
-      "awayGoals": "92' Eustáquio"
-    },
     "2026-06-29|1st Group C|2nd Group F": {
       "homeScore": 2,
       "awayScore": 1,
@@ -646,17 +638,6 @@
       "penalties": null,
       "winner": "Morocco"
     },
-    "2026-06-30|2nd Group E|2nd Group I": {
-      "homeScore": 1,
-      "awayScore": 3,
-      "status": "finished",
-      "minute": null,
-      "homeGoals": "Diallo 70'",
-      "awayGoals": "Nusa 45'; Haaland 86'; Schjelderup 90+'",
-      "period": null,
-      "penalties": null,
-      "winner": null
-    },
     "2026-06-30|Ivory Coast|Norway": {
       "homeScore": 1,
       "awayScore": 2,
@@ -664,17 +645,6 @@
       "minute": null,
       "homeGoals": "Amad Diallo",
       "awayGoals": "Antonio Nusa; Erling Haaland 86'",
-      "period": null,
-      "penalties": null,
-      "winner": null
-    },
-    "2026-06-30|1st Group I|3rd Grp C/D/F/G/H": {
-      "homeScore": 2,
-      "awayScore": 1,
-      "status": "finished",
-      "minute": null,
-      "homeGoals": "39' Nusa; 86' Haaland",
-      "awayGoals": "74' Diallo",
       "period": null,
       "penalties": null,
       "winner": null
@@ -734,16 +704,13 @@
     "2026-06-27|Algeria|Austria": "2026-06-28T04:01:13.980475+00:00",
     "2026-06-27|Jordan|Argentina": "2026-06-28T04:01:13.980475+00:00",
     "2026-06-28|South Africa|Canada": "2026-06-28T21:01:09.433576+00:00",
-    "2026-06-28|2nd Group A|2nd Group B": "2026-06-28T21:30:58.526037+00:00",
     "2026-06-29|1st Group C|2nd Group F": "2026-06-29T19:00:58.078093+00:00",
     "2026-06-29|Brazil|Japan": "2026-06-29T19:00:58.078093+00:00",
     "2026-06-29|1st Group E|3rd Grp A/B/C/D/F": "2026-06-29T23:00:59.393038+00:00",
     "2026-06-29|Germany|Paraguay": "2026-06-29T23:30:50.675253+00:00",
     "2026-06-29|1st Group F|2nd Group C": "2026-06-30T03:01:04.669617+00:00",
     "2026-06-29|Netherlands|Morocco": "2026-06-30T04:01:01.613995+00:00",
-    "2026-06-30|2nd Group E|2nd Group I": "2026-06-30T19:01:01.059996+00:00",
     "2026-06-30|Ivory Coast|Norway": "2026-06-30T19:01:01.059996+00:00",
-    "2026-06-30|1st Group I|3rd Grp C/D/F/G/H": "2026-06-30T23:01:02.269934+00:00",
     "2026-06-30|France|Sweden": "2026-06-30T23:30:53.695612+00:00"
   }
 }
