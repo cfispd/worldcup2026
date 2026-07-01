@@ -657,11 +657,11 @@
     },
     "2026-07-01|Belgium|Senegal": {
       "homeScore": 0,
-      "awayScore": 1,
+      "awayScore": 2,
       "status": "live",
-      "minute": 60,
+      "minute": 63,
       "homeGoals": "",
-      "awayGoals": "24' Habib Diarra",
+      "awayGoals": "24' Habib Diarra; 51' Ismaïla Sarr",
       "period": "2H",
       "penalties": null,
       "winner": null
