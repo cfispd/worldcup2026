@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-30T23:30:53.695612+00:00",
+  "updated": "2026-07-01T01:30:49.426062+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -655,6 +655,28 @@
       "status": "finished",
       "minute": null,
       "homeGoals": "45' Mbappé; 53' Barcola; 74' Mbappé",
+      "awayGoals": "",
+      "period": null,
+      "penalties": null,
+      "winner": null
+    },
+    "2026-06-30|1st Group A|3rd Grp C/E/F/H/I": {
+      "homeScore": null,
+      "awayScore": null,
+      "status": "upcoming",
+      "minute": null,
+      "homeGoals": "",
+      "awayGoals": "",
+      "period": null,
+      "penalties": null,
+      "winner": null
+    },
+    "2026-06-30|Mexico|Ecuador": {
+      "homeScore": null,
+      "awayScore": null,
+      "status": "live",
+      "minute": null,
+      "homeGoals": "",
       "awayGoals": "",
       "period": null,
       "penalties": null,
