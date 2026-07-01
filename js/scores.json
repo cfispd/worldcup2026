@@ -656,13 +656,13 @@
       "winner": null
     },
     "2026-07-01|Belgium|Senegal": {
-      "homeScore": 0,
+      "homeScore": 2,
       "awayScore": 2,
       "status": "live",
-      "minute": 63,
-      "homeGoals": "",
+      "minute": 95,
+      "homeGoals": "80' Lukaku; 90' Tielemans",
       "awayGoals": "24' Habib Diarra; 51' Ismaïla Sarr",
-      "period": "2H",
+      "period": "ET1",
       "penalties": null,
       "winner": null
     }
