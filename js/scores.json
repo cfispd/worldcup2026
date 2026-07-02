@@ -678,13 +678,13 @@
       "winner": null
     },
     "2026-07-02|Spain|Austria": {
-      "homeScore": 2,
+      "homeScore": 3,
       "awayScore": 0,
-      "status": "live",
-      "minute": 68,
-      "homeGoals": "35' Oyarzabal; 65' Porro",
+      "status": "finished",
+      "minute": null,
+      "homeGoals": "36' Oyarzabal; 66' Porro; 89' Oyarzabal",
       "awayGoals": "",
-      "period": "2H",
+      "period": null,
       "penalties": null,
       "winner": null
     }
