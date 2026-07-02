@@ -308,6 +308,52 @@ main { max-width: 1400px; margin: 0 auto; padding: 36px 20px 60px; }
 .match-meta { display:flex; gap:16px; flex-wrap:wrap; }
 .meta-item { display:flex; align-items:center; gap:5px; font-size:.78rem; color:#6b7280; }
 
+/* ── ABOUT SECTION ───────────────────────────── */
+.site-about {
+  background: rgba(99,102,241,.04);
+  border-top: 1px solid rgba(99,102,241,.1);
+  padding: 32px 20px;
+}
+.site-about-inner {
+  max-width: 760px;
+  margin: 0 auto;
+}
+.site-about h2 {
+  font-size: .85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #6b7280;
+  margin-bottom: 12px;
+}
+.site-about p {
+  font-size: .85rem;
+  color: #6b7280;
+  line-height: 1.7;
+  margin-bottom: 10px;
+}
+.site-about strong { color: #374151; }
+.site-about-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+.site-about-features span {
+  font-size: .78rem;
+  color: #6366f1;
+  background: rgba(99,102,241,.08);
+  border: 1px solid rgba(99,102,241,.15);
+  border-radius: 20px;
+  padding: 3px 10px;
+  font-weight: 600;
+}
+body.night .site-about { background: rgba(255,255,255,.03); border-color: rgba(255,255,255,.07); }
+body.night .site-about h2 { color: #4b5563; }
+body.night .site-about p { color: #4b5563; }
+body.night .site-about strong { color: #6b7280; }
+body.night .site-about-features span { color: #818cf8; background: rgba(129,140,248,.08); border-color: rgba(129,140,248,.15); }
+
 footer { text-align:center; padding:20px; font-size:.8rem; color:#9ca3af; border-top:1px solid rgba(99,102,241,.08); }
 
 .team-option-flag { width: 24px; height: 16px; object-fit: cover; border-radius: 2px; flex-shrink: 0; margin-right: 2px; }
