@@ -665,6 +665,17 @@
       "period": "AET",
       "penalties": null,
       "winner": null
+    },
+    "2026-07-01|United States|Bosnia-Herzegovina": {
+      "homeScore": 2,
+      "awayScore": 0,
+      "status": "finished",
+      "minute": null,
+      "homeGoals": "45' Balogun; 82' Tillman",
+      "awayGoals": "",
+      "period": null,
+      "penalties": null,
+      "winner": null
     }
   },
   "bracket_teams": {
