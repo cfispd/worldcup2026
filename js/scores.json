@@ -594,10 +594,10 @@
       "awayScore": 1,
       "status": "finished",
       "minute": null,
-      "homeGoals": "",
+      "homeGoals": "54' Havertz",
       "awayGoals": "42' Enciso",
       "period": "PEN",
-      "penalties": null,
+      "penalties": {"home": 3, "away": 4},
       "winner": "Paraguay"
     },
     "2026-06-29|Netherlands|Morocco": {
@@ -608,7 +608,7 @@
       "homeGoals": "72' Gakpo",
       "awayGoals": "91' Diop",
       "period": "PEN",
-      "penalties": null,
+      "penalties": {"home": 2, "away": 3},
       "winner": "Morocco"
     },
     "2026-06-30|Ivory Coast|Norway": {
