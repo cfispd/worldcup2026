@@ -677,6 +677,17 @@
       "penalties": null,
       "winner": null
     },
+    "2026-07-02|Portugal|Croatia": {
+      "homeScore": 1,
+      "awayScore": 1,
+      "status": "live",
+      "minute": 76,
+      "homeGoals": "68' Ronaldo (Pen)",
+      "awayGoals": "53' Perisic",
+      "period": "2H",
+      "penalties": null,
+      "winner": null
+    },
     "2026-07-02|Spain|Austria": {
       "homeScore": 3,
       "awayScore": 0,
