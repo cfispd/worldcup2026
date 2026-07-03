@@ -679,12 +679,12 @@
     },
     "2026-07-03|Argentina|Cape Verde": {
       "homeScore": 1,
-      "awayScore": 0,
+      "awayScore": 1,
       "status": "live",
-      "minute": 32,
+      "minute": 62,
       "homeGoals": "29' Messi",
-      "awayGoals": "",
-      "period": "1H",
+      "awayGoals": "59' Duarte",
+      "period": "2H",
       "penalties": null,
       "winner": null
     },
