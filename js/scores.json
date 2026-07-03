@@ -680,13 +680,13 @@
     "2026-07-03|Australia|Egypt": {
       "homeScore": 1,
       "awayScore": 1,
-      "status": "live",
-      "minute": 118,
+      "status": "finished",
+      "minute": null,
       "homeGoals": "55' Mohamed Hany (OG)",
       "awayGoals": "13' Emam Ashour",
-      "period": "ET2",
-      "penalties": null,
-      "winner": null
+      "period": "PEN",
+      "penalties": {"home": 2, "away": 4},
+      "winner": "Egypt"
     },
     "2026-07-02|Switzerland|Algeria": {
       "homeScore": 2,
