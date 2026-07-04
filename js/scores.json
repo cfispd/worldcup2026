@@ -691,11 +691,11 @@
     "2026-07-03|Colombia|Ghana": {
       "homeScore": 1,
       "awayScore": 0,
-      "status": "live",
-      "minute": 39,
+      "status": "finished",
+      "minute": null,
       "homeGoals": "14' Jhon Arias",
       "awayGoals": "",
-      "period": "1H",
+      "period": null,
       "penalties": null,
       "winner": null
     },
