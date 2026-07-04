@@ -680,11 +680,11 @@
     "2026-07-03|Argentina|Cape Verde": {
       "homeScore": 2,
       "awayScore": 1,
-      "status": "finished",
-      "minute": null,
-      "homeGoals": "29' Messi; 90+2' Lisandro Martínez",
+      "status": "live",
+      "minute": 95,
+      "homeGoals": "29' Messi; 92' Lisandro Martínez",
       "awayGoals": "59' Duarte",
-      "period": null,
+      "period": "ET1",
       "penalties": null,
       "winner": null
     },
