@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-04T20:01:03.536517+00:00",
+  "updated": "2026-07-04T21:27:43.124221+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -770,6 +770,17 @@
       "minute": null,
       "homeGoals": "",
       "awayGoals": "50' Ounahi; 82' Ounahi; 90+8' Rahimi",
+      "period": null,
+      "penalties": null,
+      "winner": null
+    },
+    "2026-07-04|W Match 74|W Match 77": {
+      "homeScore": null,
+      "awayScore": null,
+      "status": "upcoming",
+      "minute": null,
+      "homeGoals": "",
+      "awayGoals": "",
       "period": null,
       "penalties": null,
       "winner": null
