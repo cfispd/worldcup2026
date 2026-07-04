@@ -679,7 +679,13 @@ function mdsCard(m, status) {
       if (m.period === 'HT' || m.period === 'ETHT' || m.period === 'PEN') {
         minuteLabel = LIVE_PERIOD_LABELS[m.period];
       } else {
-        const mn = typeof m.matchMinute === 'number' ? `${m.matchMinute}'` : '';
+        let displayMin = m.matchMinute;
+        if (typeof m.matchMinute === 'number' && m.matchMinuteAt) {
+          const added = Math.floor((Date.now() - m.matchMinuteAt) / 60000);
+          const cap = (m.period === '1H' || m.period === 'ET1') ? 52 : 97;
+          displayMin = Math.min(m.matchMinute + added, cap);
+        }
+        const mn = typeof displayMin === 'number' ? `${displayMin}'` : '';
         minuteLabel = `${LIVE_PERIOD_LABELS[m.period]}${mn ? ' ' + mn : ''}`;
       }
     } else {
@@ -844,7 +850,8 @@ async function fetchScores() {
           m.homeScore   = score.homeScore;
           m.awayScore   = score.awayScore;
           m.matchStatus = score.status;
-          m.matchMinute = score.minute ?? null;
+          const newMin  = score.minute ?? null;
+          if (m.matchMinute !== newMin) { m.matchMinute = newMin; m.matchMinuteAt = Date.now(); }
           m.homeGoals   = score.homeGoals || '';
           m.awayGoals   = score.awayGoals || '';
           m.period      = score.period || null;
