@@ -752,14 +752,14 @@
       "penalties": null,
       "winner": null
     },
-    "2026-07-04|W Match 73|W Match 75": {
-      "homeScore": null,
-      "awayScore": null,
-      "status": "upcoming",
-      "minute": null,
+    "2026-07-04|Canada|Morocco": {
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "live",
+      "minute": 45,
       "homeGoals": "",
       "awayGoals": "",
-      "period": null,
+      "period": "HT",
       "penalties": null,
       "winner": null
     }
