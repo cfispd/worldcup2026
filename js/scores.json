@@ -680,11 +680,11 @@
     "2026-07-03|Argentina|Cape Verde": {
       "homeScore": 3,
       "awayScore": 2,
-      "status": "live",
-      "minute": 113,
+      "status": "finished",
+      "minute": null,
       "homeGoals": "29' Messi; 92' Lisandro Martínez; 111' Diney Borges (OG)",
       "awayGoals": "59' Duarte; 103' Cabral",
-      "period": "ET2",
+      "period": "AET",
       "penalties": null,
       "winner": null
     },
