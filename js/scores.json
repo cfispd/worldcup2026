@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-01T18:55:55.039402+00:00",
+  "updated": "2026-07-04T17:57:57.888408+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -597,7 +597,10 @@
       "homeGoals": "54' Havertz",
       "awayGoals": "42' Enciso",
       "period": "PEN",
-      "penalties": {"home": 3, "away": 4},
+      "penalties": {
+        "home": 3,
+        "away": 4
+      },
       "winner": "Paraguay"
     },
     "2026-06-29|Netherlands|Morocco": {
@@ -608,7 +611,10 @@
       "homeGoals": "72' Gakpo",
       "awayGoals": "91' Diop",
       "period": "PEN",
-      "penalties": {"home": 2, "away": 3},
+      "penalties": {
+        "home": 2,
+        "away": 3
+      },
       "winner": "Morocco"
     },
     "2026-06-30|Ivory Coast|Norway": {
@@ -707,7 +713,10 @@
       "homeGoals": "55' Mohamed Hany (OG)",
       "awayGoals": "13' Emam Ashour",
       "period": "PEN",
-      "penalties": {"home": 2, "away": 4},
+      "penalties": {
+        "home": 2,
+        "away": 4
+      },
       "winner": "Egypt"
     },
     "2026-07-02|Switzerland|Algeria": {
@@ -738,6 +747,17 @@
       "status": "finished",
       "minute": null,
       "homeGoals": "36' Oyarzabal; 66' Porro; 89' Oyarzabal",
+      "awayGoals": "",
+      "period": null,
+      "penalties": null,
+      "winner": null
+    },
+    "2026-07-04|W Match 73|W Match 75": {
+      "homeScore": null,
+      "awayScore": null,
+      "status": "upcoming",
+      "minute": null,
+      "homeGoals": "",
       "awayGoals": "",
       "period": null,
       "penalties": null,
