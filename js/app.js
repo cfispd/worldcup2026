@@ -236,7 +236,7 @@ function openModal(groupKey) {
 
   const todayISO = localDateISO(0);
   document.getElementById('matchList').innerHTML = matches.map(m => {
-    const finished = m.matchStatus === 'finished' || matchLocalDateISO(m.dateISO, m.time) < todayISO;
+    const finished = m.matchStatus === 'finished' || matchLocalDateISO(m.dateISO, m.time, m.venue) < todayISO;
     const hasScore = typeof m.homeScore === 'number';
     const midHtml  = finished && hasScore
       ? `<span class="match-score">${m.homeScore}–${m.awayScore}</span>`
@@ -636,7 +636,7 @@ function mdsStartUTC(dateISO, time, venue) {
 }
 
 function mdsStatus(m, todayISO) {
-  if (matchLocalDateISO(m.dateISO, m.time) !== todayISO) return null;
+  if (matchLocalDateISO(m.dateISO, m.time, m.venue) !== todayISO) return null;
   // Prioritise confirmed status from scores.json
   if (m.matchStatus === 'finished') return 'finished';
   if (m.matchStatus === 'live')     return 'live';
@@ -753,7 +753,7 @@ function renderMatchdayStrip() {
     const s = mdsStatus(m, todayISO);
     if      (s === 'live')                  live.push([m, s]);
     else if (s === 'upcoming' || s === 'finished') today.push([m, s]);
-    else if (matchLocalDateISO(m.dateISO, m.time) === tomorrowISO) tomorrow.push([m, 'upcoming']);
+    else if (matchLocalDateISO(m.dateISO, m.time, m.venue) === tomorrowISO) tomorrow.push([m, 'upcoming']);
   });
   const byKickoff = ([a], [b]) => {
     const tA = mdsStartUTC(a.dateISO, a.time, a.venue);
@@ -767,11 +767,11 @@ function renderMatchdayStrip() {
   if (!live.length && !today.length && !tomorrow.length) {
     // No matches today/tomorrow — find the next upcoming match day
     const future = ALL_MATCHES
-      .filter(m => matchLocalDateISO(m.dateISO, m.time) > todayISO)
-      .sort((a, b) => matchLocalDateISO(a.dateISO, a.time).localeCompare(matchLocalDateISO(b.dateISO, b.time)));
+      .filter(m => matchLocalDateISO(m.dateISO, m.time, m.venue) > todayISO)
+      .sort((a, b) => matchLocalDateISO(a.dateISO, a.time, a.venue).localeCompare(matchLocalDateISO(b.dateISO, b.time, b.venue)));
     if (!future.length) { strip.style.display = 'none'; return; }
-    const nextISO = matchLocalDateISO(future[0].dateISO, future[0].time);
-    const nextMatches = future.filter(m => matchLocalDateISO(m.dateISO, m.time) === nextISO);
+    const nextISO = matchLocalDateISO(future[0].dateISO, future[0].time, future[0].venue);
+    const nextMatches = future.filter(m => matchLocalDateISO(m.dateISO, m.time, m.venue) === nextISO);
     const dateLbl = fmtDateL(nextISO);
     strip.style.display = '';
     strip.innerHTML = `<div class="mds-section">

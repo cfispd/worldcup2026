@@ -158,12 +158,12 @@ function schedCardHtml(m) {
   const pill      = roundL(m.round, isGroup ? m.group : null);
   const f1        = flagImg(resolveTeamEn(m.home), 32, 21);
   const f2        = flagImg(resolveTeamEn(m.away), 32, 21);
-  const localTime = toUserLocalTime(m.time, m.dateISO);
+  const localTime = toUserLocalTime(m.time, m.dateISO, m.venue);
   const tz        = userTzLabel();
   const clockIcon = `<svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="display:inline;vertical-align:middle;margin-right:3px"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>`;
   const pinIcon   = `<svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>`;
 
-  const finished  = m.matchStatus === 'finished' || matchLocalDateISO(m.dateISO, m.time) < localDateISO(0);
+  const finished  = m.matchStatus === 'finished' || matchLocalDateISO(m.dateISO, m.time, m.venue) < localDateISO(0);
   const hasScore  = typeof m.homeScore === 'number';
   const scoreStr  = finished && hasScore ? `${m.homeScore}–${m.awayScore}` : null;
   const linksHtml = finished ? '' : `
@@ -201,14 +201,14 @@ function buildSchedule() {
 
   const byDate = {};
   ALL_MATCHES.forEach(m => {
-    const localISO = matchLocalDateISO(m.dateISO, m.time);
+    const localISO = matchLocalDateISO(m.dateISO, m.time, m.venue);
     (byDate[localISO] = byDate[localISO] || []).push(m);
   });
   // Sort matches within each day by kickoff time
   Object.keys(byDate).forEach(iso => {
     byDate[iso].sort((a, b) => {
-      const tA = matchToUTC(a.dateISO, a.time);
-      const tB = matchToUTC(b.dateISO, b.time);
+      const tA = matchToUTC(a.dateISO, a.time, a.venue);
+      const tB = matchToUTC(b.dateISO, b.time, b.venue);
       return (tA ? tA.getTime() : 0) - (tB ? tB.getTime() : 0);
     });
   });
