@@ -754,14 +754,14 @@
     },
     "2026-07-04|Canada|Morocco": {
       "homeScore": 0,
-      "awayScore": 1,
-      "status": "live",
-      "minute": 49,
+      "awayScore": 2,
+      "status": "finished",
+      "minute": null,
       "homeGoals": "",
-      "awayGoals": "49' Ounahi",
-      "period": "2H",
+      "awayGoals": "49' Ounahi; 82' Ounahi",
+      "period": null,
       "penalties": null,
-      "winner": null
+      "winner": "Morocco"
     }
   },
   "bracket_teams": {
