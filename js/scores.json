@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-04T19:30:57.018480+00:00",
+  "updated": "2026-07-04T20:01:03.536517+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -764,12 +764,12 @@
       "winner": null
     },
     "2026-07-04|W Match 73|W Match 75": {
-      "homeScore": null,
-      "awayScore": null,
-      "status": "upcoming",
+      "homeScore": 0,
+      "awayScore": 3,
+      "status": "finished",
       "minute": null,
       "homeGoals": "",
-      "awayGoals": "",
+      "awayGoals": "50' Ounahi; 82' Ounahi; 90+8' Rahimi",
       "period": null,
       "penalties": null,
       "winner": null
@@ -829,6 +829,7 @@
     "2026-06-30|Mexico|Ecuador": "2026-07-01T03:01:00.305384+00:00",
     "2026-06-30|1st Group A|3rd Grp C/E/F/H/I": "2026-07-01T04:21:13.464384+00:00",
     "2026-07-01|England|DR Congo": "2026-07-01T18:30:55.841306+00:00",
-    "2026-07-01|Belgium|Senegal": "2026-07-01T19:30:00.000000+00:00"
+    "2026-07-01|Belgium|Senegal": "2026-07-01T19:30:00.000000+00:00",
+    "2026-07-04|W Match 73|W Match 75": "2026-07-04T20:01:03.536517+00:00"
   }
 }
