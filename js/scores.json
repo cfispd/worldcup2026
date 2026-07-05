@@ -755,26 +755,15 @@
     "2026-07-04|Canada|Morocco": {
       "homeScore": 0,
       "awayScore": 3,
-      "status": "live",
-      "minute": 90,
-      "homeGoals": "",
-      "awayGoals": "49' Ounahi; 82' Ounahi; 90' Rahimi",
-      "period": "2H",
-      "penalties": null,
-      "winner": null
-    },
-    "2026-07-04|W Match 73|W Match 75": {
-      "homeScore": 0,
-      "awayScore": 3,
       "status": "finished",
       "minute": null,
       "homeGoals": "",
       "awayGoals": "50' Ounahi; 82' Ounahi; 90+8' Rahimi",
       "period": null,
       "penalties": null,
-      "winner": null
+      "winner": "Morocco"
     },
-    "2026-07-04|W Match 74|W Match 77": {
+    "2026-07-04|Paraguay|France": {
       "homeScore": 0,
       "awayScore": 1,
       "status": "finished",
@@ -783,7 +772,7 @@
       "awayGoals": "70' Mbappé",
       "period": null,
       "penalties": null,
-      "winner": null
+      "winner": "France"
     }
   },
   "bracket_teams": {
