@@ -320,23 +320,58 @@ Return ONLY a JSON object mapping slot → team name, no other text:
 
 # ── Knockout score tracking ───────────────────────────────────
 
-def active_knockout_matches(schedule, scores, bracket_teams):
+def build_match_winners(schedule, scores_db):
+    """Build matchNum → (winner, loser) from finished knockout scores."""
+    match_by_num = {}
+    for m in schedule:
+        if "matchNum" in m and not m.get("group"):
+            match_by_num[str(m["matchNum"])] = m
+
+    winners, losers = {}, {}
+    for num, m in match_by_num.items():
+        score = scores_db.get(match_key(m), {})
+        if score.get("status") != "finished":
+            continue
+        hs, as_ = score.get("homeScore"), score.get("awayScore")
+        w = score.get("winner")
+        if not w and hs is not None and as_ is not None and hs != as_:
+            w = m["home"] if hs > as_ else m["away"]
+        if w:
+            winners[num] = w
+            losers[num] = m["away"] if w == m["home"] else m["home"]
+    return winners, losers
+
+
+def resolve_team(name, bracket_teams, match_winners, match_losers):
+    """Resolve bracket placeholder → real team name."""
+    if bracket_teams.get(name):
+        return bracket_teams[name]
+    w = re.match(r'^W Match (\d+)$', name)
+    if w:
+        return match_winners.get(w.group(1), name)
+    l = re.match(r'^L Match (\d+)$', name)
+    if l:
+        return match_losers.get(l.group(1), name)
+    return name
+
+
+def active_knockout_matches(schedule, scores_db, bracket_teams):
     """Return knockout matches with real teams that are in the active window."""
+    match_winners, match_losers = build_match_winners(schedule, scores_db)
     now = datetime.now(timezone.utc)
     result = []
     for m in schedule:
         if m.get("group"):   # skip group stage
             continue
-        # Only process if both teams are resolved (not placeholders)
-        home = bracket_teams.get(m["home"], m["home"])
-        away = bracket_teams.get(m["away"], m["away"])
-        if home.startswith(("1st", "2nd", "3rd", "W ", "L ")):
-            continue   # not yet resolved
+        home = resolve_team(m["home"], bracket_teams, match_winners, match_losers)
+        away = resolve_team(m["away"], bracket_teams, match_winners, match_losers)
+        # Skip if either team is still unresolved
+        if any(t.startswith(("1st", "2nd", "3rd", "W ", "L ")) for t in (home, away)):
+            continue
         try:
             start = match_start_utc(m)
             diff = (now - start).total_seconds() / 60
             if -PRE_MIN <= diff <= POST_MIN:
-                # create a resolved copy for the fetch call
                 resolved = dict(m)
                 resolved["home"] = home
                 resolved["away"] = away
@@ -410,8 +445,8 @@ def main():
     bracket_teams = existing.get("bracket_teams", {})
     last_queried  = existing.get("last_queried", {})
 
-    # ── A. Group stage scores ─────────────────────────────────
-    live_group = active_matches(schedule, scores_db)
+    # ── A. Group stage scores (knockout matches handled separately in B) ──
+    live_group = [m for m in active_matches(schedule, scores_db) if m.get("group")]
     has_pending = False
     if live_group:
         pending = [m for m in live_group
@@ -490,9 +525,17 @@ def main():
         existing["bracket_teams"] = prev_bracket
         print(f"  → bracket_teams updated: {list(new_bracket.keys())}")
 
-    # ── D. Save (scores, bracket, or last_queried changed) ───────
+    # ── D. Remove stale placeholder keys (e.g. "2026-07-04|W Match 74|W Match 77") ──
+    placeholder_re = re.compile(r'(^|\|)(W|L) Match \d+')
+    stale = [k for k in list(scores_db.keys()) if placeholder_re.search(k)]
+    for k in stale:
+        del scores_db[k]
+        last_queried.pop(k, None)
+        print(f"  Removed stale placeholder key: {k}")
+
+    # ── E. Save (scores, bracket, or last_queried changed) ───────
     new_snapshot = json.dumps(scores_db, sort_keys=True)
-    queried_changed = last_queried != existing.get("last_queried", {})
+    queried_changed = last_queried != existing.get("last_queried", {}) or bool(stale)
     if new_snapshot != old_snapshot or bracket_changed or queried_changed:
         existing["matches"]      = scores_db
         existing["last_queried"] = last_queried
