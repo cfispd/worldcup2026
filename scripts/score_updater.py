@@ -320,8 +320,14 @@ Return ONLY a JSON object mapping slot → team name, no other text:
 
 # ── Knockout score tracking ───────────────────────────────────
 
-def build_match_winners(schedule, scores_db):
-    """Build matchNum → (winner, loser) from finished knockout scores."""
+def build_match_winners(schedule, scores_db, bracket_teams=None):
+    """Build matchNum → (winner, loser) from finished knockout scores.
+
+    Tries both the raw placeholder key (e.g. '2026-06-29|1st Group C|2nd Group F')
+    AND the bracket-resolved real-name key (e.g. '2026-06-29|Brazil|Japan') so that
+    scores written under either format are found correctly.
+    """
+    bt = bracket_teams or {}
     match_by_num = {}
     for m in schedule:
         if "matchNum" in m and not m.get("group"):
@@ -329,16 +335,28 @@ def build_match_winners(schedule, scores_db):
 
     winners, losers = {}, {}
     for num, m in match_by_num.items():
-        score = scores_db.get(match_key(m), {})
-        if score.get("status") != "finished":
+        home_r = bt.get(m["home"], m["home"])
+        away_r = bt.get(m["away"], m["away"])
+
+        # Try placeholder key first, then real-name key
+        score = scores_db.get(match_key(m))
+        if not score:
+            real_key = f"{m['dateISO']}|{home_r}|{away_r}"
+            score = scores_db.get(real_key)
+        if not score or score.get("status") != "finished":
             continue
+
         hs, as_ = score.get("homeScore"), score.get("awayScore")
         w = score.get("winner")
         if not w and hs is not None and as_ is not None and hs != as_:
-            w = m["home"] if hs > as_ else m["away"]
+            w = home_r if hs > as_ else away_r
+        elif w == m["home"]:   # normalise placeholder winner → real name
+            w = home_r
+        elif w == m["away"]:
+            w = away_r
         if w:
             winners[num] = w
-            losers[num] = m["away"] if w == m["home"] else m["home"]
+            losers[num] = away_r if w == home_r else home_r
     return winners, losers
 
 
@@ -357,7 +375,7 @@ def resolve_team(name, bracket_teams, match_winners, match_losers):
 
 def active_knockout_matches(schedule, scores_db, bracket_teams):
     """Return knockout matches with real teams that are in the active window."""
-    match_winners, match_losers = build_match_winners(schedule, scores_db)
+    match_winners, match_losers = build_match_winners(schedule, scores_db, bracket_teams)
     now = datetime.now(timezone.utc)
     result = []
     for m in schedule:
