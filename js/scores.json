@@ -773,6 +773,17 @@
       "period": null,
       "penalties": null,
       "winner": "France"
+    },
+    "2026-07-05|Brazil|Norway": {
+      "homeScore": 1,
+      "awayScore": 2,
+      "status": "finished",
+      "minute": null,
+      "homeGoals": "Neymar (P)",
+      "awayGoals": "Haaland; Haaland",
+      "period": null,
+      "penalties": null,
+      "winner": "Norway"
     }
   },
   "bracket_teams": {
