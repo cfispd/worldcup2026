@@ -49,7 +49,11 @@ def parse_schedule():
         raw = obj.group(1)
         row = {}
         for key in ("group", "round", "matchNum", "home", "away", "dateISO", "time", "venue"):
-            val = re.search(rf"['\"]?{key}['\"]?\s*:\s*['\"]([^'\"]+)['\"]", raw)
+            if key == "matchNum":
+                # matchNum is an unquoted integer: matchNum:92
+                val = re.search(r"matchNum\s*:\s*(\d+)", raw)
+            else:
+                val = re.search(rf"['\"]?{key}['\"]?\s*:\s*['\"]([^'\"]+)['\"]", raw)
             if val:
                 row[key] = val.group(1)
         # skip incomplete rows (knockout placeholders without real teams)
