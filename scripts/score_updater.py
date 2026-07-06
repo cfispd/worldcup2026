@@ -58,8 +58,15 @@ def parse_schedule():
     return matches
 
 
+# Venue-city → hours to add to local time to get UTC (matches helpers.js CITY_UTC_OFFSET)
+CITY_UTC_OFFSET = {
+    'Mexico City': 5, 'Guadalajara': 5, 'Monterrey': 5,
+    'Dallas': 5, 'Houston': 5, 'Kansas City': 5,
+    'Los Angeles': 7, 'San Francisco': 7, 'Seattle': 7, 'Vancouver': 7,
+}
+
 def match_start_utc(m):
-    """Return UTC datetime of a match's kickoff (EDT = UTC-4)."""
+    """Return UTC datetime of a match's kickoff using venue-aware offset."""
     tp = m["time"].strip()
     parts = tp.split()
     h, mi = map(int, parts[0].split(":"))
@@ -68,7 +75,10 @@ def match_start_utc(m):
     elif parts[1].upper() == "AM" and h == 12:
         h = 0
     y, mo, d = map(int, m["dateISO"].split("-"))
-    return datetime(y, mo, d, h, mi, tzinfo=timezone.utc) + timedelta(hours=4)
+    venue = m.get("venue", "")
+    city = venue.split(", ")[-1] if ", " in venue else ""
+    offset = CITY_UTC_OFFSET.get(city, 4)  # default EDT = UTC-4
+    return datetime(y, mo, d, h, mi, tzinfo=timezone.utc) + timedelta(hours=offset)
 
 
 def active_matches(schedule, scores_db=None):
@@ -546,10 +556,15 @@ def main():
     # ── D. Remove stale placeholder keys (e.g. "2026-07-04|W Match 74|W Match 77") ──
     placeholder_re = re.compile(r'(^|\|)(W|L) Match \d+')
     stale = [k for k in list(scores_db.keys()) if placeholder_re.search(k)]
+    stale_lq = [k for k in list(last_queried.keys()) if placeholder_re.search(k)]
     for k in stale:
         del scores_db[k]
         last_queried.pop(k, None)
         print(f"  Removed stale placeholder key: {k}")
+    for k in stale_lq:
+        if k not in stale:  # not already handled above
+            last_queried.pop(k, None)
+            print(f"  Removed stale placeholder from last_queried: {k}")
 
     # ── E. Save (scores, bracket, or last_queried changed) ───────
     new_snapshot = json.dumps(scores_db, sort_keys=True)
