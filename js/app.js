@@ -95,6 +95,14 @@ function setLang(lang) {
   const currentTheme = document.body.classList.contains('night') ? 'night' : 'day';
   updateThemeBtn(currentTheme);
 
+  // Delay banner text
+  const delayText = document.getElementById('delay-banner-text');
+  if (delayText) {
+    delayText.textContent = lang === 'zh'
+      ? '英格兰 vs 墨西哥（十六强）开球推迟 — 新时间：东部时间晚9:00（北京时间7月6日09:00）· 阿兹特克球场'
+      : 'England vs Mexico (R16) — kickoff delayed to 9:00 PM EDT · Estadio Azteca, Mexico City';
+  }
+
   renderMatchdayStrip();
 }
 
@@ -106,6 +114,15 @@ document.getElementById('langToggle').addEventListener('click', e => {
 
 // Apply saved language on load
 setLang(LANG);
+
+// Auto-dismiss delay banner at England vs Mexico kickoff (9 PM EDT = 01:00 UTC Jul 6)
+(function() {
+  const banner = document.getElementById('delay-banner');
+  if (!banner) return;
+  const kickoff = Date.UTC(2026, 6, 6, 1, 0);
+  if (Date.now() >= kickoff) { banner.style.display = 'none'; return; }
+  setTimeout(() => { banner.style.display = 'none'; }, kickoff - Date.now());
+})();
 
 // ═══════════════════════════════════════════════════════════
 //  TAB SWITCHING
