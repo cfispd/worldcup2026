@@ -799,13 +799,13 @@
     "2026-07-06|Portugal|Spain": {
       "homeScore": 0,
       "awayScore": 1,
-      "status": "live",
-      "minute": 90,
+      "status": "finished",
+      "minute": null,
       "homeGoals": "",
       "awayGoals": "90+1' Merino",
-      "period": "2H",
+      "period": null,
       "penalties": null,
-      "winner": null
+      "winner": "Spain"
     }
   },
   "bracket_teams": {
