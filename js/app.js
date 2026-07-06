@@ -273,10 +273,10 @@ function openModal(groupKey) {
       </div>
       <div class="match-meta">
         <span class="meta-item">${calIcon} ${fmtDateL(m.dateISO)}, 2026</span>
-        <span class="meta-item">${clkIcon} ${toUserLocalTime(m.time, m.dateISO)} ${userTzLabel()}</span>
+        <span class="meta-item">${clkIcon} ${toUserLocalTime(m.time, m.dateISO, m.venue)} ${userTzLabel()}</span>
         <span class="meta-item">${pinIcon} <span class="venue-stadium">${m.venue.split(',')[0].trim()}</span><span class="venue-sep"> · </span><span class="venue-city">${cityName(getCity(m.venue))}, ${countryName(getCountry(m.venue))}</span></span>
       </div>
-      ${linksHtml}
+${linksHtml}
     </div>`;
   }).join('');
 
@@ -319,10 +319,10 @@ function openMatchModal(m) {
       </div>
       <div class="match-meta">
         <span class="meta-item">${calIcon} ${fmtDateL(m.dateISO)}, 2026</span>
-        <span class="meta-item">${clkIcon} ${toUserLocalTime(m.time, m.dateISO)} ${userTzLabel()}</span>
+        <span class="meta-item">${clkIcon} ${toUserLocalTime(m.time, m.dateISO, m.venue)} ${userTzLabel()}</span>
         <span class="meta-item">${pinIcon} <span class="venue-stadium">${m.venue.split(',')[0].trim()}</span><span class="venue-sep"> · </span><span class="venue-city">${cityName(getCity(m.venue))}, ${countryName(getCountry(m.venue))}</span></span>
       </div>
-      <div class="card-links">
+<div class="card-links">
         <a href="${getStubHubUrl(m)}" class="card-link-btn card-ticket-btn" target="_blank" rel="noopener">🎫 ${z ? '购票' : 'Tickets'}</a>
         <a href="${getBookingUrl(m.venue, m.dateISO)}" class="card-link-btn card-hotel-btn" target="_blank" rel="noopener">🏨 ${z ? '酒店' : 'Hotel'}</a>
         <a href="#" class="card-link-btn card-flight-btn" onclick="openFlightLink('${getCity(m.venue)}','${m.dateISO}');return false;">✈️ ${z ? '机票' : 'Flights'}</a>
@@ -730,7 +730,7 @@ function mdsCard(m, status) {
     badge = `<span class="mds-ft">${z ? '完场' : 'FT'}</span>${aetLabel ? `<span class="mds-aet">${aetLabel}</span>` : ''}`;
     mid   = typeof m.homeScore === 'number' ? `${m.homeScore} – ${m.awayScore}` : 'VS';
   } else {
-    badge = `<span class="mds-time">${toUserLocalTime(m.time, m.dateISO)}</span>`;
+    badge = `<span class="mds-time">${toUserLocalTime(m.time, m.dateISO, m.venue)}</span>`;
     mid   = 'VS';
   }
 
