@@ -786,15 +786,15 @@
       "winner": "Norway"
     },
     "2026-07-05|Mexico|England": {
-      "homeScore": 1,
-      "awayScore": 2,
-      "status": "live",
-      "minute": 46,
-      "homeGoals": "42' Quinones",
-      "awayGoals": "36' Bellingham; 38' Bellingham",
-      "period": "2H",
+      "homeScore": 2,
+      "awayScore": 3,
+      "status": "finished",
+      "minute": null,
+      "homeGoals": "42' Quinones; 57' Jimenez (P)",
+      "awayGoals": "36' Bellingham; 38' Bellingham; 60' Kane (P)",
+      "period": null,
       "penalties": null,
-      "winner": null
+      "winner": "England"
     }
   },
   "bracket_teams": {
