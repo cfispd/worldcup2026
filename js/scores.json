@@ -788,13 +788,13 @@
     "2026-07-05|Mexico|England": {
       "homeScore": 2,
       "awayScore": 3,
-      "status": "live",
-      "minute": 85,
+      "status": "finished",
+      "minute": null,
       "homeGoals": "42' Quinones; 57' Jimenez (P)",
       "awayGoals": "36' Bellingham; 38' Bellingham; 60' Kane (P)",
-      "period": "2H",
+      "period": null,
       "penalties": null,
-      "winner": null
+      "winner": "England"
     }
   },
   "bracket_teams": {
