@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-04T23:30:53.867920+00:00",
+  "updated": "2026-07-06T03:01:04.372121+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -786,13 +786,13 @@
       "winner": "Norway"
     },
     "2026-07-05|Mexico|England": {
-      "homeScore": 2,
-      "awayScore": 3,
-      "status": "live",
-      "minute": 75,
-      "homeGoals": "42' Quinones; 57' Jimenez (P)",
-      "awayGoals": "36' Bellingham; 38' Bellingham; 60' Kane (P)",
-      "period": "2H",
+      "homeScore": 3,
+      "awayScore": 1,
+      "status": "finished",
+      "minute": null,
+      "homeGoals": "42' Quinones",
+      "awayGoals": "36' Bellingham; 38' Bellingham; Bellingham (penalty)",
+      "period": null,
       "penalties": null,
       "winner": null
     }
@@ -852,7 +852,6 @@
     "2026-06-30|1st Group A|3rd Grp C/E/F/H/I": "2026-07-01T04:21:13.464384+00:00",
     "2026-07-01|England|DR Congo": "2026-07-01T18:30:55.841306+00:00",
     "2026-07-01|Belgium|Senegal": "2026-07-01T19:30:00.000000+00:00",
-    "2026-07-04|W Match 73|W Match 75": "2026-07-04T20:01:03.536517+00:00",
-    "2026-07-04|W Match 74|W Match 77": "2026-07-04T23:30:53.867920+00:00"
+    "2026-07-05|Mexico|England": "2026-07-06T03:01:04.372121+00:00"
   }
 }
