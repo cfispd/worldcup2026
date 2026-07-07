@@ -808,12 +808,12 @@
       "winner": "Spain"
     },
     "2026-07-06|United States|Belgium": {
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 1,
+      "awayScore": 2,
       "status": "live",
-      "minute": null,
-      "homeGoals": "",
-      "awayGoals": "Charles De Ketelaere",
+      "minute": 40,
+      "homeGoals": "31' Tillman",
+      "awayGoals": "9' De Ketelaere; 33' De Ketelaere",
       "period": "1H",
       "penalties": null,
       "winner": null
