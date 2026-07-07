@@ -821,13 +821,13 @@
     "2026-07-07|Argentina|Egypt": {
       "homeScore": 3,
       "awayScore": 2,
-      "status": "live",
-      "minute": 95,
+      "status": "finished",
+      "minute": null,
       "homeGoals": "79' Cristian Romero; 83' Lionel Messi; 90+2' Enzo Fernandez",
       "awayGoals": "15' Yasser Ibrahim; 67' Mostafa Zico",
-      "period": "2H",
+      "period": null,
       "penalties": null,
-      "winner": null
+      "winner": "Argentina"
     }
   },
   "bracket_teams": {
