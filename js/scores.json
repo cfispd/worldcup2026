@@ -828,6 +828,20 @@
       "period": null,
       "penalties": null,
       "winner": "Argentina"
+    },
+    "2026-07-07|Switzerland|Colombia": {
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "finished",
+      "minute": null,
+      "homeGoals": "",
+      "awayGoals": "",
+      "period": "PEN",
+      "penalties": {
+        "home": 4,
+        "away": 3
+      },
+      "winner": "Switzerland"
     }
   },
   "bracket_teams": {
