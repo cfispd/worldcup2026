@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-07T00:30:57.663865+00:00",
+  "updated": "2026-07-07T01:01:06.269784+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -811,10 +811,10 @@
       "homeScore": 1,
       "awayScore": 2,
       "status": "live",
-      "minute": 40,
+      "minute": 45,
       "homeGoals": "31' Tillman",
       "awayGoals": "9' De Ketelaere; 33' De Ketelaere",
-      "period": "1H",
+      "period": "HT",
       "penalties": null,
       "winner": null
     }
@@ -875,6 +875,7 @@
     "2026-07-01|England|DR Congo": "2026-07-01T18:30:55.841306+00:00",
     "2026-07-01|Belgium|Senegal": "2026-07-01T19:30:00.000000+00:00",
     "2026-07-05|Mexico|England": "2026-07-06T03:01:04.372121+00:00",
-    "2026-07-06|Portugal|Spain": "2026-07-06T21:01:06.385368+00:00"
+    "2026-07-06|Portugal|Spain": "2026-07-06T21:01:06.385368+00:00",
+    "2026-07-06|United States|Belgium": "2026-07-07T01:01:06.269784+00:00"
   }
 }
