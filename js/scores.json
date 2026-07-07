@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-06T21:01:06.385368+00:00",
+  "updated": "2026-07-07T00:30:57.663865+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -806,6 +806,17 @@
       "period": null,
       "penalties": null,
       "winner": "Spain"
+    },
+    "2026-07-06|United States|Belgium": {
+      "homeScore": null,
+      "awayScore": null,
+      "status": "live",
+      "minute": null,
+      "homeGoals": "",
+      "awayGoals": "Charles De Ketelaere",
+      "period": "1H",
+      "penalties": null,
+      "winner": null
     }
   },
   "bracket_teams": {
