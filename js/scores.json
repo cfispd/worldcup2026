@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-07T02:01:06.379629+00:00",
+  "updated": "2026-07-07T16:20:47.914519+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -817,6 +817,17 @@
       "period": null,
       "penalties": null,
       "winner": null
+    },
+    "2026-07-07|Argentina|Egypt": {
+      "homeScore": 0,
+      "awayScore": 1,
+      "status": "live",
+      "minute": 18,
+      "homeGoals": "",
+      "awayGoals": "15' Yasser Ibrahim",
+      "period": "1H",
+      "penalties": null,
+      "winner": null
     }
   },
   "bracket_teams": {
@@ -876,6 +887,7 @@
     "2026-07-01|Belgium|Senegal": "2026-07-01T19:30:00.000000+00:00",
     "2026-07-05|Mexico|England": "2026-07-06T03:01:04.372121+00:00",
     "2026-07-06|Portugal|Spain": "2026-07-06T21:01:06.385368+00:00",
-    "2026-07-06|United States|Belgium": "2026-07-07T02:01:06.379629+00:00"
+    "2026-07-06|United States|Belgium": "2026-07-07T02:01:06.379629+00:00",
+    "2026-07-07|Argentina|Egypt": "2026-07-07T16:20:47.914519+00:00"
   }
 }
