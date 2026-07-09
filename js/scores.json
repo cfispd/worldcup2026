@@ -846,13 +846,13 @@
     "2026-07-09|France|Morocco": {
       "homeScore": 2,
       "awayScore": 0,
-      "status": "live",
-      "minute": 89,
-      "homeGoals": "60' Mbappe; 66' Dembele",
+      "status": "finished",
+      "minute": 90,
+      "homeGoals": "60' Mbappé; 66' Dembélé",
       "awayGoals": "",
       "period": "2H",
       "penalties": null,
-      "winner": null
+      "winner": "France"
     }
   },
   "bracket_teams": {
