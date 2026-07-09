@@ -337,9 +337,9 @@ Return ONLY a JSON object mapping slot → team name, no other text:
 def build_match_winners(schedule, scores_db, bracket_teams=None):
     """Build matchNum → (winner, loser) from finished knockout scores.
 
-    Tries both the raw placeholder key (e.g. '2026-06-29|1st Group C|2nd Group F')
-    AND the bracket-resolved real-name key (e.g. '2026-06-29|Brazil|Japan') so that
-    scores written under either format are found correctly.
+    Iterates multiple rounds so QF/SF/Final can be resolved once earlier
+    rounds (R32 → R16 → QF) have been processed.  Also tries both key
+    orderings (home|away and away|home) to handle manually-entered scores.
     """
     bt = bracket_teams or {}
     match_by_num = {}
@@ -348,29 +348,49 @@ def build_match_winners(schedule, scores_db, bracket_teams=None):
             match_by_num[str(m["matchNum"])] = m
 
     winners, losers = {}, {}
-    for num, m in match_by_num.items():
-        home_r = bt.get(m["home"], m["home"])
-        away_r = bt.get(m["away"], m["away"])
 
-        # Try placeholder key first, then real-name key
-        score = scores_db.get(match_key(m))
-        if not score:
-            real_key = f"{m['dateISO']}|{home_r}|{away_r}"
-            score = scores_db.get(real_key)
-        if not score or score.get("status") != "finished":
-            continue
+    def resolve_r(name):
+        """Resolve bracket placeholder or W/L Match N using current winners."""
+        r = bt.get(name, name)
+        wm = re.match(r'^W Match (\d+)$', r)
+        if wm:
+            return winners.get(wm.group(1), r)
+        lm = re.match(r'^L Match (\d+)$', r)
+        if lm:
+            return losers.get(lm.group(1), r)
+        return r
 
-        hs, as_ = score.get("homeScore"), score.get("awayScore")
-        w = score.get("winner")
-        if not w and hs is not None and as_ is not None and hs != as_:
-            w = home_r if hs > as_ else away_r
-        elif w == m["home"]:   # normalise placeholder winner → real name
-            w = home_r
-        elif w == m["away"]:
-            w = away_r
-        if w:
-            winners[num] = w
-            losers[num] = away_r if w == home_r else home_r
+    # Repeat up to 6 passes so multi-round chains (R32→R16→QF→SF→F) resolve
+    for _ in range(6):
+        for num, m in match_by_num.items():
+            if num in winners:
+                continue
+            home_r = resolve_r(m["home"])
+            away_r = resolve_r(m["away"])
+            if any(t.startswith(("1st", "2nd", "3rd", "W ", "L "))
+                   for t in (home_r, away_r)):
+                continue  # teams not yet resolved
+
+            # Try placeholder key, real-name key, and reversed real-name key
+            score = (scores_db.get(match_key(m)) or
+                     scores_db.get(f"{m['dateISO']}|{home_r}|{away_r}") or
+                     scores_db.get(f"{m['dateISO']}|{away_r}|{home_r}"))
+            if not score or score.get("status") != "finished":
+                continue
+
+            hs, as_ = score.get("homeScore"), score.get("awayScore")
+            w = score.get("winner")
+            if not w and hs is not None and as_ is not None and hs != as_:
+                # Determine which team is "home" in the stored key
+                normal_key = f"{m['dateISO']}|{home_r}|{away_r}"
+                if scores_db.get(normal_key) or scores_db.get(match_key(m)):
+                    w = home_r if hs > as_ else away_r
+                else:  # stored in reversed order
+                    w = away_r if hs > as_ else home_r
+            if w:
+                winners[num] = w
+                losers[num] = away_r if w == home_r else home_r
+
     return winners, losers
 
 
