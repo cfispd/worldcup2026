@@ -283,7 +283,7 @@ const ALL_MATCHES = [
   {round:'R16',matchNum:96, home:'W Match 85',away:'W Match 87', dateISO:'2026-07-07',time:'4:00 PM',  venue:'BC Place, Vancouver'},
   // Quarter-Finals
   {round:'QF', matchNum:97,  home:'W Match 89',away:'W Match 90',  dateISO:'2026-07-09',time:'4:00 PM',  venue:'Gillette Stadium, Boston'},
-  {round:'QF', matchNum:98,  home:'W Match 93',away:'W Match 94',  dateISO:'2026-07-10',time:'3:00 PM',  venue:'SoFi Stadium, Los Angeles'},
+  {round:'QF', matchNum:98,  home:'W Match 93',away:'W Match 94',  dateISO:'2026-07-10',time:'12:00 PM', venue:'SoFi Stadium, Los Angeles'},
   {round:'QF', matchNum:99,  home:'W Match 91',away:'W Match 92',  dateISO:'2026-07-11',time:'5:00 PM',  venue:'Hard Rock Stadium, Miami'},
   {round:'QF', matchNum:100, home:'W Match 95',away:'W Match 96',  dateISO:'2026-07-11',time:'9:00 PM',  venue:'Arrowhead Stadium, Kansas City'},
   // Semi-Finals
