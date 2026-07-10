@@ -855,13 +855,13 @@
       "winner": "France"
     },
     "2026-07-10|Spain|Belgium": {
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 1,
+      "awayScore": 1,
       "status": "live",
       "minute": null,
       "homeGoals": "",
       "awayGoals": "",
-      "period": null,
+      "period": "1H",
       "penalties": null,
       "winner": null
     }
