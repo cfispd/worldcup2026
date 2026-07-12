@@ -859,11 +859,11 @@
       "awayScore": 1,
       "status": "finished",
       "minute": null,
-      "homeGoals": "90' Merino",
-      "awayGoals": "",
+      "homeGoals": "30' Fabián Ruiz; 88' Merino",
+      "awayGoals": "41' De Ketelaere",
       "period": null,
       "penalties": null,
-      "winner": null
+      "winner": "Spain"
     },
     "2026-07-11|Norway|England": {
       "homeScore": 1,
@@ -871,21 +871,21 @@
       "status": "finished",
       "minute": null,
       "homeGoals": "36' Schjelderup",
-      "awayGoals": "45'+2' Bellingham; 93' Bellingham",
+      "awayGoals": "45+2' Bellingham; 93' Bellingham",
       "period": null,
       "penalties": null,
-      "winner": null
+      "winner": "England"
     },
     "2026-07-11|Argentina|Switzerland": {
-      "homeScore": 2,
+      "homeScore": 3,
       "awayScore": 1,
       "status": "finished",
       "minute": null,
-      "homeGoals": "10' Mac Allister",
+      "homeGoals": "10' Mac Allister; 112' Álvarez; 120+1' Lautaro Martínez",
       "awayGoals": "67' Ndoye",
-      "period": null,
+      "period": "AET",
       "penalties": null,
-      "winner": null
+      "winner": "Argentina"
     }
   },
   "bracket_teams": {
