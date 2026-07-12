@@ -287,7 +287,7 @@ const ALL_MATCHES = [
   {round:'QF', matchNum:99,  home:'W Match 91',away:'W Match 92',  dateISO:'2026-07-11',time:'5:00 PM',  venue:'Hard Rock Stadium, Miami'},
   {round:'QF', matchNum:100, home:'W Match 95',away:'W Match 96',  dateISO:'2026-07-11',time:'8:00 PM',  venue:'Arrowhead Stadium, Kansas City'},
   // Semi-Finals
-  {round:'SF',  matchNum:101, home:'W Match 97', away:'W Match 98',  dateISO:'2026-07-14',time:'3:00 PM', venue:'AT&T Stadium, Dallas'},
+  {round:'SF',  matchNum:101, home:'W Match 97', away:'W Match 98',  dateISO:'2026-07-14',time:'2:00 PM', venue:'AT&T Stadium, Dallas'},
   {round:'SF',  matchNum:102, home:'W Match 99', away:'W Match 100', dateISO:'2026-07-15',time:'3:00 PM', venue:'Mercedes-Benz Stadium, Atlanta'},
   // 3rd Place
   {round:'3rd', matchNum:103, home:'L Match 101',away:'L Match 102', dateISO:'2026-07-18',time:'5:00 PM', venue:'Hard Rock Stadium, Miami'},
