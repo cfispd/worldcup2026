@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-14T19:31:03.214862+00:00",
+  "updated": "2026-07-14T20:01:17.151024+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -888,13 +888,13 @@
       "winner": "Argentina"
     },
     "2026-07-14|France|Spain": {
-      "homeScore": 0,
-      "awayScore": 1,
+      "homeScore": 1,
+      "awayScore": 2,
       "status": "live",
-      "minute": 28,
+      "minute": null,
       "homeGoals": "",
-      "awayGoals": "22' Oyarzabal (P)",
-      "period": "1H",
+      "awayGoals": "Oyarzabal 22' (P); Yamal",
+      "period": null,
       "penalties": null,
       "winner": null
     }
@@ -962,6 +962,6 @@
     "2026-07-10|Spain|Belgium": "2026-07-10T21:01:14.567281+00:00",
     "2026-07-11|Norway|England": "2026-07-12T00:01:15.605720+00:00",
     "2026-07-11|Argentina|Switzerland": "2026-07-12T03:01:08.591984+00:00",
-    "2026-07-14|France|Spain": "2026-07-14T19:31:03.214862+00:00"
+    "2026-07-14|France|Spain": "2026-07-14T20:01:17.151024+00:00"
   }
 }
