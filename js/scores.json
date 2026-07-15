@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-15T19:31:11.208873+00:00",
+  "updated": "2026-07-15T20:01:17.044683+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -902,10 +902,10 @@
       "homeScore": 0,
       "awayScore": 0,
       "status": "live",
-      "minute": 25,
+      "minute": 45,
       "homeGoals": "",
       "awayGoals": "",
-      "period": "1H",
+      "period": "HT",
       "penalties": null,
       "winner": null
     }
@@ -974,6 +974,6 @@
     "2026-07-11|Norway|England": "2026-07-12T00:01:15.605720+00:00",
     "2026-07-11|Argentina|Switzerland": "2026-07-12T03:01:08.591984+00:00",
     "2026-07-14|France|Spain": "2026-07-14T21:01:19.264159+00:00",
-    "2026-07-15|England|Argentina": "2026-07-15T19:31:11.208873+00:00"
+    "2026-07-15|England|Argentina": "2026-07-15T20:01:17.044683+00:00"
   }
 }
