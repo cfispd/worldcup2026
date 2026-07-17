@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-YJS6015CH2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date()); gtag('config', 'G-YJS6015CH2');
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2026 World Cup Final – Spain vs Argentina | Predict the Winner</title>
+  <meta name="description" content="Spain vs Argentina — 2026 FIFA World Cup Final. Cast your prediction and see who the world is backing." />
+  <style>
+    /* ── TOKENS ── */
+    :root {
+      --spain:       #C60B1E;
+      --spain-dim:   rgba(198,11,30,.12);
+      --arg:         #43ABDF;
+      --arg-dim:     rgba(67,171,223,.12);
+      --gold:        #FFD700;
+
+      --bg:          #EEF2FF;
+      --surface:     #FFFFFF;
+      --surface2:    #F0F4FF;
+      --text:        #0D1526;
+      --text-muted:  #5A6882;
+      --border:      rgba(0,0,0,.08);
+      --shadow:      0 4px 24px rgba(0,0,0,.08);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg:         #07101F;
+        --surface:    #0E1A2E;
+        --surface2:   #122033;
+        --text:       #E8EDF8;
+        --text-muted: #7A8FAF;
+        --border:     rgba(255,255,255,.07);
+        --shadow:     0 4px 24px rgba(0,0,0,.5);
+      }
+    }
+    :root[data-theme="dark"] {
+      --bg:         #07101F;
+      --surface:    #0E1A2E;
+      --surface2:   #122033;
+      --text:       #E8EDF8;
+      --text-muted: #7A8FAF;
+      --border:     rgba(255,255,255,.07);
+      --shadow:     0 4px 24px rgba(0,0,0,.5);
+    }
+    :root[data-theme="light"] {
+      --bg:          #EEF2FF;
+      --surface:     #FFFFFF;
+      --surface2:    #F0F4FF;
+      --text:        #0D1526;
+      --text-muted:  #5A6882;
+      --border:      rgba(0,0,0,.08);
+      --shadow:      0 4px 24px rgba(0,0,0,.08);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      transition: background .2s, color .2s;
+    }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      background: linear-gradient(135deg, #1d4ed8 0%, #7c3aed 50%, #0891b2 100%);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 3px solid rgba(255,255,255,.2);
+    }
+    .back-link {
+      color: rgba(255,255,255,.8);
+      text-decoration: none;
+      font-size: .85rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: color .15s;
+    }
+    .back-link:hover { color: #fff; }
+    .header-logo {
+      font-size: .88rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+    .theme-btn {
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.2);
+      color: rgba(255,255,255,.85);
+      padding: 5px 11px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: .82rem;
+      font-family: inherit;
+      transition: background .15s;
+    }
+    .theme-btn:hover { background: rgba(255,255,255,.2); }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, #1d4ed8 0%, #7c3aed 50%, #0891b2 100%);
+      text-align: center;
+      padding: 44px 20px 56px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(255,255,255,.1) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: 3.5px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.65);
+      margin-bottom: 10px;
+    }
+    .hero-title {
+      font-size: clamp(2.2rem, 7vw, 4rem);
+      font-weight: 900;
+      color: var(--gold);
+      text-shadow: 0 2px 20px rgba(255,215,0,.35);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      line-height: 1;
+      text-wrap: balance;
+      position: relative;
+    }
+    .hero-meta {
+      margin-top: 14px;
+      color: rgba(255,255,255,.7);
+      font-size: .88rem;
+      letter-spacing: .4px;
+      position: relative;
+    }
+    .hero-meta .dot { margin: 0 8px; opacity: .4; }
+
+    /* ── MAIN ── */
+    main { max-width: 820px; margin: 0 auto; padding: 40px 20px 80px; }
+
+    /* ── CLOSED BANNER ── */
+    .closed-banner {
+      text-align: center;
+      padding: 12px 20px;
+      background: rgba(255,215,0,.08);
+      border: 1px solid rgba(255,215,0,.25);
+      border-radius: 10px;
+      color: var(--text-muted);
+      font-size: .85rem;
+      margin-bottom: 28px;
+      display: none;
+    }
+    .closed-banner.visible { display: block; }
+
+    /* ── PROMPT ── */
+    .vote-prompt {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .vote-prompt h2 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .vote-prompt p {
+      font-size: .86rem;
+      color: var(--text-muted);
+      margin-top: 5px;
+    }
+
+    /* ── MATCHUP ── */
+    .matchup {
+      display: grid;
+      grid-template-columns: 1fr 60px 1fr;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 28px;
+    }
+    @media (max-width: 480px) {
+      .matchup {
+        grid-template-columns: 1fr;
+      }
+      .vs { text-align: center; padding: 0; }
+    }
+
+    /* ── TEAM CARD ── */
+    .team-card {
+      background: var(--surface);
+      border: 2px solid var(--border);
+      border-radius: 20px;
+      padding: 28px 16px 22px;
+      text-align: center;
+      cursor: pointer;
+      transition: transform .18s ease, border-color .18s, box-shadow .18s;
+      position: relative;
+      overflow: hidden;
+      user-select: none;
+    }
+    .team-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 18px;
+      opacity: 0;
+      transition: opacity .2s;
+    }
+    .team-card.spain::after { background: radial-gradient(ellipse at 50% 0%, rgba(198,11,30,.14), transparent 70%); }
+    .team-card.arg::after   { background: radial-gradient(ellipse at 50% 100%, rgba(67,171,223,.14), transparent 70%); }
+
+    .team-card:not(.voted-other):hover { transform: translateY(-5px); }
+    .team-card.spain:not(.voted-other):hover { border-color: var(--spain); box-shadow: 0 10px 36px rgba(198,11,30,.18); }
+    .team-card.spain:not(.voted-other):hover::after { opacity: 1; }
+    .team-card.arg:not(.voted-other):hover   { border-color: var(--arg);   box-shadow: 0 10px 36px rgba(67,171,223,.18); }
+    .team-card.arg:not(.voted-other):hover::after   { opacity: 1; }
+
+    .team-card.voted-for.spain {
+      border-color: var(--spain);
+      box-shadow: 0 0 0 3px rgba(198,11,30,.2), 0 8px 32px rgba(198,11,30,.12);
+    }
+    .team-card.voted-for.spain::after { opacity: 1; }
+    .team-card.voted-for.arg {
+      border-color: var(--arg);
+      box-shadow: 0 0 0 3px rgba(67,171,223,.2), 0 8px 32px rgba(67,171,223,.12);
+    }
+    .team-card.voted-for.arg::after { opacity: 1; }
+
+    .team-card.voted-other {
+      opacity: .55;
+      cursor: default;
+      transform: none !important;
+    }
+
+    .team-flag {
+      width: 76px;
+      height: auto;
+      border-radius: 6px;
+      box-shadow: 0 3px 12px rgba(0,0,0,.18);
+      display: block;
+      margin: 0 auto 14px;
+      position: relative;
+      z-index: 1;
+    }
+    .team-name {
+      font-size: 1.3rem;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text);
+      margin-bottom: 18px;
+      position: relative;
+      z-index: 1;
+    }
+    .vote-btn {
+      display: inline-block;
+      padding: 10px 26px;
+      border-radius: 50px;
+      border: none;
+      font-size: .88rem;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      letter-spacing: .4px;
+      transition: transform .1s, opacity .15s;
+      position: relative;
+      z-index: 1;
+    }
+    .vote-btn:not(:disabled):active { transform: scale(.95); }
+    .team-card.spain .vote-btn { background: var(--spain); color: #fff; }
+    .team-card.arg   .vote-btn { background: var(--arg);   color: #fff; }
+    .vote-btn:disabled { opacity: .45; cursor: default; }
+
+    .voted-badge {
+      display: none;
+      font-size: .78rem;
+      font-weight: 700;
+      margin-top: 10px;
+      padding: 4px 14px;
+      border-radius: 50px;
+      letter-spacing: .5px;
+      position: relative;
+      z-index: 1;
+    }
+    .team-card.voted-for .voted-badge { display: inline-block; }
+    .team-card.spain .voted-badge { background: rgba(198,11,30,.12); color: var(--spain); }
+    .team-card.arg   .voted-badge { background: rgba(67,171,223,.14); color: #1d90c8; }
+
+    /* ── VS ── */
+    .vs {
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: var(--text-muted);
+      text-align: center;
+      letter-spacing: 1px;
+    }
+
+    /* ── RESULTS ── */
+    .results-section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 22px 24px;
+      box-shadow: var(--shadow);
+      display: none;
+    }
+    .results-section.visible { display: block; }
+
+    .results-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 14px;
+    }
+    .results-title {
+      font-size: .75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--text-muted);
+    }
+    .total-votes {
+      font-size: .8rem;
+      color: var(--text-muted);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .results-bar-wrap {
+      height: 38px;
+      border-radius: 50px;
+      overflow: hidden;
+      display: flex;
+      background: var(--surface2);
+    }
+    .bar-spain {
+      background: var(--spain);
+      width: 50%;
+      min-width: 0;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: 12px;
+      transition: width .65s cubic-bezier(.4,0,.2,1);
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .bar-arg {
+      background: var(--arg);
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      align-items: center;
+      padding-left: 12px;
+      overflow: hidden;
+    }
+    .bar-label {
+      font-size: .78rem;
+      font-weight: 700;
+      color: rgba(255,255,255,.9);
+      white-space: nowrap;
+    }
+
+    .results-teams {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 12px;
+    }
+    .result-side { display: flex; flex-direction: column; gap: 2px; }
+    .result-side.right { text-align: right; }
+    .result-pct {
+      font-size: 1.7rem;
+      font-weight: 900;
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+    .result-pct.spain { color: var(--spain); }
+    .result-pct.arg   { color: var(--arg); }
+    .result-team { font-size: .8rem; font-weight: 600; color: var(--text-muted); }
+
+    /* ── FOOTER ── */
+    .page-footer {
+      text-align: center;
+      margin-top: 52px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+    .page-footer a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: .82rem;
+      transition: color .15s;
+    }
+    .page-footer a:hover { color: var(--text); }
+
+    @media (prefers-reduced-motion: reduce) {
+      .bar-spain { transition: none; }
+      .team-card { transition: none; }
+    }
+  </style>
+</head>
+<body>
+
+<script>
+  (function() {
+    const t = localStorage.getItem('wc_theme');
+    document.documentElement.setAttribute('data-theme', t === 'night' ? 'dark' : 'light');
+  })();
+</script>
+
+<!-- ── PAGE HEADER ── -->
+<header class="page-header">
+  <a href="index.html" class="back-link">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+      <polyline points="15 18 9 12 15 6"/>
+    </svg>
+    <span id="backLabel">Back to Tracker</span>
+  </a>
+  <span class="header-logo">🏆 2026</span>
+  <button class="theme-btn" id="themeBtn" onclick="toggleTheme()">🌙</button>
+</header>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-eyebrow" id="eyebrow">FIFA World Cup Final</div>
+  <h1 class="hero-title">🏆 The Final</h1>
+  <div class="hero-meta">
+    <span id="matchMeta">Jul 19, 2026 <span class="dot">·</span> 3:00 PM EDT <span class="dot">·</span> MetLife Stadium, New Jersey</span>
+  </div>
+</div>
+
+<!-- ── MAIN ── -->
+<main>
+
+  <div id="closedBanner" class="closed-banner"></div>
+
+  <div class="vote-prompt" id="votePrompt">
+    <h2 id="promptTitle">Who will lift the trophy?</h2>
+    <p id="promptSub">Cast your prediction — see what the world thinks</p>
+  </div>
+
+  <div class="matchup">
+
+    <div class="team-card spain" id="cardSpain" onclick="castVote('spain')">
+      <img class="team-flag" src="https://flagcdn.com/w80/es.png" alt="Spain" />
+      <div class="team-name" id="nameSpain">Spain</div>
+      <button class="vote-btn" id="btnSpain">Support Spain</button>
+      <div class="voted-badge" id="badgeSpain">✓ Your Pick</div>
+    </div>
+
+    <div class="vs">VS</div>
+
+    <div class="team-card arg" id="cardArg" onclick="castVote('arg')">
+      <img class="team-flag" src="https://flagcdn.com/w80/ar.png" alt="Argentina" />
+      <div class="team-name" id="nameArg">Argentina</div>
+      <button class="vote-btn" id="btnArg">Support Argentina</button>
+      <div class="voted-badge" id="badgeArg">✓ Your Pick</div>
+    </div>
+
+  </div>
+
+  <!-- ── RESULTS BAR ── -->
+  <div class="results-section" id="results">
+    <div class="results-header">
+      <span class="results-title" id="resultsTitle">Community Picks</span>
+      <span class="total-votes" id="totalVotes">0 votes</span>
+    </div>
+    <div class="results-bar-wrap">
+      <div class="bar-spain" id="barSpain">
+        <span class="bar-label" id="barLabelSpain">50%</span>
+      </div>
+      <div class="bar-arg" id="barArg">
+        <span class="bar-label" id="barLabelArg">50%</span>
+      </div>
+    </div>
+    <div class="results-teams">
+      <div class="result-side">
+        <span class="result-pct spain" id="pctSpain">50%</span>
+        <span class="result-team" id="rSpain">Spain</span>
+      </div>
+      <div class="result-side right">
+        <span class="result-pct arg" id="pctArg">50%</span>
+        <span class="result-team" id="rArg">Argentina</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <a href="index.html">← <span id="footerLink">Back to FIFA World Cup 2026 Tracker</span></a>
+  </div>
+
+</main>
+
+<!-- ═══════════════════════════════════════════════════════
+     FIREBASE — replace this block once you have the config
+     ═══════════════════════════════════════════════════════
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getDatabase, ref, onValue, runTransaction }
+    from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+  const firebaseConfig = {
+    apiKey:            "PASTE_YOUR_API_KEY",
+    authDomain:        "YOUR_PROJECT.firebaseapp.com",
+    databaseURL:       "https://YOUR_PROJECT-default-rtdb.firebaseio.com",
+    projectId:         "YOUR_PROJECT",
+    storageBucket:     "YOUR_PROJECT.appspot.com",
+    messagingSenderId: "YOUR_SENDER_ID",
+    appId:             "YOUR_APP_ID"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db  = getDatabase(app);
+  const votesRef = ref(db, 'final_votes');
+
+  // Real-time listener — updates bar for all visitors
+  onValue(votesRef, (snap) => {
+    const d = snap.val() || { spain: 0, arg: 0 };
+    updateResults(d.spain, d.arg);
+  });
+
+  // Atomic increment — safe against concurrent writes
+  window._firebaseVote = async function(team) {
+    await runTransaction(ref(db, 'final_votes/' + team), (v) => (v || 0) + 1);
+  };
+</script>
+
+-->
+
+<script>
+  /* ── BILINGUAL ── */
+  const T = {
+    en: {
+      back:         'Back to Tracker',
+      footer:       'Back to FIFA World Cup 2026 Tracker',
+      eyebrow:      'FIFA World Cup Final',
+      meta:         'Jul 19, 2026 · 3:00 PM EDT · MetLife Stadium, New Jersey',
+      promptTitle:  'Who will lift the trophy?',
+      promptSub:    'Cast your prediction — see what the world thinks',
+      btnSpain:     'Support Spain',
+      btnArg:       'Support Argentina',
+      nameSpain:    'Spain',
+      nameArg:      'Argentina',
+      resultsTitle: 'Community Picks',
+      votes:        n => `${n.toLocaleString()} vote${n !== 1 ? 's' : ''}`,
+      yourPick:     '✓ Your Pick',
+      closed:       '⏱ Voting is closed — the match has kicked off. Final results below.',
+    },
+    zh: {
+      back:         '返回主页',
+      footer:       '返回 2026 世界杯追踪器',
+      eyebrow:      'FIFA 世界杯决赛',
+      meta:         '2026年7月20日 · 北京时间 03:00 · 大都会人寿球场，新泽西',
+      promptTitle:  '你支持谁捧杯？',
+      promptSub:    '投票预测，看看大家怎么想',
+      btnSpain:     '支持西班牙',
+      btnArg:       '支持阿根廷',
+      nameSpain:    '西班牙',
+      nameArg:      '阿根廷',
+      resultsTitle: '社区预测',
+      votes:        n => `共 ${n.toLocaleString()} 票`,
+      yourPick:     '✓ 你的选择',
+      closed:       '⏱ 投票已关闭，比赛已经开始，最终预测结果如下。',
+    }
+  };
+
+  let LANG = localStorage.getItem('wc_lang') || 'en';
+
+  function setLang(lang) {
+    LANG = lang;
+    const t = T[lang];
+    document.getElementById('backLabel').textContent    = t.back;
+    document.getElementById('eyebrow').textContent      = t.eyebrow;
+    document.getElementById('matchMeta').innerHTML      = t.meta
+      .replace(/·/g, '<span class="dot">·</span>');
+    document.getElementById('promptTitle').textContent  = t.promptTitle;
+    document.getElementById('promptSub').textContent    = t.promptSub;
+    document.getElementById('btnSpain').textContent     = t.btnSpain;
+    document.getElementById('btnArg').textContent       = t.btnArg;
+    document.getElementById('nameSpain').textContent    = t.nameSpain;
+    document.getElementById('nameArg').textContent      = t.nameArg;
+    document.getElementById('rSpain').textContent       = t.nameSpain;
+    document.getElementById('rArg').textContent         = t.nameArg;
+    document.getElementById('badgeSpain').textContent   = t.yourPick;
+    document.getElementById('badgeArg').textContent     = t.yourPick;
+    document.getElementById('resultsTitle').textContent = t.resultsTitle;
+    document.getElementById('footerLink').textContent   = t.footer;
+    const n = _votes.spain + _votes.arg;
+    document.getElementById('totalVotes').textContent   = t.votes(n);
+    if (_closed) {
+      document.getElementById('closedBanner').textContent = t.closed;
+    }
+  }
+
+  /* ── THEME ── */
+  function toggleTheme() {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    const next   = isDark ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('wc_theme', next === 'dark' ? 'night' : 'day');
+    document.getElementById('themeBtn').textContent = next === 'dark' ? '☀️' : '🌙';
+  }
+
+  /* ── STATE ── */
+  // FIREBASE_TODO: _votes will be overwritten by the Firebase onValue listener.
+  // Until then, starts at 0 and only reflects local votes.
+  let _votes = { spain: 0, arg: 0 };
+  const VOTE_KEY = 'wc_final_vote_2026';
+
+  // Final kick-off: Jul 19 2026 19:00 UTC (3 PM EDT)
+  const KICKOFF_UTC = Date.UTC(2026, 6, 19, 19, 0);
+  const _closed = Date.now() >= KICKOFF_UTC;
+
+  /* ── VOTE ── */
+  function castVote(team) {
+    if (localStorage.getItem(VOTE_KEY)) return;
+    if (_closed) return;
+    localStorage.setItem(VOTE_KEY, team);
+    _votes[team]++;
+
+    // FIREBASE_TODO: Remove the line above and uncomment below once Firebase is live:
+    // if (window._firebaseVote) { window._firebaseVote(team); return; }
+
+    applyVotedUI(team);
+    updateResults(_votes.spain, _votes.arg);
+  }
+
+  function applyVotedUI(team) {
+    document.getElementById('btnSpain').disabled = true;
+    document.getElementById('btnArg').disabled   = true;
+    document.getElementById('votePrompt').style.display = 'none';
+    document.getElementById('results').classList.add('visible');
+
+    const mine  = team === 'spain' ? 'cardSpain' : 'cardArg';
+    const other = team === 'spain' ? 'cardArg'   : 'cardSpain';
+    document.getElementById(mine).classList.add('voted-for');
+    const otherCard = document.getElementById(other);
+    otherCard.classList.add('voted-other');
+    otherCard.onclick = null;
+  }
+
+  /* ── RESULTS BAR ── */
+  function updateResults(spainN, argN) {
+    const total    = spainN + argN;
+    const spainPct = total === 0 ? 50 : Math.round(spainN / total * 100);
+    const argPct   = 100 - spainPct;
+
+    document.getElementById('totalVotes').textContent       = T[LANG].votes(total);
+    document.getElementById('barSpain').style.width         = spainPct + '%';
+    document.getElementById('pctSpain').textContent         = spainPct + '%';
+    document.getElementById('pctArg').textContent           = argPct   + '%';
+    document.getElementById('barLabelSpain').textContent    = spainPct + '%';
+    document.getElementById('barLabelArg').textContent      = argPct   + '%';
+    // Hide label if bar too narrow
+    document.getElementById('barLabelSpain').style.opacity  = spainPct < 14 ? '0' : '1';
+    document.getElementById('barLabelArg').style.opacity    = argPct   < 14 ? '0' : '1';
+  }
+
+  /* ── INIT ── */
+  setLang(LANG);
+
+  // Sync theme icon
+  document.getElementById('themeBtn').textContent =
+    document.documentElement.getAttribute('data-theme') === 'dark' ? '☀️' : '🌙';
+
+  // Voting closed state
+  if (_closed) {
+    const banner = document.getElementById('closedBanner');
+    banner.textContent = T[LANG].closed;
+    banner.classList.add('visible');
+    document.getElementById('btnSpain').disabled = true;
+    document.getElementById('btnArg').disabled   = true;
+    document.getElementById('cardSpain').onclick = null;
+    document.getElementById('cardArg').onclick   = null;
+    document.getElementById('votePrompt').style.display = 'none';
+    document.getElementById('results').classList.add('visible');
+  }
+
+  // Restore prior vote (local)
+  const prior = localStorage.getItem(VOTE_KEY);
+  if (prior) {
+    _votes[prior]++;
+    applyVotedUI(prior);
+    updateResults(_votes.spain, _votes.arg);
+  }
+</script>
+</body>
+</html>
