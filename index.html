@@ -21,6 +21,13 @@
 </head>
 <body>
 <script>if(localStorage.getItem('wc_theme')==='night')document.body.classList.add('night');</script>
+<script>
+  // Redirect to final prediction page until match has been played
+  // Skip if user is coming back from final.html via "Back to Tracker"
+  if (!sessionStorage.getItem('saw_final') && Date.now() < Date.UTC(2026, 6, 19, 19, 0)) {
+    window.location.replace('final.html');
+  }
+</script>
 
 <header>
   <div class="theme-toggle">

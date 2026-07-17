@@ -391,6 +391,27 @@
     .result-pct.arg   { color: var(--arg); }
     .result-team { font-size: .8rem; font-weight: 600; color: var(--text-muted); }
 
+    /* ── TOAST ── */
+    .toast {
+      position: fixed;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%) translateY(16px);
+      background: rgba(15,25,50,.93);
+      color: #fff;
+      padding: 11px 22px;
+      border-radius: 50px;
+      font-size: .88rem;
+      font-weight: 600;
+      opacity: 0;
+      transition: opacity .2s, transform .2s;
+      pointer-events: none;
+      white-space: nowrap;
+      z-index: 200;
+      box-shadow: 0 4px 20px rgba(0,0,0,.3);
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
     /* ── FOOTER ── */
     .page-footer {
       text-align: center;
@@ -473,7 +494,7 @@
   </div>
 
   <!-- ── RESULTS BAR ── -->
-  <div class="results-section" id="results">
+  <div class="results-section visible" id="results">
     <div class="results-header">
       <span class="results-title" id="resultsTitle">Community Picks</span>
       <span class="total-votes" id="totalVotes">0 votes</span>
@@ -503,6 +524,8 @@
   </div>
 
 </main>
+
+<div class="toast" id="toast"></div>
 
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
@@ -539,36 +562,38 @@
   /* ── BILINGUAL ── */
   const T = {
     en: {
-      back:         'Back to Tracker',
-      footer:       'Back to FIFA World Cup 2026 Tracker',
-      eyebrow:      'FIFA World Cup Final',
-      meta:         'Jul 19, 2026 · 3:00 PM EDT · MetLife Stadium, New Jersey',
-      promptTitle:  'Who will lift the trophy?',
-      promptSub:    'Cast your prediction — see what the world thinks',
-      btnSpain:     'Support Spain',
-      btnArg:       'Support Argentina',
-      nameSpain:    'Spain',
-      nameArg:      'Argentina',
-      resultsTitle: 'Community Picks',
-      votes:        n => `${n.toLocaleString()} vote${n !== 1 ? 's' : ''}`,
-      yourPick:     '✓ Your Pick',
-      closed:       '⏱ Voting is closed — the match has kicked off. Final results below.',
+      back:          'Back to Tracker',
+      footer:        'Back to FIFA World Cup 2026 Tracker',
+      eyebrow:       'FIFA World Cup Final',
+      meta:          'Jul 19, 2026 · 3:00 PM EDT · MetLife Stadium, New Jersey',
+      promptTitle:   'Who will lift the trophy?',
+      promptSub:     'Cast your prediction — see what the world thinks',
+      btnSpain:      'Support Spain',
+      btnArg:        'Support Argentina',
+      nameSpain:     'Spain',
+      nameArg:       'Argentina',
+      resultsTitle:  'Community Picks',
+      votes:         n => `${n.toLocaleString()} vote${n !== 1 ? 's' : ''}`,
+      yourPick:      '✓ Your Pick',
+      closed:        '⏱ Voting is closed — the match has kicked off. Final results below.',
+      alreadyVoted:  name => `You already voted for ${name}!`,
     },
     zh: {
-      back:         '返回主页',
-      footer:       '返回 2026 世界杯追踪器',
-      eyebrow:      'FIFA 世界杯决赛',
-      meta:         '2026年7月20日 · 北京时间 03:00 · 大都会人寿球场，新泽西',
-      promptTitle:  '你支持谁捧杯？',
-      promptSub:    '投票预测，看看大家怎么想',
-      btnSpain:     '支持西班牙',
-      btnArg:       '支持阿根廷',
-      nameSpain:    '西班牙',
-      nameArg:      '阿根廷',
-      resultsTitle: '社区预测',
-      votes:        n => `共 ${n.toLocaleString()} 票`,
-      yourPick:     '✓ 你的选择',
-      closed:       '⏱ 投票已关闭，比赛已经开始，最终预测结果如下。',
+      back:          '返回主页',
+      footer:        '返回 2026 世界杯追踪器',
+      eyebrow:       'FIFA 世界杯决赛',
+      meta:          '2026年7月20日 · 北京时间 03:00 · 大都会人寿球场，新泽西',
+      promptTitle:   '你支持谁捧杯？',
+      promptSub:     '投票预测，看看大家怎么想',
+      btnSpain:      '支持西班牙',
+      btnArg:        '支持阿根廷',
+      nameSpain:     '西班牙',
+      nameArg:       '阿根廷',
+      resultsTitle:  '社区预测',
+      votes:         n => `共 ${n.toLocaleString()} 票`,
+      yourPick:      '✓ 你的选择',
+      closed:        '⏱ 投票已关闭，比赛已经开始，最终预测结果如下。',
+      alreadyVoted:  name => `你已经投票支持${name}了！`,
     }
   };
 
@@ -616,13 +641,28 @@
   const KICKOFF_UTC = Date.UTC(2026, 6, 19, 19, 0);
   const _closed = Date.now() >= KICKOFF_UTC;
 
+  /* ── TOAST ── */
+  let _toastTimer;
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(_toastTimer);
+    _toastTimer = setTimeout(() => t.classList.remove('show'), 2500);
+  }
+
   /* ── VOTE ── */
   function castVote(team) {
-    if (localStorage.getItem(VOTE_KEY)) return;
+    const prior = localStorage.getItem(VOTE_KEY);
+    if (prior) {
+      const priorName = prior === 'spain' ? T[LANG].nameSpain : T[LANG].nameArg;
+      showToast(T[LANG].alreadyVoted(priorName));
+      return;
+    }
     if (_closed) return;
     localStorage.setItem(VOTE_KEY, team);
     applyVotedUI(team);
-    // Firebase handles the increment; onValue listener will update the bar
+    // Firebase handles the increment; onValue listener updates the bar
     if (window._firebaseVote) window._firebaseVote(team);
   }
 
@@ -630,7 +670,6 @@
     document.getElementById('btnSpain').disabled = true;
     document.getElementById('btnArg').disabled   = true;
     document.getElementById('votePrompt').style.display = 'none';
-    document.getElementById('results').classList.add('visible');
 
     const mine  = team === 'spain' ? 'cardSpain' : 'cardArg';
     const other = team === 'spain' ? 'cardArg'   : 'cardSpain';
@@ -658,6 +697,9 @@
   }
 
   /* ── INIT ── */
+  // Mark that this user has seen the final page (prevents re-redirect from index.html)
+  sessionStorage.setItem('saw_final', '1');
+
   setLang(LANG);
 
   // Sync theme icon
