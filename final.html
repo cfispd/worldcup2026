@@ -143,13 +143,30 @@
       position: relative;
     }
     .hero-meta {
-      margin-top: 14px;
-      color: rgba(255,255,255,.7);
-      font-size: .88rem;
-      letter-spacing: .4px;
+      margin-top: 20px;
       position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
     }
-    .hero-meta .dot { margin: 0 8px; opacity: .4; }
+    .hero-time {
+      font-size: clamp(1.5rem, 4vw, 2.2rem);
+      font-weight: 900;
+      color: var(--gold);
+      letter-spacing: 1px;
+      text-shadow: 0 2px 12px rgba(255,215,0,.4);
+      line-height: 1;
+    }
+    .hero-info-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: rgba(255,255,255,.7);
+      font-size: .85rem;
+      letter-spacing: .3px;
+    }
+    .hero-info-row .dot { opacity: .35; }
 
     /* ── MAIN ── */
     main { max-width: 820px; margin: 0 auto; padding: 40px 20px 80px; }
@@ -459,7 +476,12 @@
   <div class="hero-eyebrow" id="eyebrow">FIFA World Cup Final</div>
   <h1 class="hero-title">🏆 The Final</h1>
   <div class="hero-meta">
-    <span id="matchMeta">Jul 19, 2026 <span class="dot">·</span> 3:00 PM EDT <span class="dot">·</span> MetLife Stadium, New Jersey</span>
+    <div class="hero-time" id="matchTime">3:00 PM EDT</div>
+    <div class="hero-info-row">
+      <span id="matchDate">Sunday, July 19, 2026</span>
+      <span class="dot">·</span>
+      <span id="matchVenue">MetLife Stadium, New Jersey</span>
+    </div>
   </div>
 </div>
 
@@ -565,7 +587,9 @@
       back:          'Back to Tracker',
       footer:        'Back to FIFA World Cup 2026 Tracker',
       eyebrow:       'FIFA World Cup Final',
-      meta:          'Jul 19, 2026 · 3:00 PM EDT · MetLife Stadium, New Jersey',
+      time:          '3:00 PM EDT',
+      date:          'Sunday, July 19, 2026',
+      venue:         'MetLife Stadium, New Jersey',
       promptTitle:   'Who will lift the trophy?',
       promptSub:     'Cast your prediction — see what the world thinks',
       btnSpain:      'Support Spain',
@@ -582,7 +606,9 @@
       back:          '返回主页',
       footer:        '返回 2026 世界杯追踪器',
       eyebrow:       'FIFA 世界杯决赛',
-      meta:          '2026年7月20日 · 北京时间 03:00 · 大都会人寿球场，新泽西',
+      time:          '北京时间 03:00',
+      date:          '2026年7月20日（周一）',
+      venue:         '大都会人寿球场，新泽西',
       promptTitle:   '你支持谁捧杯？',
       promptSub:     '投票预测，看看大家怎么想',
       btnSpain:      '支持西班牙',
@@ -604,8 +630,9 @@
     const t = T[lang];
     document.getElementById('backLabel').textContent    = t.back;
     document.getElementById('eyebrow').textContent      = t.eyebrow;
-    document.getElementById('matchMeta').innerHTML      = t.meta
-      .replace(/·/g, '<span class="dot">·</span>');
+    document.getElementById('matchTime').textContent    = t.time;
+    document.getElementById('matchDate').textContent    = t.date;
+    document.getElementById('matchVenue').textContent   = t.venue;
     document.getElementById('promptTitle').textContent  = t.promptTitle;
     document.getElementById('promptSub').textContent    = t.promptSub;
     document.getElementById('btnSpain').textContent     = t.btnSpain;
