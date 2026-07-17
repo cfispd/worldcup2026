@@ -95,6 +95,33 @@
       color: var(--gold);
       text-transform: uppercase;
     }
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .lang-toggle {
+      display: flex;
+      gap: 4px;
+    }
+    .lang-btn {
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.2);
+      color: rgba(255,255,255,.7);
+      border-radius: 7px;
+      padding: 4px 10px;
+      font-size: .74rem;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background .15s, border-color .15s, color .15s;
+    }
+    .lang-btn:hover { color: #fff; border-color: rgba(255,255,255,.45); }
+    .lang-btn.active {
+      background: rgba(255,215,0,.18);
+      border-color: #ffd700;
+      color: #ffd700;
+    }
     .theme-btn {
       background: rgba(255,255,255,.1);
       border: 1px solid rgba(255,255,255,.2);
@@ -480,7 +507,13 @@
     <span id="backLabel">Back to Tracker</span>
   </a>
   <span class="header-logo">🏆 2026</span>
-  <button class="theme-btn" id="themeBtn" onclick="toggleTheme()">🌙</button>
+  <div class="header-right">
+    <div class="lang-toggle" id="langToggle">
+      <button class="lang-btn active" data-lang="en">EN</button>
+      <button class="lang-btn" data-lang="zh">中文</button>
+    </div>
+    <button class="theme-btn" id="themeBtn" onclick="toggleTheme()">🌙</button>
+  </div>
 </header>
 
 <!-- ── HERO ── -->
@@ -744,10 +777,22 @@
     document.getElementById('barLabelArg').style.opacity    = argPct   < 14 ? '0' : '1';
   }
 
+  /* ── LANG TOGGLE ── */
+  document.getElementById('langToggle').addEventListener('click', e => {
+    const btn = e.target.closest('.lang-btn');
+    if (!btn) return;
+    const lang = btn.dataset.lang;
+    localStorage.setItem('wc_lang', lang);
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+    setLang(lang);
+  });
+
   /* ── INIT ── */
   // Mark that this user has seen the final page (prevents re-redirect from index.html)
   sessionStorage.setItem('saw_final', '1');
 
+  // Sync active lang button
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === LANG));
   setLang(LANG);
 
   // Sync theme icon
