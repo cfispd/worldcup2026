@@ -587,8 +587,6 @@
       back:          'Back to Tracker',
       footer:        'Back to FIFA World Cup 2026 Tracker',
       eyebrow:       'FIFA World Cup Final',
-      time:          '3:00 PM EDT',
-      date:          'Sunday, July 19, 2026',
       venue:         'MetLife Stadium, New Jersey',
       promptTitle:   'Who will lift the trophy?',
       promptSub:     'Cast your prediction — see what the world thinks',
@@ -606,8 +604,6 @@
       back:          '返回主页',
       footer:        '返回 2026 世界杯追踪器',
       eyebrow:       'FIFA 世界杯决赛',
-      time:          '北京时间 03:00',
-      date:          '2026年7月20日（周一）',
       venue:         '大都会人寿球场，新泽西',
       promptTitle:   '你支持谁捧杯？',
       promptSub:     '投票预测，看看大家怎么想',
@@ -628,10 +624,11 @@
   function setLang(lang) {
     LANG = lang;
     const t = T[lang];
+    const localMatch = getLocalMatchTime(lang);
     document.getElementById('backLabel').textContent    = t.back;
     document.getElementById('eyebrow').textContent      = t.eyebrow;
-    document.getElementById('matchTime').textContent    = t.time;
-    document.getElementById('matchDate').textContent    = t.date;
+    document.getElementById('matchTime').textContent    = localMatch.time;
+    document.getElementById('matchDate').textContent    = localMatch.date;
     document.getElementById('matchVenue').textContent   = t.venue;
     document.getElementById('promptTitle').textContent  = t.promptTitle;
     document.getElementById('promptSub').textContent    = t.promptSub;
@@ -652,6 +649,21 @@
     }
   }
 
+  /* ── LOCAL MATCH TIME ── */
+  // Kickoff: Jul 19 2026 19:00 UTC (3:00 PM EDT)
+  const KICKOFF_DATE = new Date(Date.UTC(2026, 6, 19, 19, 0));
+
+  function getLocalMatchTime(lang) {
+    const locale = lang === 'zh' ? 'zh-CN' : 'en-US';
+    const time = KICKOFF_DATE.toLocaleTimeString(locale, {
+      hour: 'numeric', minute: '2-digit', timeZoneName: 'short'
+    });
+    const date = KICKOFF_DATE.toLocaleDateString(locale, {
+      weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+    });
+    return { time, date };
+  }
+
   /* ── THEME ── */
   function toggleTheme() {
     const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
@@ -664,9 +676,7 @@
   /* ── STATE ── */
   const VOTE_KEY = 'wc_final_vote_2026';
 
-  // Final kick-off: Jul 19 2026 19:00 UTC (3 PM EDT)
-  const KICKOFF_UTC = Date.UTC(2026, 6, 19, 19, 0);
-  const _closed = Date.now() >= KICKOFF_UTC;
+  const _closed = Date.now() >= KICKOFF_DATE.getTime();
 
   /* ── TOAST ── */
   let _toastTimer;
