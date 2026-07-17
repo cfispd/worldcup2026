@@ -150,23 +150,35 @@
       align-items: center;
       gap: 10px;
     }
+    .hero-datetime {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      background: rgba(255,215,0,.1);
+      border: 1px solid rgba(255,215,0,.3);
+      border-radius: 14px;
+      padding: 12px 28px;
+    }
     .hero-time {
-      font-size: clamp(1.5rem, 4vw, 2.2rem);
+      font-size: clamp(1.4rem, 4vw, 2rem);
       font-weight: 900;
       color: var(--gold);
       letter-spacing: 1px;
       text-shadow: 0 2px 12px rgba(255,215,0,.4);
       line-height: 1;
     }
-    .hero-info-row {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      color: rgba(255,255,255,.7);
-      font-size: .85rem;
+    .hero-date {
+      font-size: clamp(.82rem, 2vw, .95rem);
+      font-weight: 600;
+      color: rgba(255,255,255,.85);
       letter-spacing: .3px;
     }
-    .hero-info-row .dot { opacity: .35; }
+    .hero-venue {
+      color: rgba(255,255,255,.5);
+      font-size: .8rem;
+      letter-spacing: .3px;
+    }
 
     /* ── MAIN ── */
     main { max-width: 820px; margin: 0 auto; padding: 40px 20px 80px; }
@@ -476,12 +488,11 @@
   <div class="hero-eyebrow" id="eyebrow">FIFA World Cup Final</div>
   <h1 class="hero-title">🏆 The Final</h1>
   <div class="hero-meta">
-    <div class="hero-time" id="matchTime">3:00 PM EDT</div>
-    <div class="hero-info-row">
-      <span id="matchDate">Sunday, July 19, 2026</span>
-      <span class="dot">·</span>
-      <span id="matchVenue">MetLife Stadium, New Jersey</span>
+    <div class="hero-datetime">
+      <div class="hero-date" id="matchDate">Sunday, July 19, 2026</div>
+      <div class="hero-time" id="matchTime">3:00 PM EDT</div>
     </div>
+    <div class="hero-venue" id="matchVenue">MetLife Stadium, New Jersey</div>
   </div>
 </div>
 
