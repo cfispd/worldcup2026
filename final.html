@@ -504,33 +504,29 @@
 
 </main>
 
-<!-- ═══════════════════════════════════════════════════════
-     FIREBASE — replace this block once you have the config
-     ═══════════════════════════════════════════════════════
-
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
   import { getDatabase, ref, onValue, runTransaction }
     from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
   const firebaseConfig = {
-    apiKey:            "PASTE_YOUR_API_KEY",
-    authDomain:        "YOUR_PROJECT.firebaseapp.com",
-    databaseURL:       "https://YOUR_PROJECT-default-rtdb.firebaseio.com",
-    projectId:         "YOUR_PROJECT",
-    storageBucket:     "YOUR_PROJECT.appspot.com",
-    messagingSenderId: "YOUR_SENDER_ID",
-    appId:             "YOUR_APP_ID"
+    apiKey:            "AIzaSyBJj8Or9CzDDDHI9J4nb-T1kBgchwv4rHs",
+    authDomain:        "worldcup2026-eacde.firebaseapp.com",
+    databaseURL:       "https://worldcup2026-eacde-default-rtdb.firebaseio.com",
+    projectId:         "worldcup2026-eacde",
+    storageBucket:     "worldcup2026-eacde.firebasestorage.app",
+    messagingSenderId: "214562669381",
+    appId:             "1:214562669381:web:a898e39a954136c8b9342c"
   };
 
   const app = initializeApp(firebaseConfig);
   const db  = getDatabase(app);
   const votesRef = ref(db, 'final_votes');
 
-  // Real-time listener — updates bar for all visitors
+  // Real-time listener — pushes live totals to all visitors
   onValue(votesRef, (snap) => {
     const d = snap.val() || { spain: 0, arg: 0 };
-    updateResults(d.spain, d.arg);
+    updateResults(d.spain || 0, d.arg || 0);
   });
 
   // Atomic increment — safe against concurrent writes
@@ -538,8 +534,6 @@
     await runTransaction(ref(db, 'final_votes/' + team), (v) => (v || 0) + 1);
   };
 </script>
-
--->
 
 <script>
   /* ── BILINGUAL ── */
@@ -616,9 +610,6 @@
   }
 
   /* ── STATE ── */
-  // FIREBASE_TODO: _votes will be overwritten by the Firebase onValue listener.
-  // Until then, starts at 0 and only reflects local votes.
-  let _votes = { spain: 0, arg: 0 };
   const VOTE_KEY = 'wc_final_vote_2026';
 
   // Final kick-off: Jul 19 2026 19:00 UTC (3 PM EDT)
@@ -630,13 +621,9 @@
     if (localStorage.getItem(VOTE_KEY)) return;
     if (_closed) return;
     localStorage.setItem(VOTE_KEY, team);
-    _votes[team]++;
-
-    // FIREBASE_TODO: Remove the line above and uncomment below once Firebase is live:
-    // if (window._firebaseVote) { window._firebaseVote(team); return; }
-
     applyVotedUI(team);
-    updateResults(_votes.spain, _votes.arg);
+    // Firebase handles the increment; onValue listener will update the bar
+    if (window._firebaseVote) window._firebaseVote(team);
   }
 
   function applyVotedUI(team) {
@@ -690,12 +677,10 @@
     document.getElementById('results').classList.add('visible');
   }
 
-  // Restore prior vote (local)
+  // Restore prior vote — results come from Firebase's onValue listener
   const prior = localStorage.getItem(VOTE_KEY);
   if (prior) {
-    _votes[prior]++;
     applyVotedUI(prior);
-    updateResults(_votes.spain, _votes.arg);
   }
 </script>
 </body>
