@@ -896,7 +896,7 @@
       "awayGoals": "22' Oyarzabal; 58' Porro",
       "period": null,
       "penalties": null,
-      "winner": null
+      "winner": "Spain"
     },
     "2026-07-15|England|Argentina": {
       "homeScore": 1,
@@ -904,10 +904,10 @@
       "status": "finished",
       "minute": null,
       "homeGoals": "55' Anthony Gordon",
-      "awayGoals": "85' Enzo Fernandez; 90'+2' Lautaro Martinez",
+      "awayGoals": "85' Enzo Fernández; 90+2' Lautaro Martínez",
       "period": null,
       "penalties": null,
-      "winner": null
+      "winner": "Argentina"
     },
     "2026-07-18|France|England": {
       "homeScore": null,
