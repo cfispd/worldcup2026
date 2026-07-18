@@ -910,13 +910,13 @@
       "winner": "Argentina"
     },
     "2026-07-18|France|England": {
-      "homeScore": null,
-      "awayScore": null,
-      "status": "upcoming",
-      "minute": null,
-      "homeGoals": "",
-      "awayGoals": "",
-      "period": null,
+      "homeScore": 3,
+      "awayScore": 4,
+      "status": "live",
+      "minute": 84,
+      "homeGoals": "48' Mbappé; 54' Barcola; 66' Mbappé",
+      "awayGoals": "3' Rice; 18' Konsa; 37' Saka; 46' Saka",
+      "period": "2H",
       "penalties": null,
       "winner": null
     }
