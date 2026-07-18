@@ -914,9 +914,9 @@
       "awayScore": 6,
       "status": "finished",
       "minute": null,
-      "homeGoals": "48' Mbappé; 54' Barcola; 66' Mbappé; 96' Dembélé",
-      "awayGoals": "3' Rice; 18' Konsa; 37' Saka; 46' Saka; 87' Saka; 98' Bellingham",
-      "period": "AET",
+      "homeGoals": "48' Mbappé; 54' Barcola; 66' Mbappé; 90+6' Dembélé",
+      "awayGoals": "3' Rice; 18' Konsa; 37' Saka; 46' Saka; 87' Saka; 90+8' Bellingham",
+      "period": null,
       "penalties": null,
       "winner": "England"
     }
