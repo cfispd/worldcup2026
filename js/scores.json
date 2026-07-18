@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-15T21:28:16.952289+00:00",
+  "updated": "2026-07-18T21:30:56.175853+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -905,6 +905,17 @@
       "minute": null,
       "homeGoals": "55' Anthony Gordon",
       "awayGoals": "85' Enzo Fernandez; 90'+2' Lautaro Martinez",
+      "period": null,
+      "penalties": null,
+      "winner": null
+    },
+    "2026-07-18|France|England": {
+      "homeScore": null,
+      "awayScore": null,
+      "status": "upcoming",
+      "minute": null,
+      "homeGoals": "",
+      "awayGoals": "",
       "period": null,
       "penalties": null,
       "winner": null
