@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-19T21:30:53.167163+00:00",
+  "updated": "2026-07-19T22:01:08.255316+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -921,13 +921,13 @@
       "winner": "England"
     },
     "2026-07-19|Spain|Argentina": {
-      "homeScore": 0,
+      "homeScore": 1,
       "awayScore": 0,
-      "status": "live",
-      "minute": 95,
-      "homeGoals": "",
+      "status": "finished",
+      "minute": null,
+      "homeGoals": "106' Ferran Torres",
       "awayGoals": "",
-      "period": "ET1",
+      "period": "AET",
       "penalties": null,
       "winner": null
     }
@@ -997,6 +997,6 @@
     "2026-07-11|Argentina|Switzerland": "2026-07-12T03:01:08.591984+00:00",
     "2026-07-14|France|Spain": "2026-07-14T21:01:19.264159+00:00",
     "2026-07-15|England|Argentina": "2026-07-15T21:28:16.952289+00:00",
-    "2026-07-19|Spain|Argentina": "2026-07-19T21:30:53.167163+00:00"
+    "2026-07-19|Spain|Argentina": "2026-07-19T22:01:08.255316+00:00"
   }
 }
