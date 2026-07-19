@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-18T21:30:56.175853+00:00",
+  "updated": "2026-07-19T19:30:52.320606+00:00",
   "matches": {
     "2026-06-11|Mexico|South Africa": {
       "homeScore": 2,
@@ -919,6 +919,17 @@
       "period": null,
       "penalties": null,
       "winner": "England"
+    },
+    "2026-07-19|Spain|Argentina": {
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "live",
+      "minute": 20,
+      "homeGoals": "",
+      "awayGoals": "",
+      "period": "1H",
+      "penalties": null,
+      "winner": null
     }
   },
   "bracket_teams": {
@@ -985,6 +996,7 @@
     "2026-07-11|Norway|England": "2026-07-12T00:01:15.605720+00:00",
     "2026-07-11|Argentina|Switzerland": "2026-07-12T03:01:08.591984+00:00",
     "2026-07-14|France|Spain": "2026-07-14T21:01:19.264159+00:00",
-    "2026-07-15|England|Argentina": "2026-07-15T21:28:16.952289+00:00"
+    "2026-07-15|England|Argentina": "2026-07-15T21:28:16.952289+00:00",
+    "2026-07-19|Spain|Argentina": "2026-07-19T19:30:52.320606+00:00"
   }
 }
