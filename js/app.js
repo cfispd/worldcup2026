@@ -103,16 +103,12 @@ function setLang(lang) {
       : 'England vs Mexico (R16) — kickoff delayed to 9:00 PM EDT · Estadio Azteca, Mexico City';
   }
 
-  // Final banner bilingual text
+  // Champion banner bilingual text
   const finalBannerText = document.getElementById('finalBannerText');
-  const finalBannerBtn  = document.getElementById('finalBannerBtn');
   if (finalBannerText) {
     finalBannerText.innerHTML = lang === 'zh'
-      ? '决赛对阵已出：<strong>西班牙 vs 阿根廷</strong> — 7月20日 · 大都会人寿球场'
-      : 'The Final is set: <strong>Spain vs Argentina</strong> — Jul 19 · MetLife Stadium';
-  }
-  if (finalBannerBtn) {
-    finalBannerBtn.textContent = lang === 'zh' ? '投票竞猜 →' : 'Predict the Winner →';
+      ? '<strong>西班牙</strong>夺得2026年世界杯冠军！&nbsp;·&nbsp; 决赛：西班牙 1–0 阿根廷（加时）'
+      : '<strong>España</strong> are the 2026 FIFA World Cup Champions! &nbsp;·&nbsp; Final: Spain 1–0 Argentina (AET)';
   }
 
   renderMatchdayStrip();

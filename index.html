@@ -21,12 +21,172 @@
 </head>
 <body>
 <script>if(localStorage.getItem('wc_theme')==='night')document.body.classList.add('night');</script>
+<style>
+#spain-splash {
+  position: fixed; inset: 0; z-index: 9999;
+  background: #08090f;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: opacity 0.7s ease;
+}
+#spain-splash.fade-out { opacity: 0; pointer-events: none; }
+#confetti-canvas {
+  position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none;
+}
+.splash-inner {
+  position: relative; z-index: 1;
+  display: flex; flex-direction: column; align-items: center;
+  gap: 0; text-align: center; padding: 0 1rem;
+  animation: splashIn 0.7s cubic-bezier(.22,1,.36,1) both;
+}
+@keyframes splashIn {
+  from { opacity: 0; transform: scale(.88) translateY(24px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+.splash-trophy {
+  font-size: clamp(5rem, 16vw, 9rem);
+  line-height: 1;
+  filter: drop-shadow(0 0 32px #fdb91380);
+  animation: trophyPulse 2s ease-in-out infinite;
+}
+@keyframes trophyPulse {
+  0%,100% { filter: drop-shadow(0 0 24px #fdb91360); }
+  50%      { filter: drop-shadow(0 0 48px #fdb913cc); }
+}
+.splash-title {
+  font-family: "Impact", "Arial Black", "Helvetica Neue", sans-serif;
+  font-size: clamp(3.5rem, 14vw, 8.5rem);
+  font-weight: 900; letter-spacing: .04em;
+  color: #FDB913;
+  text-shadow: 0 2px 0 #a37600, 0 0 48px #fdb91340;
+  line-height: 1; margin-top: .2em;
+}
+.splash-subtitle {
+  font-family: "Impact", "Arial Black", "Helvetica Neue", sans-serif;
+  font-size: clamp(1.1rem, 4.5vw, 2.6rem);
+  letter-spacing: .18em;
+  color: #fff;
+  text-shadow: 0 0 24px #C60B1E88;
+  margin-top: .15em;
+}
+.splash-divider {
+  width: clamp(120px, 40vw, 260px); height: 3px;
+  background: linear-gradient(90deg, transparent, #C60B1E, #FDB913, #C60B1E, transparent);
+  margin: .7em auto;
+  border-radius: 2px;
+}
+.splash-tournament {
+  font-family: "Arial", sans-serif;
+  font-size: clamp(.75rem, 2.2vw, 1rem);
+  letter-spacing: .22em; text-transform: uppercase;
+  color: rgba(255,255,255,.5);
+  margin-top: .1em;
+}
+.splash-hint {
+  margin-top: 2.5rem;
+  font-family: "Arial", sans-serif;
+  font-size: .8rem; letter-spacing: .1em; text-transform: uppercase;
+  color: rgba(255,255,255,.28);
+  animation: hintBlink 2s ease-in-out infinite;
+}
+@keyframes hintBlink { 0%,100% { opacity:.28; } 50% { opacity:.6; } }
+.splash-progress {
+  position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+  background: rgba(255,255,255,.1);
+}
+.splash-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #C60B1E, #FDB913);
+  width: 0%;
+  transition: width linear;
+}
+</style>
+
+<div id="spain-splash" onclick="dismissSplash()">
+  <canvas id="confetti-canvas"></canvas>
+  <div class="splash-inner">
+    <div class="splash-trophy">🏆</div>
+    <div class="splash-title">ESPAÑA</div>
+    <div class="splash-subtitle">CAMPEONES DEL MUNDO</div>
+    <div class="splash-divider"></div>
+    <div class="splash-tournament">FIFA World Cup 2026™ · MetLife Stadium</div>
+    <div class="splash-hint">Tap anywhere to continue</div>
+  </div>
+  <div class="splash-progress"><div class="splash-progress-fill" id="splashBar"></div></div>
+</div>
+
 <script>
-  // Redirect to final prediction page until match has been played
-  // Skip if user is coming back from final.html via "Back to Tracker"
-  if (!sessionStorage.getItem('saw_final') && Date.now() < Date.UTC(2026, 6, 19, 19, 0)) {
-    window.location.replace('final.html');
+(function () {
+  var SPLASH_KEY = 'wc_spain_champion_2026';
+  var splash = document.getElementById('spain-splash');
+
+  if (sessionStorage.getItem(SPLASH_KEY)) {
+    splash.style.display = 'none';
+    return;
   }
+
+  /* ── confetti ── */
+  var canvas = document.getElementById('confetti-canvas');
+  var ctx = canvas.getContext('2d');
+  var W, H, particles = [], raf;
+  var COLORS = ['#C60B1E','#FDB913','#ffffff','#ff4d6d','#ffd166'];
+
+  function resize() {
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  function makeParticle() {
+    return {
+      x: Math.random() * W,
+      y: Math.random() * -H * .2,
+      w: 7 + Math.random() * 7,
+      h: 4 + Math.random() * 4,
+      color: COLORS[Math.floor(Math.random() * COLORS.length)],
+      angle: Math.random() * Math.PI * 2,
+      spin:  (Math.random() - .5) * .18,
+      vx:   (Math.random() - .5) * 1.8,
+      vy:    2.2 + Math.random() * 2.8,
+    };
+  }
+
+  for (var i = 0; i < 140; i++) particles.push(makeParticle());
+
+  function drawConfetti() {
+    ctx.clearRect(0, 0, W, H);
+    particles.forEach(function(p) {
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.angle);
+      ctx.fillStyle = p.color;
+      ctx.fillRect(-p.w/2, -p.h/2, p.w, p.h);
+      ctx.restore();
+      p.x  += p.vx; p.y += p.vy; p.angle += p.spin;
+      if (p.y > H + 20) { Object.assign(p, makeParticle()); p.y = -10; }
+    });
+    raf = requestAnimationFrame(drawConfetti);
+  }
+  drawConfetti();
+
+  /* ── progress bar & auto-dismiss ── */
+  var DURATION = 5000;
+  var bar = document.getElementById('splashBar');
+  bar.style.transitionDuration = DURATION + 'ms';
+  requestAnimationFrame(function() { bar.style.width = '100%'; });
+
+  var timer = setTimeout(dismissSplash, DURATION);
+
+  window.dismissSplash = function() {
+    clearTimeout(timer);
+    cancelAnimationFrame(raf);
+    splash.classList.add('fade-out');
+    sessionStorage.setItem(SPLASH_KEY, '1');
+    setTimeout(function() { splash.style.display = 'none'; }, 700);
+  };
+})();
 </script>
 
 <header>
@@ -79,8 +239,7 @@
 
 <div class="final-banner" id="finalBanner">
   <span class="final-banner-trophy">🏆</span>
-  <span id="finalBannerText">The Final is set: <strong>Spain vs Argentina</strong> — Jul 19 · MetLife Stadium</span>
-  <a href="final.html" class="final-banner-btn" id="finalBannerBtn">Predict the Winner →</a>
+  <span id="finalBannerText"><strong>España</strong> are the 2026 FIFA World Cup Champions! &nbsp;·&nbsp; Final: Spain 1–0 Argentina (AET)</span>
 </div>
 
 <main>
