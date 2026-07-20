@@ -44,11 +44,22 @@
   from { opacity: 0; transform: scale(.88) translateY(24px); }
   to   { opacity: 1; transform: scale(1) translateY(0); }
 }
+.splash-flag {
+  display: flex; flex-direction: column;
+  width: clamp(72px, 16vw, 110px);
+  height: clamp(48px, 11vw, 74px);
+  border-radius: 5px; overflow: hidden;
+  box-shadow: 0 6px 28px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.08);
+  margin-bottom: .6em;
+}
+.splash-flag-red    { background: #C60B1E; flex: 1; }
+.splash-flag-yellow { background: #FDB913; flex: 2; }
 .splash-trophy {
-  font-size: clamp(5rem, 16vw, 9rem);
+  font-size: clamp(4rem, 13vw, 7.5rem);
   line-height: 1;
   filter: drop-shadow(0 0 32px #fdb91380);
   animation: trophyPulse 2s ease-in-out infinite;
+  margin-top: .1em;
 }
 @keyframes trophyPulse {
   0%,100% { filter: drop-shadow(0 0 24px #fdb91360); }
@@ -56,37 +67,36 @@
 }
 .splash-title {
   font-family: "Impact", "Arial Black", "Helvetica Neue", sans-serif;
-  font-size: clamp(3.5rem, 14vw, 8.5rem);
+  font-size: clamp(3.2rem, 13vw, 8rem);
   font-weight: 900; letter-spacing: .04em;
   color: #FDB913;
   text-shadow: 0 2px 0 #a37600, 0 0 48px #fdb91340;
-  line-height: 1; margin-top: .2em;
+  line-height: 1; margin-top: .15em;
 }
 .splash-subtitle {
   font-family: "Impact", "Arial Black", "Helvetica Neue", sans-serif;
-  font-size: clamp(1.1rem, 4.5vw, 2.6rem);
+  font-size: clamp(1rem, 4vw, 2.4rem);
   letter-spacing: .18em;
   color: #fff;
   text-shadow: 0 0 24px #C60B1E88;
-  margin-top: .15em;
+  margin-top: .12em;
 }
 .splash-divider {
   width: clamp(120px, 40vw, 260px); height: 3px;
   background: linear-gradient(90deg, transparent, #C60B1E, #FDB913, #C60B1E, transparent);
-  margin: .7em auto;
+  margin: .65em auto;
   border-radius: 2px;
 }
 .splash-tournament {
   font-family: "Arial", sans-serif;
-  font-size: clamp(.75rem, 2.2vw, 1rem);
+  font-size: clamp(.7rem, 2vw, .95rem);
   letter-spacing: .22em; text-transform: uppercase;
   color: rgba(255,255,255,.5);
-  margin-top: .1em;
 }
 .splash-hint {
-  margin-top: 2.5rem;
+  margin-top: 2rem;
   font-family: "Arial", sans-serif;
-  font-size: .8rem; letter-spacing: .1em; text-transform: uppercase;
+  font-size: .78rem; letter-spacing: .1em; text-transform: uppercase;
   color: rgba(255,255,255,.28);
   animation: hintBlink 2s ease-in-out infinite;
 }
@@ -106,6 +116,11 @@
 <div id="spain-splash" onclick="dismissSplash()">
   <canvas id="confetti-canvas"></canvas>
   <div class="splash-inner">
+    <div class="splash-flag">
+      <div class="splash-flag-red"></div>
+      <div class="splash-flag-yellow"></div>
+      <div class="splash-flag-red"></div>
+    </div>
     <div class="splash-trophy">🏆</div>
     <div class="splash-title">ESPAÑA</div>
     <div class="splash-subtitle">CAMPEONES DEL MUNDO</div>
@@ -173,19 +188,22 @@
 
   /* ── progress bar & auto-dismiss ── */
   var DURATION = 5000;
-  var bar = document.getElementById('splashBar');
-  bar.style.transitionDuration = DURATION + 'ms';
-  requestAnimationFrame(function() { bar.style.width = '100%'; });
 
-  var timer = setTimeout(dismissSplash, DURATION);
-
-  window.dismissSplash = function() {
+  function dismiss() {
     clearTimeout(timer);
     cancelAnimationFrame(raf);
     splash.classList.add('fade-out');
     sessionStorage.setItem(SPLASH_KEY, '1');
     setTimeout(function() { splash.style.display = 'none'; }, 700);
-  };
+  }
+
+  window.dismissSplash = dismiss;
+
+  var bar = document.getElementById('splashBar');
+  bar.style.transitionDuration = DURATION + 'ms';
+  requestAnimationFrame(function() { bar.style.width = '100%'; });
+
+  var timer = setTimeout(dismiss, DURATION);
 })();
 </script>
 
